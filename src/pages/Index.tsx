@@ -81,7 +81,7 @@ const Index = () => {
       tags: ["E-Commerce", "Stripe", "Product Catalog", "Blog"],
       image: projectHoney,
       color: "from-amber-500/20 to-yellow-500/20",
-      link:'vedyara.in'
+      link:'https://www.vedyara.in'
     },
     {
       title: t('portfolio.projects.trading.title'),

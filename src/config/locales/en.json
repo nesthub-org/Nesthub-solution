@@ -28,7 +28,7 @@
     "section_highlight": "Deliver",
     "items": {
       "web_development": {
-        "title": "Custom Web Development",
+        "title": "WebSite Development",
         "desc": "Tailored websites and web applications built with cutting-edge technologies.",
         "features": ["React & Next.js", "API Integration", "CMS Development"]
       },
@@ -58,20 +58,9 @@
         "features": ["Cloud Migration", "Auto-Scaling", "DevOps"]
       },
       "security": {
-        "title": "Security & Compliance",
-        "desc": "Enterprise-grade security to protect your data.",
-        "features": ["SSL/TLS", "GDPR Compliance", "Security Audits"]
+       
       },
-      "analytics": {
-        "title": "Analytics & Insights",
-        "desc": "Comprehensive analytics to track user behavior and impact.",
-        "features": ["Dashboard Setup", "A/B Testing", "ROI Tracking"]
-      },
-      "support": {
-        "title": "Ongoing Support",
-        "desc": "Dedicated support and maintenance to keep you running 24/7.",
-        "features": ["24/7 Monitoring", "Regular Updates", "Priority Support"]
-      },
+      
       "social": {
         "title": "Social Media Management",
         "desc": "Strategic social media presence that builds your brand and engages your audience.",
@@ -86,19 +75,14 @@
     "description": "Every project tells a story. Here are three recent builds that showcase our craft, creativity, and commitment to results.",
     "view_details": "View Details",
     "projects": {
-      "ngo": {
-        "category": "NGO Website",
-        "title": "Hope Foundation",
-        "description": "A compassionate, impact-driven website for a non-profit organization. Features donation integration, volunteer sign-up, event management, and storytelling sections."
-      },
       "ecommerce": {
         "category": "E-Commerce",
-        "title": "Golden Harvest Honey",
+        "title": "Vedyara Organic",
         "description": "A warm, inviting e-commerce platform for an artisanal honey brand with product catalog, cart system, secure checkout, and a blog."
       },
       "trading": {
         "category": "Trading Platform",
-        "title": "TradeView Academy",
+        "title": "MoneyView",
         "description": "An educational trading platform combining real-time market data visualization with structured learning modules, interactive charts, and community discussions."
       }
     }

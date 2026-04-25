@@ -4,15 +4,15 @@ import PageTransition from "@/components/PageTransition";
 import AnimatedSection from "@/components/AnimatedSection";
 
 const services = [
-  { icon: Code2, title: "Custom Web Development", desc: "Tailored websites and web applications built with cutting-edge technologies. We use React, Next.js, and modern frameworks to create scalable solutions.", features: ["React & Next.js", "API Integration", "CMS Development"] },
+  { icon: Code2, title: "Website Development", desc: "Tailored websites and web applications built with cutting-edge technologies. We use React, Next.js, and modern frameworks to create scalable solutions.", features: ["React & Next.js", "API Integration", "CMS Development"] },
   { icon: Palette, title: "UI/UX Design", desc: "User-centered design that converts. We create intuitive interfaces backed by research and tested with real users.", features: ["Wireframing", "Prototyping", "User Testing"] },
   { icon: Smartphone, title: "Responsive Design", desc: "Pixel-perfect designs that look stunning on every device. Mobile-first approach for maximum reach.", features: ["Mobile-First", "Cross-Browser", "Adaptive Layouts"] },
   { icon: Zap, title: "Performance Optimization", desc: "Lightning-fast websites that rank higher and convert better. We optimize every millisecond.", features: ["Core Web Vitals", "Caching Strategy", "Code Splitting"] },
   { icon: Globe, title: "SEO & Digital Marketing", desc: "Data-driven strategies to improve your online visibility and drive qualified traffic to your website.", features: ["Technical SEO", "Content Strategy", "Analytics Setup"] },
-  { icon: Cloud, title: "Cloud Solutions", desc: "Scalable cloud infrastructure that grows with your business. AWS, Azure, and GCP expertise.", features: ["Cloud Migration", "Auto-Scaling", "DevOps"] },
-  { icon: Shield, title: "Security & Compliance", desc: "Enterprise-grade security measures to protect your data and ensure regulatory compliance.", features: ["SSL/TLS", "GDPR Compliance", "Security Audits"] },
-  { icon: BarChart3, title: "Analytics & Insights", desc: "Comprehensive analytics setup to track user behavior and measure business impact.", features: ["Dashboard Setup", "A/B Testing", "ROI Tracking"] },
-  { icon: Headphones, title: "Ongoing Support", desc: "Dedicated support and maintenance to keep your digital presence running smoothly 24/7.", features: ["24/7 Monitoring", "Regular Updates", "Priority Support"] },
+  // { icon: Cloud, title: "Cloud Solutions", desc: "Scalable cloud infrastructure that grows with your business. AWS, Azure, and GCP expertise.", features: ["Cloud Migration", "Auto-Scaling", "DevOps"] },
+  // { icon: Shield, title: "Security & Compliance", desc: "Enterprise-grade security measures to protect your data and ensure regulatory compliance.", features: ["SSL/TLS", "GDPR Compliance", "Security Audits"] },
+  // { icon: BarChart3, title: "Analytics & Insights", desc: "Comprehensive analytics setup to track user behavior and measure business impact.", features: ["Dashboard Setup", "A/B Testing", "ROI Tracking"] },
+  // { icon: Headphones, title: "Ongoing Support", desc: "Dedicated support and maintenance to keep your digital presence running smoothly 24/7.", features: ["24/7 Monitoring", "Regular Updates", "Priority Support"] },
 ];
 
 const Services = () => (

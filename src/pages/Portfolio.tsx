@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 import PageTransition from "@/components/PageTransition";
 import AnimatedSection from "@/components/AnimatedSection";
 import projectNgo from "@/assets/project-ngo.jpg";
-import projectHoney from "@/assets/project-honey.jpg";
-import projectTrading from "@/assets/project-trading.jpg";
+import projectHoney from "@/assets/project-honey.png";
+import projectTrading from "@/assets/project-trading.png";
 
 const Portfolio = () => {
   const { t } = useTranslation();

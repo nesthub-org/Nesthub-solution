@@ -7,34 +7,34 @@ import { useTranslation } from 'react-i18next';
 import PageTransition from "@/components/PageTransition";
 import AnimatedSection from "@/components/AnimatedSection";
 import projectNgo from "@/assets/project-ngo.jpg";
-import projectHoney from "@/assets/project-honey.jpg";
-import projectTrading from "@/assets/project-trading.jpg";
+import projectHoney from "@/assets/project-honey.png";
+import projectTrading from "@/assets/project-trading.png";
 import calendlyImage from "@/assets/calendly-cta.jpg";
 
 const testimonials = [
+  // {
+  //   name: "Aarav Mehta",
+  //   role: "Founder, Hope Foundation",
+  //   project: "NGO Website",
+  //   content: "NestHub Solution transformed our vision into a beautiful, functional website. Donations increased by 40% within the first month. Their understanding of our mission was remarkable.",
+  //   rating: 5,
+  //   initials: "AM",
+  // },
   {
-    name: "Aarav Mehta",
-    role: "Founder, Hope Foundation",
-    project: "NGO Website",
-    content: "NestHub Solution transformed our vision into a beautiful, functional website. Donations increased by 40% within the first month. Their understanding of our mission was remarkable.",
-    rating: 5,
-    initials: "AM",
-  },
-  {
-    name: "Priya Sharma",
-    role: "Owner, Golden Harvest Honey",
+    name: "Yogendra Maurya",
+    role: "Founder, Vedyara Organic",
     project: "E-Commerce Platform",
     content: "Our honey brand needed an online presence that matched the quality of our product. NestHub delivered beyond expectations — the site is gorgeous and our online sales have tripled.",
     rating: 5,
-    initials: "PS",
+    initials: "YK",
   },
   {
-    name: "Rohan Kapoor",
-    role: "CEO, TradeView Academy",
+    name: "Amit Mishra",
+    role: "CEO, Monew.In",
     project: "Trading Platform",
     content: "Building a trading education platform is complex, but the NestHub team handled it with precision. Real-time charts, course modules, community features — everything works flawlessly.",
     rating: 5,
-    initials: "RK",
+    initials: "AM",
   },
 ];
 
@@ -67,9 +67,9 @@ const Index = () => {
     { icon: Zap, title: t('services.items.performance.title'), desc: t('services.items.performance.desc'), features: t('services.items.performance.features', { returnObjects: true }) },
     { icon: Globe, title: t('services.items.seo.title'), desc: t('services.items.seo.desc'), features: t('services.items.seo.features', { returnObjects: true }) },
     { icon: Cloud, title: t('services.items.cloud.title'), desc: t('services.items.cloud.desc'), features: t('services.items.cloud.features', { returnObjects: true }) },
-    { icon: Shield, title: t('services.items.security.title'), desc: t('services.items.security.desc'), features: t('services.items.security.features', { returnObjects: true }) },
-    { icon: BarChart3, title: t('services.items.analytics.title'), desc: t('services.items.analytics.desc'), features: t('services.items.analytics.features', { returnObjects: true }) },
-    { icon: Headphones, title: t('services.items.support.title'), desc: t('services.items.support.desc'), features: t('services.items.support.features', { returnObjects: true }) },
+    // { icon: Shield, title: t('services.items.security.title'), desc: t('services.items.security.desc'), features: t('services.items.security.features', { returnObjects: true }) },
+    // { icon: BarChart3, title: t('services.items.analytics.title'), desc: t('services.items.analytics.desc'), features: t('services.items.analytics.features', { returnObjects: true }) },
+    // { icon: Headphones, title: t('services.items.support.title'), desc: t('services.items.support.desc'), features: t('services.items.support.features', { returnObjects: true }) },
     { icon: Share2, title: t('services.items.social.title'), desc: t('services.items.social.desc'), features: t('services.items.social.features', { returnObjects: true }) },
   ];
 
@@ -269,9 +269,15 @@ const Index = () => {
                     <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-40 z-10 pointer-events-none`} />
                     <img src={project.image} alt={project.title} className="w-full aspect-[4/3] object-cover" loading="lazy" />
                     <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex items-center justify-center">
-                      <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm">
-                        {t('portfolio.view_details')} <ExternalLink size={16} />
-                      </span>
+                      <a
+                        href="https://vedyara.in"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm">
+                          {t('portfolio.view_details')} <ExternalLink size={16} />
+                        </span>
+                      </a>
                     </div>
                   </motion.div>
 
@@ -458,7 +464,7 @@ const Index = () => {
                 </div>
                 <div>
                   <label className="text-sm text-muted-foreground mb-1.5 block">{t('contact.form_phone')}</label>
-                  <input type="tel" pattern="(\+91)?[0-9]{10}"  required value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" placeholder="Your phone number" />
+                  <input type="tel" pattern="(\+91)?[0-9]{10}" required value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" placeholder="Your phone number" />
                 </div>
                 <div>
                   <label className="text-sm text-muted-foreground mb-1.5 block">{t('contact.form_email')}</label>

@@ -75,11 +75,6 @@
     "description": "Every project tells a story. Here are three recent builds that showcase our craft, creativity, and commitment to results.",
     "view_details": "View Details",
     "projects": {
-      "ngo": {
-        "category": "NGO Website",
-        "title": "Hope Foundation",
-        "description": "A compassionate, impact-driven website for a non-profit organization. Features donation integration, volunteer sign-up, event management, and storytelling sections."
-      },
       "ecommerce": {
         "category": "E-Commerce",
         "title": "Vedyara Organic",
@@ -87,7 +82,7 @@
       },
       "trading": {
         "category": "Trading Platform",
-        "title": "MoneyView.com",
+        "title": "MoneyView",
         "description": "An educational trading platform combining real-time market data visualization with structured learning modules, interactive charts, and community discussions."
       }
     }

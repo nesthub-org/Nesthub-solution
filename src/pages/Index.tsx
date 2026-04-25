@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Code2, Palette, Zap, Globe, BarChart3, Shield, Smartphone, Cloud, Headphones, ExternalLink, Star, Quote, Target, Eye, Heart, Share2, Mail, MapPin, Phone, Send, Calendar, Clock, Video, Loader2 } from "lucide-react";
+import { ArrowRight, Code2, Palette, Zap, Globe, Smartphone, Cloud, ExternalLink, Star, Quote, Target, Eye, Heart, Share2, Mail, MapPin, Phone, Send, Calendar, Clock, Video, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslation } from 'react-i18next';
 
@@ -75,20 +75,13 @@ const Index = () => {
 
   const projects = [
     {
-      title: t('portfolio.projects.ngo.title'),
-      category: t('portfolio.projects.ngo.category'),
-      description: t('portfolio.projects.ngo.description'),
-      tags: ["React", "Tailwind CSS", "Payment Gateway", "CMS"],
-      image: projectNgo,
-      color: "from-orange-500/20 to-red-500/20",
-    },
-    {
       title: t('portfolio.projects.ecommerce.title'),
       category: t('portfolio.projects.ecommerce.category'),
       description: t('portfolio.projects.ecommerce.description'),
       tags: ["E-Commerce", "Stripe", "Product Catalog", "Blog"],
       image: projectHoney,
       color: "from-amber-500/20 to-yellow-500/20",
+      link:'vedyara.in'
     },
     {
       title: t('portfolio.projects.trading.title'),
@@ -97,6 +90,7 @@ const Index = () => {
       tags: ["Real-time Data", "Charts", "LMS", "WebSockets"],
       image: projectTrading,
       color: "from-emerald-500/20 to-cyan-500/20",
+      link:'https://d-freelance-work-moneyview-v2.vercel.app/'
     },
   ];
 
@@ -270,7 +264,7 @@ const Index = () => {
                     <img src={project.image} alt={project.title} className="w-full aspect-[4/3] object-cover" loading="lazy" />
                     <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex items-center justify-center">
                       <a
-                        href="https://vedyara.in"
+                        href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
                       >

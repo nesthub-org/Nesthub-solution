@@ -6,15 +6,6 @@ import AnimatedSection from "@/components/AnimatedSection";
 
 const testimonials = [
   {
-    name: "Aarav Mehta",
-    role: "Founder, Hope Foundation",
-    project: "NGO Website",
-    content:
-      "Nextgen Solution transformed our vision into a beautiful, functional website. Donations increased by 40% within the first month. Their understanding of our mission was remarkable — they didn't just build a site, they built a movement online.",
-    rating: 5,
-    initials: "AM",
-  },
-  {
     name: "Priya Sharma",
     role: "Owner, Golden Harvest Honey",
     project: "E-Commerce Platform",

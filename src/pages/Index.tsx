@@ -30,7 +30,7 @@ const testimonials = [
   },
   {
     name: "Amit Mishra",
-    role: "CEO, Monew.In",
+    role: "CEO, MoneyView.in",
     project: "Trading Platform",
     content: "Building a trading education platform is complex, but the NestHub team handled it with precision. Real-time charts, course modules, community features — everything works flawlessly.",
     rating: 5,
@@ -90,7 +90,7 @@ const Index = () => {
       tags: ["Real-time Data", "Charts", "LMS", "WebSockets"],
       image: projectTrading,
       color: "from-emerald-500/20 to-cyan-500/20",
-      link:'https://d-freelance-work-moneyview-v2.vercel.app/'
+      link:'https://moneyview-app-v1.vercel.app/'
     },
   ];
 

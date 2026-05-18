@@ -1,4 +1,4 @@
-import { Star, Quote, ArrowRight } from "lucide-react";
+import { Star, Quote, ArrowRight, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import PageTransition from "@/components/PageTransition";
@@ -22,6 +22,16 @@ const testimonials = [
       "Building a trading education platform is complex, but the Nextgen team handled it with precision. Real-time charts, course modules, community features — everything works flawlessly. They're not just developers, they're strategic partners.",
     rating: 5,
     initials: "RK",
+  },
+  {
+    name: "Vitality Management",
+    role: "Health & Wellness Partner",
+    project: "Fitlife Sutra",
+    content:
+      "Nextgen transformed our digital presence. Their intuitive design and seamless user experience helped us connect with our community better and showcase our Herbalife nutrition programs effectively. The platform is a game-changer for our business.",
+    rating: 5,
+    initials: "VM",
+    link: "https://fitlifesutra.netlify.app/",
   },
 ];
 
@@ -88,20 +98,34 @@ const Testimonials = () => {
                   </p>
 
                   {/* Author */}
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
-                      <span className="text-primary font-display font-bold text-sm">
-                        {t.initials}
-                      </span>
-                    </div>
-                    <div>
-                      <div className="font-display font-semibold text-foreground">
-                        {t.name}
+                  <div className="flex items-center justify-between gap-4 mt-auto">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                        <span className="text-primary font-display font-bold text-sm">
+                          {t.initials}
+                        </span>
                       </div>
-                      <div className="text-sm text-muted-foreground">
-                        {t.role} · {t.project}
+                      <div>
+                        <div className="font-display font-semibold text-foreground">
+                          {t.name}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          {t.role} · {t.project}
+                        </div>
                       </div>
                     </div>
+
+                    {(t as any).link && (
+                      <a
+                        href={(t as any).link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/5 text-primary hover:bg-primary hover:text-primary-foreground transition-colors relative z-20 shrink-0"
+                        title="Visit Website"
+                      >
+                        <ExternalLink size={18} />
+                      </a>
+                    )}
                   </div>
                 </motion.div>
               </AnimatedSection>

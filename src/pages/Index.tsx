@@ -9,6 +9,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import projectNgo from "@/assets/project-ngo.jpg";
 import projectHoney from "@/assets/project-honey.png";
 import projectTrading from "@/assets/project-trading.png";
+import projectHealth from "@/assets/project-health.png";
 import calendlyImage from "@/assets/calendly-cta.jpg";
 
 const testimonials = [
@@ -21,7 +22,7 @@ const testimonials = [
   //   initials: "AM",
   // },
   {
-    name: "Yogendra Maurya",
+    name: "Mr. Yogendra Maurya",
     role: "Founder, Vedyara Organic",
     project: "E-Commerce Platform",
     content: "Our honey brand needed an online presence that matched the quality of our product. NestHub delivered beyond expectations — the site is gorgeous and our online sales have tripled.",
@@ -29,12 +30,20 @@ const testimonials = [
     initials: "YK",
   },
   {
-    name: "Amit Mishra",
+    name: "Mr. Amit Mishra",
     role: "CEO, MoneyView.in",
     project: "Trading Platform",
     content: "Building a trading education platform is complex, but the NestHub team handled it with precision. Real-time charts, course modules, community features — everything works flawlessly.",
     rating: 5,
     initials: "AM",
+  },
+  {
+    name: "Mr. Mahtab Alam",
+    role: "Health & Wellness",
+    project: "Fitlifesutra",
+    content: "NestHub helped us create a stronger online presence with a clean, user-friendly design. The website made it easier for us to connect with our community and showcase our Herbalife nutrition programs in a simple, professional, and engaging manner.",
+    rating: 5,
+    initials: "MA"
   },
 ];
 
@@ -74,6 +83,15 @@ const Index = () => {
   ];
 
   const projects = [
+    {
+      title: "Fitlife Sutra",
+      category: "Health & Wellness",
+      description: "A comprehensive digital platform for Vitality Management, showcasing their Herbalife nutrition programs and facilitating community engagement through an intuitive, modern interface.",
+      tags: ["Health", "Wellness", "Responsive", "UI/UX"],
+      image: projectHealth,
+      color: "from-green-500/20 to-emerald-500/20",
+      link: "https://fitlifesutra.netlify.app/"
+    },
     {
       title: t('portfolio.projects.ecommerce.title'),
       category: t('portfolio.projects.ecommerce.category'),
@@ -319,14 +337,28 @@ const Index = () => {
                     ))}
                   </div>
                   <p className="text-foreground/90 text-lg leading-relaxed mb-8 relative z-10">"{t.content}"</p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
-                      <span className="text-primary font-display font-bold text-sm">{t.initials}</span>
+                  <div className="flex items-center justify-between gap-4 mt-auto">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                        <span className="text-primary font-display font-bold text-sm">{t.initials}</span>
+                      </div>
+                      <div>
+                        <div className="font-display font-semibold text-foreground">{t.name}</div>
+                        <div className="text-sm text-muted-foreground">{t.role} · {t.project}</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="font-display font-semibold text-foreground">{t.name}</div>
-                      <div className="text-sm text-muted-foreground">{t.role} · {t.project}</div>
-                    </div>
+                    
+                    {(t as any).link && (
+                      <a
+                        href={(t as any).link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/5 text-primary hover:bg-primary hover:text-primary-foreground transition-colors relative z-20 shrink-0"
+                        title="Visit Website"
+                      >
+                        <ExternalLink size={18} />
+                      </a>
+                    )}
                   </div>
                 </motion.div>
               </AnimatedSection>

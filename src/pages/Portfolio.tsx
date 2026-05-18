@@ -7,6 +7,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import projectNgo from "@/assets/project-ngo.jpg";
 import projectHoney from "@/assets/project-honey.png";
 import projectTrading from "@/assets/project-trading.png";
+import projectHealth from "@/assets/project-health.png";
 
 const Portfolio = () => {
   const { t } = useTranslation();
@@ -19,6 +20,15 @@ const Portfolio = () => {
       tags: ["React", "Tailwind CSS", "Payment Gateway", "CMS"],
       image: projectNgo,
       color: "from-orange-500/20 to-red-500/20",
+    },
+    {
+      title: "Fitlife Sutra",
+      category: "Health & Wellness",
+      description: "A comprehensive digital platform for Vitality Management, showcasing their Herbalife nutrition programs and facilitating community engagement through an intuitive, modern interface.",
+      tags: ["Health", "Wellness", "Responsive", "UI/UX"],
+      image: projectHealth,
+      color: "from-green-500/20 to-emerald-500/20",
+      link: "https://fitlifesutra.netlify.app/",
     },
     {
       title: t('portfolio.projects.ecommerce.title'),
@@ -87,9 +97,17 @@ const Portfolio = () => {
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex items-center justify-center">
-                      <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm">
-                        {t('portfolio.view_details')} <ExternalLink size={16} />
-                      </span>
+                      {(project as any).link ? (
+                        <a href={(project as any).link} target="_blank" rel="noopener noreferrer">
+                          <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm">
+                            {t('portfolio.view_details')} <ExternalLink size={16} />
+                          </span>
+                        </a>
+                      ) : (
+                        <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm">
+                          {t('portfolio.view_details')} <ExternalLink size={16} />
+                        </span>
+                      )}
                     </div>
                   </motion.div>
 

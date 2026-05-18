@@ -59,12 +59,16 @@ const Navbar = () => {
     if (to.startsWith("/#")) {
       const id = to.substring(2);
       if (location.pathname === "/") {
-        const el = document.getElementById(id);
-        el?.scrollIntoView({ behavior: "smooth" });
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          el?.scrollIntoView({ behavior: "smooth" });
+        }, 350);
       } else {
         navigate("/");
         scrollToSection(id);
       }
+    } else {
+      navigate(to);
     }
   };
 
@@ -94,11 +98,10 @@ const Navbar = () => {
               <button
                 key={link.to}
                 onClick={() => handleNavClick(link.to)}
-                className={`text-sm font-medium transition-colors duration-200 relative ${
-                  isActive(link.to)
+                className={`text-sm font-medium transition-colors duration-200 relative ${isActive(link.to)
                     ? "text-primary"
                     : "text-muted-foreground hover:text-foreground"
-                }`}
+                  }`}
               >
                 {link.label}
                 {isActive(link.to) && (
@@ -112,11 +115,10 @@ const Navbar = () => {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`text-sm font-medium transition-colors duration-200 relative ${
-                  isActive(link.to)
+                className={`text-sm font-medium transition-colors duration-200 relative ${isActive(link.to)
                     ? "text-primary"
                     : "text-muted-foreground hover:text-foreground"
-                }`}
+                  }`}
               >
                 {link.label}
                 {isActive(link.to) && (
@@ -159,9 +161,8 @@ const Navbar = () => {
                   <button
                     key={link.to}
                     onClick={() => handleNavClick(link.to)}
-                    className={`text-lg font-medium text-left ${
-                      isActive(link.to) ? "text-primary" : "text-muted-foreground"
-                    }`}
+                    className={`text-lg font-medium text-left ${isActive(link.to) ? "text-primary" : "text-muted-foreground"
+                      }`}
                   >
                     {link.label}
                   </button>
@@ -170,9 +171,8 @@ const Navbar = () => {
                     key={link.to}
                     to={link.to}
                     onClick={() => setOpen(false)}
-                    className={`text-lg font-medium ${
-                      isActive(link.to) ? "text-primary" : "text-muted-foreground"
-                    }`}
+                    className={`text-lg font-medium ${isActive(link.to) ? "text-primary" : "text-muted-foreground"
+                      }`}
                   >
                     {link.label}
                   </Link>

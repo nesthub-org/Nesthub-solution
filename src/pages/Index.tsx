@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import PageTransition from "@/components/PageTransition";
 import AnimatedSection from "@/components/AnimatedSection";
+import CountUp from "@/components/CountUp";
 import projectNgo from "@/assets/project-ngo.jpg";
 import projectHoney from "@/assets/project-honey.png";
 import projectTrading from "@/assets/project-trading.png";
@@ -64,9 +65,9 @@ const Index = () => {
   const formRef = useRef<HTMLFormElement>(null);
 
   const stats = [
-    { value: "3+", label: t('stats.projects') },
-    { value: "100%", label: t('stats.satisfaction') },
-    { value: "2+", label: t('stats.experience') },
+    { to: 3, suffix: "+", label: t('stats.projects') },
+    { to: 100, suffix: "%", label: t('stats.satisfaction') },
+    { to: 2, suffix: "+", label: t('stats.experience') },
   ];
 
   const services = [
@@ -151,9 +152,9 @@ const Index = () => {
         <div className="container mx-auto px-6 pt-20 pb-16 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, scale: 0.9, filter: "blur(6px)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               <span className="inline-block px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-primary text-sm font-medium mb-8">
                 {t('hero.badge')}
@@ -161,9 +162,9 @@ const Index = () => {
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
               className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight mb-6"
             >
               {t('hero.title')}{" "}
@@ -172,18 +173,18 @@ const Index = () => {
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, y: 24, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
               className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
             >
               {t('hero.description')}
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.6, delay: 0.38, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <a
@@ -216,7 +217,9 @@ const Index = () => {
             {stats.map((stat, i) => (
               <AnimatedSection key={stat.label} delay={i * 0.1}>
                 <div className="inline-flex flex-col items-center px-6 py-4 rounded-full bg-primary/10 border border-primary/20 shadow-sm min-w-[140px]">
-                  <span className="font-display text-2xl md:text-3xl font-bold text-primary mb-1">{stat.value}</span>
+                  <span className="font-display text-2xl md:text-3xl font-bold text-primary mb-1">
+                    <CountUp to={stat.to} suffix={stat.suffix} />
+                  </span>
                   <span className="text-xs md:text-sm text-muted-foreground font-medium">{stat.label}</span>
                 </div>
               </AnimatedSection>
@@ -269,45 +272,84 @@ const Index = () => {
             </h2>
           </AnimatedSection>
 
-          <div className="flex flex-col gap-24">
-            {projects.map((project, i) => (
-              <AnimatedSection key={project.title} delay={i * 0.1}>
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-10 items-center`}>
-                  <motion.div
-                    className={`relative rounded-2xl overflow-hidden group ${i % 2 === 1 ? "lg:order-2" : ""}`}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-40 z-10 pointer-events-none`} />
-                    <img src={project.image} alt={project.title} className="w-full aspect-[4/3] object-cover" loading="lazy" />
-                    <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex items-center justify-center">
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm">
-                          {t('portfolio.view_details')} <ExternalLink size={16} />
-                        </span>
-                      </a>
-                    </div>
-                  </motion.div>
-
-                  <div className={i % 2 === 1 ? "lg:order-1" : ""}>
-                    <span className="text-primary text-sm font-semibold uppercase tracking-widest">{project.category}</span>
-                    <h3 className="font-display text-3xl md:text-4xl font-bold mt-2 mb-4">{project.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed mb-6">{project.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <span key={tag} className="px-3 py-1 rounded-full border border-border bg-secondary/50 text-secondary-foreground text-xs font-medium">
+          <div className="flex flex-col gap-6">
+            {/* Featured card — full width, image left + content right */}
+            <AnimatedSection delay={0} variant="scale">
+              <div className="glass-card rounded-2xl overflow-hidden group hover-lift">
+                <div className="grid grid-cols-1 md:grid-cols-2 min-h-[340px]">
+                  <div className="relative overflow-hidden">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${projects[0].color} opacity-50 z-10 pointer-events-none`} />
+                    <img
+                      src={projects[0].image}
+                      alt={projects[0].title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 min-h-[240px] md:min-h-0"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="p-8 md:p-10 flex flex-col justify-center">
+                    <span className="text-primary text-xs font-semibold uppercase tracking-widest">{projects[0].category}</span>
+                    <h3 className="font-display text-2xl md:text-3xl font-bold mt-2 mb-3">{projects[0].title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-6">{projects[0].description}</p>
+                    <div className="flex flex-wrap gap-2 mb-7">
+                      {projects[0].tags.map((tag) => (
+                        <span key={tag} className="px-2.5 py-0.5 rounded-full border border-border bg-secondary/50 text-secondary-foreground text-xs font-medium">
                           {tag}
                         </span>
                       ))}
                     </div>
+                    <a
+                      href={projects[0].link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm w-fit"
+                    >
+                      {t('portfolio.view_details')} <ExternalLink size={14} />
+                    </a>
                   </div>
                 </div>
-              </AnimatedSection>
-            ))}
+              </div>
+            </AnimatedSection>
+
+            {/* Two smaller cards side by side */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {projects.slice(1).map((project, i) => (
+                <AnimatedSection key={project.title} delay={(i + 1) * 0.12} variant={i === 0 ? "left" : "right"}>
+                  <div className="glass-card rounded-2xl overflow-hidden group hover-lift h-full flex flex-col">
+                    <div className="relative overflow-hidden aspect-[16/10]">
+                      <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-50 z-10 pointer-events-none`} />
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm"
+                        >
+                          {t('portfolio.view_details')} <ExternalLink size={14} />
+                        </a>
+                      </div>
+                    </div>
+                    <div className="p-6 flex flex-col flex-1">
+                      <span className="text-primary text-xs font-semibold uppercase tracking-widest">{project.category}</span>
+                      <h3 className="font-display text-xl font-bold mt-1.5 mb-2">{project.title}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1 line-clamp-3">{project.description}</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.tags.map((tag) => (
+                          <span key={tag} className="px-2.5 py-0.5 rounded-full border border-border bg-secondary/50 text-secondary-foreground text-xs font-medium">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -321,47 +363,56 @@ const Index = () => {
               {t('testimonials.section_title')} <span className="text-gradient">{t('testimonials.section_highlight')}</span>
             </h2>
           </AnimatedSection>
+        </div>
 
-          <div className="flex flex-col gap-10 max-w-4xl mx-auto">
-            {testimonials.map((t, i) => (
-              <AnimatedSection key={t.name} delay={i * 0.12}>
-                <motion.div
-                  className="glass-card rounded-2xl p-8 md:p-10 relative overflow-hidden group"
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Quote size={80} className="absolute -top-2 -right-2 text-primary/5 group-hover:text-primary/10 transition-colors" />
-                  <div className="flex gap-1 mb-5">
-                    {Array.from({ length: t.rating }).map((_, j) => (
-                      <Star key={j} size={18} className="fill-primary text-primary" />
-                    ))}
+        {/* Row 1 — scrolls left */}
+        <div className="relative overflow-hidden mb-5 marquee-fade group/row1">
+          <div className="flex w-max animate-marquee-left group-hover/row1:[animation-play-state:paused]">
+            {[...testimonials, ...testimonials].map((item, i) => (
+              <div key={i} className="w-[380px] mx-3 shrink-0 glass-card rounded-2xl p-7 relative overflow-hidden">
+                <Quote size={50} className="absolute -top-1 -right-1 text-primary/5" />
+                <div className="flex gap-1 mb-4">
+                  {Array.from({ length: item.rating }).map((_, j) => (
+                    <Star key={j} size={14} className="fill-primary text-primary" />
+                  ))}
+                </div>
+                <p className="text-foreground/85 text-sm leading-relaxed mb-5 line-clamp-4">"{item.content}"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                    <span className="text-primary font-display font-bold text-xs">{item.initials}</span>
                   </div>
-                  <p className="text-foreground/90 text-lg leading-relaxed mb-8 relative z-10">"{t.content}"</p>
-                  <div className="flex items-center justify-between gap-4 mt-auto">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-                        <span className="text-primary font-display font-bold text-sm">{t.initials}</span>
-                      </div>
-                      <div>
-                        <div className="font-display font-semibold text-foreground">{t.name}</div>
-                        <div className="text-sm text-muted-foreground">{t.role} · {t.project}</div>
-                      </div>
-                    </div>
-                    
-                    {(t as any).link && (
-                      <a
-                        href={(t as any).link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/5 text-primary hover:bg-primary hover:text-primary-foreground transition-colors relative z-20 shrink-0"
-                        title="Visit Website"
-                      >
-                        <ExternalLink size={18} />
-                      </a>
-                    )}
+                  <div>
+                    <div className="font-display font-semibold text-sm text-foreground">{item.name}</div>
+                    <div className="text-xs text-muted-foreground">{item.role} · {item.project}</div>
                   </div>
-                </motion.div>
-              </AnimatedSection>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Row 2 — scrolls right */}
+        <div className="relative overflow-hidden marquee-fade group/row2">
+          <div className="flex w-max animate-marquee-right group-hover/row2:[animation-play-state:paused]">
+            {[...[...testimonials].reverse(), ...[...testimonials].reverse()].map((item, i) => (
+              <div key={i} className="w-[380px] mx-3 shrink-0 glass-card rounded-2xl p-7 relative overflow-hidden">
+                <Quote size={50} className="absolute -top-1 -right-1 text-primary/5" />
+                <div className="flex gap-1 mb-4">
+                  {Array.from({ length: item.rating }).map((_, j) => (
+                    <Star key={j} size={14} className="fill-primary text-primary" />
+                  ))}
+                </div>
+                <p className="text-foreground/85 text-sm leading-relaxed mb-5 line-clamp-4">"{item.content}"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                    <span className="text-primary font-display font-bold text-xs">{item.initials}</span>
+                  </div>
+                  <div>
+                    <div className="font-display font-semibold text-sm text-foreground">{item.name}</div>
+                    <div className="text-xs text-muted-foreground">{item.role} · {item.project}</div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>

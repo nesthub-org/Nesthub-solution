@@ -9,6 +9,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PageLoader from "@/components/PageLoader";
+import CursorGlow from "@/components/CursorGlow";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -33,6 +35,8 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <PageLoader />
+          <CursorGlow />
           <Navbar />
           <main className="min-h-screen">
             <AnimatedRoutes />

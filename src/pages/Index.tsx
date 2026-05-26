@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Code2, Palette, Zap, Globe, Smartphone, Cloud, ExternalLink, Star, Quote, Target, Eye, Heart, Share2, Mail, MapPin, Phone, Send, Calendar, Clock, Video, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslation } from 'react-i18next';
@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import PageTransition from "@/components/PageTransition";
 import AnimatedSection from "@/components/AnimatedSection";
 import CountUp from "@/components/CountUp";
+import WordReveal from "@/components/WordReveal";
 import projectNgo from "@/assets/project-ngo.jpg";
 import projectHoney from "@/assets/project-honey.png";
 import projectTrading from "@/assets/project-trading.png";
@@ -63,6 +64,10 @@ const Index = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sending, setSending] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+
+  const { scrollY } = useScroll();
+  const heroY = useTransform(scrollY, [0, 600], [0, -90]);
+  const heroOpacity = useTransform(scrollY, [0, 380], [1, 0]);
 
   const stats = [
     { to: 3, suffix: "+", label: t('stats.projects') },
@@ -149,7 +154,11 @@ const Index = () => {
       {/* Hero */}
       <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="hero-glow top-1/4 left-1/2 -translate-x-1/2" />
-        <div className="container mx-auto px-6 pt-20 pb-16 relative z-10">
+
+        <motion.div
+          style={{ y: heroY, opacity: heroOpacity }}
+          className="container mx-auto px-6 pt-20 pb-16 relative z-10"
+        >
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.9, filter: "blur(6px)" }}
@@ -201,13 +210,41 @@ const Index = () => {
               </a>
             </motion.div>
           </div>
+        </motion.div>
+
+        {/* Animated grid lines */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {[1/4, 1/2, 3/4].map((pos, i) => (
+            <motion.div
+              key={i}
+              className="absolute top-0 w-px bg-border/30"
+              style={{ left: `${pos * 100}%` }}
+              initial={{ height: 0 }}
+              animate={{ height: "100%" }}
+              transition={{ duration: 1.4, delay: 0.4 + i * 0.15, ease: [0.22, 1, 0.36, 1] }}
+            />
+          ))}
         </div>
 
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-px h-full bg-border/30" />
-          <div className="absolute top-0 left-1/2 w-px h-full bg-border/30" />
-          <div className="absolute top-0 left-3/4 w-px h-full bg-border/30" />
-        </div>
+        {/* Scroll indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
+        >
+          <motion.div
+            className="w-5 h-8 rounded-full border border-border/60 flex items-start justify-center pt-1.5"
+            animate={{ y: [0, 4, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <motion.div
+              className="w-1 h-1.5 rounded-full bg-primary"
+              animate={{ opacity: [1, 0.2, 1] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Stats */}
@@ -231,12 +268,16 @@ const Index = () => {
       {/* Services */}
       <section id="services" className="py-24 md:py-32">
         <div className="container mx-auto px-6">
-          <AnimatedSection className="text-center mb-16">
-            <span className="text-primary text-sm font-semibold uppercase tracking-widest">{t('services.section_label')}</span>
+          <div className="text-center mb-16">
+            <AnimatedSection variant="fade">
+              <span className="text-primary text-sm font-semibold uppercase tracking-widest">{t('services.section_label')}</span>
+            </AnimatedSection>
             <h2 className="font-display text-3xl md:text-5xl font-bold mt-3">
-              {t('services.section_title')} <span className="text-gradient">{t('services.section_highlight')}</span>
+              <WordReveal text={t('services.section_title')} delay={0.05} />
+              {" "}
+              <WordReveal text={t('services.section_highlight')} wordClassName="text-gradient" delay={0.2} />
             </h2>
-          </AnimatedSection>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, i) => (
@@ -265,12 +306,16 @@ const Index = () => {
       <section id="portfolio" className="py-24 md:py-32 relative overflow-hidden">
         <div className="hero-glow top-0 left-1/2 -translate-x-1/2" />
         <div className="container mx-auto px-6 relative z-10">
-          <AnimatedSection className="text-center mb-16">
-            <span className="text-primary text-sm font-semibold uppercase tracking-widest">{t('portfolio.section_label')}</span>
+          <div className="text-center mb-16">
+            <AnimatedSection variant="fade">
+              <span className="text-primary text-sm font-semibold uppercase tracking-widest">{t('portfolio.section_label')}</span>
+            </AnimatedSection>
             <h2 className="font-display text-3xl md:text-5xl font-bold mt-3">
-              {t('portfolio.section_title')} <span className="text-gradient">{t('portfolio.section_highlight')}</span>
+              <WordReveal text={t('portfolio.section_title')} delay={0.05} />
+              {" "}
+              <WordReveal text={t('portfolio.section_highlight')} wordClassName="text-gradient" delay={0.2} />
             </h2>
-          </AnimatedSection>
+          </div>
 
           <div className="flex flex-col gap-6">
             {/* Featured card — full width, image left + content right */}
@@ -357,12 +402,16 @@ const Index = () => {
       {/* Testimonials */}
       <section id="testimonials" className="py-24 md:py-32">
         <div className="container mx-auto px-6">
-          <AnimatedSection className="text-center mb-16">
-            <span className="text-primary text-sm font-semibold uppercase tracking-widest">{t('testimonials.section_label')}</span>
+          <div className="text-center mb-16">
+            <AnimatedSection variant="fade">
+              <span className="text-primary text-sm font-semibold uppercase tracking-widest">{t('testimonials.section_label')}</span>
+            </AnimatedSection>
             <h2 className="font-display text-3xl md:text-5xl font-bold mt-3">
-              {t('testimonials.section_title')} <span className="text-gradient">{t('testimonials.section_highlight')}</span>
+              <WordReveal text={t('testimonials.section_title')} delay={0.05} />
+              {" "}
+              <WordReveal text={t('testimonials.section_highlight')} wordClassName="text-gradient" delay={0.2} />
             </h2>
-          </AnimatedSection>
+          </div>
         </div>
 
         {/* Row 1 — scrolls left */}
@@ -422,15 +471,19 @@ const Index = () => {
       <section id="about" className="py-24 md:py-32 relative overflow-hidden">
         <div className="hero-glow top-0 left-1/2 -translate-x-1/2" />
         <div className="container mx-auto px-6 relative z-10">
-          <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-primary text-sm font-semibold uppercase tracking-widest">{t('about.section_label')}</span>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <AnimatedSection variant="fade">
+              <span className="text-primary text-sm font-semibold uppercase tracking-widest">{t('about.section_label')}</span>
+            </AnimatedSection>
             <h2 className="font-display text-3xl md:text-5xl font-bold mt-3 mb-5">
-              {t('about.section_title')} <span className="text-gradient">{t('about.section_highlight')}</span>
+              <WordReveal text={t('about.section_title')} delay={0.05} />
+              {" "}
+              <WordReveal text={t('about.section_highlight')} wordClassName="text-gradient" delay={0.2} />
             </h2>
-            <p className="text-lg text-muted-foreground">
-              {t('about.description')}
-            </p>
-          </AnimatedSection>
+            <AnimatedSection variant="fade" delay={0.3}>
+              <p className="text-lg text-muted-foreground">{t('about.description')}</p>
+            </AnimatedSection>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {values.map((v, i) => (

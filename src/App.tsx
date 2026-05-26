@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageLoader from "@/components/PageLoader";
 import CursorGlow from "@/components/CursorGlow";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -36,6 +37,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <PageLoader />
+          <ScrollProgressBar />
           <CursorGlow />
           <Navbar />
           <main className="min-h-screen">

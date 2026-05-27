@@ -1,4 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://nesthubsolution.in/sitemap.xml
+
+# Social crawlers
 User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
 Allow: /
 
 User-agent: Bingbot
@@ -10,5 +20,5 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
+User-agent: LinkedInBot
 Allow: /

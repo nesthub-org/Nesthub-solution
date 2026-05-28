@@ -8,8 +8,10 @@ import PageTransition from "@/components/PageTransition";
 import AnimatedSection from "@/components/AnimatedSection";
 import CountUp from "@/components/CountUp";
 import WordReveal from "@/components/WordReveal";
-import projectNgo from "@/assets/project-ngo.jpg";
 import projectHoney from "@/assets/project-honey.png";
+import logoFitlife from "@/assets/logo-fitlifesutra.png";
+import logoMoneyview from "@/assets/logo-moneyview.png";
+import logoVedyara from "@/assets/logo-vedyara.png";
 import projectTrading from "@/assets/project-trading.png";
 import projectHealth from "@/assets/project-health.png";
 import calendlyImage from "@/assets/calendly-cta.jpg";
@@ -61,7 +63,7 @@ const STATICFORM_API_KEY = "sf_96hcfm4egdje3k77kii2j9ma";
 
 const Index = () => {
   const { t } = useTranslation();
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", message: "", phone: "" });
   const [sending, setSending] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -76,16 +78,16 @@ const Index = () => {
   ];
 
   const services = [
-    { icon: Code2, title: t('services.items.web_development.title'), desc: t('services.items.web_development.desc'), features: t('services.items.web_development.features', { returnObjects: true }) },
-    { icon: Palette, title: t('services.items.ui_design.title'), desc: t('services.items.ui_design.desc'), features: t('services.items.ui_design.features', { returnObjects: true }) },
-    { icon: Smartphone, title: t('services.items.responsive.title'), desc: t('services.items.responsive.desc'), features: t('services.items.responsive.features', { returnObjects: true }) },
-    { icon: Zap, title: t('services.items.performance.title'), desc: t('services.items.performance.desc'), features: t('services.items.performance.features', { returnObjects: true }) },
-    { icon: Globe, title: t('services.items.seo.title'), desc: t('services.items.seo.desc'), features: t('services.items.seo.features', { returnObjects: true }) },
-    { icon: Cloud, title: t('services.items.cloud.title'), desc: t('services.items.cloud.desc'), features: t('services.items.cloud.features', { returnObjects: true }) },
-    // { icon: Shield, title: t('services.items.security.title'), desc: t('services.items.security.desc'), features: t('services.items.security.features', { returnObjects: true }) },
-    // { icon: BarChart3, title: t('services.items.analytics.title'), desc: t('services.items.analytics.desc'), features: t('services.items.analytics.features', { returnObjects: true }) },
-    // { icon: Headphones, title: t('services.items.support.title'), desc: t('services.items.support.desc'), features: t('services.items.support.features', { returnObjects: true }) },
-    { icon: Share2, title: t('services.items.social.title'), desc: t('services.items.social.desc'), features: t('services.items.social.features', { returnObjects: true }) },
+    { icon: Code2, title: t('services.items.web_development.title'), desc: t('services.items.web_development.desc'), features: t('services.items.web_development.features', { returnObjects: true }) as string[] },
+    { icon: Palette, title: t('services.items.ui_design.title'), desc: t('services.items.ui_design.desc'), features: t('services.items.ui_design.features', { returnObjects: true }) as string[] },
+    { icon: Smartphone, title: t('services.items.responsive.title'), desc: t('services.items.responsive.desc'), features: t('services.items.responsive.features', { returnObjects: true }) as string[] },
+    { icon: Zap, title: t('services.items.performance.title'), desc: t('services.items.performance.desc'), features: t('services.items.performance.features', { returnObjects: true }) as string[] },
+    { icon: Globe, title: t('services.items.seo.title'), desc: t('services.items.seo.desc'), features: t('services.items.seo.features', { returnObjects: true }) as string[] },
+    { icon: Cloud, title: t('services.items.cloud.title'), desc: t('services.items.cloud.desc'), features: t('services.items.cloud.features', { returnObjects: true }) as string[] },
+    // { icon: Shield, title: t('services.items.security.title'), desc: t('services.items.security.desc'), features: t('services.items.security.features', { returnObjects: true }) as string[] },
+    // { icon: BarChart3, title: t('services.items.analytics.title'), desc: t('services.items.analytics.desc'), features: t('services.items.analytics.features', { returnObjects: true }) as string[] },
+    // { icon: Headphones, title: t('services.items.support.title'), desc: t('services.items.support.desc'), features: t('services.items.support.features', { returnObjects: true }) as string[] },
+    { icon: Share2, title: t('services.items.social.title'), desc: t('services.items.social.desc'), features: t('services.items.social.features', { returnObjects: true }) as string[] },
   ];
 
   const projects = [
@@ -297,6 +299,32 @@ const Index = () => {
                   </div>
                 </div>
               </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Partners */}
+      <section className="py-16 bg-black border-y border-white/[0.06] overflow-hidden">
+        <AnimatedSection variant="fade" className="text-center mb-10 px-6">
+          <span className="text-white/25 text-xs font-semibold uppercase tracking-[0.2em]">Trusted by growing brands</span>
+        </AnimatedSection>
+
+        <div className="relative overflow-hidden marquee-fade">
+          <div className="flex w-max animate-marquee-right items-center" style={{ animationDuration: "10s" }}>
+            {[logoFitlife, logoMoneyview, logoVedyara, logoFitlife, logoMoneyview, logoVedyara].map((logo, i) => (
+              <div
+                key={i}
+                className="mx-14 shrink-0 group cursor-default"
+              >
+                <img
+                  src={logo}
+                  alt={["FitLifeSutra", "MoneyView", "Vedyara"][i % 3]}
+                  className="h-28 md:h-32 w-auto object-contain opacity-40 group-hover:opacity-75 transition-opacity duration-500"
+                  style={{ filter: "grayscale(1) invert(1)" }}
+                  draggable={false}
+                />
+              </div>
             ))}
           </div>
         </div>

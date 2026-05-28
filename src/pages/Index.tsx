@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, Code2, Palette, Zap, Globe, Smartphone, Cloud, ExternalLink, Star, Quote, Target, Eye, Heart, Share2, Mail, MapPin, Phone, Send, Calendar, Clock, Video, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslation } from 'react-i18next';
@@ -67,10 +67,6 @@ const Index = () => {
   const [sending, setSending] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
-  const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 600], [0, -90]);
-  const heroOpacity = useTransform(scrollY, [0, 380], [1, 0]);
-
   const stats = [
     { to: 3, suffix: "+", label: t('stats.projects') },
     { to: 100, suffix: "%", label: t('stats.satisfaction') },
@@ -92,15 +88,6 @@ const Index = () => {
 
   const projects = [
     {
-      title: "Fitlife Sutra",
-      category: "Health & Wellness",
-      description: "A comprehensive digital platform for Vitality Management, showcasing their Herbalife nutrition programs and facilitating community engagement through an intuitive, modern interface.",
-      tags: ["Health", "Wellness", "Responsive", "UI/UX"],
-      image: projectHealth,
-      color: "from-green-500/20 to-emerald-500/20",
-      link: "https://fitlifesutra.netlify.app/"
-    },
-    {
       title: t('portfolio.projects.ecommerce.title'),
       category: t('portfolio.projects.ecommerce.category'),
       description: t('portfolio.projects.ecommerce.description'),
@@ -117,6 +104,15 @@ const Index = () => {
       image: projectTrading,
       color: "from-emerald-500/20 to-cyan-500/20",
       link:'https://moneyview-app-v1.vercel.app/'
+    },
+    {
+      title: "Fitlife Sutra",
+      category: "Health & Wellness",
+      description: "A comprehensive digital platform for Vitality Management, showcasing their Herbalife nutrition programs and facilitating community engagement through an intuitive, modern interface.",
+      tags: ["Health", "Wellness", "Responsive", "UI/UX"],
+      image: projectHealth,
+      color: "from-green-500/20 to-emerald-500/20",
+      link: "https://fitlifesutra.netlify.app/"
     },
   ];
 
@@ -158,7 +154,6 @@ const Index = () => {
         <div className="hero-glow top-1/4 left-1/2 -translate-x-1/2" />
 
         <motion.div
-          style={{ y: heroY, opacity: heroOpacity }}
           className="container mx-auto px-6 pt-20 pb-16 relative z-10"
         >
           <div className="max-w-4xl mx-auto text-center">

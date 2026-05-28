@@ -9,7 +9,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import PageLoader from "@/components/PageLoader";
 import CursorGlow from "@/components/CursorGlow";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import Index from "./pages/Index";
@@ -36,7 +35,6 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <PageLoader />
           <ScrollProgressBar />
           <CursorGlow />
           <Navbar />

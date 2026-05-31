@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -9,6 +10,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import WordsPreloader from "@/components/WordsPreloader";
+import CursorGlow from "@/components/CursorGlow";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -26,6 +30,26 @@ const AnimatedRoutes = () => {
   );
 };
 
+const AppContent = () => {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <>
+      <AnimatePresence>
+        {!loaded && <WordsPreloader onComplete={() => setLoaded(true)} />}
+      </AnimatePresence>
+      <ScrollProgressBar />
+      <CursorGlow />
+      <Navbar />
+      <main className="min-h-screen">
+        <AnimatedRoutes />
+      </main>
+      <Footer />
+      <WhatsAppButton />
+    </>
+  );
+};
+
 const App = () => (
   <I18nextProvider i18n={i18n}>
     <QueryClientProvider client={queryClient}>
@@ -33,12 +57,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Navbar />
-          <main className="min-h-screen">
-            <AnimatedRoutes />
-          </main>
-          <Footer />
-          <WhatsAppButton />
+          <AppContent />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

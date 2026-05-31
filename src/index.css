@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
+/* Grain texture removed — SVG feTurbulence filter was expensive on scroll */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -74,7 +76,7 @@
     background: var(--gradient-card);
     border: 1px solid hsl(var(--border));
     box-shadow: var(--shadow-card);
-    backdrop-filter: blur(12px);
+    /* backdrop-filter removed — 20+ blurred elements caused severe scroll jank */
   }
 
   .text-gradient {
@@ -91,11 +93,11 @@
 
   .hero-glow {
     position: absolute;
-    width: 600px;
-    height: 600px;
-    background: var(--gradient-glow);
-    filter: blur(80px);
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(ellipse at center, hsl(175 80% 50% / 0.12) 0%, transparent 65%);
     pointer-events: none;
+    /* filter:blur() replaced with a soft radial-gradient — no repaint cost */
   }
 }
 
@@ -106,5 +108,9 @@
   .hover-lift:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-glow);
+  }
+  .marquee-fade {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   }
 }

@@ -6,8 +6,12 @@ import { useTranslation } from 'react-i18next';
 
 import PageTransition from "@/components/PageTransition";
 import AnimatedSection from "@/components/AnimatedSection";
-import projectNgo from "@/assets/project-ngo.jpg";
+import CountUp from "@/components/CountUp";
+import WordReveal from "@/components/WordReveal";
 import projectHoney from "@/assets/project-honey.png";
+import logoFitlife from "@/assets/logo-fitlifesutra.png";
+import logoMoneyview from "@/assets/logo-moneyview.png";
+import logoVedyara from "@/assets/logo-vedyara.png";
 import projectTrading from "@/assets/project-trading.png";
 import projectHealth from "@/assets/project-health.png";
 import calendlyImage from "@/assets/calendly-cta.jpg";
@@ -59,39 +63,30 @@ const STATICFORM_API_KEY = "sf_96hcfm4egdje3k77kii2j9ma";
 
 const Index = () => {
   const { t } = useTranslation();
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", message: "", phone: "" });
   const [sending, setSending] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
   const stats = [
-    { value: "3+", label: t('stats.projects') },
-    { value: "100%", label: t('stats.satisfaction') },
-    { value: "2+", label: t('stats.experience') },
+    { to: 3, suffix: "+", label: t('stats.projects') },
+    { to: 100, suffix: "%", label: t('stats.satisfaction') },
+    { to: 2, suffix: "+", label: t('stats.experience') },
   ];
 
   const services = [
-    { icon: Code2, title: t('services.items.web_development.title'), desc: t('services.items.web_development.desc'), features: t('services.items.web_development.features', { returnObjects: true }) },
-    { icon: Palette, title: t('services.items.ui_design.title'), desc: t('services.items.ui_design.desc'), features: t('services.items.ui_design.features', { returnObjects: true }) },
-    { icon: Smartphone, title: t('services.items.responsive.title'), desc: t('services.items.responsive.desc'), features: t('services.items.responsive.features', { returnObjects: true }) },
-    { icon: Zap, title: t('services.items.performance.title'), desc: t('services.items.performance.desc'), features: t('services.items.performance.features', { returnObjects: true }) },
-    { icon: Globe, title: t('services.items.seo.title'), desc: t('services.items.seo.desc'), features: t('services.items.seo.features', { returnObjects: true }) },
-    { icon: Cloud, title: t('services.items.cloud.title'), desc: t('services.items.cloud.desc'), features: t('services.items.cloud.features', { returnObjects: true }) },
-    // { icon: Shield, title: t('services.items.security.title'), desc: t('services.items.security.desc'), features: t('services.items.security.features', { returnObjects: true }) },
-    // { icon: BarChart3, title: t('services.items.analytics.title'), desc: t('services.items.analytics.desc'), features: t('services.items.analytics.features', { returnObjects: true }) },
-    // { icon: Headphones, title: t('services.items.support.title'), desc: t('services.items.support.desc'), features: t('services.items.support.features', { returnObjects: true }) },
-    { icon: Share2, title: t('services.items.social.title'), desc: t('services.items.social.desc'), features: t('services.items.social.features', { returnObjects: true }) },
+    { icon: Code2, title: t('services.items.web_development.title'), desc: t('services.items.web_development.desc'), features: t('services.items.web_development.features', { returnObjects: true }) as string[] },
+    { icon: Palette, title: t('services.items.ui_design.title'), desc: t('services.items.ui_design.desc'), features: t('services.items.ui_design.features', { returnObjects: true }) as string[] },
+    { icon: Smartphone, title: t('services.items.responsive.title'), desc: t('services.items.responsive.desc'), features: t('services.items.responsive.features', { returnObjects: true }) as string[] },
+    { icon: Zap, title: t('services.items.performance.title'), desc: t('services.items.performance.desc'), features: t('services.items.performance.features', { returnObjects: true }) as string[] },
+    { icon: Globe, title: t('services.items.seo.title'), desc: t('services.items.seo.desc'), features: t('services.items.seo.features', { returnObjects: true }) as string[] },
+    { icon: Cloud, title: t('services.items.cloud.title'), desc: t('services.items.cloud.desc'), features: t('services.items.cloud.features', { returnObjects: true }) as string[] },
+    // { icon: Shield, title: t('services.items.security.title'), desc: t('services.items.security.desc'), features: t('services.items.security.features', { returnObjects: true }) as string[] },
+    // { icon: BarChart3, title: t('services.items.analytics.title'), desc: t('services.items.analytics.desc'), features: t('services.items.analytics.features', { returnObjects: true }) as string[] },
+    // { icon: Headphones, title: t('services.items.support.title'), desc: t('services.items.support.desc'), features: t('services.items.support.features', { returnObjects: true }) as string[] },
+    { icon: Share2, title: t('services.items.social.title'), desc: t('services.items.social.desc'), features: t('services.items.social.features', { returnObjects: true }) as string[] },
   ];
 
   const projects = [
-    {
-      title: "Fitlife Sutra",
-      category: "Health & Wellness",
-      description: "A comprehensive digital platform for Vitality Management, showcasing their Herbalife nutrition programs and facilitating community engagement through an intuitive, modern interface.",
-      tags: ["Health", "Wellness", "Responsive", "UI/UX"],
-      image: projectHealth,
-      color: "from-green-500/20 to-emerald-500/20",
-      link: "https://fitlifesutra.netlify.app/"
-    },
     {
       title: t('portfolio.projects.ecommerce.title'),
       category: t('portfolio.projects.ecommerce.category'),
@@ -100,6 +95,15 @@ const Index = () => {
       image: projectHoney,
       color: "from-amber-500/20 to-yellow-500/20",
       link:'https://www.vedyara.in'
+    },
+    {
+      title: "Fitlife Sutra",
+      category: "Health & Wellness",
+      description: "A comprehensive digital platform for Vitality Management, showcasing their Herbalife nutrition programs and facilitating community engagement through an intuitive, modern interface.",
+      tags: ["Health", "Wellness", "Responsive", "UI/UX"],
+      image: projectHealth,
+      color: "from-green-500/20 to-emerald-500/20",
+      link: "https://fitlifesutra.in/"
     },
     {
       title: t('portfolio.projects.trading.title'),
@@ -148,12 +152,15 @@ const Index = () => {
       {/* Hero */}
       <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="hero-glow top-1/4 left-1/2 -translate-x-1/2" />
-        <div className="container mx-auto px-6 pt-20 pb-16 relative z-10">
+
+        <motion.div
+          className="container mx-auto px-6 pt-20 pb-16 relative z-10"
+        >
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
               <span className="inline-block px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-primary text-sm font-medium mb-8">
                 {t('hero.badge')}
@@ -161,7 +168,7 @@ const Index = () => {
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight mb-6"
@@ -172,18 +179,18 @@ const Index = () => {
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
               className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
             >
               {t('hero.description')}
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.5, delay: 0.34, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <a
@@ -200,13 +207,41 @@ const Index = () => {
               </a>
             </motion.div>
           </div>
+        </motion.div>
+
+        {/* Animated grid lines */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {[1/4, 1/2, 3/4].map((pos, i) => (
+            <motion.div
+              key={i}
+              className="absolute top-0 w-px bg-border/30"
+              style={{ left: `${pos * 100}%` }}
+              initial={{ height: 0 }}
+              animate={{ height: "100%" }}
+              transition={{ duration: 1.4, delay: 0.4 + i * 0.15, ease: [0.22, 1, 0.36, 1] }}
+            />
+          ))}
         </div>
 
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-px h-full bg-border/30" />
-          <div className="absolute top-0 left-1/2 w-px h-full bg-border/30" />
-          <div className="absolute top-0 left-3/4 w-px h-full bg-border/30" />
-        </div>
+        {/* Scroll indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
+        >
+          <motion.div
+            className="w-5 h-8 rounded-full border border-border/60 flex items-start justify-center pt-1.5"
+            animate={{ y: [0, 4, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <motion.div
+              className="w-1 h-1.5 rounded-full bg-primary"
+              animate={{ opacity: [1, 0.2, 1] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Stats */}
@@ -216,7 +251,9 @@ const Index = () => {
             {stats.map((stat, i) => (
               <AnimatedSection key={stat.label} delay={i * 0.1}>
                 <div className="inline-flex flex-col items-center px-6 py-4 rounded-full bg-primary/10 border border-primary/20 shadow-sm min-w-[140px]">
-                  <span className="font-display text-2xl md:text-3xl font-bold text-primary mb-1">{stat.value}</span>
+                  <span className="font-display text-2xl md:text-3xl font-bold text-primary mb-1">
+                    <CountUp to={stat.to} suffix={stat.suffix} />
+                  </span>
                   <span className="text-xs md:text-sm text-muted-foreground font-medium">{stat.label}</span>
                 </div>
               </AnimatedSection>
@@ -228,12 +265,16 @@ const Index = () => {
       {/* Services */}
       <section id="services" className="py-24 md:py-32">
         <div className="container mx-auto px-6">
-          <AnimatedSection className="text-center mb-16">
-            <span className="text-primary text-sm font-semibold uppercase tracking-widest">{t('services.section_label')}</span>
+          <div className="text-center mb-16">
+            <AnimatedSection variant="fade">
+              <span className="text-primary text-sm font-semibold uppercase tracking-widest">{t('services.section_label')}</span>
+            </AnimatedSection>
             <h2 className="font-display text-3xl md:text-5xl font-bold mt-3">
-              {t('services.section_title')} <span className="text-gradient">{t('services.section_highlight')}</span>
+              <WordReveal text={t('services.section_title')} delay={0.05} />
+              {" "}
+              <WordReveal text={t('services.section_highlight')} wordClassName="text-gradient" delay={0.2} />
             </h2>
-          </AnimatedSection>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, i) => (
@@ -258,56 +299,126 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Partners */}
+      <section className="py-16 bg-black border-y border-white/[0.06] overflow-hidden">
+        <AnimatedSection variant="fade" className="text-center mb-10 px-6">
+          <span className="text-white/25 text-xs font-semibold uppercase tracking-[0.2em]">Trusted by growing brands</span>
+        </AnimatedSection>
+
+        <div className="relative overflow-hidden marquee-fade">
+          <div className="flex w-max animate-marquee-right items-center" style={{ animationDuration: "10s" }}>
+            {[logoFitlife, logoMoneyview, logoVedyara, logoFitlife, logoMoneyview, logoVedyara].map((logo, i) => (
+              <div
+                key={i}
+                className="mx-14 shrink-0 group cursor-default"
+              >
+                <img
+                  src={logo}
+                  alt={["FitLifeSutra", "MoneyView", "Vedyara"][i % 3]}
+                  className="h-28 md:h-32 w-auto object-contain opacity-40 group-hover:opacity-75 transition-opacity duration-500"
+                  style={{ filter: "grayscale(1) invert(1)" }}
+                  decoding="async"
+                  draggable={false}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Portfolio */}
       <section id="portfolio" className="py-24 md:py-32 relative overflow-hidden">
         <div className="hero-glow top-0 left-1/2 -translate-x-1/2" />
         <div className="container mx-auto px-6 relative z-10">
-          <AnimatedSection className="text-center mb-16">
-            <span className="text-primary text-sm font-semibold uppercase tracking-widest">{t('portfolio.section_label')}</span>
+          <div className="text-center mb-16">
+            <AnimatedSection variant="fade">
+              <span className="text-primary text-sm font-semibold uppercase tracking-widest">{t('portfolio.section_label')}</span>
+            </AnimatedSection>
             <h2 className="font-display text-3xl md:text-5xl font-bold mt-3">
-              {t('portfolio.section_title')} <span className="text-gradient">{t('portfolio.section_highlight')}</span>
+              <WordReveal text={t('portfolio.section_title')} delay={0.05} />
+              {" "}
+              <WordReveal text={t('portfolio.section_highlight')} wordClassName="text-gradient" delay={0.2} />
             </h2>
-          </AnimatedSection>
+          </div>
 
-          <div className="flex flex-col gap-24">
-            {projects.map((project, i) => (
-              <AnimatedSection key={project.title} delay={i * 0.1}>
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-10 items-center`}>
-                  <motion.div
-                    className={`relative rounded-2xl overflow-hidden group ${i % 2 === 1 ? "lg:order-2" : ""}`}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-40 z-10 pointer-events-none`} />
-                    <img src={project.image} alt={project.title} className="w-full aspect-[4/3] object-cover" loading="lazy" />
-                    <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex items-center justify-center">
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm">
-                          {t('portfolio.view_details')} <ExternalLink size={16} />
-                        </span>
-                      </a>
-                    </div>
-                  </motion.div>
-
-                  <div className={i % 2 === 1 ? "lg:order-1" : ""}>
-                    <span className="text-primary text-sm font-semibold uppercase tracking-widest">{project.category}</span>
-                    <h3 className="font-display text-3xl md:text-4xl font-bold mt-2 mb-4">{project.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed mb-6">{project.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <span key={tag} className="px-3 py-1 rounded-full border border-border bg-secondary/50 text-secondary-foreground text-xs font-medium">
+          <div className="flex flex-col gap-6">
+            {/* Featured card — full width, image left + content right */}
+            <AnimatedSection delay={0} variant="scale">
+              <div className="glass-card rounded-2xl overflow-hidden group hover-lift">
+                <div className="grid grid-cols-1 md:grid-cols-2 min-h-[340px]">
+                  <div className="relative overflow-hidden">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${projects[0].color} opacity-50 z-10 pointer-events-none`} />
+                    <img
+                      src={projects[0].image}
+                      alt={projects[0].title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 min-h-[240px] md:min-h-0"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="p-8 md:p-10 flex flex-col justify-center">
+                    <span className="text-primary text-xs font-semibold uppercase tracking-widest">{projects[0].category}</span>
+                    <h3 className="font-display text-2xl md:text-3xl font-bold mt-2 mb-3">{projects[0].title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-6">{projects[0].description}</p>
+                    <div className="flex flex-wrap gap-2 mb-7">
+                      {projects[0].tags.map((tag) => (
+                        <span key={tag} className="px-2.5 py-0.5 rounded-full border border-border bg-secondary/50 text-secondary-foreground text-xs font-medium">
                           {tag}
                         </span>
                       ))}
                     </div>
+                    <a
+                      href={projects[0].link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm w-fit"
+                    >
+                      {t('portfolio.view_details')} <ExternalLink size={14} />
+                    </a>
                   </div>
                 </div>
-              </AnimatedSection>
-            ))}
+              </div>
+            </AnimatedSection>
+
+            {/* Two smaller cards side by side */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {projects.slice(1).map((project, i) => (
+                <AnimatedSection key={project.title} delay={(i + 1) * 0.12} variant={i === 0 ? "left" : "right"}>
+                  <div className="glass-card rounded-2xl overflow-hidden group hover-lift h-full flex flex-col">
+                    <div className="relative overflow-hidden aspect-[16/10]">
+                      <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-50 z-10 pointer-events-none`} />
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm"
+                        >
+                          {t('portfolio.view_details')} <ExternalLink size={14} />
+                        </a>
+                      </div>
+                    </div>
+                    <div className="p-6 flex flex-col flex-1">
+                      <span className="text-primary text-xs font-semibold uppercase tracking-widest">{project.category}</span>
+                      <h3 className="font-display text-xl font-bold mt-1.5 mb-2">{project.title}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1 line-clamp-3">{project.description}</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.tags.map((tag) => (
+                          <span key={tag} className="px-2.5 py-0.5 rounded-full border border-border bg-secondary/50 text-secondary-foreground text-xs font-medium">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -315,53 +426,66 @@ const Index = () => {
       {/* Testimonials */}
       <section id="testimonials" className="py-24 md:py-32">
         <div className="container mx-auto px-6">
-          <AnimatedSection className="text-center mb-16">
-            <span className="text-primary text-sm font-semibold uppercase tracking-widest">{t('testimonials.section_label')}</span>
+          <div className="text-center mb-16">
+            <AnimatedSection variant="fade">
+              <span className="text-primary text-sm font-semibold uppercase tracking-widest">{t('testimonials.section_label')}</span>
+            </AnimatedSection>
             <h2 className="font-display text-3xl md:text-5xl font-bold mt-3">
-              {t('testimonials.section_title')} <span className="text-gradient">{t('testimonials.section_highlight')}</span>
+              <WordReveal text={t('testimonials.section_title')} delay={0.05} />
+              {" "}
+              <WordReveal text={t('testimonials.section_highlight')} wordClassName="text-gradient" delay={0.2} />
             </h2>
-          </AnimatedSection>
+          </div>
+        </div>
 
-          <div className="flex flex-col gap-10 max-w-4xl mx-auto">
-            {testimonials.map((t, i) => (
-              <AnimatedSection key={t.name} delay={i * 0.12}>
-                <motion.div
-                  className="glass-card rounded-2xl p-8 md:p-10 relative overflow-hidden group"
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Quote size={80} className="absolute -top-2 -right-2 text-primary/5 group-hover:text-primary/10 transition-colors" />
-                  <div className="flex gap-1 mb-5">
-                    {Array.from({ length: t.rating }).map((_, j) => (
-                      <Star key={j} size={18} className="fill-primary text-primary" />
-                    ))}
+        {/* Row 1 — scrolls left */}
+        <div className="relative overflow-hidden mb-5 marquee-fade group/row1">
+          <div className="flex w-max animate-marquee-left group-hover/row1:[animation-play-state:paused]">
+            {[...testimonials, ...testimonials].map((item, i) => (
+              <div key={i} className="w-[380px] mx-3 shrink-0 glass-card rounded-2xl p-7 relative overflow-hidden">
+                <Quote size={50} className="absolute -top-1 -right-1 text-primary/5" />
+                <div className="flex gap-1 mb-4">
+                  {Array.from({ length: item.rating }).map((_, j) => (
+                    <Star key={j} size={14} className="fill-primary text-primary" />
+                  ))}
+                </div>
+                <p className="text-foreground/85 text-sm leading-relaxed mb-5 line-clamp-4">"{item.content}"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                    <span className="text-primary font-display font-bold text-xs">{item.initials}</span>
                   </div>
-                  <p className="text-foreground/90 text-lg leading-relaxed mb-8 relative z-10">"{t.content}"</p>
-                  <div className="flex items-center justify-between gap-4 mt-auto">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-                        <span className="text-primary font-display font-bold text-sm">{t.initials}</span>
-                      </div>
-                      <div>
-                        <div className="font-display font-semibold text-foreground">{t.name}</div>
-                        <div className="text-sm text-muted-foreground">{t.role} · {t.project}</div>
-                      </div>
-                    </div>
-                    
-                    {(t as any).link && (
-                      <a
-                        href={(t as any).link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/5 text-primary hover:bg-primary hover:text-primary-foreground transition-colors relative z-20 shrink-0"
-                        title="Visit Website"
-                      >
-                        <ExternalLink size={18} />
-                      </a>
-                    )}
+                  <div>
+                    <div className="font-display font-semibold text-sm text-foreground">{item.name}</div>
+                    <div className="text-xs text-muted-foreground">{item.role} · {item.project}</div>
                   </div>
-                </motion.div>
-              </AnimatedSection>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Row 2 — scrolls right */}
+        <div className="relative overflow-hidden marquee-fade group/row2">
+          <div className="flex w-max animate-marquee-right group-hover/row2:[animation-play-state:paused]">
+            {[...[...testimonials].reverse(), ...[...testimonials].reverse()].map((item, i) => (
+              <div key={i} className="w-[380px] mx-3 shrink-0 glass-card rounded-2xl p-7 relative overflow-hidden">
+                <Quote size={50} className="absolute -top-1 -right-1 text-primary/5" />
+                <div className="flex gap-1 mb-4">
+                  {Array.from({ length: item.rating }).map((_, j) => (
+                    <Star key={j} size={14} className="fill-primary text-primary" />
+                  ))}
+                </div>
+                <p className="text-foreground/85 text-sm leading-relaxed mb-5 line-clamp-4">"{item.content}"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                    <span className="text-primary font-display font-bold text-xs">{item.initials}</span>
+                  </div>
+                  <div>
+                    <div className="font-display font-semibold text-sm text-foreground">{item.name}</div>
+                    <div className="text-xs text-muted-foreground">{item.role} · {item.project}</div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -371,15 +495,19 @@ const Index = () => {
       <section id="about" className="py-24 md:py-32 relative overflow-hidden">
         <div className="hero-glow top-0 left-1/2 -translate-x-1/2" />
         <div className="container mx-auto px-6 relative z-10">
-          <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-primary text-sm font-semibold uppercase tracking-widest">{t('about.section_label')}</span>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <AnimatedSection variant="fade">
+              <span className="text-primary text-sm font-semibold uppercase tracking-widest">{t('about.section_label')}</span>
+            </AnimatedSection>
             <h2 className="font-display text-3xl md:text-5xl font-bold mt-3 mb-5">
-              {t('about.section_title')} <span className="text-gradient">{t('about.section_highlight')}</span>
+              <WordReveal text={t('about.section_title')} delay={0.05} />
+              {" "}
+              <WordReveal text={t('about.section_highlight')} wordClassName="text-gradient" delay={0.2} />
             </h2>
-            <p className="text-lg text-muted-foreground">
-              {t('about.description')}
-            </p>
-          </AnimatedSection>
+            <AnimatedSection variant="fade" delay={0.3}>
+              <p className="text-lg text-muted-foreground">{t('about.description')}</p>
+            </AnimatedSection>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {values.map((v, i) => (

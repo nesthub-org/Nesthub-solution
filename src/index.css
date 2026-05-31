@@ -1,16 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
-/* Grain texture for depth */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 9997;
-  pointer-events: none;
-  opacity: 0.028;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 256px 256px;
-}
+/* Grain texture removed — SVG feTurbulence filter was expensive on scroll */
 
 @tailwind base;
 @tailwind components;
@@ -86,7 +76,7 @@ body::after {
     background: var(--gradient-card);
     border: 1px solid hsl(var(--border));
     box-shadow: var(--shadow-card);
-    backdrop-filter: blur(12px);
+    /* backdrop-filter removed — 20+ blurred elements caused severe scroll jank */
   }
 
   .text-gradient {
@@ -103,11 +93,11 @@ body::after {
 
   .hero-glow {
     position: absolute;
-    width: 600px;
-    height: 600px;
-    background: var(--gradient-glow);
-    filter: blur(80px);
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(ellipse at center, hsl(175 80% 50% / 0.12) 0%, transparent 65%);
     pointer-events: none;
+    /* filter:blur() replaced with a soft radial-gradient — no repaint cost */
   }
 }
 

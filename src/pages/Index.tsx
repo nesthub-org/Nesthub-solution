@@ -97,6 +97,15 @@ const Index = () => {
       link:'https://www.vedyara.in'
     },
     {
+      title: "Fitlife Sutra",
+      category: "Health & Wellness",
+      description: "A comprehensive digital platform for Vitality Management, showcasing their Herbalife nutrition programs and facilitating community engagement through an intuitive, modern interface.",
+      tags: ["Health", "Wellness", "Responsive", "UI/UX"],
+      image: projectHealth,
+      color: "from-green-500/20 to-emerald-500/20",
+      link: "https://fitlifesutra.in/"
+    },
+    {
       title: t('portfolio.projects.trading.title'),
       category: t('portfolio.projects.trading.category'),
       description: t('portfolio.projects.trading.description'),
@@ -104,15 +113,6 @@ const Index = () => {
       image: projectTrading,
       color: "from-emerald-500/20 to-cyan-500/20",
       link:'https://moneyview-app-v1.vercel.app/'
-    },
-    {
-      title: "Fitlife Sutra",
-      category: "Health & Wellness",
-      description: "A comprehensive digital platform for Vitality Management, showcasing their Herbalife nutrition programs and facilitating community engagement through an intuitive, modern interface.",
-      tags: ["Health", "Wellness", "Responsive", "UI/UX"],
-      image: projectHealth,
-      color: "from-green-500/20 to-emerald-500/20",
-      link: "https://fitlifesutra.netlify.app/"
     },
   ];
 

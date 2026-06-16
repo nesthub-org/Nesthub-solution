@@ -1,12 +1,10 @@
 import { useState, useRef } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, Code2, Palette, Zap, Globe, Smartphone, Cloud, ExternalLink, Star, Quote, Target, Eye, Heart, Share2, Mail, MapPin, Phone, Send, Calendar, Clock, Video, Loader2 } from "lucide-react";
+import { ArrowRight, Code2, Palette, Zap, Globe, Smartphone, Cloud, ExternalLink, Star, Quote, Target, Eye, Heart, Share2, Mail, MapPin, Phone, Send, Calendar, Clock, Video, Loader2, Brain, QrCode, Utensils, BarChart3, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslation } from 'react-i18next';
 
 import PageTransition from "@/components/PageTransition";
 import AnimatedSection from "@/components/AnimatedSection";
-import CountUp from "@/components/CountUp";
 import WordReveal from "@/components/WordReveal";
 import projectHoney from "@/assets/project-honey.png";
 import logoFitlife from "@/assets/logo-fitlifesutra.png";
@@ -15,6 +13,7 @@ import logoVedyara from "@/assets/logo-vedyara.png";
 import projectTrading from "@/assets/project-trading.png";
 import projectHealth from "@/assets/project-health.png";
 import calendlyImage from "@/assets/calendly-cta.jpg";
+import SplineHero from "@/components/SplineHero";
 
 const testimonials = [
   // {
@@ -67,23 +66,20 @@ const Index = () => {
   const [sending, setSending] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
-  const stats = [
-    { to: 3, suffix: "+", label: t('stats.projects') },
-    { to: 100, suffix: "%", label: t('stats.satisfaction') },
-    { to: 2, suffix: "+", label: t('stats.experience') },
+  const qrFeatures = [
+    { icon: QrCode, title: t('product.features.scan.title'), desc: t('product.features.scan.desc') },
+    { icon: Utensils, title: t('product.features.menu.title'), desc: t('product.features.menu.desc') },
+    { icon: RefreshCw, title: t('product.features.orders.title'), desc: t('product.features.orders.desc') },
+    { icon: BarChart3, title: t('product.features.analytics.title'), desc: t('product.features.analytics.desc') },
   ];
 
   const services = [
+    { icon: Brain, title: t('services.items.ai_integration.title'), desc: t('services.items.ai_integration.desc'), features: t('services.items.ai_integration.features', { returnObjects: true }) as string[] },
     { icon: Code2, title: t('services.items.web_development.title'), desc: t('services.items.web_development.desc'), features: t('services.items.web_development.features', { returnObjects: true }) as string[] },
     { icon: Palette, title: t('services.items.ui_design.title'), desc: t('services.items.ui_design.desc'), features: t('services.items.ui_design.features', { returnObjects: true }) as string[] },
     { icon: Smartphone, title: t('services.items.responsive.title'), desc: t('services.items.responsive.desc'), features: t('services.items.responsive.features', { returnObjects: true }) as string[] },
     { icon: Zap, title: t('services.items.performance.title'), desc: t('services.items.performance.desc'), features: t('services.items.performance.features', { returnObjects: true }) as string[] },
     { icon: Globe, title: t('services.items.seo.title'), desc: t('services.items.seo.desc'), features: t('services.items.seo.features', { returnObjects: true }) as string[] },
-    { icon: Cloud, title: t('services.items.cloud.title'), desc: t('services.items.cloud.desc'), features: t('services.items.cloud.features', { returnObjects: true }) as string[] },
-    // { icon: Shield, title: t('services.items.security.title'), desc: t('services.items.security.desc'), features: t('services.items.security.features', { returnObjects: true }) as string[] },
-    // { icon: BarChart3, title: t('services.items.analytics.title'), desc: t('services.items.analytics.desc'), features: t('services.items.analytics.features', { returnObjects: true }) as string[] },
-    // { icon: Headphones, title: t('services.items.support.title'), desc: t('services.items.support.desc'), features: t('services.items.support.features', { returnObjects: true }) as string[] },
-    { icon: Share2, title: t('services.items.social.title'), desc: t('services.items.social.desc'), features: t('services.items.social.features', { returnObjects: true }) as string[] },
   ];
 
   const projects = [
@@ -149,118 +145,7 @@ const Index = () => {
 
   return (
     <PageTransition>
-      {/* Hero */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="hero-glow top-1/4 left-1/2 -translate-x-1/2" />
-
-        <motion.div
-          className="container mx-auto px-6 pt-20 pb-16 relative z-10"
-        >
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <span className="inline-block px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-primary text-sm font-medium mb-8">
-                {t('hero.badge')}
-              </span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 32 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight mb-6"
-            >
-              {t('hero.title')}{" "}
-              <span className="text-gradient">{t('hero.titleHighlight')}</span>{" "}
-              {t('hero.results')}
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
-              className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
-            >
-              {t('hero.description')}
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.34, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
-              >
-                {t('hero.cta_primary')} <ArrowRight size={18} />
-              </a>
-              <a
-                href="#services"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg border border-border text-foreground font-semibold hover:bg-secondary transition-colors"
-              >
-                {t('hero.cta_secondary')}
-              </a>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Animated grid lines */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {[1/4, 1/2, 3/4].map((pos, i) => (
-            <motion.div
-              key={i}
-              className="absolute top-0 w-px bg-border/30"
-              style={{ left: `${pos * 100}%` }}
-              initial={{ height: 0 }}
-              animate={{ height: "100%" }}
-              transition={{ duration: 1.4, delay: 0.4 + i * 0.15, ease: [0.22, 1, 0.36, 1] }}
-            />
-          ))}
-        </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-        >
-          <motion.div
-            className="w-5 h-8 rounded-full border border-border/60 flex items-start justify-center pt-1.5"
-            animate={{ y: [0, 4, 0] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <motion.div
-              className="w-1 h-1.5 rounded-full bg-primary"
-              animate={{ opacity: [1, 0.2, 1] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* Stats */}
-      <section className="border-y border-border/50 bg-card/30">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-wrap justify-center gap-4 py-10 md:py-14">
-            {stats.map((stat, i) => (
-              <AnimatedSection key={stat.label} delay={i * 0.1}>
-                <div className="inline-flex flex-col items-center px-6 py-4 rounded-full bg-primary/10 border border-primary/20 shadow-sm min-w-[140px]">
-                  <span className="font-display text-2xl md:text-3xl font-bold text-primary mb-1">
-                    <CountUp to={stat.to} suffix={stat.suffix} />
-                  </span>
-                  <span className="text-xs md:text-sm text-muted-foreground font-medium">{stat.label}</span>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
+      <SplineHero />
 
       {/* Services */}
       <section id="services" className="py-24 md:py-32">
@@ -295,6 +180,141 @@ const Index = () => {
                 </div>
               </AnimatedSection>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Product — QR Ordering System */}
+      <section id="product" className="py-24 md:py-32 relative overflow-hidden">
+        <div className="hero-glow top-1/2 left-1/4 -translate-y-1/2" />
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center max-w-6xl mx-auto">
+
+            {/* Left: Content */}
+            <AnimatedSection variant="left">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-semibold uppercase tracking-widest mb-6">
+                <Zap size={12} /> {t('product.section_label')}
+              </span>
+              <h2 className="font-display text-3xl md:text-5xl font-bold mb-4 leading-tight">
+                {t('product.title')}{" "}
+                <span className="text-gradient">{t('product.title_highlight')}</span>{" "}
+                {t('product.title_end')}
+              </h2>
+              <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
+                {t('product.description')}
+              </p>
+              <div className="space-y-4 mb-10">
+                {qrFeatures.map((f) => (
+                  <div key={f.title} className="flex items-start gap-4">
+                    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                      <f.icon size={18} className="text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-display font-semibold text-sm mb-0.5">{f.title}</h4>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{f.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-wrap items-center gap-4">
+                <a
+                  href="#contact"
+                  className="inline-flex items-center gap-2 px-7 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity"
+                >
+                  {t('product.cta_button')} <ArrowRight size={16} />
+                </a>
+                <span className="text-xs text-muted-foreground">{t('product.cta_note')}</span>
+              </div>
+            </AnimatedSection>
+
+            {/* Right: Phone mockup */}
+            <AnimatedSection variant="right" delay={0.15}>
+              <div className="flex justify-center lg:justify-end">
+                <div className="relative" style={{ width: 264, height: 530 }}>
+                  {/* Phone body */}
+                  <div
+                    className="absolute inset-0 rounded-[2.5rem] border border-white/10 overflow-hidden"
+                    style={{ background: "linear-gradient(160deg, #111114, #0d0d10)" }}
+                  >
+                    {/* Dynamic island */}
+                    <div className="h-9 flex items-center justify-center bg-black/60">
+                      <div className="w-24 h-5 rounded-full bg-black" />
+                    </div>
+                    {/* App UI */}
+                    <div className="px-4 pt-3 pb-4">
+                      {/* App header */}
+                      <div className="flex items-center justify-between mb-3">
+                        <div>
+                          <div className="text-[10px] text-primary font-semibold tracking-wide">TABLE 4 · SCAN &amp; ORDER</div>
+                          <div className="text-[13px] font-bold text-white mt-0.5">Today's Menu</div>
+                        </div>
+                        <div className="w-8 h-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
+                          <QrCode size={14} className="text-primary" />
+                        </div>
+                      </div>
+                      {/* Category tabs */}
+                      <div className="flex gap-1.5 mb-4">
+                        {["All", "Mains", "Drinks", "Desserts"].map((c, i) => (
+                          <span
+                            key={c}
+                            className="text-[8px] px-2 py-1 rounded-full font-semibold"
+                            style={i === 0
+                              ? { background: "hsl(var(--primary))", color: "#000" }
+                              : { background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.35)", border: "1px solid rgba(255,255,255,0.08)" }
+                            }
+                          >
+                            {c}
+                          </span>
+                        ))}
+                      </div>
+                      {/* Menu items */}
+                      {[
+                        { name: "Margherita Pizza", price: "₹280", qty: 1 },
+                        { name: "Caesar Salad", price: "₹190", qty: 0 },
+                        { name: "Mango Lassi", price: "₹120", qty: 2 },
+                      ].map((item) => (
+                        <div
+                          key={item.name}
+                          className="flex items-center justify-between mb-2 px-3 py-2.5 rounded-xl"
+                          style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
+                        >
+                          <div>
+                            <div className="text-[10px] text-white font-medium leading-tight">{item.name}</div>
+                            <div className="text-[9px] mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>{item.price}</div>
+                          </div>
+                          <div
+                            className="w-6 h-6 rounded-lg flex items-center justify-center text-[9px] font-bold"
+                            style={item.qty > 0
+                              ? { background: "hsl(var(--primary))", color: "#000" }
+                              : { background: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.4)" }
+                            }
+                          >
+                            {item.qty > 0 ? item.qty : "+"}
+                          </div>
+                        </div>
+                      ))}
+                      {/* Cart strip */}
+                      <div
+                        className="mt-3 rounded-xl p-3 flex items-center justify-between"
+                        style={{ background: "hsl(var(--primary))" }}
+                      >
+                        <div>
+                          <div className="text-[9px] font-medium" style={{ color: "rgba(0,0,0,0.55)" }}>3 items · ₹590</div>
+                          <div className="text-[11px] font-bold text-black">Place Order</div>
+                        </div>
+                        <ArrowRight size={14} className="text-black" />
+                      </div>
+                    </div>
+                  </div>
+                  {/* Ambient glow */}
+                  <div
+                    className="absolute -inset-8 -z-10 rounded-[3.5rem]"
+                    style={{ background: "hsl(var(--primary) / 0.07)", filter: "blur(32px)" }}
+                  />
+                </div>
+              </div>
+            </AnimatedSection>
+
           </div>
         </div>
       </section>

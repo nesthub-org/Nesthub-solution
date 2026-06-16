@@ -8,14 +8,12 @@
     "contact": "Contact"
   },
   "hero": {
-    "badge": "We Build the Future of Web",
-    "title": "NestHub Solutions",
-    "subtitle": "",
-    "titleHighlight": "That Drive",
-    "results": "Results",
-    "description": "We craft exceptional web experiences that transform businesses. From stunning designs to powerful applications, we bring your vision to life.",
+    "badge": "AI-Powered · Precision-Built",
+    "tagline": "We build AI-powered digital products.",
+    "description": "High-performance websites, AI-integrated platforms & smart web applications built for growing brands. Custom React development, AI features, UI/UX design & SEO — from Jaipur, India.",
     "cta_primary": "Start a Project",
-    "cta_secondary": "Our Services"
+    "cta_secondary": "View Our Work",
+    "footer_note": "AI-Powered Web Agency · Jaipur, India · 3+ projects delivered"
   },
   "stats": {
     "projects": "Projects Delivered",
@@ -27,10 +25,15 @@
     "section_title": "Services That",
     "section_highlight": "Deliver",
     "items": {
+      "ai_integration": {
+        "title": "AI Integration",
+        "desc": "Embed AI-powered capabilities into your product — intelligent chatbots, smart search, recommendation engines, content generation & predictive analytics.",
+        "features": ["AI Chatbots", "Smart Search", "Recommendations", "Automation"]
+      },
       "web_development": {
-        "title": "WebSite Development",
+        "title": "Website Development",
         "desc": "Tailored websites and web applications built with cutting-edge technologies.",
-        "features": ["React & Next.js", "API Integration", "CMS Development"]
+        "features": ["React & Node.js", "API Integration", "CMS Development"]
       },
       "ui_design": {
         "title": "UI/UX Design",
@@ -51,20 +54,33 @@
         "title": "SEO & Digital Marketing",
         "desc": "Data-driven strategies to improve your online visibility.",
         "features": ["Technical SEO", "Content Strategy", "Analytics Setup"]
+      }
+    }
+  },
+  "product": {
+    "section_label": "Our In-House Product",
+    "title": "QR Scan.",
+    "title_highlight": "Order.",
+    "title_end": "Done.",
+    "description": "A smart, contactless ordering system for restaurants, cafes & food courts. Customers scan a QR code at their table — no app, no friction. Just browse, order, and pay.",
+    "cta_button": "Get Early Access",
+    "cta_note": "Currently in development · Pilot available",
+    "features": {
+      "scan": {
+        "title": "Scan to Order",
+        "desc": "Customers scan a table QR code — no app download, no login. Instant digital menu from any phone."
       },
-      "cloud": {
-        "title": "Cloud Solutions",
-        "desc": "Scalable cloud infrastructure that grows with your business.",
-        "features": ["Cloud Migration", "Auto-Scaling", "DevOps"]
+      "menu": {
+        "title": "Live Menu Management",
+        "desc": "Update prices, add dishes, or mark items sold-out in real time from a single dashboard."
       },
-      "security": {
-       
+      "orders": {
+        "title": "Real-Time Order Flow",
+        "desc": "Orders appear on the kitchen display instantly. Staff notified; customers track status live."
       },
-      
-      "social": {
-        "title": "Social Media Management",
-        "desc": "Strategic social media presence that builds your brand and engages your audience.",
-        "features": ["Content Creation", "Scheduling & Posting", "Growth Strategy"]
+      "analytics": {
+        "title": "Revenue Analytics",
+        "desc": "Track bestsellers, peak hours, and revenue trends from a clean, role-based analytics panel."
       }
     }
   },
@@ -128,3 +144,4 @@
     "button": "Book Your Free Call"
   }
 }
+

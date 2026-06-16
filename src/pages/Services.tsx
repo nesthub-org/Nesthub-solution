@@ -4,7 +4,7 @@ import PageTransition from "@/components/PageTransition";
 import AnimatedSection from "@/components/AnimatedSection";
 
 const services = [
-  { icon: Code2, title: "Website Development", desc: "Tailored websites and web applications built with cutting-edge technologies. We use React, Next.js, and modern frameworks to create scalable solutions.", features: ["React & Next.js", "API Integration", "CMS Development"] },
+  { icon: Code2, title: "Website Development", desc: "Tailored websites and web applications built with cutting-edge technologies. We use React, React.js, and modern frameworks to create scalable solutions.", features: ["React & Next.js", "API Integration", "CMS Development"] },
   { icon: Palette, title: "UI/UX Design", desc: "User-centered design that converts. We create intuitive interfaces backed by research and tested with real users.", features: ["Wireframing", "Prototyping", "User Testing"] },
   { icon: Smartphone, title: "Responsive Design", desc: "Pixel-perfect designs that look stunning on every device. Mobile-first approach for maximum reach.", features: ["Mobile-First", "Cross-Browser", "Adaptive Layouts"] },
   { icon: Zap, title: "Performance Optimization", desc: "Lightning-fast websites that rank higher and convert better. We optimize every millisecond.", features: ["Core Web Vitals", "Caching Strategy", "Code Splitting"] },

@@ -22,6 +22,7 @@ const Navbar = () => {
     { to: "/#testimonials", label: t('navbar.testimonials') },
     { to: "/#about", label: t('navbar.about') },
     { to: "/#contact", label: t('navbar.contact') },
+    { to: "/careers", label: "Careers" },
   ];
 
   useEffect(() => {

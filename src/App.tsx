@@ -14,6 +14,7 @@ import WordsPreloader from "@/components/WordsPreloader";
 import CursorGlow from "@/components/CursorGlow";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import Index from "./pages/Index";
+import Careers from "./pages/Careers";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Index />} />
+        <Route path="/careers" element={<Careers />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>

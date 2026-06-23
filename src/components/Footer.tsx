@@ -1,4 +1,22 @@
+import { Instagram, Facebook, Linkedin } from "lucide-react";
 
+const socialLinks = [
+  {
+    icon: Instagram,
+    label: "Instagram",
+    href: "https://www.instagram.com/nesthubsolution",
+  },
+  // {
+  //   icon: Facebook,
+  //   label: "Facebook",
+  //   href: "https://www.facebook.com/nesthubsolution",
+  // },
+  {
+    icon: Linkedin,
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/nesthub-solution",
+  },
+];
 
 const Footer = () => (
   <footer className="border-t border-border/50 bg-card/50">
@@ -11,6 +29,20 @@ const Footer = () => (
           <p className="text-muted-foreground text-sm max-w-sm">
             We craft digital experiences that drive growth. From concept to launch, we build websites that make an impact.
           </p>
+          <div className="flex items-center gap-3 mt-5">
+            {socialLinks.map(({ icon: Icon, label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+              >
+                <Icon size={18} />
+              </a>
+            ))}
+          </div>
         </div>
         <div>
           <h4 className="font-display font-semibold mb-3 text-sm text-foreground">Links</h4>
@@ -21,12 +53,13 @@ const Footer = () => (
             <a href="/#testimonials" className="text-sm text-muted-foreground hover:text-primary transition-colors">Testimonials</a>
             <a href="/#about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About</a>
             <a href="/#contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact</a>
+            <a href="/careers" className="text-sm text-muted-foreground hover:text-primary transition-colors">Careers</a>
           </div>
         </div>
         <div>
           <h4 className="font-display font-semibold mb-3 text-sm text-foreground">Contact</h4>
           <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-            <span>workquerysol@gmail.com</span>
+            <span>contact@nesthubsolution.in</span>
             <span>+91 8188941304</span>
             <span>Jaipur, Rajasthan, India</span>
           </div>

@@ -4,7 +4,7 @@ Disallow: /api/
 
 Sitemap: https://nesthubsolution.in/sitemap.xml
 
-# Social crawlers
+# Standard Search Crawlers
 User-agent: Googlebot
 Allow: /
 
@@ -14,6 +14,16 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Social Media Crawlers
 User-agent: Twitterbot
 Allow: /
 
@@ -21,4 +31,60 @@ User-agent: facebookexternalhit
 Allow: /
 
 User-agent: LinkedInBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# ─────────────────────────────────────────────────────────────
+# AI / Generative Engine Crawlers (GEO)
+# Explicitly allow AI assistants to read and cite our content.
+# ─────────────────────────────────────────────────────────────
+
+# OpenAI — ChatGPT, SearchGPT
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic — Claude
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Google AI — Gemini, SGE, AI Overviews
+User-agent: Google-Extended
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# Diffbot
+User-agent: Diffbot
+Allow: /
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /
+
+# Common Crawl (trains many open AI models)
+User-agent: CCBot
 Allow: /

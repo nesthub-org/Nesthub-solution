@@ -30,7 +30,7 @@ const SplineHero = () => {
   }, []);
 
   const heroStats = [
-    { value: "3+",   label: t('stats.projects') },
+    { value: "5+",   label: t('stats.projects') },
     { value: "100%", label: t('stats.satisfaction') },
     { value: "2+",   label: t('stats.experience') },
   ];

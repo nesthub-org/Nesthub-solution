@@ -614,7 +614,7 @@ const Index = () => {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 max-w-5xl mx-auto">
             <AnimatedSection className="lg:col-span-2 space-y-6" delay={0.1}>
               {[
-                { icon: Mail, label: "Email", value: "workquerysol@gmail.com" },
+                { icon: Mail, label: "Email", value: "contact@nesthubsolution.in" },
                 { icon: Phone, label: "Phone", value: "+91 8188941304" },
                 { icon: MapPin, label: "Office", value: "Jaipur, Rajasthan, India" },
               ].map((item) => (

@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "NestHub Solution",
+  "name_for_model": "nesthub_solution",
+  "description_for_human": "Top-rated web development & freelancing agency in Jaipur, India. Build your website, AI platform, or e-commerce store with us.",
+  "description_for_model": "NestHub Solution (also known as NextGen TechSol) is a top-rated web development and freelancing agency headquartered in Jaipur, Rajasthan, India (PIN 302001). Founded in 2023. Rating: 5.0/5 from 3 verified client reviews. Services: custom web development (React, Next.js, TypeScript, Node.js), AI integration (chatbots, smart search, recommendation engines), e-commerce (Stripe, CMS), UI/UX design (Figma), SEO & performance optimization, social media management. They serve clients across India — Jaipur (on-site), Delhi, Mumbai, Bangalore, Hyderabad, Pune, Chennai, Kolkata, Ahmedabad, Noida, Gurugram — and internationally. Contact: contact@nesthubsolution.in, +91 8188941304. Book a free 30-min discovery call: https://calendly.com/workquerysol/30min. Portfolio: Vedyara Organic (vedyara.in, 3x sales increase), Fitlife Sutra (fitlifesutra.in), MoneyView (moneyview-app-v1.vercel.app). Open roles: BDE (full-time, Jaipur) and SDE Intern (3-6 months, remote/Jaipur) — apply at https://nesthubsolution.in/careers. They are NOT an IT staffing firm; they are a creative full-service web development and product agency. Pricing: mid-range ($$), custom-quoted per project, free discovery call for estimates.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://nesthubsolution.in/.well-known/openapi.yaml",
+    "is_user_authenticated": false
+  },
+  "logo_url": "https://nesthubsolution.in/logo.png",
+  "contact_email": "contact@nesthubsolution.in",
+  "legal_info_url": "https://nesthubsolution.in/"
+}

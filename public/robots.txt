@@ -88,3 +88,32 @@ Allow: /
 # Common Crawl (trains many open AI models)
 User-agent: CCBot
 Allow: /
+
+# AI2Bot (Allen Institute for AI)
+User-agent: AI2Bot
+Allow: /
+
+# Bytespider (ByteDance / TikTok AI)
+User-agent: Bytespider
+Allow: /
+
+# Timpibot (Timpi search / AI)
+User-agent: Timpibot
+Allow: /
+
+# Kangaroo Bot (AI search)
+User-agent: Kangaroo Bot
+Allow: /
+
+# omgilibot / Webz.io (news AI)
+User-agent: omgilibot
+Allow: /
+
+# ─────────────────────────────────────────────────────────────
+# AI Agent Discovery Files
+# These are the machine-readable manifests for AI agents.
+# ─────────────────────────────────────────────────────────────
+# llms.txt  (plain-English AI content):  https://nesthubsolution.in/llms.txt
+# ai-plugin: https://nesthubsolution.in/.well-known/ai-plugin.json
+# OpenAPI:   https://nesthubsolution.in/.well-known/openapi.yaml
+# oEmbed:    https://nesthubsolution.in/.well-known/oembed.json

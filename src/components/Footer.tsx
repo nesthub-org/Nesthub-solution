@@ -1,76 +1,94 @@
-import { Instagram, Facebook, Linkedin } from "lucide-react";
+import { motion } from 'framer-motion'
+import { brand, footerLinks } from '../data/content'
+import { Logo, LogoFallback } from './Logo'
+import { InstagramIcon, LinkedInIcon, WhatsAppIcon, XIcon } from './SocialIcons'
 
-const socialLinks = [
-  {
-    icon: Instagram,
-    label: "Instagram",
-    href: "https://www.instagram.com/nesthubsolution",
-  },
-  // {
-  //   icon: Facebook,
-  //   label: "Facebook",
-  //   href: "https://www.facebook.com/nesthubsolution",
-  // },
-  {
-    icon: Linkedin,
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/company/nesthub-solution",
-  },
-];
+const socials = [
+  { label: 'LinkedIn', Icon: LinkedInIcon, href: '#top' },
+  { label: 'X', Icon: XIcon, href: '#top' },
+  { label: 'Instagram', Icon: InstagramIcon, href: '#top' },
+  { label: 'WhatsApp', Icon: WhatsAppIcon, href: `https://wa.me/${brand.phone.replace(/[^0-9]/g, '')}` },
+]
 
-const Footer = () => (
-  <footer className="border-t border-border/50 bg-card/50">
-    <div className="container mx-auto px-6 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div className="md:col-span-2">
-          <h3 className="font-display text-xl font-bold mb-3">
-            <span className="text-gradient">NestHub</span> Solution
-          </h3>
-          <p className="text-muted-foreground text-sm max-w-sm">
-            We craft digital experiences that drive growth. From concept to launch, we build websites that make an impact.
+export function Footer() {
+  return (
+    <footer className="border-t border-line bg-white">
+      <div className="mx-auto max-w-[1320px] grid grid-cols-1 gap-12 px-6 py-18 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div>
+          <div className="flex items-center gap-2.5">
+            <Logo size={26} />
+            <LogoFallback size={26} />
+            <span className="text-[16.5px] font-bold tracking-[-.02em]">{brand.name}</span>
+          </div>
+          <p className="mt-4 max-w-[300px] text-[16px] leading-relaxed text-muted">
+            We craft digital experiences that drive growth. From concept to launch, we build websites that make an
+            impact.
           </p>
-          <div className="flex items-center gap-3 mt-5">
-            {socialLinks.map(({ icon: Icon, label, href }) => (
-              <a
+          <div className="mt-5 flex gap-2.5">
+            {socials.map(({ label, Icon, href }) => (
+              <motion.a
                 key={label}
                 href={href}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={href.startsWith('http') ? '_blank' : undefined}
+                rel={href.startsWith('http') ? 'noreferrer' : undefined}
                 aria-label={label}
-                className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+                whileHover={{ y: -3, borderColor: '#111111', color: '#2563EB' }}
+                whileTap={{ scale: 0.92 }}
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-line text-ink"
               >
-                <Icon size={18} />
+                <Icon size={17} />
+              </motion.a>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <div className="text-[14px] font-semibold tracking-[.05em] text-ink">Links</div>
+          <div className="mt-4 grid gap-[11px]">
+            {footerLinks.quick.map((l) => (
+              <a key={l.label} href={l.href} className="text-[16px] text-muted hover:text-ink transition-colors">
+                {l.label}
               </a>
             ))}
           </div>
         </div>
+
         <div>
-          <h4 className="font-display font-semibold mb-3 text-sm text-foreground">Links</h4>
-          <div className="flex flex-col gap-2">
-            <a href="/#home" className="text-sm text-muted-foreground hover:text-primary transition-colors">Home</a>
-            <a href="/#services" className="text-sm text-muted-foreground hover:text-primary transition-colors">Services</a>
-            <a href="/#portfolio" className="text-sm text-muted-foreground hover:text-primary transition-colors">Portfolio</a>
-            <a href="/#testimonials" className="text-sm text-muted-foreground hover:text-primary transition-colors">Testimonials</a>
-            <a href="/#about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About</a>
-            <a href="/#contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact</a>
-            <a href="/careers" className="text-sm text-muted-foreground hover:text-primary transition-colors">Careers</a>
+          <div className="text-[14px] font-semibold tracking-[.05em] text-ink">Services</div>
+          <div className="mt-4 grid gap-[11px]">
+            {footerLinks.services.map((l, i) => (
+              <a key={i} href={l.href} className="text-[16px] text-muted hover:text-ink transition-colors">
+                {l.label}
+              </a>
+            ))}
           </div>
         </div>
+
         <div>
-          <h4 className="font-display font-semibold mb-3 text-sm text-foreground">Contact</h4>
-          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-            <span>contact@nesthubsolution.in</span>
-            <span>+91 8188941304</span>
-            <span>Jaipur, Rajasthan, India</span>
+          <div className="text-[14px] font-semibold tracking-[.05em] text-ink">Contact</div>
+          <div className="mt-4 grid gap-[11px] text-[16px] text-muted">
+            <a href={`mailto:${brand.email}`} className="hover:text-ink transition-colors">
+              {brand.email}
+            </a>
+            <a href={`tel:${brand.phone.replace(/\s+/g, '')}`} className="hover:text-ink transition-colors">
+              {brand.phone}
+            </a>
+            <span>{brand.location}</span>
           </div>
         </div>
       </div>
-      <div className="glow-line mt-10 mb-6" />
-      <p className="text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} NestHub Solution. All rights reserved.
-      </p>
-    </div>
-  </footer>
-);
 
-export default Footer;
+      <div className="mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-4 border-t border-line px-6 py-6">
+        <span className="text-[14.5px] text-muted">© 2026 {brand.name}. All rights reserved.</span>
+        <span className="flex gap-6">
+          <a href="#top" className="text-[14.5px] text-muted hover:text-ink transition-colors">
+            Privacy
+          </a>
+          <a href="#top" className="text-[14.5px] text-muted hover:text-ink transition-colors">
+            Terms
+          </a>
+        </span>
+      </div>
+    </footer>
+  )
+}

@@ -1,116 +1,92 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
 
-/* Grain texture removed — SVG feTurbulence filter was expensive on scroll */
+@theme {
+  --font-sans: "Inter", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  --font-mono: ui-monospace, Menlo, monospace;
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+  --color-ink: #111111;
+  --color-muted: #6b7280;
+  --color-line: #ececec;
+  --color-surface: #fafafa;
+  --color-success: #16a34a;
 
-@layer base {
-  :root {
-    --background: 220 20% 4%;
-    --foreground: 210 20% 92%;
-
-    --card: 220 18% 8%;
-    --card-foreground: 210 20% 92%;
-
-    --popover: 220 18% 8%;
-    --popover-foreground: 210 20% 92%;
-
-    --primary: 175 80% 50%;
-    --primary-foreground: 220 20% 4%;
-
-    --secondary: 220 16% 14%;
-    --secondary-foreground: 210 20% 85%;
-
-    --muted: 220 14% 12%;
-    --muted-foreground: 215 12% 50%;
-
-    --accent: 175 80% 50%;
-    --accent-foreground: 220 20% 4%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 220 14% 16%;
-    --input: 220 14% 16%;
-    --ring: 175 80% 50%;
-
-    --radius: 0.75rem;
-
-    --font-display: 'Space Grotesk', sans-serif;
-    --font-body: 'Inter', sans-serif;
-
-    --gradient-primary: linear-gradient(135deg, hsl(175 80% 50%), hsl(200 90% 55%));
-    --gradient-glow: radial-gradient(ellipse at center, hsl(175 80% 50% / 0.15), transparent 70%);
-    --gradient-card: linear-gradient(135deg, hsl(220 18% 10%), hsl(220 18% 6%));
-    --shadow-glow: 0 0 40px hsl(175 80% 50% / 0.2);
-    --shadow-card: 0 8px 32px hsl(220 20% 2% / 0.5);
-
-    --sidebar-background: 220 18% 6%;
-    --sidebar-foreground: 210 20% 85%;
-    --sidebar-primary: 175 80% 50%;
-    --sidebar-primary-foreground: 220 20% 4%;
-    --sidebar-accent: 220 14% 14%;
-    --sidebar-accent-foreground: 210 20% 85%;
-    --sidebar-border: 220 14% 16%;
-    --sidebar-ring: 175 80% 50%;
-  }
+  --color-brand-50: #eef2fb;
+  --color-brand-100: #dce6fa;
+  --color-brand-200: #b9cff6;
+  --color-brand-500: #2563eb;
+  --color-brand-600: #1d4ed8;
 }
 
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes floatySlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes shimmer {
+  0% { opacity: 0.55; }
+  50% { opacity: 1; }
+  100% { opacity: 0.55; }
+}
+@keyframes textShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.animate-floaty { animation: floaty 7s ease-in-out infinite; }
+.animate-floaty-slow { animation: floatySlow 9s ease-in-out infinite; }
+.animate-shimmer { animation: shimmer 1.6s ease-in-out infinite; }
+
+.text-shimmer {
+  background-image: linear-gradient(100deg, #2563eb 30%, #7dd3fc 45%, #2563eb 60%, #2563eb 100%);
+  background-size: 250% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: textShimmer 5s linear infinite;
+}
+
+/* Layered as `base` so Tailwind utilities (e.g. text-white on a button)
+   always win over these element defaults — unlayered CSS beats layered
+   CSS regardless of specificity, which previously made `text-white`
+   lose to this rule and rendered blue button text on a blue background. */
 @layer base {
-  * {
-    @apply border-border;
+  html {
+    scroll-behavior: smooth;
   }
+
   body {
-    @apply bg-background text-foreground;
-    font-family: var(--font-body);
+    margin: 0;
+    background: #ffffff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
+
+  a {
+    color: var(--color-brand-500);
+    text-decoration: none;
+  }
+
+  ::selection {
+    background: var(--color-brand-100);
+    color: var(--color-ink);
   }
 }
 
-@layer components {
-  .glass-card {
-    background: var(--gradient-card);
-    border: 1px solid hsl(var(--border));
-    box-shadow: var(--shadow-card);
-    /* backdrop-filter removed — 20+ blurred elements caused severe scroll jank */
-  }
-
-  .text-gradient {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .glow-line {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
-  }
-
-  .hero-glow {
-    position: absolute;
-    width: 700px;
-    height: 700px;
-    background: radial-gradient(ellipse at center, hsl(175 80% 50% / 0.12) 0%, transparent 65%);
-    pointer-events: none;
-    /* filter:blur() replaced with a soft radial-gradient — no repaint cost */
-  }
+.text-balance {
+  text-wrap: balance;
+}
+.text-pretty {
+  text-wrap: pretty;
 }
 
-@layer utilities {
-  .hover-lift {
-    @apply transition-all duration-300;
-  }
-  .hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-glow);
-  }
-  .marquee-fade {
-    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  }
+.perspective-1000 {
+  perspective: 1000px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
 }

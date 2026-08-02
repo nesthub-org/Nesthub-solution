@@ -1,0 +1,246 @@
+export type IconDef = string[]
+
+export const brand = {
+  name: 'NestHub Solution',
+  location: 'Jaipur, Rajasthan, India',
+  founded: '2023',
+  email: 'contact@nesthubsolution.in',
+  phone: '+91 8188941304',
+}
+
+export const navLinks = [
+  { href: '#services', label: 'Services' },
+  { href: '#work', label: 'Portfolio' },
+  { href: '#product', label: 'Product' },
+  { href: '#process', label: 'Process' },
+  { href: '#about', label: 'About' },
+]
+
+export const trustedBy = ['Vedyara Organic', 'Fitlife Sutra', 'MoneyView']
+
+export const trustStats = [
+  { number: 5, suffix: '+', label: 'Projects delivered' },
+  { number: 100, suffix: '%', label: 'Client satisfaction' },
+  { number: 2, suffix: '+', label: 'Years experience' },
+  { number: 98, suffix: '/100', label: 'Lighthouse score' },
+]
+
+export const heroBadge = 'TOP-RATED · AI-POWERED · JAIPUR, INDIA'
+
+export const heroPanel = {
+  aiEnabled: 'AI ENABLED',
+  lighthouse: { label: 'LIGHTHOUSE SCORE', value: 98, max: 100 },
+  techStack: ['React', 'Node.js', 'AI', 'TypeScript'],
+  status: 'SYSTEM: ONLINE',
+  performanceIndex: { label: 'PERFORMANCE INDEX', value: 78 },
+}
+
+export const icons: Record<string, IconDef> = {
+  design: [
+    'M3 5.5A2.5 2.5 0 0 1 5.5 3h13A2.5 2.5 0 0 1 21 5.5v13A2.5 2.5 0 0 1 18.5 21h-13A2.5 2.5 0 0 1 3 18.5z',
+    'M3 9h18',
+    'M9 21V9',
+  ],
+  dev: ['M8 17 3 12l5-5', 'M16 7l5 5-5 5', 'M13.5 4 10.5 20'],
+  ai: [
+    'M12 3v3',
+    'M12 18v3',
+    'M4.9 4.9 7 7',
+    'M17 17l2.1 2.1',
+    'M3 12h3',
+    'M18 12h3',
+    'M4.9 19.1 7 17',
+    'M17 7l2.1-2.1',
+  ],
+  responsive: ['M4 4h16v11H4z', 'M9 20h6', 'M12 17v3', 'M15 7h3v6h-3z'],
+  speed: ['M13 3 4 14h7l-1 7 9-11h-7z'],
+  seo: ['M4 19V9', 'M10 19V5', 'M16 19v-7', 'M22 19H2'],
+  care: ['M12 3 4 6.5v5c0 4.6 3.2 8.4 8 9.5 4.8-1.1 8-4.9 8-9.5v-5z', 'M9 12l2 2 4-4'],
+  target: ['M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z', 'M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z', 'M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z'],
+  eye: ['M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z', 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z'],
+  heart: ['M12 20.5s-7.5-4.6-9.5-9A5.3 5.3 0 0 1 12 6.2 5.3 5.3 0 0 1 21.5 11.5c-2 4.4-9.5 9-9.5 9Z'],
+  qr: ['M4 4h6v6H4z', 'M14 4h6v6h-6z', 'M4 14h6v6H4z', 'M14 14h3v3', 'M20 14v3h-3', 'M14 20h3'],
+  menu: ['M3 3h4l1 4h13l-2 8H7', 'M7 7h13', 'M9 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z', 'M18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z'],
+  sync: ['M3 12a9 9 0 0 1 15-6.7L21 8', 'M21 3v5h-5', 'M21 12a9 9 0 0 1-15 6.7L3 16', 'M3 21v-5h5'],
+  chart: ['M4 19V9', 'M10 19V5', 'M16 19v-12', 'M22 19H2'],
+}
+
+export interface Service {
+  title: string
+  body: string
+  tags: string[]
+  icon: string
+}
+
+export const services: Service[] = [
+  {
+    title: 'AI Integration',
+    body: 'Embed AI-powered capabilities into your product — intelligent chatbots, smart search, recommendation engines, content generation & predictive analytics.',
+    tags: ['AI Chatbots', 'Smart Search', 'Recommendations', 'Automation'],
+    icon: 'ai',
+  },
+  {
+    title: 'Website Development',
+    body: 'Tailored websites and web applications built with cutting-edge technologies.',
+    tags: ['React & Node.js', 'API Integration', 'CMS Development'],
+    icon: 'dev',
+  },
+  {
+    title: 'UI/UX Design',
+    body: 'User-centered design that converts. Intuitive interfaces backed by research.',
+    tags: ['Wireframing', 'Prototyping', 'User Testing'],
+    icon: 'design',
+  },
+  {
+    title: 'Responsive Design',
+    body: 'Pixel-perfect designs that look stunning on every device.',
+    tags: ['Mobile-First', 'Cross-Browser', 'Adaptive Layouts'],
+    icon: 'responsive',
+  },
+  {
+    title: 'Performance Optimization',
+    body: 'Lightning-fast websites that rank higher and convert better.',
+    tags: ['Core Web Vitals', 'Caching Strategy', 'Code Splitting'],
+    icon: 'speed',
+  },
+  {
+    title: 'SEO & Digital Marketing',
+    body: 'Data-driven strategies to improve your online visibility.',
+    tags: ['Technical SEO', 'Content Strategy', 'Analytics Setup'],
+    icon: 'seo',
+  },
+]
+
+export interface Project {
+  title: string
+  body: string
+  category: string
+  tags: string[]
+  href: string
+}
+
+export const projects: Project[] = [
+  {
+    title: 'Vedyara Organic',
+    body: 'A warm, inviting e-commerce platform for an artisanal honey brand with product catalog, cart system, secure checkout, and a blog.',
+    category: 'E-Commerce',
+    tags: ['E-Commerce', 'Stripe', 'Product Catalog', 'Blog'],
+    href: 'https://courageous-pika-a9eef6.netlify.app',
+  },
+  {
+    title: 'Fitlife Sutra',
+    body: 'A comprehensive digital platform for Vitality Management, showcasing their Herbalife nutrition programs and facilitating community engagement through an intuitive, modern interface.',
+    category: 'Health & Wellness',
+    tags: ['Health', 'Wellness', 'Responsive', 'UI/UX'],
+    href: '#',
+  },
+  {
+    title: 'MoneyView',
+    body: 'An educational trading platform combining real-time market data visualization with structured learning modules, interactive charts, and community discussions.',
+    category: 'Trading Platform',
+    tags: ['Real-time Data', 'Charts', 'LMS', 'WebSockets'],
+    href: 'https://d-freelance-work-moneyview-v2.vercel.app',
+  },
+]
+
+export interface QrFeature {
+  n: string
+  icon: string
+  title: string
+  body: string
+}
+
+export const qrFeatures: QrFeature[] = [
+  { n: '01', icon: 'qr', title: 'Scan to Order', body: 'Customers scan a table QR code — no app download, no login. Instant digital menu from any phone.' },
+  { n: '02', icon: 'menu', title: 'Live Menu Management', body: 'Update prices, add dishes, or mark items sold-out in real time from a single dashboard.' },
+  { n: '03', icon: 'sync', title: 'Real-Time Order Flow', body: 'Orders appear on the kitchen display instantly. Staff notified; customers track status live.' },
+  { n: '04', icon: 'chart', title: 'Revenue Analytics', body: 'Track bestsellers, peak hours, and revenue trends from a clean, role-based analytics panel.' },
+]
+
+export interface Testimonial {
+  quote: string
+  name: string
+  initials: string
+  role: string
+  company: string
+}
+
+export const testimonials: Testimonial[] = [
+  {
+    quote: 'Our honey brand needed an online presence that matched the quality of our product. NestHub delivered beyond expectations — the site is gorgeous and our online sales have tripled.',
+    name: 'Mr. Yogendra Maurya',
+    initials: 'YK',
+    role: 'Founder, Vedyara Organic',
+    company: 'E-Commerce Platform',
+  },
+  {
+    quote: 'Building a trading education platform is complex, but the NestHub team handled it with precision. Real-time charts, course modules, community features — everything works flawlessly.',
+    name: 'Mr. Amit Mishra',
+    initials: 'AM',
+    role: 'CEO, MoneyView.in',
+    company: 'Trading Platform',
+  },
+  {
+    quote: 'NestHub helped us create a stronger online presence with a clean, user-friendly design. The website made it easier for us to connect with our community and showcase our Herbalife nutrition programs in a simple, professional, and engaging manner.',
+    name: 'Mr. Mahtab Alam',
+    initials: 'MA',
+    role: 'Health & Wellness',
+    company: 'Fitlifesutra',
+  },
+]
+
+export const stack = [
+  { name: 'React 19', mark: 'Re' },
+  { name: 'Next.js 15', mark: 'N' },
+  { name: 'TypeScript', mark: 'TS' },
+  { name: 'Node.js', mark: 'Nd' },
+  { name: 'MongoDB', mark: 'M' },
+  { name: 'SQL', mark: 'SQ' },
+  { name: 'Postgres', mark: 'PG' },
+  { name: 'Tailwind', mark: 'Tw' },
+  { name: 'AI / LLM', mark: 'AI' },
+  { name: 'Agentic Ai', mark: 'Ag' },
+  { name: 'SEO', mark: 'SE' },
+]
+
+export interface Step {
+  n: string
+  title: string
+  body: string
+}
+
+export const steps: Step[] = [
+  { n: '01', title: 'Discovery', body: 'Stakeholder interviews, analytics audit and a written brief we both sign off on.' },
+  { n: '02', title: 'Design', body: 'Wireframes to high-fidelity system in Figma, reviewed live rather than by email.' },
+  { n: '03', title: 'Development', body: 'Component-driven build with preview deploys on every pull request.' },
+  { n: '04', title: 'Testing', body: 'Cross-device QA, accessibility audit and Core Web Vitals budgets enforced in CI.' },
+  { n: '05', title: 'Launch', body: 'Zero-downtime migration, redirects mapped, analytics and monitoring verified.' },
+  { n: '06', title: 'Support', body: 'A named engineer, monthly performance reporting and a roadmap that keeps moving.' },
+]
+
+export const needs = ['New website', 'Redesign', 'AI integration', 'Ongoing partner']
+
+export const aboutIntro =
+  "Founded in 2023, NestHub Solution is Jaipur's top-rated web development and freelancing agency. Our team of designers, developers, and strategists serves businesses across Jaipur, Delhi, Mumbai, Bangalore, and all of India — delivering websites and digital products that drive real results."
+
+export const values = [
+  { title: 'Innovation First', body: 'We stay ahead of the curve, leveraging the latest technologies.', icon: 'target' },
+  { title: 'Transparency', body: "Open communication and honest timelines. You're always in the loop.", icon: 'eye' },
+  { title: 'Client-Centric', body: 'Your success is our success. Every decision aligns with your goals.', icon: 'heart' },
+]
+
+export const footerLinks = {
+  quick: [
+    { href: '#top', label: 'Home' },
+    { href: '#services', label: 'Services' },
+    { href: '#work', label: 'Portfolio' },
+    { href: '#about', label: 'About' },
+    { href: '#contact', label: 'Contact' },
+  ],
+  services: [
+    { href: '#services', label: 'AI Integration' },
+    { href: '#services', label: 'Website Development' },
+    { href: '#services', label: 'UI/UX Design' },
+    { href: '#services', label: 'SEO & Digital Marketing' },
+  ],
+}

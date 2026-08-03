@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion'
 import { brand, footerLinks } from '../data/content'
 import { Logo, LogoFallback } from './Logo'
-import { InstagramIcon, LinkedInIcon, WhatsAppIcon, XIcon } from './SocialIcons'
+import { FacebookIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from './SocialIcons'
 
 const socials = [
-  { label: 'LinkedIn', Icon: LinkedInIcon, href: '#top' },
-  { label: 'X', Icon: XIcon, href: '#top' },
-  { label: 'Instagram', Icon: InstagramIcon, href: '#top' },
+  { label: 'LinkedIn', Icon: LinkedInIcon, href: 'https://www.linkedin.com/company/nesthub-solution' },
+  { label: 'Instagram', Icon: InstagramIcon, href: 'https://www.instagram.com/nesthubsolution' },
+  { label: 'Facebook', Icon: FacebookIcon, href: 'https://www.facebook.com/nesthubsolution' },
   { label: 'WhatsApp', Icon: WhatsAppIcon, href: `https://wa.me/${brand.phone.replace(/[^0-9]/g, '')}` },
 ]
 
@@ -81,10 +81,10 @@ export function Footer() {
       <div className="mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-4 border-t border-line px-6 py-6">
         <span className="text-[14.5px] text-muted">© 2026 {brand.name}. All rights reserved.</span>
         <span className="flex gap-6">
-          <a href="#top" className="text-[14.5px] text-muted hover:text-ink transition-colors">
+          <a href="/#top" className="text-[14.5px] text-muted hover:text-ink transition-colors">
             Privacy
           </a>
-          <a href="#top" className="text-[14.5px] text-muted hover:text-ink transition-colors">
+          <a href="/#top" className="text-[14.5px] text-muted hover:text-ink transition-colors">
             Terms
           </a>
         </span>

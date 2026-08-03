@@ -7,11 +7,6 @@
   "auth": {
     "type": "none"
   },
-  "api": {
-    "type": "openapi",
-    "url": "https://nesthubsolution.in/.well-known/openapi.yaml",
-    "is_user_authenticated": false
-  },
   "logo_url": "https://nesthubsolution.in/logo.png",
   "contact_email": "contact@nesthubsolution.in",
   "legal_info_url": "https://nesthubsolution.in/"

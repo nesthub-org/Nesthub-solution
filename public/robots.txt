@@ -115,5 +115,4 @@ Allow: /
 # ─────────────────────────────────────────────────────────────
 # llms.txt  (plain-English AI content):  https://nesthubsolution.in/llms.txt
 # ai-plugin: https://nesthubsolution.in/.well-known/ai-plugin.json
-# OpenAPI:   https://nesthubsolution.in/.well-known/openapi.yaml
 # oEmbed:    https://nesthubsolution.in/.well-known/oembed.json

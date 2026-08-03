@@ -1,3 +1,10 @@
+import logoVedyara from '../assets/logo-vedyara.png'
+import logoFitlifeSutra from '../assets/logo-fitlifesutra.png'
+import logoMoneyView from '../assets/logo-moneyview.png'
+import projectHoney from '../assets/project-honey.png'
+import projectHealth from '../assets/project-health.png'
+import projectTrading from '../assets/project-trading.png'
+
 export type IconDef = string[]
 
 export const brand = {
@@ -6,17 +13,22 @@ export const brand = {
   founded: '2023',
   email: 'contact@nesthubsolution.in',
   phone: '+91 8188941304',
+  calendly: 'https://calendly.com/workquerysol/30min',
 }
 
 export const navLinks = [
-  { href: '#services', label: 'Services' },
-  { href: '#work', label: 'Portfolio' },
-  { href: '#product', label: 'Product' },
-  { href: '#process', label: 'Process' },
-  { href: '#about', label: 'About' },
+  { href: '/#services', label: 'Services' },
+  { href: '/#work', label: 'Portfolio' },
+  { href: '/#product', label: 'Product' },
+  { href: '/#process', label: 'Process' },
+  { href: '/#about', label: 'About' },
 ]
 
-export const trustedBy = ['Vedyara Organic', 'Fitlife Sutra', 'MoneyView']
+export const trustedBy = [
+  { name: 'Vedyara Organic', logo: logoVedyara },
+  { name: 'Fitlife Sutra', logo: logoFitlifeSutra },
+  { name: 'MoneyView', logo: logoMoneyView },
+]
 
 export const trustStats = [
   { number: 5, suffix: '+', label: 'Projects delivered' },
@@ -63,6 +75,11 @@ export const icons: Record<string, IconDef> = {
   menu: ['M3 3h4l1 4h13l-2 8H7', 'M7 7h13', 'M9 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z', 'M18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z'],
   sync: ['M3 12a9 9 0 0 1 15-6.7L21 8', 'M21 3v5h-5', 'M21 12a9 9 0 0 1-15 6.7L3 16', 'M3 21v-5h5'],
   chart: ['M4 19V9', 'M10 19V5', 'M16 19v-12', 'M22 19H2'],
+  clock: ['M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z', 'M12 7v5l3.5 2'],
+  video: ['M3 6.5A2.5 2.5 0 0 1 5.5 4h7A2.5 2.5 0 0 1 15 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 3 17.5z', 'M15 9.5 21 6v12l-6-3.5Z'],
+  briefcase: ['M3 8.5A1.5 1.5 0 0 1 4.5 7h15A1.5 1.5 0 0 1 21 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z', 'M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7', 'M3 12h18'],
+  mapPin: ['M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12Z', 'M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z'],
+  send: ['m3 11 18-8-8 18-2.5-7.5L3 11Z'],
 }
 
 export interface Service {
@@ -117,6 +134,8 @@ export interface Project {
   category: string
   tags: string[]
   href: string
+  image: string
+  logo: string
 }
 
 export const projects: Project[] = [
@@ -125,14 +144,18 @@ export const projects: Project[] = [
     body: 'A warm, inviting e-commerce platform for an artisanal honey brand with product catalog, cart system, secure checkout, and a blog.',
     category: 'E-Commerce',
     tags: ['E-Commerce', 'Stripe', 'Product Catalog', 'Blog'],
-    href: 'https://courageous-pika-a9eef6.netlify.app',
+    href: 'https://vedyara.in',
+    image: projectHoney,
+    logo: logoVedyara,
   },
   {
     title: 'Fitlife Sutra',
     body: 'A comprehensive digital platform for Vitality Management, showcasing their Herbalife nutrition programs and facilitating community engagement through an intuitive, modern interface.',
     category: 'Health & Wellness',
     tags: ['Health', 'Wellness', 'Responsive', 'UI/UX'],
-    href: '#',
+    href: 'https://courageous-pika-a9ee96.netlify.app',
+    image: projectHealth,
+    logo: logoFitlifeSutra,
   },
   {
     title: 'MoneyView',
@@ -140,6 +163,8 @@ export const projects: Project[] = [
     category: 'Trading Platform',
     tags: ['Real-time Data', 'Charts', 'LMS', 'WebSockets'],
     href: 'https://d-freelance-work-moneyview-v2.vercel.app',
+    image: projectTrading,
+    logo: logoMoneyView,
   },
 ]
 
@@ -231,16 +256,73 @@ export const values = [
 
 export const footerLinks = {
   quick: [
-    { href: '#top', label: 'Home' },
-    { href: '#services', label: 'Services' },
-    { href: '#work', label: 'Portfolio' },
-    { href: '#about', label: 'About' },
-    { href: '#contact', label: 'Contact' },
+    { href: '/#top', label: 'Home' },
+    { href: '/#services', label: 'Services' },
+    { href: '/#work', label: 'Portfolio' },
+    { href: '/#about', label: 'About' },
+    { href: '/#contact', label: 'Contact' },
+    { href: '/careers', label: 'Careers' },
   ],
   services: [
-    { href: '#services', label: 'AI Integration' },
-    { href: '#services', label: 'Website Development' },
-    { href: '#services', label: 'UI/UX Design' },
-    { href: '#services', label: 'SEO & Digital Marketing' },
+    { href: '/#services', label: 'AI Integration' },
+    { href: '/#services', label: 'Website Development' },
+    { href: '/#services', label: 'UI/UX Design' },
+    { href: '/#services', label: 'SEO & Digital Marketing' },
   ],
 }
+
+export interface Job {
+  id: 'bde' | 'sde-intern'
+  title: string
+  type: string
+  location: string
+  experience: string
+  description: string
+  responsibilities: string[]
+  requirements: string[]
+}
+
+export const jobs: Job[] = [
+  {
+    id: 'bde',
+    title: 'Business Development Executive',
+    type: 'Full-time',
+    location: 'Jaipur, Rajasthan (On-site / Hybrid)',
+    experience: '0–2 years experience',
+    description:
+      'Drive new client relationships for our web development and AI integration services — from first outreach through to a signed project brief.',
+    responsibilities: [
+      'Identify and reach out to prospective clients across India',
+      'Run discovery calls and qualify project requirements',
+      'Prepare proposals and pricing in collaboration with the delivery team',
+      'Maintain and grow relationships with existing clients',
+    ],
+    requirements: [
+      'Strong written and verbal communication in English and Hindi',
+      'Comfortable on client calls and following up independently',
+      'Interest in web development, AI and digital products',
+      'Prior sales or business development experience is a plus, not required',
+    ],
+  },
+  {
+    id: 'sde-intern',
+    title: 'Software Development Engineer Intern',
+    type: 'Internship · 3–6 months',
+    location: 'Remote or Jaipur',
+    experience: 'React, TypeScript, Git',
+    description:
+      'Work directly with our engineering team on real client projects — production React/TypeScript code, not busywork.',
+    responsibilities: [
+      'Build and ship features on live client projects under senior review',
+      'Work with React, TypeScript, Node.js and Tailwind CSS',
+      'Participate in code review and pull request workflows',
+      'Pair with designers to implement Figma specs pixel-accurately',
+    ],
+    requirements: [
+      'Working knowledge of React, TypeScript and Git',
+      'A GitHub profile or portfolio showing prior projects',
+      'Available for 3–6 months, remote or Jaipur-based',
+      'Currently studying or recently graduated in CS or a related field',
+    ],
+  },
+]

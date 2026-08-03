@@ -46,7 +46,7 @@ export function About() {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <motion.a
-              href="#contact"
+              href="/#contact"
               whileHover={{ y: -2, backgroundColor: '#1D4ED8' }}
               whileTap={{ scale: 0.97 }}
               className="flex h-13 items-center rounded-2xl bg-brand-500 px-7 text-[15.5px] font-semibold text-white shadow-[0_8px_28px_rgba(37,99,235,.35)]"
@@ -54,7 +54,9 @@ export function About() {
               Get Free Consultation
             </motion.a>
             <motion.a
-              href={`mailto:${brand.email}`}
+              href={brand.calendly}
+              target="_blank"
+              rel="noreferrer"
               whileHover={{ y: -2, borderColor: '#ffffff' }}
               whileTap={{ scale: 0.97 }}
               className="flex h-13 items-center rounded-2xl border border-white/20 px-7 text-[15.5px] font-semibold text-white"

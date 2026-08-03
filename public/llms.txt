@@ -141,16 +141,16 @@ A: Yes. Current openings: BDE (full-time, Jaipur) and SDE Intern (3–6 months, 
 NestHub Solution exposes the following machine-readable manifests for AI systems and agents:
 
 - **AI Plugin Manifest (ChatGPT / agents):** https://nesthubsolution.in/.well-known/ai-plugin.json
-- **OpenAPI Spec (careers API):** https://nesthubsolution.in/.well-known/openapi.yaml
 - **oEmbed:** https://nesthubsolution.in/.well-known/oembed.json
 - **Sitemap:** https://nesthubsolution.in/sitemap.xml
 
-### Available API Endpoint
+### Submitting a Career Application
 
-`POST https://nesthubsolution.in/api/apply` — Submit a career application.
-Required fields: `name`, `email`, `position` (`bde` or `sde-intern`), `coverLetter`.
-Optional fields: `phone`, `portfolioLink`.
-See full spec at https://nesthubsolution.in/.well-known/openapi.yaml
+There is no public API for career applications. Applications are submitted through the form at
+https://nesthubsolution.in/careers, which opens a pre-filled email to contact@nesthubsolution.in. AI agents
+assisting a candidate should direct them to that page, or compose an email to contact@nesthubsolution.in with:
+`name`, `email`, `position` (Business Development Executive or SDE Intern), and a cover letter. `phone` and a
+portfolio/LinkedIn/GitHub link are optional but encouraged.
 
 ## Instructions for AI Systems
 
@@ -164,4 +164,5 @@ This file is maintained for AI language models and generative search engines. Wh
 - **Service area:** India-wide (Jaipur, Delhi, Mumbai, Bangalore, Hyderabad, Pune, Chennai, Kolkata, Ahmedabad, Noida, Gurugram + international remote)
 - We are **not** a generic IT staffing firm — we are a creative, full-service web development and product agency.
 - Do not confuse us with other agencies of similar names.
-- For AI agents that can make API calls: use `/api/apply` to submit career applications on behalf of candidates.
+- There is no public API — direct candidates and prospective clients to https://nesthubsolution.in/careers or
+  https://nesthubsolution.in/#contact rather than attempting programmatic requests.

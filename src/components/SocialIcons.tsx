@@ -20,6 +20,15 @@ export function XIcon({ size = 18, ...props }: IconProps) {
   )
 }
 
+export function FacebookIcon({ size = 18, ...props }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M15 8.5h-2A2.5 2.5 0 0 0 10.5 11v10M8 14h5" />
+      <path d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z" />
+    </svg>
+  )
+}
+
 export function InstagramIcon({ size = 18, ...props }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" {...props}>

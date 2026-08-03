@@ -9,7 +9,7 @@ export function Header() {
   return (
     <header className="sticky top-2.5 z-[60] mt-2.5 px-4 sm:top-[18px] sm:mt-[18px] sm:px-6">
       <nav className="mx-auto max-w-[1320px] h-[68px] flex items-center justify-between pl-[22px] pr-3 bg-white/78 backdrop-blur-xl border border-line rounded-[20px] shadow-[0_8px_40px_rgba(0,0,0,.05)]">
-        <motion.a href="#top" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="flex items-center gap-2.5 text-ink">
+        <motion.a href="/#top" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="flex items-center gap-2.5 text-ink">
           <motion.span whileHover={{ rotate: -8 }} transition={{ type: 'spring', stiffness: 300, damping: 12 }}>
             <Logo size={26} />
             <LogoFallback size={26} />
@@ -41,11 +41,11 @@ export function Header() {
         </div>
 
         <div className="hidden md:flex items-center gap-2">
-          <a href="#contact" className="h-11 px-3.5 flex items-center text-[15px] font-medium text-ink">
+          <a href="/#contact" className="h-11 px-3.5 flex items-center text-[15px] font-medium text-ink">
             Contact
           </a>
           <motion.a
-            href="#contact"
+            href="/#contact"
             whileHover={{ y: -1, backgroundColor: '#1D4ED8' }}
             className="h-11 px-5 flex items-center rounded-[14px] bg-brand-500 text-white text-[16px] font-semibold shadow-[0_6px_18px_rgba(37,99,235,.22)]"
           >
@@ -96,7 +96,7 @@ export function Header() {
                 </a>
               ))}
               <a
-                href="#contact"
+                href="/#contact"
                 onClick={() => setOpen(false)}
                 className="mt-2 flex h-12 items-center justify-center rounded-[14px] bg-brand-500 text-[16px] font-semibold text-white"
               >

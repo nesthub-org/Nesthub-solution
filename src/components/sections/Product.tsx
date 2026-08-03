@@ -93,7 +93,7 @@ export function Product() {
           <Reveal delay={0.3}>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <motion.a
-                href="#contact"
+                href="/#contact"
                 whileHover={{ y: -2, backgroundColor: '#1D4ED8' }}
                 whileTap={{ scale: 0.97 }}
                 className="flex h-13 items-center gap-2 rounded-2xl bg-brand-500 px-6 text-[15.5px] font-semibold text-white shadow-[0_8px_28px_rgba(37,99,235,.24)]"

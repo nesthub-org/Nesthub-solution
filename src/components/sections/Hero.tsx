@@ -77,7 +77,7 @@ export function Hero() {
           <Reveal delay={0.15}>
             <div className="mt-9 flex flex-wrap gap-3">
               <motion.a
-                href="#contact"
+                href="/#contact"
                 whileHover={{ y: -2, backgroundColor: '#1D4ED8' }}
                 whileTap={{ scale: 0.97 }}
                 className="flex h-14 items-center rounded-2xl bg-brand-500 px-7 text-[16px] font-semibold text-white shadow-[0_8px_28px_rgba(37,99,235,.24)]"
@@ -85,7 +85,7 @@ export function Hero() {
                 Start a Project
               </motion.a>
               <motion.a
-                href="#work"
+                href="/#work"
                 whileHover={{ y: -2, borderColor: '#111111' }}
                 whileTap={{ scale: 0.97 }}
                 className="flex h-14 items-center gap-2.5 rounded-2xl border border-line bg-white px-6.5 text-[16px] font-semibold text-ink"
@@ -99,11 +99,15 @@ export function Hero() {
           <Reveal delay={0.2}>
             <div className="mt-11 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
               <span className="shrink-0 whitespace-nowrap text-[13px] font-semibold uppercase tracking-[.09em] text-muted">Trusted by</span>
-              <div className="flex min-w-0 flex-wrap items-center gap-x-6 gap-y-2">
-                {trustedBy.map((name) => (
-                  <span key={name} className="text-[15px] sm:text-[17px] font-bold tracking-[-.02em] text-ink opacity-35">
-                    {name}
-                  </span>
+              <div className="flex min-w-0 flex-wrap items-center gap-4">
+                {trustedBy.map((client) => (
+                  <img
+                    key={client.name}
+                    src={client.logo}
+                    alt={client.name}
+                    title={client.name}
+                    className="h-10 w-10 object-contain opacity-50 grayscale transition-all duration-300 hover:opacity-90 hover:grayscale-0 sm:h-12 sm:w-12"
+                  />
                 ))}
               </div>
             </div>
@@ -208,7 +212,7 @@ export function Hero() {
       </motion.div>
 
       <motion.a
-        href="#services"
+        href="/#services"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.6 }}

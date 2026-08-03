@@ -16,7 +16,7 @@ export function Work() {
               </h2>
             </div>
             <a
-              href="#contact"
+              href="/#contact"
               className="flex h-13 items-center rounded-2xl border border-line bg-white px-6 text-[16px] font-semibold text-ink hover:border-ink transition-colors"
             >
               All case studies
@@ -29,22 +29,25 @@ export function Work() {
             <Reveal key={p.title} delay={(i % 2) * 0.08}>
               <TiltCard max={5} lift={-8} className="h-full rounded-[20px]">
                 <div className="h-full overflow-hidden rounded-[20px] border border-line bg-white shadow-[0_8px_40px_rgba(0,0,0,.05)]">
-                  <div className="bg-gradient-to-b from-white to-[#F6F7F9] px-10 pt-10">
-                    <div className="mx-auto w-full max-w-[520px]">
-                      <div className="overflow-hidden rounded-t-2xl rounded-b-[4px] border-[10px] border-ink bg-white">
-                        <div className="flex h-[200px] sm:h-[230px] items-center justify-center bg-[repeating-linear-gradient(135deg,#F7F7F8_0_12px,#F0F1F3_12px_24px)]">
-                          <span className="rounded-lg border border-line bg-white px-3 py-1.5 font-mono text-[12px] text-muted">
-                            {p.title}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="mx-[-22px] h-2.5 rounded-b-xl bg-ink" />
-                      <div className="h-5.5" />
-                    </div>
+                  <div className="flex items-center justify-center bg-gradient-to-b from-white to-[#F0F2F6] px-6 pt-8 pb-2 sm:px-8 sm:pt-9">
+                    <img
+                      src={p.image}
+                      alt={`${p.title} website, shown on a laptop screen`}
+                      loading="lazy"
+                      className="w-full max-w-[480px] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,.12)]"
+                    />
                   </div>
                   <div className="border-t border-line px-8 pb-8.5 pt-7.5">
-                    <span className="text-[12.5px] font-bold uppercase tracking-[.08em] text-brand-500">{p.category}</span>
-                    <h3 className="mt-2 text-[22px] sm:text-[24px] font-semibold tracking-[-.025em]">{p.title}</h3>
+                    <div className="flex items-center gap-2.5">
+                      <img
+                        src={p.logo}
+                        alt=""
+                        aria-hidden
+                        className="h-7 w-7 rounded-full border border-line object-contain p-0.5"
+                      />
+                      <span className="text-[12.5px] font-bold uppercase tracking-[.08em] text-brand-500">{p.category}</span>
+                    </div>
+                    <h3 className="mt-3 text-[22px] sm:text-[24px] font-semibold tracking-[-.025em]">{p.title}</h3>
                     <p className="mt-2 text-[16.5px] leading-[1.6] text-muted">{p.body}</p>
                     <div className="mt-5 flex flex-wrap gap-2">
                       {p.tags.map((tag) => (

@@ -25,19 +25,19 @@ function Core({ scrollProgress }: CoreProps) {
   })
 
   return (
-    <group ref={group}>
+    <group ref={group} scale={0.85}>
       <Float speed={1.4} rotationIntensity={0.5} floatIntensity={0.9}>
         <Sphere args={[1.08, 48, 48]}>
-          <MeshDistortMaterial color="#2563EB" distort={0.32} speed={1.6} roughness={0.2} metalness={0.3} opacity={0.92} transparent />
+          <MeshDistortMaterial color="#3B82F6" distort={0.32} speed={1.6} roughness={0.15} metalness={0.2} opacity={0.85} transparent emissive="#1D4ED8" emissiveIntensity={0.5} />
         </Sphere>
         <Icosahedron args={[1.85, 0]}>
-          <meshBasicMaterial color="#2563EB" wireframe transparent opacity={0.16} />
+          <meshBasicMaterial color="#60A5FA" wireframe transparent opacity={0.3} />
         </Icosahedron>
         <Icosahedron args={[2.35, 1]}>
-          <meshBasicMaterial color="#B9CFF6" wireframe transparent opacity={0.12} />
+          <meshBasicMaterial color="#B9CFF6" wireframe transparent opacity={0.22} />
         </Icosahedron>
       </Float>
-      <Sparkles count={45} scale={4.4} size={2.2} speed={0.3} opacity={0.6} color="#2563EB" />
+      <Sparkles count={60} scale={4.6} size={2.6} speed={0.3} opacity={0.85} color="#7DD3FC" />
     </group>
   )
 }
@@ -62,9 +62,9 @@ export function HeroScene({ scrollProgress }: HeroSceneProps) {
         gl={{ alpha: true, antialias: true, powerPreference: 'low-power' }}
         style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
       >
-        <ambientLight intensity={1} />
-        <directionalLight position={[3, 4, 4]} intensity={1.2} />
-        <directionalLight position={[-3, -2, -2]} intensity={0.5} color="#B9CFF6" />
+        <ambientLight intensity={1.4} />
+        <directionalLight position={[3, 4, 4]} intensity={2} />
+        <directionalLight position={[-3, -2, -2]} intensity={1} color="#B9CFF6" />
         <Core scrollProgress={scrollProgress} />
       </Canvas>
     </div>

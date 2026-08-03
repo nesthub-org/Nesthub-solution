@@ -37,14 +37,12 @@ export const trustStats = [
   { number: 98, suffix: '/100', label: 'Lighthouse score' },
 ]
 
-export const heroBadge = 'TOP-RATED · AI-POWERED · JAIPUR, INDIA'
+export const heroBadge = 'AI-POWERED DEVELOPMENT · JAIPUR, INDIA'
 
 export const heroPanel = {
   aiEnabled: 'AI ENABLED',
   lighthouse: { label: 'LIGHTHOUSE SCORE', value: 98, max: 100 },
   techStack: ['React', 'Node.js', 'AI', 'TypeScript'],
-  status: 'SYSTEM: ONLINE',
-  performanceIndex: { label: 'PERFORMANCE INDEX', value: 78 },
 }
 
 export const icons: Record<string, IconDef> = {

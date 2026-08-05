@@ -11,8 +11,8 @@ export function Header() {
       <nav className="mx-auto max-w-[1320px] h-[68px] flex items-center justify-between pl-[22px] pr-3 bg-white/78 backdrop-blur-xl border border-line rounded-[20px] shadow-[0_8px_40px_rgba(0,0,0,.05)]">
         <motion.a href="/#top" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="flex items-center gap-2.5 text-ink">
           <motion.span whileHover={{ rotate: -8 }} transition={{ type: 'spring', stiffness: 300, damping: 12 }}>
-            <Logo size={26} />
-            <LogoFallback size={26} />
+            <Logo size={40} />
+            <LogoFallback size={40} />
           </motion.span>
           <span className="text-[16.5px] font-bold tracking-[-.02em]">
             NestHub<span className="text-muted font-medium"> Solution</span>

@@ -35,4 +35,9 @@ jobs:
           port: ${{ secrets.FTP_PORT }}
           protocol: ftp
           local-dir: ./dist/
-          server-dir: ./public_html/
+          # The FTP_USERNAME account's home directory on Hostinger is already
+          # public_html/ — pointing server-dir there too was uploading every
+          # deploy into a nested public_html/public_html/ that the live site
+          # never serves, while the real document root stayed stale. Root ("./")
+          # is the actual document root for this account.
+          server-dir: ./

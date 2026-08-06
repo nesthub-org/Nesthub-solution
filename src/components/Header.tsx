@@ -7,7 +7,7 @@ export function Header() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-2.5 z-[60] mt-2.5 px-4 sm:top-[18px] sm:mt-[18px] sm:px-6">
+    <header className="fixed top-2.5 left-0 right-0 z-[60] px-4 sm:top-[18px] sm:px-6">
       <nav className="mx-auto max-w-[1320px] h-[68px] flex items-center justify-between pl-[22px] pr-3 bg-white/78 backdrop-blur-xl border border-line rounded-[20px] shadow-[0_8px_40px_rgba(0,0,0,.05)]">
         <motion.a href="/#top" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="flex items-center gap-2.5 text-ink">
           <motion.span whileHover={{ rotate: -8 }} transition={{ type: 'spring', stiffness: 300, damping: 12 }}>

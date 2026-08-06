@@ -16,7 +16,7 @@ import { Contact } from '../components/sections/Contact'
 export function Home() {
   useDocumentTitle(
     'Top Web Development Agency in Jaipur | NestHub Solution India',
-    "NestHub Solution — Jaipur's top-rated web development & freelancing agency. We build websites, AI platforms & e-commerce for businesses across Jaipur, Delhi, Mumbai & all of India. 5★ rated · Free discovery call.",
+    "NestHub Solution - Jaipur's top-rated web development & freelancing agency. Websites, AI platforms & e-commerce for businesses across India.",
   )
 
   return (

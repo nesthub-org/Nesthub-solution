@@ -23,6 +23,7 @@ export function Careers() {
   useDocumentTitle(
     'Careers at NestHub Solution — Jaipur Web & App Development Agency',
     'Open roles at NestHub Solution: React Native Developer, Business Development Executive and MERN Stack Intern (Jaipur / remote). Apply today.',
+    '/careers',
   )
 
   return (

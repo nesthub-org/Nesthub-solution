@@ -252,6 +252,24 @@ export const values = [
   { title: 'Client-Centric', body: 'Your success is our success. Every decision aligns with your goals.', icon: 'heart' },
 ]
 
+export interface TeamMember {
+  name: string
+  initials: string
+  role: string
+  /** Path under /public, e.g. '/team/apoorv.jpg'. Falls back to the initials mark when absent or broken. */
+  img?: string
+  /** CSS object-position for the crop — useful for full-body shots where the face sits high. */
+  imgPosition?: string
+}
+
+export const team: TeamMember[] = [
+  { name: 'Mr. Apoorv Arya', initials: 'AA', role: 'Founder and CEO', img: '/team/apoorv.jpg' },
+  { name: 'Mr. Yogendra Maurya', initials: 'YM', role: 'CFO', img: '/team/yogendra.jpg', imgPosition: '50% 30%' },
+  { name: 'Mr. Naveen Soni', initials: 'NS', role: 'Full Stack Developer', img: '/team/naveen.jpg', imgPosition: '50% 25%' },
+  { name: 'Miss. Juhi Nagar', initials: 'JN', role: 'Head of HR & BDE', img: '/team/juhi.jpg', imgPosition: '50% 25%' },
+  
+]
+
 export const footerLinks = {
   quick: [
     { href: '/#top', label: 'Home' },

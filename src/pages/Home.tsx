@@ -8,6 +8,7 @@ import { Testimonials } from '../components/sections/Testimonials'
 import { TechStack } from '../components/sections/TechStack'
 import { Process } from '../components/sections/Process'
 import { About } from '../components/sections/About'
+import { Team } from '../components/sections/Team'
 import { BookCall } from '../components/sections/BookCall'
 import { Contact } from '../components/sections/Contact'
 
@@ -28,6 +29,7 @@ export function Home() {
       <TechStack />
       <Process />
       <About />
+      <Team />
       <BookCall />
       <Contact />
     </main>

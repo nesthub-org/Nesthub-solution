@@ -208,9 +208,9 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     quote: 'Our honey brand needed an online presence that matched the quality of our product. NestHub delivered beyond expectations — the site is gorgeous and our online sales have tripled.',
-    name: 'Mr. Yogendra Maurya',
-    initials: 'YK',
-    role: 'Founder, Vedyara Organic',
+    name: 'Mr. Avinash Maurya',
+    initials: 'AM',
+    role: 'Manager, Vedyara Agro Foods',
     company: 'E-Commerce Platform',
   },
   {
@@ -281,9 +281,9 @@ export interface TeamMember {
 
 export const team: TeamMember[] = [
   { name: 'Mr. Apoorv Arya', initials: 'AA', role: 'Founder and CEO', img: '/team/apoorv.jpg' },
+  { name: 'Miss. Roli Nagar', initials: 'JN', role: 'Head of HR & BDE', img: '/team/juhi.jpg', imgPosition: '50% 25%' },
   { name: 'Mr. Yogendra Maurya', initials: 'YM', role: 'CFO', img: '/team/yogendra.jpg', imgPosition: '50% 30%' },
-  { name: 'Mr. Naveen Soni', initials: 'NS', role: 'Full Stack Developer', img: '/team/naveen.jpg', imgPosition: '50% 25%' },
-  { name: 'Miss. Juhi Nagar', initials: 'JN', role: 'Head of HR & BDE', img: '/team/juhi.jpg', imgPosition: '50% 25%' },
+  { name: 'Mr. Naveen Soni', initials: 'NS', role: 'Full Stack Developer', img: '/team/naveen-img.jpeg', imgPosition: '50% 25%' },
   
 ]
 

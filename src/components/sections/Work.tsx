@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
 import { Reveal } from '../Reveal'
 import { TiltCard } from '../TiltCard'
+import { Icon } from '../Icon'
 import { projects } from '../../data/content'
 
 export function Work() {
@@ -24,50 +24,47 @@ export function Work() {
           </div>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {projects.map((p, i) => (
-            <Reveal key={p.title} delay={(i % 2) * 0.08}>
-              <TiltCard max={5} lift={-8} className="h-full rounded-[20px]">
-                <div className="h-full overflow-hidden rounded-[20px] border border-line bg-white shadow-[0_8px_40px_rgba(0,0,0,.05)]">
-                  <div className="flex items-center justify-center bg-gradient-to-b from-white to-[#F0F2F6] px-6 pt-8 pb-2 sm:px-8 sm:pt-9">
+            <Reveal key={p.title} delay={(i % 3) * 0.06}>
+              <TiltCard max={5} lift={-6} className="h-full rounded-[18px]">
+                <div className="h-full overflow-hidden rounded-[18px] border border-line bg-white shadow-[0_8px_40px_rgba(0,0,0,.05)]">
+                  <div className="flex items-center justify-center bg-gradient-to-b from-white to-[#F0F2F6] px-5 pt-6 pb-2">
                     <img
                       src={p.image}
                       alt={`${p.title} website, shown on a laptop screen`}
                       loading="lazy"
-                      className="w-full max-w-[480px] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,.12)]"
+                      className="w-full max-w-[300px] object-contain drop-shadow-[0_14px_28px_rgba(0,0,0,.12)]"
                     />
                   </div>
-                  <div className="border-t border-line px-8 pb-8.5 pt-7.5">
-                    <div className="flex items-center gap-2.5">
-                      <img
-                        src={p.logo}
-                        alt=""
-                        aria-hidden
-                        className="h-7 w-7 rounded-full border border-line object-contain p-0.5"
-                      />
-                      <span className="text-[12.5px] font-bold uppercase tracking-[.08em] text-brand-500">{p.category}</span>
+                  <div className="border-t border-line px-6 pb-6 pt-5">
+                    <div className="flex items-center gap-2">
+                      {p.logo ? (
+                        <img
+                          src={p.logo}
+                          alt=""
+                          aria-hidden
+                          className="h-6 w-6 rounded-full border border-line object-contain p-0.5"
+                        />
+                      ) : (
+                        <span className="flex h-6 w-6 items-center justify-center rounded-full border border-line bg-brand-50">
+                          <Icon name={p.icon ?? 'briefcase'} size={12} color="#2563EB" />
+                        </span>
+                      )}
+                      <span className="text-[11.5px] font-bold uppercase tracking-[.08em] text-brand-500">{p.category}</span>
                     </div>
-                    <h3 className="mt-3 text-[22px] sm:text-[24px] font-semibold tracking-[-.025em]">{p.title}</h3>
-                    <p className="mt-2 text-[16.5px] leading-[1.6] text-muted">{p.body}</p>
-                    <div className="mt-5 flex flex-wrap gap-2">
+                    <h3 className="mt-2.5 text-[18px] font-semibold tracking-[-.02em]">{p.title}</h3>
+                    <p className="mt-1.5 text-[14.5px] leading-[1.55] text-muted">{p.body}</p>
+                    <div className="mt-4 flex flex-wrap gap-1.5">
                       {p.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-full border border-line bg-surface px-2.5 py-1 text-[12.5px] font-semibold text-muted"
+                          className="rounded-full border border-line bg-surface px-2 py-0.5 text-[11.5px] font-semibold text-muted"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
-                    <motion.a
-                      href={p.href}
-                      target={p.href.startsWith('http') ? '_blank' : undefined}
-                      rel={p.href.startsWith('http') ? 'noreferrer' : undefined}
-                      whileHover={{ x: 4 }}
-                      className="mt-5.5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-brand-500"
-                    >
-                      View Details →
-                    </motion.a>
                   </div>
                 </div>
               </TiltCard>

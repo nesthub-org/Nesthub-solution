@@ -1,15 +1,10 @@
 import { motion } from 'framer-motion'
 import { Reveal } from '../Reveal'
+import { TiltCard } from '../TiltCard'
 import { Icon } from '../Icon'
-import { PhoneMockup } from '../PhoneMockup'
-import { qrFeatures } from '../../data/content'
+import { qrFeatures, productMockup } from '../../data/content'
 
-const menuItems = [
-  { name: 'Margherita Pizza', price: '₹280', qty: 1 },
-  { name: 'Caesar Salad', price: '₹190', qty: 0 },
-  { name: 'Mango Lassi', price: '₹120', qty: 2 },
-  { name: 'Garlic Bread', price: '₹140', qty: 0 },
-]
+const easeOut = [0.16, 1, 0.3, 1] as const
 
 export function Product() {
   return (
@@ -17,53 +12,23 @@ export function Product() {
       <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-[.9fr_1.1fr] lg:gap-20">
         <div className="relative flex justify-center">
           <div className="absolute inset-x-0 bottom-10 h-[300px] bg-[radial-gradient(320px_200px_at_50%_50%,rgba(37,99,235,.10),rgba(37,99,235,0)_70%)]" />
-          <PhoneMockup className="relative">
-            <div className="px-5 pb-6.5 pt-2">
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="text-[11px] font-semibold tracking-[.05em] text-brand-500">TABLE 4 · SCAN &amp; ORDER</div>
-                  <div className="mt-1 text-[20px] font-bold tracking-[-.025em]">Today's Menu</div>
-                </div>
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-surface">
-                  <Icon name="qr" size={16} color="#2563EB" />
-                </span>
-              </div>
-              <div className="mt-4 flex gap-1.5">
-                {['All', 'Mains', 'Drinks', 'Desserts'].map((c, i) => (
-                  <span
-                    key={c}
-                    className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${i === 0 ? 'bg-brand-500 text-white' : 'bg-surface text-muted'}`}
-                  >
-                    {c}
-                  </span>
-                ))}
-              </div>
-              <div className="mt-4 grid gap-2.5">
-                {menuItems.map((item) => (
-                  <div key={item.name} className="flex items-center justify-between rounded-xl border border-line px-3.5 py-3">
-                    <span>
-                      <span className="block text-[14px] font-semibold">{item.name}</span>
-                      <span className="block text-[12.5px] text-muted">{item.price}</span>
-                    </span>
-                    <span
-                      className={`flex h-6.5 w-6.5 items-center justify-center rounded-full text-[12px] font-bold ${
-                        item.qty > 0 ? 'bg-brand-500 text-white' : 'border border-line text-muted'
-                      }`}
-                    >
-                      {item.qty > 0 ? item.qty : '+'}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-4 flex items-center justify-between rounded-xl bg-brand-50 px-4 py-3.5">
-                <span>
-                  <span className="block text-[11px] font-semibold text-brand-500">3 items · ₹590</span>
-                  <span className="block text-[14px] font-bold">Place Order</span>
-                </span>
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-500 text-white">→</span>
-              </div>
-            </div>
-          </PhoneMockup>
+          <div className="relative" style={{ perspective: 1600 }}>
+            <motion.div
+              initial={{ rotateY: -115, opacity: 0 }}
+              whileInView={{ rotateY: 0, opacity: 1 }}
+              viewport={{ once: true, margin: '-12% 0px -12% 0px' }}
+              transition={{ duration: 1.1, ease: easeOut }}
+              style={{ transformStyle: 'preserve-3d' }}
+            >
+              <TiltCard max={12} lift={0} className="w-[240px] sm:w-[260px]">
+                <img
+                  src={productMockup}
+                  alt="ScanIt QR ordering app — live menu on a phone"
+                  className="animate-floaty-slow w-full drop-shadow-[0_30px_90px_rgba(0,0,0,.18)]"
+                />
+              </TiltCard>
+            </motion.div>
+          </div>
         </div>
 
         <div>

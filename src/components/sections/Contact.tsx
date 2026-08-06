@@ -10,13 +10,58 @@ const infoRows = [
   { label: 'OFFICE', value: brand.location },
 ]
 
+// StaticForms (staticforms.xyz) — delivers submissions from this form to our inbox.
+const STATICFORM_API_KEY = 'sf_96hcfm4egdje3k77kii2j9ma'
+
 export function Contact() {
   const [need, setNeed] = useState(needs[0])
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [budget, setBudget] = useState('')
+  const [message, setMessage] = useState('')
+  const [honeypot, setHoneypot] = useState('')
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setSubmitted(true)
+    setError(null)
+    setSending(true)
+
+    try {
+      const res = await fetch('https://api.staticforms.xyz/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          accessKey: STATICFORM_API_KEY,
+          subject: `New project enquiry — ${need}`,
+          replyTo: email,
+          honeypot,
+          name,
+          email,
+          phone,
+          budget,
+          need,
+          message,
+        }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok || data.success === false) {
+        throw new Error(data.message || 'Something went wrong sending your message.')
+      }
+      setSubmitted(true)
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : `Something went wrong. Please email us directly at ${brand.email}.`,
+      )
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -72,9 +117,36 @@ export function Contact() {
                   exit={{ opacity: 0 }}
                   onSubmit={handleSubmit}
                 >
+                  {/* Honeypot spam trap — kept off-screen and off the tab order; real users never fill it. */}
+                  <input
+                    type="text"
+                    name="honeypot"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+                  />
+
                   <div className="grid grid-cols-1 gap-4.5 sm:grid-cols-2">
-                    <TextField label="Your name" placeholder="Priya Sharma" fullWidth required />
-                    <TextField label="Your email" type="email" placeholder="priya@company.com" fullWidth required />
+                    <TextField
+                      label="Your name"
+                      placeholder="Priya Sharma"
+                      fullWidth
+                      required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                    <TextField
+                      label="Your email"
+                      type="email"
+                      placeholder="priya@company.com"
+                      fullWidth
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
                   </div>
 
                   <div className="mt-5">
@@ -99,8 +171,23 @@ export function Contact() {
                   </div>
 
                   <div className="grid grid-cols-1 gap-4.5 sm:grid-cols-2">
-                    <TextField label="Phone number" type="tel" placeholder="+91 98765 43210" fullWidth sx={{ mt: 2.5 }} />
-                    <TextField label="Budget range" placeholder="₹50,000 – ₹5,00,000" fullWidth sx={{ mt: 2.5 }} />
+                    <TextField
+                      label="Phone number"
+                      type="tel"
+                      placeholder="+91 98765 43210"
+                      fullWidth
+                      sx={{ mt: 2.5 }}
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                    <TextField
+                      label="Budget range"
+                      placeholder="₹50,000 – ₹5,00,000"
+                      fullWidth
+                      sx={{ mt: 2.5 }}
+                      value={budget}
+                      onChange={(e) => setBudget(e.target.value)}
+                    />
                   </div>
 
                   <div className="mt-5">
@@ -110,8 +197,16 @@ export function Contact() {
                       fullWidth
                       multiline
                       minRows={4}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
                     />
                   </div>
+
+                  {error && (
+                    <p className="mt-3.5 text-[14px] font-medium text-red-600">
+                      {error}
+                    </p>
+                  )}
 
                   <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
                     <Button
@@ -120,9 +215,10 @@ export function Contact() {
                       color="primary"
                       fullWidth
                       size="large"
+                      disabled={sending}
                       sx={{ mt: 3, height: 56, fontSize: 16 }}
                     >
-                      Send Message
+                      {sending ? 'Sending…' : 'Send Message'}
                     </Button>
                   </motion.div>
                 </motion.form>

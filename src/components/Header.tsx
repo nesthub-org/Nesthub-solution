@@ -15,7 +15,7 @@ export function Header() {
             <LogoFallback size={40} />
           </motion.span>
           <span className="text-[16.5px] font-bold tracking-[-.02em]">
-            NestHub<span className="text-muted font-medium"> Solution</span>
+            NestHub<span className="font-bold" style={{color:"#2563eb "}}> Solution</span>
           </span>
         </motion.a>
 
@@ -41,9 +41,6 @@ export function Header() {
         </div>
 
         <div className="hidden md:flex items-center gap-2">
-          <a href="/#contact" className="h-11 px-3.5 flex items-center text-[15px] font-medium text-ink">
-            Contact
-          </a>
           <motion.a
             href="/#contact"
             whileHover={{ y: -1, backgroundColor: '#1D4ED8' }}

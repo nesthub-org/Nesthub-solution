@@ -2,8 +2,7 @@ import { lazy, Suspense, useRef } from 'react'
 import { motion, useScroll, useTransform, type Variants } from 'framer-motion'
 import { Reveal } from '../Reveal'
 import { HeroBackground } from '../HeroBackground'
-import { AnimatedCounter } from '../AnimatedCounter'
-import { heroBadge, heroPanel, trustedBy } from '../../data/content'
+import { heroBadge } from '../../data/content'
 
 // three.js/r3f/drei is the heaviest dependency in the bundle — load it off
 // the critical path so it never blocks first paint or input responsiveness.
@@ -80,8 +79,8 @@ export function Hero() {
 
         <Reveal delay={0.1}>
           <p className="text-pretty mx-auto mt-6 max-w-[620px] text-[18px] font-medium leading-[1.55] text-white/65 sm:text-[20px]">
-            Jaipur&apos;s AI-native web development studio. We engineer intelligent websites, AI platforms &amp;
-            automation-driven e-commerce for businesses across Jaipur, Delhi, Mumbai &amp; all of India.
+            India's AI-native web development studio. We engineer intelligent websites, AI platforms &amp;
+            automation-driven e-commerce for businesses across India.
           </p>
         </Reveal>
 
@@ -107,7 +106,7 @@ export function Hero() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.2}>
+        {/* <Reveal delay={0.2}>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-x-5 gap-y-2.5 rounded-2xl border border-white/10 bg-white/5 px-5 py-3.5 backdrop-blur-md sm:px-6">
             <span className="flex items-center gap-1.5 text-[11.5px] font-bold tracking-[.06em] text-white/70">
               <span className="block h-1.5 w-1.5 rounded-full bg-success" />
@@ -126,9 +125,9 @@ export function Hero() {
               ))}
             </span>
           </div>
-        </Reveal>
+        </Reveal> */}
 
-        <Reveal delay={0.25}>
+        {/* <Reveal delay={0.25}>
           <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:gap-5">
             <span className="shrink-0 whitespace-nowrap text-[13px] font-semibold uppercase tracking-[.09em] text-white/45">
               Trusted by
@@ -144,7 +143,7 @@ export function Hero() {
               ))}
             </div>
           </div>
-        </Reveal>
+        </Reveal> */}
       </motion.div>
 
       <motion.a

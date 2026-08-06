@@ -1,6 +1,7 @@
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { Hero } from '../components/sections/Hero'
 import { TrustBar } from '../components/sections/TrustBar'
+import { Partners } from '../components/sections/Partners'
 import { Services } from '../components/sections/Services'
 import { Work } from '../components/sections/Work'
 import { Product } from '../components/sections/Product'
@@ -21,6 +22,7 @@ export function Home() {
     <main id="top" className="relative z-[1]">
       <Hero />
       <TrustBar />
+      <Partners />
       <Services />
       <Work />
       <Product />

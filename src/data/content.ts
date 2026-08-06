@@ -4,6 +4,8 @@ import logoMoneyView from '../assets/logo-moneyview.png'
 import projectHoney from '../assets/project-honey.png'
 import projectHealth from '../assets/project-health.png'
 import projectTrading from '../assets/project-trading.png'
+import projectAgencyOS from '../assets/agencyos.png'
+import scanitMockup from '../assets/scanit-mockup.png'
 
 export type IconDef = string[]
 
@@ -22,7 +24,11 @@ export const navLinks = [
   { href: '/#product', label: 'Product' },
   { href: '/#process', label: 'Process' },
   { href: '/#about', label: 'About' },
+  { href: '/#contact', label: 'Contact' },
+  { href: '/careers', label: 'Careers' },
 ]
+
+export const productMockup = scanitMockup
 
 export const trustedBy = [
   { name: 'Vedyara Organic', logo: logoVedyara },
@@ -31,13 +37,13 @@ export const trustedBy = [
 ]
 
 export const trustStats = [
-  { number: 5, suffix: '+', label: 'Projects delivered' },
+  { number: 10, suffix: '+', label: 'Projects delivered' },
   { number: 100, suffix: '%', label: 'Client satisfaction' },
   { number: 2, suffix: '+', label: 'Years experience' },
   { number: 98, suffix: '/100', label: 'Lighthouse score' },
 ]
 
-export const heroBadge = 'AI-POWERED DEVELOPMENT · JAIPUR, INDIA'
+export const heroBadge = 'AI-POWERED DEVELOPMENT'
 
 export const heroPanel = {
   aiEnabled: 'AI ENABLED',
@@ -63,6 +69,7 @@ export const icons: Record<string, IconDef> = {
     'M17 7l2.1-2.1',
   ],
   responsive: ['M4 4h16v11H4z', 'M9 20h6', 'M12 17v3', 'M15 7h3v6h-3z'],
+  mobile: ['M8 2.5h8a1.5 1.5 0 0 1 1.5 1.5v16a1.5 1.5 0 0 1-1.5 1.5H8A1.5 1.5 0 0 1 6.5 20V4A1.5 1.5 0 0 1 8 2.5Z', 'M11 19h2'],
   speed: ['M13 3 4 14h7l-1 7 9-11h-7z'],
   seo: ['M4 19V9', 'M10 19V5', 'M16 19v-7', 'M22 19H2'],
   care: ['M12 3 4 6.5v5c0 4.6 3.2 8.4 8 9.5 4.8-1.1 8-4.9 8-9.5v-5z', 'M9 12l2 2 4-4'],
@@ -107,10 +114,10 @@ export const services: Service[] = [
     icon: 'design',
   },
   {
-    title: 'Responsive Design',
-    body: 'Pixel-perfect designs that look stunning on every device.',
-    tags: ['Mobile-First', 'Cross-Browser', 'Adaptive Layouts'],
-    icon: 'responsive',
+    title: 'Mobile App Development',
+    body: 'Native and cross-platform apps built for Android and iOS that feel fast and native.',
+    tags: ['Android', 'iOS', 'React Native'],
+    icon: 'mobile',
   },
   {
     title: 'Performance Optimization',
@@ -133,10 +140,20 @@ export interface Project {
   tags: string[]
   href: string
   image: string
-  logo: string
+  logo?: string
+  icon?: string
 }
 
 export const projects: Project[] = [
+  {
+    title: 'Agency OS',
+    body: 'An in-house agency management suite — lead pipeline, client & project tracking, invoicing and revenue analytics in one dashboard.',
+    category: 'SaaS Dashboard',
+    tags: ['Dashboard', 'CRM', 'Analytics', 'SaaS'],
+    href: 'https://agencyos.nestsphere.in',
+    image: projectAgencyOS,
+    icon: 'chart',
+  },
   {
     title: 'Vedyara Organic',
     body: 'A warm, inviting e-commerce platform for an artisanal honey brand with product catalog, cart system, secure checkout, and a blog.',
@@ -270,7 +287,7 @@ export const footerLinks = {
 }
 
 export interface Job {
-  id: 'bde' | 'sde-intern'
+  id: 'react-native' | 'bde' | 'mern-intern'
   title: string
   type: string
   location: string
@@ -282,13 +299,36 @@ export interface Job {
 
 export const jobs: Job[] = [
   {
+    id: 'react-native',
+    title: 'React Native Developer',
+    type: 'Full-time',
+    location: 'Jaipur, Rajasthan (On-site / Hybrid)',
+    experience: '1–3 years experience',
+    description:
+      'Build and ship native mobile apps for Android and iOS using React Native — from architecture through to App Store and Play Store release.',
+    responsibilities: [
+      'Build and maintain cross-platform mobile apps in React Native for Android and iOS',
+      'Integrate REST/GraphQL APIs, push notifications and third-party SDKs',
+      'Optimize app performance, memory usage and load times across devices',
+      'Handle App Store and Google Play releases, versioning and store listings',
+      'Collaborate with designers and backend engineers to ship pixel-accurate, production-ready features',
+    ],
+    requirements: [
+      'Solid hands-on experience with React Native, JavaScript and TypeScript',
+      'Familiarity with native build tooling (Xcode, Android Studio)',
+      'Experience integrating REST APIs and third-party libraries',
+      'Understanding of mobile UI/UX and platform guidelines (HIG / Material)',
+      'Published apps on the App Store or Play Store are a strong plus',
+    ],
+  },
+  {
     id: 'bde',
     title: 'Business Development Executive',
     type: 'Full-time',
     location: 'Jaipur, Rajasthan (On-site / Hybrid)',
     experience: '0–2 years experience',
     description:
-      'Drive new client relationships for our web development and AI integration services — from first outreach through to a signed project brief.',
+      'Drive new client relationships for our web, mobile app and AI integration services — from first outreach through to a signed project brief.',
     responsibilities: [
       'Identify and reach out to prospective clients across India',
       'Run discovery calls and qualify project requirements',
@@ -298,26 +338,27 @@ export const jobs: Job[] = [
     requirements: [
       'Strong written and verbal communication in English and Hindi',
       'Comfortable on client calls and following up independently',
-      'Interest in web development, AI and digital products',
+      'Interest in web development, mobile apps, AI and digital products',
       'Prior sales or business development experience is a plus, not required',
     ],
   },
   {
-    id: 'sde-intern',
-    title: 'Software Development Engineer Intern',
+    id: 'mern-intern',
+    title: 'MERN Stack Intern',
     type: 'Internship · 3–6 months',
     location: 'Remote or Jaipur',
-    experience: 'React, TypeScript, Git',
+    experience: 'MongoDB, Express, React, Node.js',
     description:
-      'Work directly with our engineering team on real client projects — production React/TypeScript code, not busywork.',
+      'Work directly with our engineering team on real client projects — production MERN-stack code, not busywork.',
     responsibilities: [
       'Build and ship features on live client projects under senior review',
-      'Work with React, TypeScript, Node.js and Tailwind CSS',
+      'Work across the stack with MongoDB, Express, React and Node.js',
+      'Write clean, tested API endpoints and wire them up to the frontend',
       'Participate in code review and pull request workflows',
-      'Pair with designers to implement Figma specs pixel-accurately',
     ],
     requirements: [
-      'Working knowledge of React, TypeScript and Git',
+      'Working knowledge of MongoDB, Express, React and Node.js',
+      'Comfortable with Git and collaborative workflows',
       'A GitHub profile or portfolio showing prior projects',
       'Available for 3–6 months, remote or Jaipur-based',
       'Currently studying or recently graduated in CS or a related field',

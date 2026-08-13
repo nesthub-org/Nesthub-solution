@@ -97,6 +97,8 @@ export interface Service {
   tags: string[]
   icon: string
   accent: ServiceAccent
+  /** Small category label shown above the title in the service card. */
+  badge: string
 }
 
 export const services: Service[] = [
@@ -106,6 +108,7 @@ export const services: Service[] = [
     tags: ['AI Chatbots', 'Smart Search', 'Recommendations', 'Automation'],
     icon: 'ai',
     accent: 'violet',
+    badge: 'Artificial Intelligence',
   },
   {
     title: 'Website Development',
@@ -113,6 +116,7 @@ export const services: Service[] = [
     tags: ['React & Node.js', 'API Integration', 'CMS Development'],
     icon: 'dev',
     accent: 'sky',
+    badge: 'Web Engineering',
   },
   {
     title: 'UI/UX Design',
@@ -120,6 +124,7 @@ export const services: Service[] = [
     tags: ['Wireframing', 'Prototyping', 'User Testing'],
     icon: 'design',
     accent: 'orange',
+    badge: 'Product Design',
   },
   {
     title: 'Mobile App Development',
@@ -127,6 +132,7 @@ export const services: Service[] = [
     tags: ['Android', 'iOS', 'React Native'],
     icon: 'mobile',
     accent: 'emerald',
+    badge: 'Mobile Engineering',
   },
   {
     title: 'Performance Optimization',
@@ -134,6 +140,7 @@ export const services: Service[] = [
     tags: ['Core Web Vitals', 'Caching Strategy', 'Code Splitting'],
     icon: 'speed',
     accent: 'amber',
+    badge: 'Web Performance',
   },
   {
     title: 'SEO & Digital Marketing',
@@ -141,6 +148,7 @@ export const services: Service[] = [
     tags: ['Technical SEO', 'Content Strategy', 'Analytics Setup'],
     icon: 'seo',
     accent: 'teal',
+    badge: 'Growth & Marketing',
   },
 ]
 
@@ -153,6 +161,8 @@ export interface Project {
   image: string
   logo?: string
   icon?: string
+  /** Reuses the Services accent palette to give each case study its own color identity. */
+  accent: ServiceAccent
 }
 
 export const projects: Project[] = [
@@ -164,6 +174,7 @@ export const projects: Project[] = [
     href: 'https://agencyos.nestsphere.in',
     image: projectAgencyOS,
     icon: 'chart',
+    accent: 'sky',
   },
   {
     title: 'Vedyara Organic',
@@ -173,6 +184,7 @@ export const projects: Project[] = [
     href: 'https://vedyara.in',
     image: projectHoney,
     logo: logoVedyara,
+    accent: 'amber',
   },
   {
     title: 'Fitlife Sutra',
@@ -182,6 +194,7 @@ export const projects: Project[] = [
     href: 'https://courageous-pika-a9ee96.netlify.app',
     image: projectHealth,
     logo: logoFitlifeSutra,
+    accent: 'emerald',
   },
   {
     title: 'MoneyView',
@@ -191,6 +204,7 @@ export const projects: Project[] = [
     href: 'https://d-freelance-work-moneyview-v2.vercel.app',
     image: projectTrading,
     logo: logoMoneyView,
+    accent: 'violet',
   },
 ]
 

@@ -1,8 +1,39 @@
-import { useState, type FormEvent } from 'react'
+import { useState, type FormEvent, type InputHTMLAttributes, type TextareaHTMLAttributes } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { TextField, Button } from '@mui/material'
 import { Reveal } from '../Reveal'
 import { brand, needs } from '../../data/content'
+
+// Same visual language MUI's outlined TextField gave us (14px radius, hairline
+// border, brand-blue focus ring) — reproduced in plain Tailwind so the form no
+// longer needs to pull in MUI + Emotion just for two field types.
+const fieldClasses =
+  'h-14 w-full rounded-[14px] border border-line bg-white px-4 text-[16px] text-ink placeholder:text-muted/70 transition-shadow outline-none hover:border-[#D8D8D8] focus:border-brand-500 focus:shadow-[0_0_0_4px_rgba(37,99,235,.10)]'
+
+function Field({ label, id, ...props }: { label: string; id: string } & InputHTMLAttributes<HTMLInputElement>) {
+  return (
+    <div>
+      <label htmlFor={id} className="mb-1.5 block text-[14px] font-semibold text-ink">
+        {label}
+      </label>
+      <input id={id} className={fieldClasses} {...props} />
+    </div>
+  )
+}
+
+function TextAreaField({
+  label,
+  id,
+  ...props
+}: { label: string; id: string } & TextareaHTMLAttributes<HTMLTextAreaElement>) {
+  return (
+    <div>
+      <label htmlFor={id} className="mb-1.5 block text-[14px] font-semibold text-ink">
+        {label}
+      </label>
+      <textarea id={id} className={`${fieldClasses} h-auto min-h-[110px] resize-y py-3.5`} {...props} />
+    </div>
+  )
+}
 
 const infoRows = [
   { label: 'EMAIL', value: brand.email },
@@ -106,7 +137,7 @@ export function Contact() {
                   </motion.span>
                   <h3 className="mt-6 text-[22px] font-semibold">Message received.</h3>
                   <p className="mt-2 max-w-[320px] text-[16px] leading-[1.6] text-muted">
-                    Our team will get back to you from {brand.email} shortly.
+                    {`Our team will get back to you from ${brand.email} shortly.`}
                   </p>
                 </motion.div>
               ) : (
@@ -130,19 +161,19 @@ export function Contact() {
                   />
 
                   <div className="grid grid-cols-1 gap-4.5 sm:grid-cols-2">
-                    <TextField
+                    <Field
+                      id="contact-name"
                       label="Your name"
                       placeholder="Priya Sharma"
-                      fullWidth
                       required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
-                    <TextField
+                    <Field
+                      id="contact-email"
                       label="Your email"
                       type="email"
                       placeholder="priya@company.com"
-                      fullWidth
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -170,33 +201,29 @@ export function Contact() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 gap-4.5 sm:grid-cols-2">
-                    <TextField
+                  <div className="mt-5 grid grid-cols-1 gap-4.5 sm:grid-cols-2">
+                    <Field
+                      id="contact-phone"
                       label="Phone number"
                       type="tel"
                       placeholder="+91 98765 43210"
-                      fullWidth
-                      sx={{ mt: 2.5 }}
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                     />
-                    <TextField
+                    <Field
+                      id="contact-budget"
                       label="Budget range"
                       placeholder="₹50,000 – ₹5,00,000"
-                      fullWidth
-                      sx={{ mt: 2.5 }}
                       value={budget}
                       onChange={(e) => setBudget(e.target.value)}
                     />
                   </div>
 
                   <div className="mt-5">
-                    <TextField
+                    <TextAreaField
+                      id="contact-message"
                       label="Project details"
                       placeholder="A few sentences about the goal, timeline and what success looks like."
-                      fullWidth
-                      multiline
-                      minRows={4}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                     />
@@ -208,19 +235,15 @@ export function Contact() {
                     </p>
                   )}
 
-                  <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-                    <Button
-                      type="submit"
-                      variant="contained"
-                      color="primary"
-                      fullWidth
-                      size="large"
-                      disabled={sending}
-                      sx={{ mt: 3, height: 56, fontSize: 16 }}
-                    >
-                      {sending ? 'Sending…' : 'Send Message'}
-                    </Button>
-                  </motion.div>
+                  <motion.button
+                    type="submit"
+                    disabled={sending}
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="mt-6 flex h-14 w-full items-center justify-center rounded-2xl bg-brand-500 text-[16px] font-semibold text-white shadow-[0_8px_28px_rgba(37,99,235,.24)] transition-shadow hover:shadow-[0_8px_28px_rgba(37,99,235,.34)] disabled:cursor-not-allowed disabled:opacity-70"
+                  >
+                    {sending ? 'Sending…' : 'Send Message'}
+                  </motion.button>
                 </motion.form>
               )}
             </AnimatePresence>

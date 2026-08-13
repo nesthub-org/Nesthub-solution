@@ -79,7 +79,7 @@ export function Footer() {
       </div>
 
       <div className="mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-4 border-t border-line px-6 py-6">
-        <span className="text-[14.5px] text-muted">© 2026 {brand.name}. All rights reserved.</span>
+        <span className="text-[14.5px] text-muted">{`© 2026 ${brand.name}. All rights reserved.`}</span>
         <span className="flex gap-6">
           <a href="/#top" className="text-[14.5px] text-muted hover:text-ink transition-colors">
             Privacy

@@ -82,7 +82,7 @@ function ProjectSection({ project, index }: { project: Project; index: number })
 
           <div className={reverse ? 'lg:order-1' : 'lg:order-2'}>
             <span aria-hidden className="text-[13px] font-bold tracking-[.05em] text-line">
-              {String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
+              {`${String(index + 1).padStart(2, '0')} / ${String(projects.length).padStart(2, '0')}`}
             </span>
 
             <div className="mt-3 flex items-center gap-2">

@@ -15,7 +15,7 @@ export function Header() {
             <LogoFallback size={40} />
           </motion.span>
           <span className="text-[16.5px] font-bold tracking-[-.02em]">
-            NestHub<span className="font-bold" style={{color:"#2563eb "}}> Solution</span>
+            NestHub<span className="font-bold" style={{ color: '#2563eb' }}> Solution</span>
           </span>
         </motion.a>
 

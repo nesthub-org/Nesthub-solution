@@ -87,7 +87,7 @@ export function Testimonials() {
                   ))}
                 </div>
                 <p className="text-pretty mt-5.5 text-[19px] sm:text-[22px] font-medium leading-[1.5] tracking-[-.015em]">
-                  “{t.quote}”
+                  {`“${t.quote}”`}
                 </p>
                 <div className="mt-8 flex items-center gap-3.5">
                   <motion.span
@@ -99,9 +99,7 @@ export function Testimonials() {
                   </motion.span>
                   <span className="flex-1">
                     <span className="block text-[16px] font-semibold">{t.name}</span>
-                    <span className="block text-[15px] text-muted">
-                      {t.role} · {t.company}
-                    </span>
+                    <span className="block text-[15px] text-muted">{`${t.role} · ${t.company}`}</span>
                   </span>
                 </div>
               </div>

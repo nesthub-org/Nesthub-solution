@@ -2,6 +2,7 @@ import { lazy, Suspense, useRef } from 'react'
 import { motion, useScroll, useTransform, type Variants } from 'framer-motion'
 import { Reveal } from '../Reveal'
 import { HeroBackground } from '../HeroBackground'
+import { useMountAfterHydration } from '../../hooks/usePrerendering'
 import { heroBadge } from '../../data/content'
 
 // three.js/r3f/drei is the heaviest dependency in the bundle — load it off
@@ -23,15 +24,20 @@ export function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] })
   const heroFade = useTransform(scrollYProgress, [0, 1], [1, 0.35])
+  // Mounted post-hydration only — see src/hooks/usePrerendering.ts for why a
+  // lazy-loaded Suspense child can't be part of the hydrated tree itself.
+  const showHeroScene = useMountAfterHydration()
 
   return (
     <section ref={sectionRef} className="relative flex min-h-[100svh] flex-col overflow-hidden bg-[#05060A]">
       <HeroBackground />
 
       <div className="absolute inset-0 z-[1]">
-        <Suspense fallback={null}>
-          <HeroScene scrollProgress={scrollYProgress} />
-        </Suspense>
+        {showHeroScene && (
+          <Suspense fallback={null}>
+            <HeroScene scrollProgress={scrollYProgress} />
+          </Suspense>
+        )}
       </div>
 
       <div

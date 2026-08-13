@@ -22,6 +22,14 @@ if (!base) throw new Error('prerender: could not resolve preview server URL')
 
 const browser = await chromium.launch()
 const page = await browser.newPage()
+// Tell the app it's being captured for a static snapshot — components that
+// lazy-load behind <Suspense> (see src/hooks/usePrerendering.ts) read this
+// to skip rendering, so the snapshot doesn't bake in "resolved" content a
+// real visitor's first paint can't possibly match yet. Runs before any page
+// script, so it's set for every route below.
+await page.addInitScript(() => {
+  window.__PRERENDER__ = true
+})
 
 try {
   for (const route of routes) {

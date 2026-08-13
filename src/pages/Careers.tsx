@@ -96,7 +96,7 @@ export function Careers() {
                     Apply for this role
                   </motion.a>
                   <p className="mt-3 text-center text-[13.5px] text-muted">
-                    Send your resume to{' '}
+                    {'Send your resume to '}
                     <a href={`mailto:${brand.email}`} className="font-semibold text-brand-500">
                       {brand.email}
                     </a>
@@ -116,11 +116,11 @@ export function Careers() {
             </span>
             <h2 className="mt-5 text-[24px] sm:text-[28px] font-bold leading-[1.15] tracking-[-.03em]">How to apply</h2>
             <p className="mt-3 text-[16px] leading-[1.65] text-muted">
-              Found a role above that fits? Email your resume to{' '}
+              {'Found a role above that fits? Email your resume to '}
               <a href={`mailto:${brand.email}`} className="font-semibold text-brand-500">
                 {brand.email}
-              </a>{' '}
-              with the role title in the subject line. We reply to every application within 2 business days.
+              </a>
+              {' with the role title in the subject line. We reply to every application within 2 business days.'}
             </p>
             <motion.a
               href={`mailto:${brand.email}?subject=${encodeURIComponent('Application: ')}`}
@@ -128,7 +128,7 @@ export function Careers() {
               whileTap={{ scale: 0.97 }}
               className="mt-6 inline-flex h-13 items-center justify-center rounded-2xl bg-brand-500 px-8 text-[15.5px] font-semibold text-white shadow-[0_8px_28px_rgba(37,99,235,.24)]"
             >
-              Email {brand.email}
+              {`Email ${brand.email}`}
             </motion.a>
           </div>
         </Reveal>

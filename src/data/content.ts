@@ -1,6 +1,6 @@
 import logoVedyara from '../assets/logo-vedyara.png'
 import logoFitlifeSutra from '../assets/logo-fitlifesutra.png'
-import logoMoneyView from '../assets/logo-moneyview.png'
+import logoTheFineGrow from '../assets/logo-thefinegrow.png'
 import logoIllusionmed from '../assets/illusionmed-logo.png'
 import projectHoney from '../assets/project-honey.png'
 import projectHealth from '../assets/project-health.png'
@@ -36,7 +36,7 @@ export const productMockup = scanitMockup
 export const trustedBy = [
   { name: 'Vedyara Organic', logo: logoVedyara },
   { name: 'Fitlife Sutra', logo: logoFitlifeSutra },
-  { name: 'MoneyView', logo: logoMoneyView },
+  { name: 'TheFineGrow', logo: logoTheFineGrow },
   { name: 'IllusionMed', logo: logoIllusionmed },
 ]
 
@@ -223,8 +223,8 @@ export const projects: Project[] = [
     accent: 'emerald',
   },
   {
-    slug: 'moneyview',
-    title: 'MoneyView',
+    slug: 'thefinegrow',
+    title: 'TheFineGrow',
     body: 'An educational trading platform combining real-time market data visualization with structured learning modules, interactive charts, and community discussions.',
     category: 'Trading Platform',
     tags: ['Real-time Data', 'Charts', 'LMS', 'WebSockets'],
@@ -235,7 +235,7 @@ export const projects: Project[] = [
     ],
     href: 'https://thefinegrow.com',
     image: projectTrading,
-    logo: logoMoneyView,
+    logo: logoTheFineGrow,
     accent: 'violet',
   },
   {
@@ -290,7 +290,7 @@ export const testimonials: Testimonial[] = [
     quote: 'Building a trading education platform is complex, but the NestHub team handled it with precision. Real-time charts, course modules, community features — everything works flawlessly.',
     name: 'Mr. Amit Mishra',
     initials: 'AM',
-    role: 'CEO, MoneyView.in',
+    role: 'CEO, TheFineGrow',
     company: 'Trading Platform',
   },
   {

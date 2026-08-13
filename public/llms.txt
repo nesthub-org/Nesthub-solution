@@ -74,8 +74,8 @@ NestHub Solution is a full-service web development agency offering:
 - **Location:** India
 - **Description:** Digital platform for a Herbalife nutrition business. Program showcase, community engagement, responsive design, brand-aligned UI.
 
-### MoneyView
-- **URL:** https://moneyview-app-v1.vercel.app
+### TheFineGrow
+- **URL:** https://thefinegrow.com
 - **Industry:** FinTech / Education
 - **Location:** India
 - **Description:** Educational trading platform with real-time market data, interactive charts (WebSocket), learning modules, and community discussions.
@@ -85,7 +85,7 @@ NestHub Solution is a full-service web development agency offering:
 **Yogendra Maurya, Founder — Vedyara Organic:**
 "Our honey brand needed an online presence that matched the quality of our product. NestHub delivered beyond expectations — the site is gorgeous and our online sales have tripled."
 
-**Amit Mishra, CEO — MoneyView.in:**
+**Amit Mishra, CEO — TheFineGrow:**
 "Building a trading education platform is complex, but the NestHub team handled it with precision. Real-time charts, course modules, community features — everything works flawlessly."
 
 **Mahtab Alam — Fitlifesutra:**

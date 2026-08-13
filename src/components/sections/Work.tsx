@@ -5,6 +5,9 @@ import { accentStyles, tones } from './Services/tones'
 import { getDomain } from '../../utils/url'
 import { projects } from '../../data/content'
 
+// The homepage teases a handful of projects; the full set lives on /case-studies.
+const featuredProjects = projects.slice(0, 4)
+
 export function Work() {
   return (
     <section id="work" className="relative mt-28 overflow-hidden border-y border-line bg-surface sm:mt-32">
@@ -47,7 +50,7 @@ export function Work() {
         </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {projects.map((p, i) => {
+          {featuredProjects.map((p, i) => {
             const a = accentStyles[p.accent]
             const t = tones[p.accent]
             const domain = getDomain(p.href)

@@ -32,7 +32,14 @@ export function Reveal({ children, delay = 0, y = 24, className, tilt = true }: 
       style={{ transformPerspective: 800 }}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: '-10% 0px -8% 0px' }}
+      // Fixed pixel margin, not percentage — percentage rootMargin resolves
+      // against the IntersectionObserver root's size, which on mobile Safari
+      // and Chrome keeps shifting as the address bar shows/hides and the
+      // visual viewport resizes. That made the trigger zone unstable: content
+      // would sometimes pop in already-revealed on load, or never fire at
+      // all. Pixel values are resolved once and stay correct regardless of
+      // device or viewport-height changes.
+      viewport={{ once: true, margin: '0px 0px -80px 0px', amount: 0.15 }}
       variants={variants}
     >
       {children}

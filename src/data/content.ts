@@ -4,8 +4,10 @@ import logoMoneyView from '../assets/logo-moneyview.png'
 import logoIllusionmed from '../assets/illusionmed-logo.png'
 import projectHoney from '../assets/project-honey.png'
 import projectHealth from '../assets/project-health.png'
+import projectHealth1 from '../assets/project-health1.png'
 import projectTrading from '../assets/project-trading.png'
 import projectAgencyOS from '../assets/agencyos.png'
+import projectIllusionmed from '../assets/illusionmed-img.png'
 import scanitMockup from '../assets/scanit-mockup.png'
 
 export type IconDef = string[]
@@ -153,12 +155,17 @@ export const services: Service[] = [
 ]
 
 export interface Project {
+  slug: string
   title: string
   body: string
   category: string
   tags: string[]
   href: string
   image: string
+  /** Extra screenshots shown in the case-study gallery, alongside `image`. */
+  gallery?: string[]
+  /** Short, tag-grounded capability bullets shown on the case-study detail page. */
+  highlights: string[]
   logo?: string
   icon?: string
   /** Reuses the Services accent palette to give each case study its own color identity. */
@@ -167,44 +174,85 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: 'agency-os',
     title: 'Agency OS',
     body: 'An in-house agency management suite — lead pipeline, client & project tracking, invoicing and revenue analytics in one dashboard.',
     category: 'SaaS Dashboard',
     tags: ['Dashboard', 'CRM', 'Analytics', 'SaaS'],
+    highlights: [
+      'Visual lead pipeline for tracking prospects from first contact to signed brief',
+      'Per-client and per-project tracking with task status and ownership',
+      'Invoicing built in, with revenue analytics rolled up on one dashboard',
+    ],
     href: 'https://agencyos.nestsphere.in',
     image: projectAgencyOS,
     icon: 'chart',
     accent: 'sky',
   },
   {
+    slug: 'vedyara-organic',
     title: 'Vedyara Organic',
     body: 'A warm, inviting e-commerce platform for an artisanal honey brand with product catalog, cart system, secure checkout, and a blog.',
     category: 'E-Commerce',
     tags: ['E-Commerce', 'Stripe', 'Product Catalog', 'Blog'],
+    highlights: [
+      'Full product catalog with a cart and secure Stripe checkout',
+      'Warm, brand-led visual design suited to an artisanal food product',
+      'Built-in blog for storytelling and content marketing',
+    ],
     href: 'https://vedyara.in',
     image: projectHoney,
     logo: logoVedyara,
     accent: 'amber',
   },
   {
+    slug: 'fitlife-sutra',
     title: 'Fitlife Sutra',
     body: 'A comprehensive digital platform for Vitality Management, showcasing their Herbalife nutrition programs and facilitating community engagement through an intuitive, modern interface.',
     category: 'Health & Wellness',
     tags: ['Health', 'Wellness', 'Responsive', 'UI/UX'],
-    href: 'https://courageous-pika-a9ee96.netlify.app',
+    highlights: [
+      'Herbalife nutrition programs presented with a clean, conversion-focused layout',
+      'Fully responsive across devices, from phone to desktop',
+      'Community engagement features woven into an intuitive, modern interface',
+    ],
+    href: 'https://fitlifesutra.in',
     image: projectHealth,
+    gallery: [projectHealth1],
     logo: logoFitlifeSutra,
     accent: 'emerald',
   },
   {
+    slug: 'moneyview',
     title: 'MoneyView',
     body: 'An educational trading platform combining real-time market data visualization with structured learning modules, interactive charts, and community discussions.',
     category: 'Trading Platform',
     tags: ['Real-time Data', 'Charts', 'LMS', 'WebSockets'],
-    href: 'https://d-freelance-work-moneyview-v2.vercel.app',
+    highlights: [
+      'Live market data streamed over WebSockets and visualized in interactive charts',
+      'Structured learning modules for teaching trading fundamentals',
+      'Community discussion space built alongside the learning content',
+    ],
+    href: 'https://thefinegrow.com',
     image: projectTrading,
     logo: logoMoneyView,
     accent: 'violet',
+  },
+  {
+    slug: 'illusionmed',
+    title: 'IllusionMed',
+    body: 'IllusionMed helps pharmaceutical companies communicate approved product information through high-impact brand strategy, visual aids, LBLs, and bespoke digital experiences.',
+    category: 'Pharma Brand & Digital Marketing',
+    tags: ['Brand Strategy', 'Visual Aids & LBLs', 'Digital Creatives', 'Web Development'],
+    highlights: [
+      'Brand strategy and positioning, from messaging maps to launch planning',
+      'Print-ready visual aids and LBLs designed for doctor-detailing',
+      'Regulatory-aware creative process built around medical and compliance review',
+    ],
+    href: 'https://illusionmed.nestsphere.in',
+    image: projectIllusionmed,
+    logo: logoIllusionmed,
+    accent: 'teal',
   },
 ]
 
@@ -309,7 +357,7 @@ export const team: TeamMember[] = [
   { name: 'Miss. Roli Nagar', initials: 'JN', role: 'Head of HR & BDE', img: '/team/juhi.jpg', imgPosition: '50% 25%' },
   { name: 'Mr. Yogendra Maurya', initials: 'YM', role: 'CFO', img: '/team/yogendra.jpg', imgPosition: '50% 30%' },
   { name: 'Mr. Naveen Soni', initials: 'NS', role: 'Full Stack Developer', img: '/team/naveen-img.jpeg', imgPosition: '50% 25%' },
-  
+
 ]
 
 export const footerLinks = {
@@ -317,6 +365,7 @@ export const footerLinks = {
     { href: '/#top', label: 'Home' },
     { href: '/#services', label: 'Services' },
     { href: '/#work', label: 'Portfolio' },
+    { href: '/case-studies', label: 'Case Studies' },
     { href: '/#about', label: 'About' },
     { href: '/#contact', label: 'Contact' },
     { href: '/careers', label: 'Careers' },

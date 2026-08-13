@@ -2,15 +2,8 @@ import { Reveal } from '../Reveal'
 import { TiltCard } from '../TiltCard'
 import { Icon } from '../Icon'
 import { accentStyles, tones } from './Services/tones'
+import { getDomain } from '../../utils/url'
 import { projects } from '../../data/content'
-
-function getDomain(href: string) {
-  try {
-    return new URL(href).hostname.replace(/^www\./, '')
-  } catch {
-    return href
-  }
-}
 
 export function Work() {
   return (
@@ -31,7 +24,7 @@ export function Work() {
               </h2>
             </div>
             <a
-              href="/#contact"
+              href="/case-studies"
               className="group flex h-13 items-center gap-2 rounded-2xl border border-line bg-white px-6 text-[16px] font-semibold text-ink transition-colors hover:border-ink"
             >
               All case studies

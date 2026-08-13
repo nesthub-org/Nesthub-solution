@@ -13,6 +13,7 @@ import path from 'node:path'
 const routes = [
   { path: '/', out: 'index.html' },
   { path: '/careers', out: 'careers/index.html' },
+  { path: '/case-studies', out: 'case-studies/index.html' },
 ]
 
 const server = await preview({ preview: { port: 4174, strictPort: true }, logLevel: 'warn' })

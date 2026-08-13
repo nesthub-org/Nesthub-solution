@@ -1,6 +1,7 @@
 import logoVedyara from '../assets/logo-vedyara.png'
 import logoFitlifeSutra from '../assets/logo-fitlifesutra.png'
 import logoMoneyView from '../assets/logo-moneyview.png'
+import logoIllusionmed from '../assets/illusionmed-logo.png'
 import projectHoney from '../assets/project-honey.png'
 import projectHealth from '../assets/project-health.png'
 import projectTrading from '../assets/project-trading.png'
@@ -34,6 +35,7 @@ export const trustedBy = [
   { name: 'Vedyara Organic', logo: logoVedyara },
   { name: 'Fitlife Sutra', logo: logoFitlifeSutra },
   { name: 'MoneyView', logo: logoMoneyView },
+  { name: 'IllusionMed', logo: logoIllusionmed },
 ]
 
 export const trustStats = [
@@ -87,11 +89,14 @@ export const icons: Record<string, IconDef> = {
   send: ['m3 11 18-8-8 18-2.5-7.5L3 11Z'],
 }
 
+export type ServiceAccent = 'violet' | 'sky' | 'orange' | 'emerald' | 'amber' | 'teal'
+
 export interface Service {
   title: string
   body: string
   tags: string[]
   icon: string
+  accent: ServiceAccent
 }
 
 export const services: Service[] = [
@@ -100,36 +105,42 @@ export const services: Service[] = [
     body: 'Embed AI-powered capabilities into your product — intelligent chatbots, smart search, recommendation engines, content generation & predictive analytics.',
     tags: ['AI Chatbots', 'Smart Search', 'Recommendations', 'Automation'],
     icon: 'ai',
+    accent: 'violet',
   },
   {
     title: 'Website Development',
     body: 'Tailored websites and web applications built with cutting-edge technologies.',
     tags: ['React & Node.js', 'API Integration', 'CMS Development'],
     icon: 'dev',
+    accent: 'sky',
   },
   {
     title: 'UI/UX Design',
     body: 'User-centered design that converts. Intuitive interfaces backed by research.',
     tags: ['Wireframing', 'Prototyping', 'User Testing'],
     icon: 'design',
+    accent: 'orange',
   },
   {
     title: 'Mobile App Development',
     body: 'Native and cross-platform apps built for Android and iOS that feel fast and native.',
     tags: ['Android', 'iOS', 'React Native'],
     icon: 'mobile',
+    accent: 'emerald',
   },
   {
     title: 'Performance Optimization',
     body: 'Lightning-fast websites that rank higher and convert better.',
     tags: ['Core Web Vitals', 'Caching Strategy', 'Code Splitting'],
     icon: 'speed',
+    accent: 'amber',
   },
   {
     title: 'SEO & Digital Marketing',
     body: 'Data-driven strategies to improve your online visibility.',
     tags: ['Technical SEO', 'Content Strategy', 'Analytics Setup'],
     icon: 'seo',
+    accent: 'teal',
   },
 ]
 

@@ -3,6 +3,7 @@ import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { ScrollToTop } from './components/ScrollToTop'
 import { WhatsAppButton } from './components/WhatsAppButton'
+import { AiAssistant } from './components/AiAssistant'
 import { Home } from './pages/Home'
 import { Careers } from './pages/Careers'
 import { CaseStudies } from './pages/CaseStudies'
@@ -32,6 +33,7 @@ function App() {
       </Routes>
       <Footer />
       <WhatsAppButton />
+      <AiAssistant />
     </>
   )
 }

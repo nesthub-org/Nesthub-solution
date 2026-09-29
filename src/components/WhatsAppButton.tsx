@@ -25,9 +25,9 @@ export function WhatsAppButton() {
       transition={{ delay: 0.6, type: 'spring', stiffness: 260, damping: 20 }}
       whileHover={{ scale: 1.08, y: -2 }}
       whileTap={{ scale: 0.94 }}
-      className="fixed bottom-5 right-5 z-[70] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-[0_10px_30px_rgba(37,211,102,.45)] sm:bottom-6 sm:right-6"
+      className="fixed bottom-8 left-12 z-[70] flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] shadow-[0_10px_30px_rgba(37,211,102,.45)] sm:bottom-9 sm:right-28"
     >
-      <WhatsAppGlyph size={26} />
+      <WhatsAppGlyph size={22} />
     </motion.a>
   )
 }

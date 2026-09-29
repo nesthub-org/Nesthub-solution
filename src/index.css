@@ -96,3 +96,16 @@
 .preserve-3d {
   transform-style: preserve-3d;
 }
+
+/* AI assistant: "speaking" sound-wave bars in the greeting pill */
+@keyframes nhWave {
+  0%, 100% { height: 3px; }
+  50% { height: 12px; }
+}
+.nh-wave {
+  height: 3px;
+  animation: nhWave 0.7s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nh-wave { animation: none; height: 8px; }
+}

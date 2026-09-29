@@ -109,3 +109,13 @@
 @media (prefers-reduced-motion: reduce) {
   .nh-wave { animation: none; height: 8px; }
 }
+
+/* AI assistant: slow idle breathing */
+@keyframes nhBreathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-1.5px) scale(1.012); }
+}
+.nh-breathe { animation: nhBreathe 4.2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .nh-breathe { animation: none; }
+}

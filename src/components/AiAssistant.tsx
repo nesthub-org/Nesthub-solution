@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useMountAfterHydration } from '../hooks/usePrerendering'
 import assistantFull from '../assets/assistant-full.webp'
 import assistantFace from '../assets/assistant-face.webp'
+import { LiveAvatar } from './LiveAvatar'
 import {
   ASSISTANT_NAME,
   GREETING,
@@ -32,10 +33,45 @@ function AssistantAvatar({ size = 40 }: { size?: number }) {
   )
 }
 
-function pickFemaleVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | undefined {
-  const english = voices.filter((v) => v.lang.toLowerCase().startsWith('en'))
-  const preferred = /female|zira|samantha|susan|hazel|heera|aria|jenny|libby|sonia|victoria|karen|moira|tessa|google uk english female|google us english/i
-  return english.find((v) => preferred.test(v.name) && /en-(in|gb|us)/i.test(v.lang)) ?? english.find((v) => preferred.test(v.name)) ?? english[0]
+// What the voice says. Kept separate from the on-screen GREETING so the
+// punctuation can shape a natural, conversational delivery.
+const SPOKEN_GREETING = 'Welcome to NestHub Solution! How may I help you?'
+
+const NATURAL_VOICE = /natural|neural|online|premium|enhanced/i
+const FEMALE_VOICE =
+  /neerja|ava|emma|jenny|aria|michelle|sonia|libby|maisie|natasha|clara|emily|molly|heera|veena|kajal|samantha|karen|moira|tessa|serena|fiona|victoria|susan|hazel|zira|female|google us english/i
+const MALE_VOICE =
+  /\b(guy|davis|andrew|brian|christopher|eric|roger|steffan|ryan|thomas|prabhat|william|liam|mark|david|george|james|daniel|alex|fred|ravi|rishi|tony|jason|male)\b/i
+const LEGACY_VOICE = /zira|heera|hazel|susan/i
+
+// Rank the voices this browser offers, strongly preferring neural "Natural"
+// voices (Edge ships these, e.g. Neerja, an Indian English voice) over the
+// flat, robotic system voices, and female voices over male ones.
+function scoreVoice(v: SpeechSynthesisVoice): number {
+  const lang = v.lang.toLowerCase().replace('_', '-')
+  if (!lang.startsWith('en')) return -Infinity
+  if (MALE_VOICE.test(v.name)) return -Infinity
+  let score = 0
+  if (NATURAL_VOICE.test(v.name)) score += 100
+  if (/google/i.test(v.name)) score += 40
+  if (FEMALE_VOICE.test(v.name)) score += 30
+  if (lang === 'en-in') score += 25
+  else if (lang === 'en-gb' || lang === 'en-us') score += 10
+  if (LEGACY_VOICE.test(v.name)) score -= 20
+  return score
+}
+
+function pickVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | undefined {
+  let best: SpeechSynthesisVoice | undefined
+  let bestScore = -Infinity
+  for (const v of voices) {
+    const s = scoreVoice(v)
+    if (s > bestScore) {
+      best = v
+      bestScore = s
+    }
+  }
+  return best
 }
 
 // Voices load asynchronously in some browsers; wait for them once, then reuse
@@ -76,6 +112,7 @@ export function AiAssistant() {
   const [bubble, setBubble] = useState(false)
   const [typed, setTyped] = useState('')
   const [speaking, setSpeaking] = useState(false)
+  const [wordTick, setWordTick] = useState(0)
   const [messages, setMessages] = useState<Message[]>([{ id: 0, role: 'assistant', text: GREETING }])
   const [input, setInput] = useState('')
   const [thinking, setThinking] = useState(false)
@@ -90,18 +127,32 @@ export function AiAssistant() {
     const synth = window.speechSynthesis
     const voices = await loadVoices()
     synth.cancel()
-    const u = new SpeechSynthesisUtterance(text)
-    const voice = pickFemaleVoice(voices)
-    try {
-      if (voice) {
-        u.voice = voice
-        u.lang = voice.lang
+    const voice = pickVoice(voices)
+    const natural = !!voice && NATURAL_VOICE.test(voice.name)
+    // One utterance per sentence: the short gap between them lands like a
+    // breath, instead of one flat read-through.
+    const sentences = (text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) ?? [text]).map((s) => s.trim()).filter(Boolean)
+    const utterances = sentences.map((sentence) => {
+      const u = new SpeechSynthesisUtterance(sentence)
+      try {
+        if (voice) {
+          u.voice = voice
+          u.lang = voice.lang
+        }
+      } catch {
+        // Unusable voice object: fall back to the browser default.
       }
-    } catch {
-      // Unusable voice object: fall back to the browser default.
-    }
-    u.rate = 1
-    u.pitch = 1.1
+      // Neural voices already sound natural at defaults; slowing the older
+      // system voices slightly takes the rushed, robotic edge off them.
+      u.rate = natural ? 1 : 0.94
+      u.pitch = 1
+      u.onboundary = (e) => {
+        if (e.name === 'word') setWordTick((t) => t + 1)
+      }
+      return u
+    })
+    const first = utterances[0]
+    const last = utterances[utterances.length - 1]
     return new Promise<boolean>((resolve) => {
       let settled = false
       const settle = (ok: boolean) => {
@@ -114,17 +165,19 @@ export function AiAssistant() {
         synth.cancel()
         setSpeaking(false)
         settle(false)
-      }, 2500)
-      u.onstart = () => {
+      }, 3500)
+      first.onstart = () => {
         setSpeaking(true)
         settle(true)
       }
-      u.onend = () => setSpeaking(false)
-      u.onerror = () => {
-        setSpeaking(false)
-        settle(false)
-      }
-      synth.speak(u)
+      last.onend = () => setSpeaking(false)
+      utterances.forEach((u) => {
+        u.onerror = () => {
+          setSpeaking(false)
+          settle(false)
+        }
+        synth.speak(u)
+      })
     })
   }, [])
 
@@ -142,13 +195,11 @@ export function AiAssistant() {
     const startTimer = window.setTimeout(() => {
       setBubble(true)
       let i = 0
-      setSpeaking(true)
       typeTimer = window.setInterval(() => {
         i += 1
         setTyped(GREETING.slice(0, i))
         if (i >= GREETING.length) {
           window.clearInterval(typeTimer)
-          if (!window.speechSynthesis?.speaking) setSpeaking(false)
         }
       }, 38)
 
@@ -158,10 +209,10 @@ export function AiAssistant() {
       const disarm = () => events.forEach((e) => window.removeEventListener(e, onFirst, true))
       const onFirst = () => {
         disarm()
-        if (!cancelled) void speak(GREETING)
+        if (!cancelled) void speak(SPOKEN_GREETING)
       }
       cleanups.push(disarm)
-      void speak(GREETING).then((ok) => {
+      void speak(SPOKEN_GREETING).then((ok) => {
         if (ok || cancelled) return
         events.forEach((e) => window.addEventListener(e, onFirst, { capture: true, passive: true }))
       })
@@ -290,14 +341,9 @@ export function AiAssistant() {
                 className={`absolute inset-[12%] rounded-full bg-brand-500/40 blur-2xl transition-opacity duration-500 ${speaking ? 'animate-pulse opacity-100' : 'opacity-0'}`}
                 aria-hidden
               />
-              <img
-                src={assistantFull}
-                alt=""
-                width={440}
-                height={407}
-                draggable={false}
-                className="animate-floaty-slow relative block h-auto w-full select-none drop-shadow-[0_18px_30px_rgba(37,99,235,.28)]"
-              />
+              <span className="relative block drop-shadow-[0_18px_30px_rgba(37,99,235,.28)]">
+                <LiveAvatar src={assistantFull} width={440} height={407} speaking={speaking} wordTick={wordTick} />
+              </span>
             </motion.button>
           </motion.div>
         )}

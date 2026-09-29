@@ -5,6 +5,7 @@ import { useMountAfterHydration } from '../hooks/usePrerendering'
 import assistantFull from '../assets/assistant-full.webp'
 import assistantFace from '../assets/assistant-face.webp'
 import { LiveAvatar } from './LiveAvatar'
+import { estimateWordMs, type SpeechCue } from '../utils/lipSync'
 import {
   ASSISTANT_NAME,
   GREETING,
@@ -89,6 +90,40 @@ function loadVoices(): Promise<SpeechSynthesisVoice[]> {
   return voicesReady
 }
 
+const GREETED_KEY = 'nh-assistant-greeted'
+
+function markGreeted() {
+  try {
+    sessionStorage.setItem(GREETED_KEY, '1')
+  } catch {
+    // Storage unavailable: worst case she greets again on the next page.
+  }
+}
+
+// Say the greeting aloud when the visitor opens the site (typed URL, bookmark,
+// search result, another site) or refreshes it — but not when a link inside
+// the site loads a new page. The header/footer use plain <a> links, which
+// reload the page, so the assistant can't rely on staying mounted.
+function shouldGreetAloud(): boolean {
+  const nav = performance.getEntriesByType?.('navigation')[0] as PerformanceNavigationTiming | undefined
+  if (nav?.type === 'reload') return true
+  let internal = false
+  try {
+    internal = !!document.referrer && new URL(document.referrer).origin === window.location.origin
+  } catch {
+    // Unparseable referrer: treat as an outside visit.
+  }
+  if (!internal) return true
+  // Arrived via an in-site link. Still greet if she hasn't actually been heard
+  // yet in this tab (e.g. the visitor's very first click was that link, which
+  // unloaded the page before the greeting could play).
+  try {
+    return sessionStorage.getItem(GREETED_KEY) !== '1'
+  } catch {
+    return false
+  }
+}
+
 function ActionLink({ action }: { action: AssistantAction }) {
   const cls =
     'inline-flex items-center rounded-full border border-brand-200 bg-white px-3 py-1.5 text-xs font-medium text-brand-600 transition hover:border-brand-500 hover:bg-brand-50'
@@ -112,13 +147,77 @@ export function AiAssistant() {
   const [bubble, setBubble] = useState(false)
   const [typed, setTyped] = useState('')
   const [speaking, setSpeaking] = useState(false)
-  const [wordTick, setWordTick] = useState(0)
+  const [cue, setCue] = useState<SpeechCue | null>(null)
+  const cueId = useRef(0)
+  // Learned ratio of real to estimated word length for the current voice, so
+  // the mouth keeps pace with fast or slow voices.
+  const pace = useRef(1)
   const [messages, setMessages] = useState<Message[]>([{ id: 0, role: 'assistant', text: GREETING }])
   const [input, setInput] = useState('')
   const [thinking, setThinking] = useState(false)
   const nextId = useRef(1)
   const listRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const emitCue = useCallback((word: string, ms: number) => {
+    cueId.current += 1
+    setCue({ id: cueId.current, word, ms })
+  }, [])
+
+  // Drives the lips from the words being spoken. Voices that report word
+  // boundaries (Edge, Windows/macOS system voices) are followed word by word;
+  // voices that don't (Chrome's Google voices) get a timeline estimated from
+  // the text, re-calibrated against how long each sentence actually took.
+  const attachLipSync = useCallback(
+    (u: SpeechSynthesisUtterance, sentence: string) => {
+      const words = sentence.match(/[A-Za-z']+/g) ?? []
+      const est = (w: string) => (estimateWordMs(w) / u.rate) * pace.current
+      const timers: number[] = []
+      const clearTimers = () => timers.splice(0).forEach((t) => window.clearTimeout(t))
+      let tracked = false
+      let startedAt = 0
+      let plannedMs = 0
+      let prev: { at: number; word: string } | null = null
+
+      u.addEventListener('start', () => {
+        startedAt = performance.now()
+        // Fallback timeline, used only until/unless real word boundaries arrive.
+        let t = 120
+        for (const w of words) {
+          timers.push(window.setTimeout(() => emitCue(w, est(w)), t))
+          t += est(w) + 45 * pace.current
+        }
+        plannedMs = t
+      })
+      u.addEventListener('boundary', (e) => {
+        if (e.name !== 'word') return
+        if (!tracked) {
+          tracked = true
+          clearTimers()
+        }
+        const word = sentence.slice(e.charIndex).match(/^[A-Za-z']+/)?.[0]
+        if (!word) return
+        const now = performance.now()
+        if (prev) {
+          // How long the previous word really took vs our guess: nudge the pace.
+          const ratio = (now - prev.at) / (estimateWordMs(prev.word) / u.rate)
+          if (ratio > 0.3 && ratio < 3) pace.current = pace.current * 0.7 + ratio * 0.3
+        }
+        prev = { at: now, word }
+        emitCue(word, est(word))
+      })
+      u.addEventListener('end', () => {
+        clearTimers()
+        if (!tracked && plannedMs > 0) {
+          const ratio = (performance.now() - startedAt) / plannedMs
+          if (ratio > 0.3 && ratio < 3) pace.current = Math.min(1.8, Math.max(0.6, pace.current * ratio))
+        }
+        emitCue('', 0)
+      })
+      u.addEventListener('error', clearTimers)
+    },
+    [emitCue],
+  )
 
   // Resolves true once the browser actually starts talking, false if it
   // refuses (autoplay policy: "not-allowed") or never starts.
@@ -146,9 +245,7 @@ export function AiAssistant() {
       // system voices slightly takes the rushed, robotic edge off them.
       u.rate = natural ? 1 : 0.94
       u.pitch = 1
-      u.onboundary = (e) => {
-        if (e.name === 'word') setWordTick((t) => t + 1)
-      }
+      attachLipSync(u, sentence)
       return u
     })
     const first = utterances[0]
@@ -179,14 +276,24 @@ export function AiAssistant() {
         synth.speak(u)
       })
     })
-  }, [])
+  }, [attachLipSync])
 
-  // Greeting: on every page load, show the bubble, type the text out and say
-  // it. Browsers refuse to play any sound before the visitor has interacted
-  // with the page, so if the first attempt is blocked, say it on their first
-  // click / tap / keypress anywhere on the page instead.
+  // Greeting: show the bubble, type the text out and say it — but only when
+  // the visitor opens or refreshes the site, not on every in-site page change
+  // (see shouldGreetAloud). Browsers refuse to play any sound before the
+  // visitor has interacted with the page, so if the first attempt is blocked,
+  // say it on their first click / tap / keypress anywhere on the page instead.
   useEffect(() => {
     if (!mounted) return
+
+    if (!shouldGreetAloud()) {
+      // Moving around the site: keep the greeting on screen, but silently.
+      const t = window.setTimeout(() => {
+        setTyped(GREETING)
+        setBubble(true)
+      }, 1200)
+      return () => window.clearTimeout(t)
+    }
 
     let typeTimer = 0
     let cancelled = false
@@ -209,11 +316,12 @@ export function AiAssistant() {
       const disarm = () => events.forEach((e) => window.removeEventListener(e, onFirst, true))
       const onFirst = () => {
         disarm()
-        if (!cancelled) void speak(SPOKEN_GREETING)
+        if (!cancelled) void speak(SPOKEN_GREETING).then((ok) => ok && markGreeted())
       }
       cleanups.push(disarm)
       void speak(SPOKEN_GREETING).then((ok) => {
-        if (ok || cancelled) return
+        if (ok) return markGreeted()
+        if (cancelled) return
         events.forEach((e) => window.addEventListener(e, onFirst, { capture: true, passive: true }))
       })
     }, 1200)
@@ -342,7 +450,7 @@ export function AiAssistant() {
                 aria-hidden
               />
               <span className="relative block drop-shadow-[0_18px_30px_rgba(37,99,235,.28)]">
-                <LiveAvatar src={assistantFull} width={440} height={407} speaking={speaking} wordTick={wordTick} />
+                <LiveAvatar src={assistantFull} width={440} height={407} speaking={speaking} cue={cue} />
               </span>
             </motion.button>
           </motion.div>

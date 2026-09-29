@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { useAnimate, useReducedMotion } from 'framer-motion'
+import { wordToVisemes, type SpeechCue } from '../utils/lipSync'
 
 interface Feature {
   /** Centre, as % of the image width / height. */
@@ -34,54 +35,65 @@ interface LiveAvatarProps {
   width: number
   height: number
   speaking: boolean
-  /** Increments on every spoken word (speech `boundary` events). */
-  wordTick: number
+  /** The word currently being spoken; drives the mouth shapes. */
+  cue: SpeechCue | null
 }
 
 /**
  * Brings the still photo to life: she breathes, blinks at natural random
- * intervals, and while speaking her head/body moves and her lips part in time
- * with each word. Browsers that don't report word timings get an even rhythm
- * instead.
+ * intervals, and while speaking her lips form each word's shapes (open for
+ * "a", rounded for "o"/"u", closed for "m"/"b"/"p") in time with the voice,
+ * with her head moving on the stressed words.
  */
-export function LiveAvatar({ src, width, height, speaking, wordTick }: LiveAvatarProps) {
+export function LiveAvatar({ src, width, height, speaking, cue }: LiveAvatarProps) {
   const reduced = useReducedMotion()
   const [bodyRef, animateBody] = useAnimate<HTMLSpanElement>()
   const [eyesRef, animateEyes] = useAnimate<HTMLSpanElement>()
   const [mouthRef, animateMouth] = useAnimate<HTMLSpanElement>()
-  const lastWord = useRef(0)
 
-  const syllable = useCallback(() => {
-    if (reduced || !bodyRef.current || !mouthRef.current) return
-    const tilt = (Math.random() - 0.5) * 2.6
-    animateBody(bodyRef.current, { rotate: [null, tilt, tilt * 0.35], y: [null, -2.5, -0.5] }, { duration: 0.38, ease: 'easeOut' })
-    animateMouth(
-      mouthRef.current,
-      { scaleY: [0.1, 0.55 + Math.random() * 0.45, 0.1], opacity: [0.2, 0.9, 0.2] },
-      { duration: 0.18 + Math.random() * 0.1, ease: 'easeInOut' },
-    )
-  }, [reduced, animateBody, animateMouth, bodyRef, mouthRef])
-
-  // A lip/head movement on every spoken word.
+  // Play one word's mouth shapes across its expected duration. A new word
+  // interrupts the previous one, so the mouth always follows the voice.
   useEffect(() => {
-    if (!wordTick) return
-    lastWord.current = Date.now()
-    syllable()
-  }, [wordTick, syllable])
-
-  // Keep the lips moving through long words, or on voices that never report
-  // word boundaries; settle back to rest when she stops talking.
-  useEffect(() => {
-    if (!speaking) {
-      if (bodyRef.current) animateBody(bodyRef.current, { rotate: 0, y: 0 }, { duration: 0.5, ease: 'easeOut' })
-      if (mouthRef.current) animateMouth(mouthRef.current, { scaleY: 0.1, opacity: 0 }, { duration: 0.2 })
+    const mouth = mouthRef.current
+    if (!cue || !mouth) return
+    const shapes = reduced ? [] : wordToVisemes(cue.word)
+    if (!shapes.length || cue.ms <= 0) {
+      animateMouth(mouth, { scaleY: 0.1, scaleX: 1, opacity: 0.15 }, { duration: 0.12 })
       return
     }
-    const id = window.setInterval(() => {
-      if (Date.now() - lastWord.current > 420) syllable()
-    }, 260)
-    return () => window.clearInterval(id)
-  }, [speaking, syllable, animateBody, animateMouth, bodyRef, mouthRef])
+    const total = shapes.reduce((n, v) => n + v.weight, 0)
+    const times = [0]
+    let acc = 0
+    for (const v of shapes) {
+      acc += v.weight
+      times.push(Math.min(0.92, (acc - v.weight * 0.5) / total))
+    }
+    times.push(1)
+    animateMouth(
+      mouth,
+      {
+        scaleY: [null, ...shapes.map((v) => 0.1 + v.open * 0.9), 0.2],
+        scaleX: [null, ...shapes.map((v) => 0.78 + v.wide * 0.34), 1],
+        opacity: [null, ...shapes.map((v) => (v.open < 0.05 ? 0.12 : 0.35 + v.open * 0.6)), 0.25],
+      },
+      { duration: cue.ms / 1000, times, ease: 'easeInOut' },
+    )
+
+    // Head and body follow the rhythm, moving more on open, stressed words.
+    const body = bodyRef.current
+    const stress = Math.max(...shapes.map((v) => v.open))
+    if (body && cue.word.length > 2) {
+      const tilt = (Math.random() - 0.5) * 2.4 * stress
+      animateBody(body, { rotate: [null, tilt, tilt * 0.35], y: [null, -2.6 * stress, -0.5] }, { duration: 0.42, ease: 'easeOut' })
+    }
+  }, [cue, reduced, animateMouth, animateBody, mouthRef, bodyRef])
+
+  // Settle back to rest when she stops talking.
+  useEffect(() => {
+    if (speaking) return
+    if (bodyRef.current) animateBody(bodyRef.current, { rotate: 0, y: 0 }, { duration: 0.5, ease: 'easeOut' })
+    if (mouthRef.current) animateMouth(mouthRef.current, { scaleY: 0.1, scaleX: 1, opacity: 0 }, { duration: 0.2 })
+  }, [speaking, animateBody, animateMouth, bodyRef, mouthRef])
 
   // Natural blinking: every 2.5–5.5s, occasionally a double blink.
   useEffect(() => {

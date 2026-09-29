@@ -13,6 +13,12 @@ import projectAgencyOS from '../assets/agencyos.png'
 import projectIllusionmed from '../assets/illusionmed-img.png'
 import projectDrSunil from '../assets/project-drsunil.png'
 import scanitMockup from '../assets/scanit-mockup.png'
+import screenVedyara from '../assets/screen-vedyara.webp'
+import screenFitlife from '../assets/screen-fitlife.webp'
+import screenDrSunil from '../assets/screen-drsunil.webp'
+import screenTheFineGrow from '../assets/screen-thefinegrow.webp'
+import screenIllusionmed from '../assets/screen-illusionmed.webp'
+import screenAgencyOS from '../assets/screen-agencyos.webp'
 
 export type IconDef = string[]
 
@@ -39,7 +45,7 @@ export const navLinks = [
 export const productMockup = scanitMockup
 
 export const trustedBy = [
-  { name: 'Vedyara Organic', logo: logoVedyara },
+  { name: 'Vedyara Agro Foods', logo: logoVedyara },
   { name: 'Fitlife Sutra', logo: logoFitlifeSutra },
   { name: 'SKC', logo: logoSKC },
   { name: 'G.S.S. Welfare Association', logo: logoGSS },
@@ -167,7 +173,7 @@ export const services: Service[] = [
   {
     title: 'SEO & Digital Marketing',
     body: 'Data-driven strategies to improve your online visibility.',
-    tags: ['Technical SEO','Meta Ads','Google Ads', 'Content Strategy', 'Analytics Setup'],
+    tags: ['Technical SEO', 'Meta Ads', 'Google Ads', 'Content Strategy', 'Analytics Setup'],
     icon: 'seo',
     accent: 'teal',
     badge: 'Growth & Marketing',
@@ -209,12 +215,28 @@ export interface Project {
   icon?: string
   /** Reuses the Services accent palette to give each case study its own color identity. */
   accent: ServiceAccent
+  /** The bare website (no laptop frame), shown inside the homepage browser frame. */
+  screen: string
+  /** Homepage filter groups this project appears under. */
+  kinds: ProjectKind[]
+  /** Homepage meta row. Each is optional and only shown when known. */
+  stack?: string
+  outcome?: string
+  year?: string
 }
+
+export type ProjectKind = 'websites' | 'platforms' | 'ai'
+
+export const projectKinds: { id: ProjectKind; label: string }[] = [
+  { id: 'websites', label: 'Websites' },
+  { id: 'platforms', label: 'Platforms' },
+  { id: 'ai', label: 'AI' },
+]
 
 export const projects: Project[] = [
   {
     slug: 'vedyara-organic',
-    title: 'Vedyara Organic',
+    title: 'Vedyara Agro Foods',
     body: 'A warm, inviting e-commerce platform for an artisanal honey brand with product catalog, cart system, secure checkout, and a blog.',
     category: 'E-Commerce',
     tags: ['E-Commerce', 'Stripe', 'Product Catalog', 'Blog'],
@@ -227,6 +249,10 @@ export const projects: Project[] = [
     image: projectHoney,
     logo: logoVedyara,
     accent: 'amber',
+    screen: screenVedyara,
+    kinds: ['websites'],
+    stack: 'React, Node.js, MongoDB, Razorpay',
+    outcome: 'Online sales tripled',
   },
   {
     slug: 'fitlife-sutra',
@@ -244,6 +270,10 @@ export const projects: Project[] = [
     gallery: [projectHealth1],
     logo: logoFitlifeSutra,
     accent: 'emerald',
+    screen: screenFitlife,
+    kinds: ['websites'],
+    stack: 'React, Node.js, MongoDB',
+    outcome: 'Programs & community online',
   },
   {
     slug: 'dr-sunil-chaudhary',
@@ -260,6 +290,11 @@ export const projects: Project[] = [
     image: projectDrSunil,
     logo: logoSKC,
     accent: 'sky',
+    screen: screenDrSunil,
+    kinds: ['websites'],
+    stack: 'React, Framer Motion',
+    outcome: 'Online appointments',
+    year: '2026',
   },
   {
     slug: 'thefinegrow',
@@ -276,6 +311,10 @@ export const projects: Project[] = [
     image: projectTrading,
     logo: logoTheFineGrow,
     accent: 'violet',
+    screen: screenTheFineGrow,
+    kinds: ['platforms'],
+    stack: 'Real-time data, WebSockets',
+    outcome: 'Live-market learning',
   },
   {
     slug: 'illusionmed',
@@ -292,6 +331,10 @@ export const projects: Project[] = [
     image: projectIllusionmed,
     logo: logoIllusionmed,
     accent: 'teal',
+    screen: screenIllusionmed,
+    kinds: ['websites'],
+    outcome: 'Pharma brand launch',
+    year: '2026',
   },
   {
     slug: 'agency-os',
@@ -308,6 +351,11 @@ export const projects: Project[] = [
     image: projectAgencyOS,
     icon: 'chart',
     accent: 'sky',
+    screen: screenAgencyOS,
+    kinds: ['platforms', 'ai'],
+    stack: 'React, Node.js, MongoDB, Claude AI',
+    outcome: 'Leads to invoices in one app',
+    year: '2026',
   },
 ]
 
@@ -418,7 +466,7 @@ export interface FaqItem {
 export const faqs: FaqItem[] = [
   {
     q: 'Who is NestHub Solution?',
-    a: "We're a web development studio based in Jaipur, Rajasthan, founded in 2025. Our team of designers, developers and strategists has shipped projects like Vedyara Organic, Fitlife Sutra and TheFineGrow for clients across India.",
+    a: "We're a web development studio based in Jaipur, Rajasthan, founded in 2025. Our team of designers, developers and strategists has shipped projects like Vedyara Agro Foods, Fitlife Sutra and TheFineGrow for clients across India.",
   },
   {
     q: 'Do you work with clients outside Jaipur?',
@@ -446,7 +494,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: 'Is NestHub Solution hiring?',
-    a: "Usually, yes. Open roles typically include React Native Developer, Business Development Executive and MERN Stack Intern positions in Jaipur or remote. Check current openings and apply on our Careers page.",
+    a: "Usually, yes. We're currently hiring a Lead Generation Executive in Jaipur. Check current openings and apply on our Careers page.",
   },
 ]
 
@@ -496,7 +544,9 @@ export const footerLinks = {
 }
 
 export interface Job {
-  id: 'react-native' | 'bde' | 'mern-intern'
+  id: 'lead-gen' | 'react-native' | 'bde' | 'mern-intern'
+  /** Only open roles are listed on the Careers page; flip back to true to re-list one. */
+  open: boolean
   title: string
   type: string
   location: string
@@ -508,10 +558,35 @@ export interface Job {
 
 export const jobs: Job[] = [
   {
+    id: 'lead-gen',
+    open: true,
+    title: 'Lead Generation Executive',
+    type: 'Full-time',
+    location: 'Remote',
+    experience: '0–2 years experience',
+    description:
+      'Fill our sales pipeline with qualified businesses that need websites, mobile apps, AI integration and digital marketing — finding the right prospects and starting the conversation.',
+    responsibilities: [
+      'Research and build targeted lead lists of businesses across India using LinkedIn, Google Maps, directories and other sources',
+      'Run outreach over email, LinkedIn, WhatsApp and calls to start conversations with decision-makers',
+      'Qualify leads against our services and book discovery calls for the team',
+      'Keep every lead, follow-up and status up to date in the CRM',
+      'Track what works across channels and share weekly pipeline numbers',
+    ],
+    requirements: [
+      'Strong written and verbal communication in English and Hindi',
+      'Comfortable with cold outreach and following up consistently',
+      'Organised, with an eye for detail when researching and qualifying prospects',
+      'Interest in web development, mobile apps, AI and digital products',
+      'Prior lead generation, inside sales or outreach experience is a plus, not required',
+    ],
+  },
+  {
     id: 'react-native',
+    open: false,
     title: 'React Native Developer',
     type: 'Full-time',
-    location: 'Jaipur, Rajasthan (On-site / Hybrid)',
+    location: 'Remote',
     experience: '1–3 years experience',
     description:
       'Build and ship native mobile apps for Android and iOS using React Native — from architecture through to App Store and Play Store release.',
@@ -532,9 +607,10 @@ export const jobs: Job[] = [
   },
   {
     id: 'bde',
+    open: false,
     title: 'Business Development Executive',
     type: 'Full-time',
-    location: 'Jaipur, Rajasthan (On-site / Hybrid)',
+    location: 'Remote',
     experience: '0–2 years experience',
     description:
       'Drive new client relationships for our web, mobile app and AI integration services — from first outreach through to a signed project brief.',
@@ -553,6 +629,7 @@ export const jobs: Job[] = [
   },
   {
     id: 'mern-intern',
+    open: false,
     title: 'MERN Stack Intern',
     type: 'Internship · 3–6 months',
     location: 'Remote or Jaipur',
@@ -574,3 +651,5 @@ export const jobs: Job[] = [
     ],
   },
 ]
+
+export const openJobs = jobs.filter((j) => j.open)

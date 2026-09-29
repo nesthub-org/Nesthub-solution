@@ -220,13 +220,18 @@ export function AiAssistant() {
   )
 
   // Resolves true once the browser actually starts talking, false if it
-  // refuses (autoplay policy: "not-allowed") or never starts.
-  const speak = useCallback(async (text: string): Promise<boolean> => {
-    if (!('speechSynthesis' in window)) return false
+  // refuses (autoplay policy: "not-allowed") or never starts. It calls
+  // synth.speak() synchronously, so when invoked from a click/tap handler the
+  // speech stays inside that gesture — iOS Safari rejects it otherwise.
+  const speak = useCallback((text: string): Promise<boolean> => {
+    if (!('speechSynthesis' in window)) return Promise.resolve(false)
     const synth = window.speechSynthesis
-    const voices = await loadVoices()
-    synth.cancel()
-    const voice = pickVoice(voices)
+    // Chrome can drop an utterance queued right behind a cancel(), and can
+    // come back from a reload with the queue stuck "paused"; only cancel when
+    // something is actually queued, and always un-pause.
+    if (synth.speaking || synth.pending) synth.cancel()
+    synth.resume()
+    const voice = pickVoice(synth.getVoices())
     const natural = !!voice && NATURAL_VOICE.test(voice.name)
     // One utterance per sentence: the short gap between them lands like a
     // breath, instead of one flat read-through.
@@ -285,6 +290,9 @@ export function AiAssistant() {
   // say it on their first click / tap / keypress anywhere on the page instead.
   useEffect(() => {
     if (!mounted) return
+    // Warm the voice list now so the best voice is ready by the first click
+    // (speak() reads it synchronously).
+    if ('speechSynthesis' in window) void loadVoices()
 
     if (!shouldGreetAloud()) {
       // Moving around the site: keep the greeting on screen, but silently.
@@ -310,20 +318,33 @@ export function AiAssistant() {
         }
       }, 38)
 
-      // Only these events count as "user activation" for the autoplay policy
-      // (scrolling and hovering don't).
-      const events = ['mousedown', 'pointerup', 'touchend', 'keydown', 'click'] as const
-      const disarm = () => events.forEach((e) => window.removeEventListener(e, onFirst, true))
-      const onFirst = () => {
-        disarm()
-        if (!cancelled) void speak(SPOKEN_GREETING).then((ok) => ok && markGreeted())
+      let done = false
+      let inFlight = false
+      const attempt = () => {
+        if (done || inFlight || cancelled) return
+        inFlight = true
+        void speak(SPOKEN_GREETING).then((ok) => {
+          inFlight = false
+          if (!ok) return
+          done = true
+          disarm()
+          markGreeted()
+        })
       }
+
+      // Listen for the visitor's first click / tap / keypress straight away
+      // (only these count as "user activation"; scrolling and hovering don't),
+      // and speak from inside that gesture. Chrome silently ignores speech that
+      // is blocked, so waiting to find out first would miss an early click.
+      const events = ['mousedown', 'pointerup', 'touchend', 'keydown', 'click'] as const
+      const disarm = () => events.forEach((e) => window.removeEventListener(e, attempt, true))
+      events.forEach((e) => window.addEventListener(e, attempt, { capture: true, passive: true }))
       cleanups.push(disarm)
-      void speak(SPOKEN_GREETING).then((ok) => {
-        if (ok) return markGreeted()
-        if (cancelled) return
-        events.forEach((e) => window.addEventListener(e, onFirst, { capture: true, passive: true }))
-      })
+
+      // If the page already has user activation (or the browser doesn't report
+      // it), try right away; otherwise the attempt would just be blocked.
+      const activation = (navigator as Navigator & { userActivation?: { hasBeenActive: boolean } }).userActivation
+      if (!activation || activation.hasBeenActive) attempt()
     }, 1200)
 
     return () => {

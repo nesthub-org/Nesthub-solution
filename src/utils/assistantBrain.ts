@@ -1,4 +1,4 @@
-import { brand, faqs, jobs, projects, services, steps } from '../data/content'
+import { brand, faqs, openJobs, projects, services, steps } from '../data/content'
 
 export interface AssistantAction {
   label: string
@@ -61,7 +61,7 @@ const intents: Intent[] = [
   {
     keywords: ['job', 'jobs', 'career', 'careers', 'hiring', 'hire me', 'vacancy', 'vacancies', 'intern', 'internship', 'opening', 'openings', 'apply', 'resume', 'cv'],
     reply: () => ({
-      text: `Yes, we're hiring! Current openings:\n${jobs.map((j) => `• ${j.title} (${j.type}, ${j.location})`).join('\n')}`,
+      text: `Yes, we're hiring! Current openings:\n${openJobs.map((j) => `• ${j.title} (${j.type}, ${j.location})`).join('\n')}`,
       actions: [{ label: 'View openings', href: '/careers' }],
     }),
   },

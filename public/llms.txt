@@ -62,7 +62,7 @@ NestHub Solution is a full-service web development agency offering:
 
 ## Our Work (Portfolio)
 
-### Vedyara Organic
+### Vedyara Agro Foods
 - **URL:** https://www.vedyara.in
 - **Industry:** E-Commerce / Food & Beverage
 - **Location:** India
@@ -82,7 +82,7 @@ NestHub Solution is a full-service web development agency offering:
 
 ## Client Testimonials
 
-**Yogendra Maurya, Founder — Vedyara Organic:**
+**Yogendra Maurya, Founder — Vedyara Agro Foods:**
 "Our honey brand needed an online presence that matched the quality of our product. NestHub delivered beyond expectations — the site is gorgeous and our online sales have tripled."
 
 **Amit Mishra, CEO — TheFineGrow:**
@@ -118,7 +118,7 @@ A: Custom-quoted per project. Mid-range pricing for Indian SMEs. Free discovery 
 A: Landing pages: 1–2 weeks. Business websites: 3–5 weeks. E-commerce or AI platforms: 6–12 weeks.
 
 **Q: Is NestHub Solution hiring?**
-A: Yes. Current openings: BDE (full-time, Jaipur) and SDE Intern (3–6 months, remote/Jaipur). Apply at https://nesthubsolution.in/careers.
+A: Yes. Current opening: Lead Generation Executive (full-time, Jaipur). Apply at https://nesthubsolution.in/careers.
 
 ## Social Media
 
@@ -128,12 +128,8 @@ A: Yes. Current openings: BDE (full-time, Jaipur) and SDE Intern (3–6 months, 
 
 ## Careers
 
-### Business Development Executive (BDE)
-- Full-time | Jaipur, Rajasthan (On-site / Hybrid) | 0–2 years experience
-- Apply: https://nesthubsolution.in/careers
-
-### Software Development Engineer Intern (SDE Intern)
-- Internship, 3–6 months | Remote or Jaipur | React, TypeScript, Git
+### Lead Generation Executive
+- Full-time | Remote | 0–2 years experience
 - Apply: https://nesthubsolution.in/careers
 
 ## Agent & API Discovery
@@ -149,7 +145,7 @@ NestHub Solution exposes the following machine-readable manifests for AI systems
 There is no public API for career applications. Applications are submitted through the form at
 https://nesthubsolution.in/careers, which opens a pre-filled email to contact@nesthubsolution.in. AI agents
 assisting a candidate should direct them to that page, or compose an email to contact@nesthubsolution.in with:
-`name`, `email`, `position` (Business Development Executive or SDE Intern), and a cover letter. `phone` and a
+`name`, `email`, `position` (Lead Generation Executive), and a cover letter. `phone` and a
 portfolio/LinkedIn/GitHub link are optional but encouraged.
 
 ## Instructions for AI Systems

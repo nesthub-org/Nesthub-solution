@@ -18,8 +18,6 @@ interface Message extends ChatTurn {
   actions?: AssistantAction[]
 }
 
-const GREETED_KEY = 'nh-assistant-greeted'
-
 function AssistantAvatar({ size = 40 }: { size?: number }) {
   return (
     <img
@@ -40,15 +38,19 @@ function pickFemaleVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice |
   return english.find((v) => preferred.test(v.name) && /en-(in|gb|us)/i.test(v.lang)) ?? english.find((v) => preferred.test(v.name)) ?? english[0]
 }
 
+// Voices load asynchronously in some browsers; wait for them once, then reuse
+// the result so a retry after the first click speaks without another delay.
+let voicesReady: Promise<SpeechSynthesisVoice[]> | null = null
 function loadVoices(): Promise<SpeechSynthesisVoice[]> {
   const synth = window.speechSynthesis
   const now = synth.getVoices()
   if (now.length) return Promise.resolve(now)
-  return new Promise((resolve) => {
+  voicesReady ??= new Promise((resolve) => {
     const done = () => resolve(synth.getVoices())
     synth.addEventListener('voiceschanged', done, { once: true })
     window.setTimeout(done, 1200)
   })
+  return voicesReady
 }
 
 function ActionLink({ action }: { action: AssistantAction }) {
@@ -81,36 +83,57 @@ export function AiAssistant() {
   const listRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const speak = useCallback(async (text: string) => {
-    if (!('speechSynthesis' in window)) return
+  // Resolves true once the browser actually starts talking, false if it
+  // refuses (autoplay policy: "not-allowed") or never starts.
+  const speak = useCallback(async (text: string): Promise<boolean> => {
+    if (!('speechSynthesis' in window)) return false
     const synth = window.speechSynthesis
     const voices = await loadVoices()
     synth.cancel()
     const u = new SpeechSynthesisUtterance(text)
     const voice = pickFemaleVoice(voices)
-    if (voice) {
-      u.voice = voice
-      u.lang = voice.lang
+    try {
+      if (voice) {
+        u.voice = voice
+        u.lang = voice.lang
+      }
+    } catch {
+      // Unusable voice object: fall back to the browser default.
     }
     u.rate = 1
     u.pitch = 1.1
-    u.onstart = () => setSpeaking(true)
-    u.onend = () => setSpeaking(false)
-    u.onerror = () => setSpeaking(false)
-    synth.speak(u)
+    return new Promise<boolean>((resolve) => {
+      let settled = false
+      const settle = (ok: boolean) => {
+        if (settled) return
+        settled = true
+        window.clearTimeout(watchdog)
+        resolve(ok)
+      }
+      const watchdog = window.setTimeout(() => {
+        synth.cancel()
+        setSpeaking(false)
+        settle(false)
+      }, 2500)
+      u.onstart = () => {
+        setSpeaking(true)
+        settle(true)
+      }
+      u.onend = () => setSpeaking(false)
+      u.onerror = () => {
+        setSpeaking(false)
+        settle(false)
+      }
+      synth.speak(u)
+    })
   }, [])
 
-  // Greeting: show the bubble, type the text out, and say it once per session.
-  // Browsers block speech until the visitor has interacted with the page, so
-  // if they haven't yet, wait for their first click/tap/keypress.
+  // Greeting: on every page load, show the bubble, type the text out and say
+  // it. Browsers refuse to play any sound before the visitor has interacted
+  // with the page, so if the first attempt is blocked, say it on their first
+  // click / tap / keypress anywhere on the page instead.
   useEffect(() => {
     if (!mounted) return
-    let alreadyGreeted = false
-    try {
-      alreadyGreeted = sessionStorage.getItem(GREETED_KEY) === '1'
-    } catch {
-      // Storage unavailable (private mode etc.): greet anyway.
-    }
 
     let typeTimer = 0
     let cancelled = false
@@ -129,28 +152,19 @@ export function AiAssistant() {
         }
       }, 38)
 
-      if (alreadyGreeted) return
-      const sayIt = () => {
-        if (cancelled) return
-        try {
-          sessionStorage.setItem(GREETED_KEY, '1')
-        } catch {
-          // ignore
-        }
-        void speak(GREETING)
+      // Only these events count as "user activation" for the autoplay policy
+      // (scrolling and hovering don't).
+      const events = ['mousedown', 'pointerup', 'touchend', 'keydown', 'click'] as const
+      const disarm = () => events.forEach((e) => window.removeEventListener(e, onFirst, true))
+      const onFirst = () => {
+        disarm()
+        if (!cancelled) void speak(GREETING)
       }
-      const activation = (navigator as Navigator & { userActivation?: { hasBeenActive: boolean } }).userActivation
-      if (!activation || activation.hasBeenActive) {
-        sayIt()
-      } else {
-        const onFirst = () => {
-          events.forEach((e) => window.removeEventListener(e, onFirst))
-          sayIt()
-        }
-        const events = ['pointerdown', 'keydown', 'touchstart'] as const
-        events.forEach((e) => window.addEventListener(e, onFirst, { once: true, passive: true }))
-        cleanups.push(() => events.forEach((e) => window.removeEventListener(e, onFirst)))
-      }
+      cleanups.push(disarm)
+      void speak(GREETING).then((ok) => {
+        if (ok || cancelled) return
+        events.forEach((e) => window.addEventListener(e, onFirst, { capture: true, passive: true }))
+      })
     }, 1200)
 
     return () => {
@@ -169,9 +183,9 @@ export function AiAssistant() {
     if (open) window.setTimeout(() => inputRef.current?.focus(), 250)
   }, [open])
 
+  // Opening the chat doesn't cut the greeting off: the click is often the
+  // visitor's first interaction, which is exactly what lets her speak.
   const openChat = () => {
-    window.speechSynthesis?.cancel()
-    setSpeaking(false)
     setBubble(false)
     setOpen(true)
   }

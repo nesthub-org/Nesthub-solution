@@ -471,7 +471,7 @@ export interface TeamMember {
 
 export const team: TeamMember[] = [
   { name: 'Mr. Apoorv Arya', initials: 'AA', role: 'Founder and CEO', img: '/team/apoorv.jpg' },
-  { name: 'Miss. Roli Nagar', initials: 'JN', role: 'Head of Business', img: '/team/juhi.jpg', imgPosition: '50% 25%' },
+  { name: 'Miss. Juhi Nagar', initials: 'JN', role: 'Head of Business', img: '/team/juhi.jpg', imgPosition: '50% 25%' },
   { name: 'Mr. Yogendra Maurya', initials: 'YM', role: 'CFO', img: '/team/yogendra.jpg', imgPosition: '50% 30%' },
   { name: 'Mr. Naveen Soni', initials: 'NS', role: 'Full Stack Developer', img: '/team/naveen-img.jpeg', imgPosition: '50% 25%' },
 

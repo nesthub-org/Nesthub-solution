@@ -1,5 +1,6 @@
 import { Reveal } from '../Reveal'
 import { trustedBy } from '../../data/content'
+import { SplitText } from '../SplitText'
 
 // Repeated to give the marquee track enough width, then the whole run is
 // duplicated once more below so translateX(-50%) loops seamlessly.
@@ -11,9 +12,9 @@ export function Partners() {
     <section className="mx-auto max-w-[1320px] px-6 pt-24 sm:pt-28">
       <Reveal className="text-center">
         <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Our partners</span>
-        <h2 className="mt-4 text-[26px] sm:text-[32px] font-bold leading-[1.15] tracking-[-.03em]">
+        <SplitText className="mt-4 text-[26px] sm:text-[32px] font-bold leading-[1.15] tracking-[-.03em]">
           Trusted by the brands we build for
-        </h2>
+        </SplitText>
       </Reveal>
 
       <Reveal delay={0.08}>

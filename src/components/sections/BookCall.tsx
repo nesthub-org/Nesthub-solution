@@ -3,6 +3,7 @@ import { Reveal } from '../Reveal'
 import { Icon } from '../Icon'
 import { brand } from '../../data/content'
 import calendlyCta from '../../assets/calendly-cta.jpg'
+import { SplitText } from '../SplitText'
 
 export function BookCall() {
   return (
@@ -11,9 +12,9 @@ export function BookCall() {
         <div className="grid grid-cols-1 overflow-hidden rounded-[28px] border border-line bg-surface lg:grid-cols-2">
           <div className="p-8 sm:p-12 lg:p-14">
             <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Schedule a call</span>
-            <h2 className="mt-4 text-[28px] sm:text-[34px] font-bold leading-[1.15] tracking-[-.03em]">
+            <SplitText className="mt-4 text-[28px] sm:text-[34px] font-bold leading-[1.15] tracking-[-.03em]">
               Book a Free 1-on-1 Discovery Call
-            </h2>
+            </SplitText>
             <p className="mt-4 max-w-[420px] text-[16px] sm:text-[17px] leading-[1.6] text-muted">
               Let's discuss your project in detail. Pick a time that works for you and we'll walk through your
               vision, goals, and how we can bring it to life.

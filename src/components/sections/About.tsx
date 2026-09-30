@@ -3,15 +3,16 @@ import { Reveal } from '../Reveal'
 import { TiltCard } from '../TiltCard'
 import { Icon } from '../Icon'
 import { aboutIntro, brand, values } from '../../data/content'
+import { SplitText } from '../SplitText'
 
 export function About() {
   return (
     <section id="about" className="mx-auto max-w-[1320px] px-6 pt-28 sm:pt-32">
       <Reveal className="mx-auto max-w-[820px] text-center">
         <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">About us</span>
-        <h2 className="mt-4 text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em] text-balance">
+        <SplitText className="mt-4 text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em] text-balance">
           Building the Web, One Pixel at a Time
-        </h2>
+        </SplitText>
         <p className="text-pretty mt-5 text-[17px] sm:text-[18px] leading-[1.65] text-muted">{aboutIntro}</p>
       </Reveal>
 

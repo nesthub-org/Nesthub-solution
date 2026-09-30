@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Reveal } from '../Reveal'
 import { testimonials } from '../../data/content'
+import { SplitText } from '../SplitText'
 
 function useResponsivePerPage() {
   const [perPage, setPerPage] = useState(2)
@@ -40,9 +41,9 @@ export function Testimonials() {
       <div className="mx-auto max-w-[1320px] px-6 py-24 sm:py-28">
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-8">
-            <h2 className="max-w-[640px] text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em]">
+            <SplitText className="max-w-[640px] text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em]">
               What Our Clients Say
-            </h2>
+            </SplitText>
             <div className="flex gap-2">
               <motion.button
                 onClick={() => go(-1)}

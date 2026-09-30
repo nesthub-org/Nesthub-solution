@@ -7,6 +7,7 @@ import { accentStyles, tones } from '../components/sections/Services/tones'
 import { getDomain } from '../utils/url'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { projects, type Project } from '../data/content'
+import { SplitText } from '../components/SplitText'
 
 function ProjectGallery({ project }: { project: Project }) {
   const images = [project.image, ...(project.gallery ?? [])]
@@ -102,7 +103,7 @@ function ProjectSection({ project, index }: { project: Project; index: number })
               </span>
             </div>
 
-            <h2 className="mt-4 text-[28px] font-bold tracking-[-.03em] text-ink sm:text-[34px]">{project.title}</h2>
+            <SplitText className="mt-4 text-[28px] font-bold tracking-[-.03em] text-ink sm:text-[34px]">{project.title}</SplitText>
             <span className={`mt-3 block h-[3px] w-10 rounded-full ${a.underline}`} />
             <p className="mt-4 text-[16.5px] leading-[1.65] text-muted">{project.body}</p>
 
@@ -191,9 +192,9 @@ export function CaseStudies() {
             <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl border border-line bg-brand-50">
               <Icon name="send" color="#2563EB" size={20} />
             </span>
-            <h2 className="mt-5 text-[24px] sm:text-[28px] font-bold leading-[1.15] tracking-[-.03em]">
+            <SplitText className="mt-5 text-[24px] sm:text-[28px] font-bold leading-[1.15] tracking-[-.03em]">
               Have a project like this in mind?
-            </h2>
+            </SplitText>
             <p className="mt-3 text-[16px] leading-[1.65] text-muted">
               Tell us what you're building — we'll get back to you within a couple of business days with next steps.
             </p>

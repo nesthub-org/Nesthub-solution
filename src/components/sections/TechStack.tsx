@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react'
 import { useInView } from 'framer-motion'
 import { Reveal } from '../Reveal'
 import { stack } from '../../data/content'
+import { SplitText } from '../SplitText'
 
 export function TechStack() {
   const listRef = useRef<HTMLDivElement>(null)
@@ -50,9 +51,9 @@ export function TechStack() {
   return (
     <section className="mx-auto max-w-[1320px] px-6 pt-28 text-center sm:pt-32">
       <Reveal>
-        <h2 className="text-[30px] sm:text-[36px] lg:text-[44px] font-bold leading-[1.1] tracking-[-.035em]">
+        <SplitText className="text-[30px] sm:text-[36px] lg:text-[44px] font-bold leading-[1.1] tracking-[-.035em]">
           A stack chosen for the next five years
-        </h2>
+        </SplitText>
       </Reveal>
       <Reveal delay={0.05}>
         <p className="text-pretty mx-auto mt-4 max-w-[620px] text-[17px] sm:text-[18px] leading-[1.6] text-muted">

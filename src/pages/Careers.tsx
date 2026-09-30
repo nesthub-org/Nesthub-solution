@@ -4,6 +4,7 @@ import { Icon } from '../components/Icon'
 import { Faq } from '../components/sections/Faq'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { brand, openJobs, values, type Job } from '../data/content'
+import { SplitText } from '../components/SplitText'
 
 function mailtoFor(job?: Job) {
   const title = job?.title ?? ''
@@ -86,7 +87,7 @@ export function Careers() {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <span className="text-[13px] font-semibold text-brand-500">Open roles</span>
-              <h2 className="mt-2 text-[32px] font-bold leading-[1.05] tracking-[-.04em] sm:text-[44px]">Current openings</h2>
+              <SplitText className="mt-2 text-[32px] font-bold leading-[1.05] tracking-[-.04em] sm:text-[44px]">Current openings</SplitText>
             </div>
             <span className="rounded-full border border-line bg-surface px-3.5 py-1.5 text-[13px] font-semibold text-muted">
               {openJobs.length} {openJobs.length === 1 ? 'position' : 'positions'}
@@ -107,9 +108,9 @@ export function Careers() {
       <section className="mx-auto max-w-[1320px] px-6 pt-24 sm:pt-28">
         <Reveal>
           <span className="text-[13px] font-semibold text-brand-500">Why NestHub</span>
-          <h2 className="mt-2 max-w-[640px] text-[32px] font-bold leading-[1.05] tracking-[-.04em] sm:text-[44px]">
+          <SplitText className="mt-2 max-w-[640px] text-[32px] font-bold leading-[1.05] tracking-[-.04em] sm:text-[44px]">
             What we value, every day.
-          </h2>
+          </SplitText>
         </Reveal>
         <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
           {values.map((v, i) => (
@@ -146,9 +147,9 @@ export function Careers() {
             <div className="relative grid grid-cols-1 items-center gap-12 lg:grid-cols-[.9fr_1.1fr]">
               <div>
                 <span className="text-[13px] font-semibold text-brand-500">How to apply</span>
-                <h2 className="mt-3 text-[38px] font-bold leading-[1] tracking-[-.045em] text-white sm:text-[52px]">
+                <SplitText className="mt-3 text-[38px] font-bold leading-[1] tracking-[-.045em] text-white sm:text-[52px]">
                   Ready to <span className="text-brand-500">join us?</span>
-                </h2>
+                </SplitText>
                 <p className="mt-5 max-w-[440px] text-[16.5px] leading-[1.6] text-white/60">
                   No forms, no portals. Email your resume and a line about why the role fits you.
                 </p>

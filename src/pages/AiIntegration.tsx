@@ -4,6 +4,7 @@ import { Icon } from '../components/Icon'
 import { Faq } from '../components/sections/Faq'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { brand } from '../data/content'
+import { SplitText } from '../components/SplitText'
 
 const aiTechStack = [
   {
@@ -134,9 +135,9 @@ export function AiIntegration() {
       <section className="mx-auto max-w-[1320px] px-6 pt-20 sm:pt-28">
         <Reveal className="max-w-[720px]">
           <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-violet-600">Capabilities</span>
-          <h2 className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[38px]">
+          <SplitText className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[38px]">
             What We Build with Artificial Intelligence
-          </h2>
+          </SplitText>
           <p className="mt-4 text-[16.5px] leading-[1.65] text-muted">
             From customer service automation to intelligent document processing and semantic search, our AI engineering team builds production-ready solutions tailored to your workflow.
           </p>
@@ -174,9 +175,9 @@ export function AiIntegration() {
         <div className="rounded-[36px] border border-line bg-gradient-to-b from-white to-surface p-8 shadow-[0_10px_50px_rgba(0,0,0,.04)] sm:p-12">
           <Reveal className="max-w-[760px]">
             <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-violet-600">AI Stack</span>
-            <h2 className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[40px]">
+            <SplitText className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[40px]">
               Technologies & AI Frameworks We Use
-            </h2>
+            </SplitText>
             <p className="mt-4 text-[16.5px] leading-[1.65] text-muted">
               We leverage top-tier AI models, vector search engines, and orchestration frameworks to ensure low latency, high accuracy, and enterprise data privacy.
             </p>
@@ -206,9 +207,9 @@ export function AiIntegration() {
       <section className="mx-auto max-w-[1320px] px-6 pt-24 sm:pt-32">
         <Reveal className="max-w-[720px]">
           <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-violet-600">Use Cases</span>
-          <h2 className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[38px]">
+          <SplitText className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[38px]">
             Popular AI Integration Solutions
-          </h2>
+          </SplitText>
         </Reveal>
 
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -233,9 +234,9 @@ export function AiIntegration() {
             <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-600 text-white shadow-md">
               <Icon name="ai" color="#ffffff" size={24} />
             </span>
-            <h2 className="mt-6 text-[26px] font-bold leading-[1.15] tracking-[-.03em] text-ink sm:text-[34px]">
+            <SplitText className="mt-6 text-[26px] font-bold leading-[1.15] tracking-[-.03em] text-ink sm:text-[34px]">
               Supercharge Your Software with AI
-            </h2>
+            </SplitText>
             <p className="mt-3 text-[16px] leading-[1.65] text-muted">
               Talk to our AI engineers to discuss your custom use case, data security model, and API integration plan.
             </p>

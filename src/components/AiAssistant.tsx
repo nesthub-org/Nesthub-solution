@@ -100,28 +100,27 @@ function markGreeted() {
   }
 }
 
-// Say the greeting aloud when the visitor opens the site (typed URL, bookmark,
-// search result, another site) or refreshes it — but not when a link inside
-// the site loads a new page. The header/footer use plain <a> links, which
-// reload the page, so the assistant can't rely on staying mounted.
-function shouldGreetAloud(): boolean {
-  const nav = performance.getEntriesByType?.('navigation')[0] as PerformanceNavigationTiming | undefined
-  if (nav?.type === 'reload') return true
-  let internal = false
+// Say the greeting aloud once per visit (per browser tab): the first page the
+// visitor opens, never again as they move around the site. The header/footer
+// use plain <a> links, which reload the page, so this can't rely on the
+// assistant staying mounted — sessionStorage survives those reloads.
+function hasGreeted(): boolean {
   try {
-    internal = !!document.referrer && new URL(document.referrer).origin === window.location.origin
-  } catch {
-    // Unparseable referrer: treat as an outside visit.
-  }
-  if (!internal) return true
-  // Arrived via an in-site link. Still greet if she hasn't actually been heard
-  // yet in this tab (e.g. the visitor's very first click was that link, which
-  // unloaded the page before the greeting could play).
-  try {
-    return sessionStorage.getItem(GREETED_KEY) !== '1'
+    return sessionStorage.getItem(GREETED_KEY) === '1'
   } catch {
     return false
   }
+}
+
+// True when this click/tap is on a link that will unload the page. Starting
+// the greeting from that gesture would cut it off a moment later and leave it
+// "unheard", so it would restart on the next page — every page.
+function leavesPage(e: Event): boolean {
+  const link = (e.target as Element | null)?.closest?.('a[href]') as HTMLAnchorElement | null
+  if (!link || link.target === '_blank' || link.hasAttribute('download')) return false
+  const url = new URL(link.href, window.location.href)
+  if (url.origin !== window.location.origin) return true
+  return url.pathname !== window.location.pathname || url.search !== window.location.search
 }
 
 function ActionLink({ action }: { action: AssistantAction }) {
@@ -283,9 +282,8 @@ export function AiAssistant() {
     })
   }, [attachLipSync])
 
-  // Greeting: show the bubble, type the text out and say it — but only when
-  // the visitor opens or refreshes the site, not on every in-site page change
-  // (see shouldGreetAloud). Browsers refuse to play any sound before the
+  // Greeting: show the bubble, type the text out and say it — but only on the
+  // first page of the visit, not on every in-site page change (see hasGreeted). Browsers refuse to play any sound before the
   // visitor has interacted with the page, so if the first attempt is blocked,
   // say it on their first click / tap / keypress anywhere on the page instead.
   useEffect(() => {
@@ -294,7 +292,7 @@ export function AiAssistant() {
     // (speak() reads it synchronously).
     if ('speechSynthesis' in window) void loadVoices()
 
-    if (!shouldGreetAloud()) {
+    if (hasGreeted()) {
       // Moving around the site: keep the greeting on screen, but silently.
       const t = window.setTimeout(() => {
         setTyped(GREETING)
@@ -320,8 +318,9 @@ export function AiAssistant() {
 
       let done = false
       let inFlight = false
-      const attempt = () => {
+      const attempt = (e?: Event) => {
         if (done || inFlight || cancelled) return
+        if (e && leavesPage(e)) return
         inFlight = true
         void speak(SPOKEN_GREETING).then((ok) => {
           inFlight = false

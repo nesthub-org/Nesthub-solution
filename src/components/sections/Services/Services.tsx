@@ -2,6 +2,7 @@ import { Reveal } from '../../Reveal'
 import { BackgroundGrid } from './BackgroundGrid'
 import { ServiceCard } from './ServiceCard'
 import { services } from '../../../data/content'
+import { SplitText } from '../../SplitText'
 
 export function Services() {
   return (
@@ -11,9 +12,9 @@ export function Services() {
       <Reveal>
         <div className="max-w-[760px]">
           <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Services</span>
-          <h2 className="mt-4 text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em]">
+          <SplitText className="mt-4 text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em]">
             Services That Deliver
-          </h2>
+          </SplitText>
           <p className="mt-4.5 text-[17px] sm:text-[18px] leading-[1.6] text-muted">
             One senior team across strategy, design, engineering and growth — no handoffs, no agencies inside
             agencies.

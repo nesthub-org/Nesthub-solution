@@ -3,6 +3,7 @@ import { Reveal } from '../Reveal'
 import { Icon } from '../Icon'
 import { steps, processHighlights, type ServiceAccent } from '../../data/content'
 import { tones } from './Services/tones'
+import { SplitText } from '../SplitText'
 
 // Cycles the same accent palette Services uses so each step reads as its own
 // stop along the process rather than six identical gray boxes.
@@ -17,9 +18,9 @@ export function Process() {
           <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Our Process</span>
           <span className="h-px w-10 bg-line sm:w-14" />
         </div>
-        <h2 className="mt-4 text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em]">
+        <SplitText className="mt-4 text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em]">
           Six steps. No surprises<span className="text-brand-500">.</span>
-        </h2>
+        </SplitText>
         <p className="text-pretty mt-4 text-[16px] sm:text-[17px] leading-[1.6] text-muted">
           A clear, proven process that keeps your project on track from start to success.
         </p>

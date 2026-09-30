@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Reveal } from '../Reveal'
 import { TiltCard } from '../TiltCard'
 import { team } from '../../data/content'
+import { SplitText } from '../SplitText'
 
 export function Team() {
   // A member whose photo 404s falls back to the initials mark rather than a broken-image icon.
@@ -12,9 +13,9 @@ export function Team() {
     <section id="team" className="mx-auto max-w-[1320px] px-6 pt-28 sm:pt-32">
       <Reveal className="mx-auto max-w-[820px] text-center">
         <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Our team</span>
-        <h2 className="mt-4 text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em] text-balance">
+        <SplitText className="mt-4 text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em] text-balance">
           Team Behind Wonders
-        </h2>
+        </SplitText>
         <p className="text-pretty mt-5 text-[17px] sm:text-[18px] leading-[1.65] text-muted">
           A small, senior crew from Jaipur — the same people who scope your project are the ones who build it.
         </p>

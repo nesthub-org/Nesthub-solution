@@ -4,6 +4,7 @@ import { Icon } from '../components/Icon'
 import { Faq } from '../components/sections/Faq'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { brand, projects } from '../data/content'
+import { SplitText } from '../components/SplitText'
 
 // Technologies used in NestHub Solution's web projects
 const webTechStack = [
@@ -248,9 +249,9 @@ export function WebsiteDevelopment() {
       <section className="mx-auto max-w-[1320px] px-6 pt-20 sm:pt-28">
         <Reveal className="max-w-[720px]">
           <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Overview</span>
-          <h2 className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[38px]">
+          <SplitText className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[38px]">
             What is Website Development?
-          </h2>
+          </SplitText>
           <p className="mt-4 text-[16.5px] leading-[1.65] text-muted">
             Website development is far more than putting images and text on a screen. It encompasses the end-to-end engineering discipline of creating, structuring, coding, and maintaining web portals and applications that operate smoothly on any web browser worldwide.
           </p>
@@ -288,9 +289,9 @@ export function WebsiteDevelopment() {
         <div className="rounded-[36px] border border-line bg-gradient-to-b from-white to-surface p-8 shadow-[0_10px_50px_rgba(0,0,0,.04)] sm:p-12">
           <Reveal className="max-w-[760px]">
             <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Tech Stack</span>
-            <h2 className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[40px]">
+            <SplitText className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[40px]">
               Technologies Used in Our Web Projects
-            </h2>
+            </SplitText>
             <p className="mt-4 text-[16.5px] leading-[1.65] text-muted">
               We leverage modern, industry-standard frameworks, programming languages, build tools, and cloud platforms to build web applications that perform seamlessly under heavy traffic.
             </p>
@@ -320,9 +321,9 @@ export function WebsiteDevelopment() {
       <section className="mx-auto max-w-[1320px] px-6 pt-24 sm:pt-32">
         <Reveal className="max-w-[720px]">
           <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Solutions</span>
-          <h2 className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[38px]">
+          <SplitText className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[38px]">
             Comprehensive Website Development Solutions
-          </h2>
+          </SplitText>
           <p className="mt-4 text-[16.5px] leading-[1.65] text-muted">
             Whether you need a high-converting landing page, an e-commerce storefront, or a complex web portal, we architect solutions tailored specifically to your business goals.
           </p>
@@ -361,9 +362,9 @@ export function WebsiteDevelopment() {
       <section className="mx-auto max-w-[1320px] px-6 pt-24 sm:pt-32">
         <Reveal className="max-w-[720px]">
           <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Portfolio</span>
-          <h2 className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[38px]">
+          <SplitText className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[38px]">
             Websites Built by NestHub Solution
-          </h2>
+          </SplitText>
           <p className="mt-4 text-[16.5px] leading-[1.65] text-muted">
             Explore live production websites engineered for our clients across e-commerce, health & wellness, trading platforms, and SaaS.
           </p>
@@ -407,9 +408,9 @@ export function WebsiteDevelopment() {
             <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-500 text-white shadow-md">
               <Icon name="rocket" color="#ffffff" size={24} />
             </span>
-            <h2 className="mt-6 text-[26px] font-bold leading-[1.15] tracking-[-.03em] text-ink sm:text-[34px]">
+            <SplitText className="mt-6 text-[26px] font-bold leading-[1.15] tracking-[-.03em] text-ink sm:text-[34px]">
               Ready to Build Your Website with NestHub?
-            </h2>
+            </SplitText>
             <p className="mt-3 text-[16px] leading-[1.65] text-muted">
               Get in touch with our engineering team for a free quote, scope review, and technical proposal.
             </p>

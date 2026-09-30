@@ -4,6 +4,7 @@ import { Icon } from '../components/Icon'
 import { Faq } from '../components/sections/Faq'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { brand } from '../data/content'
+import { SplitText } from '../components/SplitText'
 
 const seoTechStack = [
   {
@@ -140,9 +141,9 @@ export function SeoDigitalMarketing() {
       <section className="mx-auto max-w-[1320px] px-6 pt-20 sm:pt-28">
         <Reveal className="max-w-[720px]">
           <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-teal-600">Growth Services</span>
-          <h2 className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[38px]">
+          <SplitText className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[38px]">
             Comprehensive SEO & Marketing Solutions
-          </h2>
+          </SplitText>
         </Reveal>
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -177,9 +178,9 @@ export function SeoDigitalMarketing() {
         <div className="rounded-[36px] border border-line bg-gradient-to-b from-white to-surface p-8 shadow-[0_10px_50px_rgba(0,0,0,.04)] sm:p-12">
           <Reveal className="max-w-[760px]">
             <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-teal-600">Marketing Toolkit</span>
-            <h2 className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[40px]">
+            <SplitText className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[40px]">
               Tools & Platforms We Utilize
-            </h2>
+            </SplitText>
           </Reveal>
 
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -209,9 +210,9 @@ export function SeoDigitalMarketing() {
             <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-600 text-white shadow-md">
               <Icon name="seo" color="#ffffff" size={24} />
             </span>
-            <h2 className="mt-6 text-[26px] font-bold leading-[1.15] tracking-[-.03em] text-ink sm:text-[34px]">
+            <SplitText className="mt-6 text-[26px] font-bold leading-[1.15] tracking-[-.03em] text-ink sm:text-[34px]">
               Ready to Grow Your Organic Traffic?
-            </h2>
+            </SplitText>
             <p className="mt-3 text-[16px] leading-[1.65] text-muted">
               Request a comprehensive technical SEO & keyword analysis for your website today.
             </p>

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useRef } from 'react'
-import { motion, useScroll, useTransform, type Variants } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { Reveal } from '../Reveal'
+import { SplitText } from '../SplitText'
 import { HeroBackground } from '../HeroBackground'
 import { useMountAfterHydration } from '../../hooks/usePrerendering'
 import { heroBadge } from '../../data/content'
@@ -8,17 +9,6 @@ import { heroBadge } from '../../data/content'
 // three.js/r3f/drei is the heaviest dependency in the bundle — load it off
 // the critical path so it never blocks first paint or input responsiveness.
 const HeroScene = lazy(() => import('../three/HeroScene').then((m) => ({ default: m.HeroScene })))
-
-const headline = ['Websites', 'Powered', 'By']
-
-const wordContainer: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
-}
-const wordItem: Variants = {
-  hidden: { opacity: 0, y: 18, rotateX: 25 },
-  show: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
-}
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -65,23 +55,14 @@ export function Hero() {
           </div>
         </Reveal>
 
-        <motion.h1
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: '-10% 0px -8% 0px' }}
-          variants={wordContainer}
-          style={{ perspective: 800 }}
+        <SplitText
+          as="h1"
+          delay={0.1}
+          stagger={0.08}
           className="text-balance mt-7 text-[42px] leading-[1.05] font-bold tracking-[-.035em] text-white sm:text-[56px] lg:text-[68px]"
         >
-          {headline.map((word, i) => (
-            <motion.span key={i} variants={wordItem} className="mr-[0.28em] inline-block">
-              {word}
-            </motion.span>
-          ))}
-          <motion.span variants={wordItem} className="text-shimmer inline-block">
-            Intelligent AI
-          </motion.span>
-        </motion.h1>
+          Websites Powered By <span className="text-shimmer inline-block">Intelligent AI</span>
+        </SplitText>
 
         <Reveal delay={0.1}>
           <p className="text-pretty mx-auto mt-6 max-w-[620px] text-[18px] font-medium leading-[1.55] text-white/65 sm:text-[20px]">

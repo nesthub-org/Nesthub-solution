@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Reveal } from '../Reveal'
+import { Parallax } from '../Parallax'
 import { getDomain } from '../../utils/url'
 import { projects, projectKinds, type Project, type ProjectKind } from '../../data/content'
+import { SplitText } from '../SplitText'
 
 type Filter = 'all' | ProjectKind
 
@@ -25,9 +27,9 @@ export function Work() {
         <div className="flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
           <div>
             <span className="text-[13px] font-semibold text-brand-500">Selected work</span>
-            <h2 className="mt-2 text-[34px] font-bold leading-[1.05] tracking-[-.04em] sm:text-[46px] lg:text-[56px]">
+            <SplitText className="mt-2 text-[34px] font-bold leading-[1.05] tracking-[-.04em] sm:text-[46px] lg:text-[56px]">
               Projects we're proud of
-            </h2>
+            </SplitText>
           </div>
 
           {filters.length > 2 && (
@@ -105,7 +107,9 @@ function ProjectRow({ project: p, index }: { project: Project; index: number }) 
   return (
     <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
       <div className={flip ? 'lg:order-2' : undefined}>
-        <BrowserFrame project={p} />
+        <Parallax offset={flip ? -40 : 40}>
+          <BrowserFrame project={p} />
+        </Parallax>
       </div>
 
       <div className={flip ? 'lg:order-1' : undefined}>

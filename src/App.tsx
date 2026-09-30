@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { ScrollToTop } from './components/ScrollToTop'
+import { SmoothScroll } from './components/SmoothScroll'
 import { WhatsAppButton } from './components/WhatsAppButton'
 import { AiAssistant } from './components/AiAssistant'
 import { Home } from './pages/Home'
@@ -17,6 +18,7 @@ import { UiUxDesign } from './pages/UiUxDesign'
 function App() {
   return (
     <>
+      <SmoothScroll />
       <ScrollToTop />
       <Header />
       <Routes>

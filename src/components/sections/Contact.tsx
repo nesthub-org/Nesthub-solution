@@ -2,6 +2,7 @@ import { useState, type FormEvent, type InputHTMLAttributes, type TextareaHTMLAt
 import { motion, AnimatePresence } from 'framer-motion'
 import { Reveal } from '../Reveal'
 import { brand, needs } from '../../data/content'
+import { SplitText } from '../SplitText'
 
 // Same visual language MUI's outlined TextField gave us (14px radius, hairline
 // border, brand-blue focus ring) — reproduced in plain Tailwind so the form no
@@ -100,9 +101,9 @@ export function Contact() {
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-16 px-6 py-24 sm:py-28 lg:grid-cols-[.9fr_1.1fr] lg:gap-18">
         <Reveal>
           <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Contact us</span>
-          <h2 className="mt-4 text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em]">
+          <SplitText className="mt-4 text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em]">
             Or Send Us a Message
-          </h2>
+          </SplitText>
           <p className="mt-4.5 max-w-[460px] text-[17px] sm:text-[18px] leading-[1.6] text-muted">
             Have an idea? We'd love to hear about it.
           </p>

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Reveal } from '../Reveal'
 import { faqs } from '../../data/content'
+import { SplitText } from '../SplitText'
 
 const PER_PAGE = 3
 const totalPages = Math.ceil(faqs.length / PER_PAGE)
@@ -21,9 +22,9 @@ export function Faq() {
     <section id="faq" className="mx-auto max-w-[860px] px-6 pt-28 sm:pt-32">
       <Reveal className="text-center">
         <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">FAQ</span>
-        <h2 className="mt-4 text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em]">
+        <SplitText className="mt-4 text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em]">
           Questions, answered
-        </h2>
+        </SplitText>
         <p className="text-pretty mx-auto mt-4 max-w-[560px] text-[17px] leading-[1.6] text-muted">
           Everything you need to know before booking a call — don't see yours, just ask.
         </p>

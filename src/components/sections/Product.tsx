@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Reveal } from '../Reveal'
 import { brand, qrFeatures } from '../../data/content'
 import scanitPhone from '../../assets/scanit-phone.webp'
+import { SplitText } from '../SplitText'
 
 const STEP_MS = 3200
 
@@ -30,11 +31,11 @@ export function Product() {
           <div className="relative grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.05fr_.95fr] lg:gap-10">
             <div>
               <span className="text-[13px] font-semibold text-brand-500">Our product for restaurants</span>
-              <h2 className="mt-4 text-[46px] font-bold leading-[.98] tracking-[-.045em] text-white sm:text-[62px] lg:text-[70px]">
+              <SplitText className="mt-4 text-[46px] font-bold leading-[.98] tracking-[-.045em] text-white sm:text-[62px] lg:text-[70px]">
                 QR scan.
                 <br />
                 <span className="text-brand-500">Order.</span> Done.
-              </h2>
+              </SplitText>
               <p className="mt-6 max-w-[470px] text-[16.5px] leading-[1.6] text-white/60">
                 A contactless menu and ordering system for cafés, restaurants and food courts. Guests scan the QR at
                 their table, with no app to install, and your kitchen sees the order instantly.

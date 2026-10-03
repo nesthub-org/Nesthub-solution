@@ -1,5 +1,7 @@
-// Base URL of the Express backend (no trailing slash), e.g. https://api.nesthubsolution.in
-export const API_URL = ((import.meta.env.VITE_API_URL as string | undefined) || 'http://localhost:8000').replace(/\/$/, '')
+import { environment } from '../config/environment'
+
+// Base URL of the Express backend (no trailing slash) — see src/config/environment.ts
+export const API_URL = environment.apiUrl.replace(/\/$/, '')
 
 export class ApiError extends Error {
   status: number

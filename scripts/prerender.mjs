@@ -9,7 +9,7 @@
 // Blog posts live in the backend, so their routes are fetched from the API
 // at build time and also appended to dist/sitemap.xml. Publishing a post
 // re-triggers this build (backend/utils/triggerSiteRebuild.js).
-import { loadEnv, preview } from 'vite'
+import { preview } from 'vite'
 import { chromium } from 'playwright-chromium'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
@@ -22,14 +22,11 @@ const routes = [
   { path: '/case-studies', out: 'case-studies/index.html' },
 ]
 
-const env = { ...loadEnv('production', process.cwd(), 'VITE_'), ...process.env }
-const apiUrl = (env.VITE_API_URL || '').replace(/\/$/, '')
+// Must match PROD_API_URL in src/config/environment.ts. PRERENDER_API_URL can
+// point a local build at another backend (e.g. http://localhost:3000).
+const apiUrl = (process.env.PRERENDER_API_URL || 'https://api.nestsphere.in').replace(/\/$/, '')
 
 async function fetchPublishedPosts() {
-  if (!apiUrl) {
-    console.warn('prerender: VITE_API_URL is not set — skipping blog prerender')
-    return null
-  }
   try {
     const res = await fetch(`${apiUrl}/blog/v1/blog/sitemap`, { signal: AbortSignal.timeout(20000) })
     const body = await res.json()
@@ -62,9 +59,12 @@ const page = await browser.newPage()
 // to skip rendering, so the snapshot doesn't bake in "resolved" content a
 // real visitor's first paint can't possibly match yet. Runs before any page
 // script, so it's set for every route below.
-await page.addInitScript(() => {
+// The snapshot is captured on localhost, which src/config/environment.ts would
+// otherwise map to the local API — point it at the same backend as above.
+await page.addInitScript((url) => {
   window.__PRERENDER__ = true
-})
+  window.__API_URL__ = url
+}, apiUrl)
 
 const prerenderedBlogPaths = new Set()
 

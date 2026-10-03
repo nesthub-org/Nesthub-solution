@@ -34,9 +34,6 @@ jobs:
 
       - name: Build project
         run: npm run build
-        env:
-          # Repo → Settings → Secrets and variables → Actions → Variables
-          VITE_API_URL: ${{ vars.VITE_API_URL }}
 
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

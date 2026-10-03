@@ -40,6 +40,7 @@ export const navLinks = [
   { href: '/#faq', label: 'FAQ' },
   { href: '/#contact', label: 'Contact' },
   { href: '/careers', label: 'Careers' },
+  { href: '/blog', label: 'Blog' },
 ]
 
 export const productMockup = scanitMockup
@@ -534,6 +535,7 @@ export const footerLinks = {
     { href: '/#about', label: 'About' },
     { href: '/#contact', label: 'Contact' },
     { href: '/careers', label: 'Careers' },
+    { href: '/blog', label: 'Blog' },
   ],
   services: [
     { href: '/#services', label: 'AI Integration' },

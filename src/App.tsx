@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { ScrollToTop } from './components/ScrollToTop'
@@ -14,8 +15,33 @@ import { MobileAppDevelopment } from './pages/MobileAppDevelopment'
 import { SeoDigitalMarketing } from './pages/SeoDigitalMarketing'
 import { SocialMediaMarketing } from './pages/SocialMediaMarketing'
 import { UiUxDesign } from './pages/UiUxDesign'
+import { Blog } from './pages/Blog'
+import { BlogPost } from './pages/BlogPost'
+
+const AdminApp = lazy(() => import('./pages/admin/AdminApp'))
+
+function AdminFallback() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-surface">
+      <div className="h-8 w-8 animate-spin rounded-full border-2 border-line border-t-brand-500" />
+    </div>
+  )
+}
 
 function App() {
+  const { pathname } = useLocation()
+
+  // The admin panel has its own chrome — no marketing header/footer/widgets
+  if (pathname === '/admin' || pathname.startsWith('/admin/')) {
+    return (
+      <Suspense fallback={<AdminFallback />}>
+        <Routes>
+          <Route path="/admin/*" element={<AdminApp />} />
+        </Routes>
+      </Suspense>
+    )
+  }
+
   return (
     <>
       <SmoothScroll />
@@ -32,6 +58,8 @@ function App() {
         <Route path="/services/seo-digital-marketing" element={<SeoDigitalMarketing />} />
         <Route path="/services/social-media-marketing" element={<SocialMediaMarketing />} />
         <Route path="/services/ui-ux-design" element={<UiUxDesign />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
       </Routes>
       <Footer />
       <WhatsAppButton />

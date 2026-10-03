@@ -5,6 +5,15 @@ on:
     branches:
       - main
   workflow_dispatch:
+  # Fired by the backend when a blog post is published/updated/deleted, so the
+  # new post gets prerendered HTML + a sitemap entry (backend/utils/triggerSiteRebuild.js)
+  repository_dispatch:
+    types: [blog-updated]
+
+# A newer build supersedes one still running
+concurrency:
+  group: deploy
+  cancel-in-progress: true
 
 jobs:
   build-and-deploy:
@@ -25,6 +34,9 @@ jobs:
 
       - name: Build project
         run: npm run build
+        env:
+          # Repo → Settings → Secrets and variables → Actions → Variables
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
 
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

@@ -87,6 +87,9 @@ export function Footer() {
           <a href="/#top" className="text-[14.5px] text-muted hover:text-ink transition-colors">
             Terms
           </a>
+          <a href="/admin/login" rel="nofollow" className="text-[14.5px] text-muted hover:text-ink transition-colors">
+            Admin login
+          </a>
         </span>
       </div>
     </footer>

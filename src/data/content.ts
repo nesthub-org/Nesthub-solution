@@ -32,13 +32,13 @@ export const brand = {
 }
 
 export const navLinks = [
-  { href: '/#services', label: 'Services' },
-  { href: '/#work', label: 'Portfolio' },
-  { href: '/#product', label: 'Product' },
-  { href: '/#process', label: 'Process' },
-  { href: '/#about', label: 'About' },
-  { href: '/#faq', label: 'FAQ' },
-  { href: '/#contact', label: 'Contact' },
+  { href: '/services', label: 'Services' },
+  { href: '/portfolio', label: 'Portfolio' },
+  { href: '/product', label: 'Product' },
+  { href: '/process', label: 'Process' },
+  { href: '/about', label: 'About' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/contact', label: 'Contact' },
   { href: '/careers', label: 'Careers' },
   { href: '/blog', label: 'Blog' },
 ]
@@ -528,20 +528,26 @@ export const team: TeamMember[] = [
 
 export const footerLinks = {
   quick: [
-    { href: '/#top', label: 'Home' },
-    { href: '/#services', label: 'Services' },
-    { href: '/#work', label: 'Portfolio' },
+    { href: '/', label: 'Home' },
+    { href: '/services', label: 'Services' },
+    { href: '/portfolio', label: 'Portfolio' },
     { href: '/case-studies', label: 'Case Studies' },
-    { href: '/#about', label: 'About' },
-    { href: '/#contact', label: 'Contact' },
+    { href: '/product', label: 'Product' },
+    { href: '/process', label: 'Process' },
+    { href: '/about', label: 'About' },
+    { href: '/faq', label: 'FAQ' },
+    { href: '/contact', label: 'Contact' },
     { href: '/careers', label: 'Careers' },
     { href: '/blog', label: 'Blog' },
   ],
   services: [
-    { href: '/#services', label: 'AI Integration' },
-    { href: '/#services', label: 'Website Development' },
-    { href: '/#services', label: 'UI/UX Design' },
-    { href: '/#services', label: 'SEO & Digital Marketing' },
+    { href: '/services/ai-integration', label: 'AI Integration' },
+    { href: '/services/website-development', label: 'Website Development' },
+    { href: '/services/mobile-app-development', label: 'Mobile App Development' },
+    { href: '/services/ui-ux-design', label: 'UI/UX Design' },
+    { href: '/services/seo-digital-marketing', label: 'SEO & Digital Marketing' },
+    { href: '/services/social-media-marketing', label: 'Social Media Marketing' },
+    { href: '/services', label: 'All services →' },
   ],
 }
 

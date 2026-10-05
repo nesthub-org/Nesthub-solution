@@ -92,7 +92,7 @@ export function Footer() {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <motion.a
-              href="/#contact"
+              href="/contact"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-[15px] font-semibold text-ink"

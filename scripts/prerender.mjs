@@ -20,6 +20,7 @@ const routes = [
   { path: '/', out: 'index.html' },
   { path: '/careers', out: 'careers/index.html' },
   { path: '/case-studies', out: 'case-studies/index.html' },
+  ...['services', 'portfolio', 'product', 'process', 'about', 'faq', 'contact'].map((p) => ({ path: `/${p}`, out: `${p}/index.html` })),
 ]
 
 // Must match PROD_API_URL in src/config/environment.ts. PRERENDER_API_URL can

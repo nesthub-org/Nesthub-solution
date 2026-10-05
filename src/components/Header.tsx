@@ -1,10 +1,13 @@
 import { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { navLinks } from '../data/content'
 import { Logo, LogoFallback } from './Logo'
 
 export function Header() {
   const [open, setOpen] = useState(false)
+  const { pathname } = useLocation()
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
 
   return (
     <header className="fixed top-2.5 left-0 right-0 z-[60] px-4 sm:top-[18px] sm:px-6">
@@ -26,8 +29,9 @@ export function Header() {
               href={l.href}
               initial="rest"
               whileHover="hover"
-              animate="rest"
-              className="relative text-[15px] font-medium text-muted hover:text-ink transition-colors"
+              animate={isActive(l.href) ? 'hover' : 'rest'}
+              aria-current={isActive(l.href) ? 'page' : undefined}
+              className={`relative text-[15px] font-medium transition-colors hover:text-ink ${isActive(l.href) ? 'text-ink' : 'text-muted'}`}
             >
               {l.label}
               <motion.span
@@ -42,7 +46,7 @@ export function Header() {
 
         <div className="hidden md:flex items-center gap-2">
           <motion.a
-            href="/#contact"
+            href="/contact"
             whileHover={{ y: -1, backgroundColor: '#1D4ED8' }}
             className="h-11 px-5 flex items-center rounded-[14px] bg-brand-500 text-white text-[16px] font-semibold shadow-[0_6px_18px_rgba(37,99,235,.22)]"
           >
@@ -87,13 +91,13 @@ export function Header() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-xl px-3 py-3 text-[15px] font-medium text-ink hover:bg-surface"
+                  className={`rounded-xl px-3 py-3 text-[15px] font-medium hover:bg-surface ${isActive(l.href) ? 'bg-surface text-brand-500' : 'text-ink'}`}
                 >
                   {l.label}
                 </a>
               ))}
               <a
-                href="/#contact"
+                href="/contact"
                 onClick={() => setOpen(false)}
                 className="mt-2 flex h-12 items-center justify-center rounded-[14px] bg-brand-500 text-[16px] font-semibold text-white"
               >

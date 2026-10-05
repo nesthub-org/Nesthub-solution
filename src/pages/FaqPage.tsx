@@ -1,4 +1,6 @@
 import { useMemo, useState } from 'react'
+import { JsonLd } from '../components/JsonLd'
+import { breadcrumb, graph, webPage, faqPage } from '../lib/schema'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
 import { PageCta, PageHero, PrimaryButton, GhostButton } from '../components/PageHero'
@@ -60,11 +62,23 @@ function highlight(text: string, q: string) {
   )
 }
 
+const schema = graph(
+  webPage({
+    path: '/faq',
+    name: 'FAQ — NestHub Solution',
+    description: 'Answers about NestHub Solution: pricing, project timelines, AI integration, mobile apps, payments, ownership and support.',
+    speakable: ['h1', '.page-summary'],
+  }),
+  faqPage('/faq', categorised),
+  breadcrumb([{ name: 'FAQ', path: '/faq' }]),
+)
+
 export function FaqPage() {
   useDocumentTitle(
     'FAQ — Pricing, Timelines & Services | NestHub Solution',
     'Answers about NestHub Solution: pricing, project timelines, AI integration, mobile apps, payments, ownership and support.',
     '/faq',
+    'website cost India, how long to build a website, web development FAQ, NestHub Solution questions',
   )
   const [cat, setCat] = useState<(typeof categories)[number]>('All')
   const [query, setQuery] = useState('')
@@ -77,6 +91,7 @@ export function FaqPage() {
 
   return (
     <main id="top" className="relative z-[1] pb-4 pt-32 sm:pt-40">
+      <JsonLd data={schema} />
       <PageHero
         crumb="FAQ"
         eyebrow={`${categorised.length} answers`}

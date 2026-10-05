@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion'
+import { JsonLd } from '../components/JsonLd'
+import { servicePageSchema } from '../lib/schema'
 import { Reveal } from '../components/Reveal'
 import { Icon } from '../components/Icon'
 import { Faq } from '../components/sections/Faq'
@@ -75,6 +77,7 @@ export function AiIntegration() {
 
   return (
     <main id="top" className="relative z-[1] pb-16 pt-32 sm:pt-36">
+      <JsonLd data={servicePageSchema('/services/ai-integration', 'AI Integration & Intelligent Automation — NestHub Solution', 'Embed cutting-edge AI chatbots, RAG vector search, automated LLM workflows, and predictive analytics into your web and mobile applications with NestHub Solution.')} />
       <section className="mx-auto max-w-[1320px] px-6">
         <Reveal className="max-w-[840px]">
           <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-[.08em] text-violet-600">

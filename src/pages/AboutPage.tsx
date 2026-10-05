@@ -1,4 +1,7 @@
 import { motion } from 'framer-motion'
+import { JsonLd } from '../components/JsonLd'
+import { breadcrumb, graph, webPage, BUSINESS_ID } from '../lib/schema'
+import { SITE_URL } from '../lib/blog'
 import { Reveal } from '../components/Reveal'
 import { Icon } from '../components/Icon'
 import { Team } from '../components/sections/Team'
@@ -6,7 +9,7 @@ import { TrustBar } from '../components/sections/TrustBar'
 import { Partners } from '../components/sections/Partners'
 import { PageCta, PageHero, PrimaryButton, GhostButton, SectionHead } from '../components/PageHero'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
-import { aboutIntro, brand, values } from '../data/content'
+import { aboutIntro, brand, team, values } from '../data/content'
 
 const story = [
   { year: '2025', title: 'NestHub is founded', body: 'Started in Jaipur with one idea: senior people doing the work themselves, no hand-offs.' },
@@ -22,15 +25,36 @@ const principles = [
   { n: '04', title: 'We stick around', body: 'Launch is the start. Most of our clients stay on for support and growth work.' },
 ]
 
+const schema = graph(
+  webPage({
+    type: 'AboutPage',
+    path: '/about',
+    name: 'About NestHub Solution',
+    description: aboutIntro,
+    speakable: ['h1', '.page-summary'],
+    extra: { mainEntity: { '@id': BUSINESS_ID } },
+  }),
+  ...team.map((m) => ({
+    '@type': 'Person',
+    name: m.name.replace(/^(Mr|Mrs|Ms|Miss)\.\s*/, ''),
+    jobTitle: m.role,
+    worksFor: { '@id': BUSINESS_ID },
+    ...(m.img && { image: `${SITE_URL}${m.img}` }),
+  })),
+  breadcrumb([{ name: 'About', path: '/about' }]),
+)
+
 export function AboutPage() {
   useDocumentTitle(
     'About NestHub Solution — Web Development Studio in Jaipur',
     'Meet NestHub Solution: a senior web, AI and app development studio from Jaipur, founded in 2025, building for businesses across India.',
     '/about',
+    'about NestHub Solution, web development company Jaipur, web agency team Jaipur, digital agency Rajasthan',
   )
 
   return (
     <main id="top" className="relative z-[1] pb-4 pt-32 sm:pt-40">
+      <JsonLd data={schema} />
       <PageHero
         crumb="About"
         eyebrow={`Est. ${brand.founded} · ${brand.location}`}

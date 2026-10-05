@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion'
+import { JsonLd } from '../components/JsonLd'
+import { servicePageSchema } from '../lib/schema'
 import { Reveal } from '../components/Reveal'
 import { Icon } from '../components/Icon'
 import { Faq } from '../components/sections/Faq'
@@ -81,6 +83,7 @@ export function SocialMediaMarketing() {
 
   return (
     <main id="top" className="relative z-[1] pb-16 pt-32 sm:pt-36">
+      <JsonLd data={servicePageSchema('/services/social-media-marketing', 'Social Media Marketing Services — NestHub Solution', 'Build brand authority, engaging video reels, targeted Meta & LinkedIn ad campaigns, and community growth with NestHub Solution.')} />
       <section className="mx-auto max-w-[1320px] px-6">
         <Reveal className="max-w-[840px]">
           <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-[.08em] text-amber-600">

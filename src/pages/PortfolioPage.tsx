@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { JsonLd } from '../components/JsonLd'
+import { breadcrumb, graph, webPage, BUSINESS_ID } from '../lib/schema'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Partners } from '../components/sections/Partners'
 import { Testimonials } from '../components/sections/Testimonials'
@@ -15,17 +17,47 @@ const filters: { id: Filter; label: string }[] = [
   ...projectKinds.filter((k) => projects.some((p) => p.kinds.includes(k.id))),
 ]
 
+const schema = graph(
+  webPage({
+    type: 'CollectionPage',
+    path: '/portfolio',
+    name: 'Portfolio — NestHub Solution',
+    description: 'Selected websites, e-commerce stores, apps and AI platforms built by NestHub Solution for brands across India.',
+    speakable: ['h1', '.page-summary'],
+  }),
+  {
+    '@type': 'ItemList',
+    name: 'NestHub Solution portfolio',
+    itemListElement: projects.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'CreativeWork',
+        name: p.title,
+        description: p.body,
+        genre: p.category,
+        keywords: p.tags.join(', '),
+        url: p.href,
+        creator: { '@id': BUSINESS_ID },
+      },
+    })),
+  },
+  breadcrumb([{ name: 'Portfolio', path: '/portfolio' }]),
+)
+
 export function PortfolioPage() {
   useDocumentTitle(
     'Portfolio — Websites, Apps & AI Projects | NestHub Solution',
     'Selected websites, e-commerce stores, apps and AI platforms built by NestHub Solution for brands across India.',
     '/portfolio',
+    'web development portfolio Jaipur, website design examples India, e-commerce website portfolio, NestHub Solution projects',
   )
   const [filter, setFilter] = useState<Filter>('all')
   const shown = filter === 'all' ? projects : projects.filter((p) => p.kinds.includes(filter))
 
   return (
     <main id="top" className="relative z-[1] pb-4 pt-32 sm:pt-40">
+      <JsonLd data={schema} />
       <PageHero
         crumb="Portfolio"
         eyebrow="Selected work"

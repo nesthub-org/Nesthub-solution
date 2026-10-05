@@ -99,10 +99,16 @@
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": ["ProfessionalService", "LocalBusiness"],
+        "@type": [
+          "ProfessionalService",
+          "LocalBusiness"
+        ],
         "@id": "https://nesthubsolution.in/#business",
         "name": "NestHub Solution",
-        "alternateName": ["NextGen TechSol", "NestHub"],
+        "alternateName": [
+          "NextGen TechSol",
+          "NestHub"
+        ],
         "url": "https://nesthubsolution.in",
         "logo": {
           "@type": "ImageObject",
@@ -136,7 +142,10 @@
           "telephone": "+91-8188941304",
           "email": "contact@nesthubsolution.in",
           "contactType": "customer service",
-          "availableLanguage": ["English", "Hindi"],
+          "availableLanguage": [
+            "English",
+            "Hindi"
+          ],
           "areaServed": "IN"
         },
         "email": "contact@nesthubsolution.in",
@@ -146,23 +155,65 @@
         "paymentAccepted": "Bank Transfer, UPI, Credit Card",
         "openingHoursSpecification": {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
           "opens": "10:00",
           "closes": "19:00"
         },
         "areaServed": [
-          { "@type": "City", "name": "Jaipur" },
-          { "@type": "City", "name": "Delhi" },
-          { "@type": "City", "name": "Mumbai" },
-          { "@type": "City", "name": "Bangalore" },
-          { "@type": "City", "name": "Hyderabad" },
-          { "@type": "City", "name": "Pune" },
-          { "@type": "City", "name": "Chennai" },
-          { "@type": "City", "name": "Kolkata" },
-          { "@type": "City", "name": "Ahmedabad" },
-          { "@type": "City", "name": "Noida" },
-          { "@type": "City", "name": "Gurugram" },
-          { "@type": "Country", "name": "India" }
+          {
+            "@type": "City",
+            "name": "Jaipur"
+          },
+          {
+            "@type": "City",
+            "name": "Delhi"
+          },
+          {
+            "@type": "City",
+            "name": "Mumbai"
+          },
+          {
+            "@type": "City",
+            "name": "Bangalore"
+          },
+          {
+            "@type": "City",
+            "name": "Hyderabad"
+          },
+          {
+            "@type": "City",
+            "name": "Pune"
+          },
+          {
+            "@type": "City",
+            "name": "Chennai"
+          },
+          {
+            "@type": "City",
+            "name": "Kolkata"
+          },
+          {
+            "@type": "City",
+            "name": "Ahmedabad"
+          },
+          {
+            "@type": "City",
+            "name": "Noida"
+          },
+          {
+            "@type": "City",
+            "name": "Gurugram"
+          },
+          {
+            "@type": "Country",
+            "name": "India"
+          }
         ],
         "sameAs": [
           "https://www.instagram.com/nesthubsolution",
@@ -193,8 +244,12 @@
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Custom Web Development",
-                "description": "Bespoke websites and web applications built with React, Next.js, TypeScript, and modern frameworks — for businesses in Jaipur, Delhi, Mumbai, and across India."
+                "name": "Website Development",
+                "description": "Bespoke websites and web applications built with React, Next.js, TypeScript, and modern frameworks — for businesses in Jaipur, Delhi, Mumbai, and across India.",
+                "url": "https://nesthubsolution.in/services/website-development",
+                "provider": {
+                  "@id": "https://nesthubsolution.in/#business"
+                }
               }
             },
             {
@@ -202,7 +257,23 @@
               "itemOffered": {
                 "@type": "Service",
                 "name": "AI Integration",
-                "description": "AI-powered features for websites: chatbots, smart search, product recommendations, and business process automation."
+                "description": "AI-powered features for websites: chatbots, smart search, product recommendations, and business process automation.",
+                "url": "https://nesthubsolution.in/services/ai-integration",
+                "provider": {
+                  "@id": "https://nesthubsolution.in/#business"
+                }
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Mobile App Development",
+                "description": "Native and cross-platform Android and iOS apps built with React Native.",
+                "url": "https://nesthubsolution.in/services/mobile-app-development",
+                "provider": {
+                  "@id": "https://nesthubsolution.in/#business"
+                }
               }
             },
             {
@@ -210,34 +281,39 @@
               "itemOffered": {
                 "@type": "Service",
                 "name": "UI/UX Design",
-                "description": "User-centered interface design using Figma: wireframing, prototyping, user testing, and responsive design systems."
+                "description": "User-centered interface design using Figma: wireframing, prototyping, user testing, and responsive design systems.",
+                "url": "https://nesthubsolution.in/services/ui-ux-design",
+                "provider": {
+                  "@id": "https://nesthubsolution.in/#business"
+                }
               }
             },
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "E-Commerce Development",
-                "description": "High-converting online stores with product catalogs, secure checkout, Stripe payment integration, inventory management, and CMS."
+                "name": "SEO & Digital Marketing",
+                "description": "Technical SEO, Core Web Vitals optimization, caching, code splitting, and performance audits to drive organic search traffic across India.",
+                "url": "https://nesthubsolution.in/services/seo-digital-marketing",
+                "provider": {
+                  "@id": "https://nesthubsolution.in/#business"
+                }
               }
             },
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "SEO & Performance Optimization",
-                "description": "Technical SEO, Core Web Vitals optimization, caching, code splitting, and performance audits to drive organic search traffic across India."
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Social Media Management",
-                "description": "Content strategy and social media marketing to grow your brand online."
+                "name": "Social Media Marketing",
+                "description": "Content strategy and social media marketing to grow your brand online.",
+                "url": "https://nesthubsolution.in/services/social-media-marketing",
+                "provider": {
+                  "@id": "https://nesthubsolution.in/#business"
+                }
               }
             }
-          ]
+          ],
+          "url": "https://nesthubsolution.in/services"
         },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -249,24 +325,51 @@
         "review": [
           {
             "@type": "Review",
-            "author": { "@type": "Person", "name": "Yogendra Maurya" },
-            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+            "author": {
+              "@type": "Person",
+              "name": "Yogendra Maurya"
+            },
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            },
             "reviewBody": "Our honey brand needed an online presence that matched the quality of our product. NestHub delivered beyond expectations — the site is gorgeous and our online sales have tripled.",
-            "itemReviewed": { "@id": "https://nesthubsolution.in/#business" }
+            "itemReviewed": {
+              "@id": "https://nesthubsolution.in/#business"
+            }
           },
           {
             "@type": "Review",
-            "author": { "@type": "Person", "name": "Amit Mishra" },
-            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+            "author": {
+              "@type": "Person",
+              "name": "Amit Mishra"
+            },
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            },
             "reviewBody": "Building a trading education platform is complex, but the NestHub team handled it with precision. Real-time charts, course modules, community features — everything works flawlessly.",
-            "itemReviewed": { "@id": "https://nesthubsolution.in/#business" }
+            "itemReviewed": {
+              "@id": "https://nesthubsolution.in/#business"
+            }
           },
           {
             "@type": "Review",
-            "author": { "@type": "Person", "name": "Mahtab Alam" },
-            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+            "author": {
+              "@type": "Person",
+              "name": "Mahtab Alam"
+            },
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            },
             "reviewBody": "NestHub helped us create a stronger online presence with a clean, user-friendly design. The website made it easier to connect with our community and showcase our programs professionally.",
-            "itemReviewed": { "@id": "https://nesthubsolution.in/#business" }
+            "itemReviewed": {
+              "@id": "https://nesthubsolution.in/#business"
+            }
           }
         ]
       },
@@ -276,123 +379,10 @@
         "url": "https://nesthubsolution.in",
         "name": "NestHub Solution",
         "description": "Top-rated web development and freelancing agency in Jaipur, India.",
-        "publisher": { "@id": "https://nesthubsolution.in/#business" },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": "https://nesthubsolution.in/?q={search_term_string}"
-          },
-          "query-input": "required name=search_term_string"
-        }
-      },
-      {
-        "@type": "WebPage",
-        "@id": "https://nesthubsolution.in/#webpage",
-        "url": "https://nesthubsolution.in/",
-        "name": "Top Web Development Agency in Jaipur | NestHub Solution India",
-        "isPartOf": { "@id": "https://nesthubsolution.in/#website" },
-        "about": { "@id": "https://nesthubsolution.in/#business" },
-        "description": "NestHub Solution — Jaipur's top-rated web development and freelancing agency. Websites, AI platforms and e-commerce for businesses across India.",
-        "inLanguage": "en-IN",
-        "dateModified": "2026-08-02"
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://nesthubsolution.in/"
-          }
-        ]
-      },
-      {
-        "@type": "FAQPage",
-        "@id": "https://nesthubsolution.in/#faq",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Which is the top web development agency in Jaipur?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "NestHub Solution is one of Jaipur's top-rated web development agencies, known for building AI-powered websites, e-commerce platforms, and custom web applications. With a 5-star rating from clients and projects like Vedyara Agro Foods and Fitlife Sutra, we are a trusted web development company in Jaipur, Rajasthan."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What is the best freelancing agency near me in Jaipur?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "NestHub Solution is Jaipur's top-rated freelancing and web development agency. Based in Jaipur, Rajasthan (PIN 302001), we serve clients locally in Jaipur as well as remotely across Delhi, Mumbai, Bangalore, and all of India. Contact us at contact@nesthubsolution.in or call +91 8188941304."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does NestHub Solution work with clients in Delhi and Mumbai?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. While NestHub Solution is based in Jaipur, we work with clients across India including Delhi, Mumbai, Bangalore, Hyderabad, Pune, Chennai, Kolkata, and Ahmedabad. All projects can be managed fully remotely. Book a free discovery call to get started."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is there a good website development company near me in Jaipur?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "NestHub Solution is a top website development company in Jaipur. We build custom websites, e-commerce stores, and AI-powered web applications for businesses in Jaipur and across India. Visit https://nesthubsolution.in or call +91 8188941304 to discuss your project."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How do I find the top web development company near me in India?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "NestHub Solution is a top-rated web development agency in Jaipur that serves clients across India. We offer custom website development, AI integration, e-commerce, UI/UX design, and SEO. Start with a free 30-minute discovery call at https://calendly.com/workquerysol/30min or email contact@nesthubsolution.in."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What services does NestHub Solution offer?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "NestHub Solution offers: custom web development (React, Next.js, TypeScript), AI integration (chatbots, smart search, automation), e-commerce development (Stripe payments, CMS), UI/UX design (Figma, prototyping), SEO and performance optimization (Core Web Vitals), and social media management. We serve businesses across Jaipur, Delhi, Mumbai, Bangalore, and all of India."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How much does a website cost at NestHub Solution?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Our pricing is customized to each project's scope. We offer competitive mid-range pricing for Indian SMEs and startups. Book a free 30-minute discovery call at https://calendly.com/workquerysol/30min to get a quote."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How long does NestHub Solution take to build a website?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Typical timelines: landing pages take 1–2 weeks, full business websites take 3–5 weeks, and e-commerce or AI-integrated platforms take 6–12 weeks. We provide a full timeline during the discovery call."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does NestHub Solution integrate AI into websites?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. NestHub Solution integrates AI features including chatbots, smart search, product recommendations, business automation, and AI analytics into web applications. We are an AI-powered web development agency."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is NestHub Solution hiring?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. NestHub Solution is hiring a Lead Generation Executive — full-time, Jaipur (Remote). Apply at https://nesthubsolution.in/careers."
-            }
-          }
-        ]
+        "publisher": {
+          "@id": "https://nesthubsolution.in/#business"
+        },
+        "inLanguage": "en-IN"
       },
       {
         "@type": "JobPosting",
@@ -402,7 +392,9 @@
         "datePosted": "2026-09-30",
         "validThrough": "2026-12-31",
         "employmentType": "FULL_TIME",
-        "hiringOrganization": { "@id": "https://nesthubsolution.in/#business" },
+        "hiringOrganization": {
+          "@id": "https://nesthubsolution.in/#business"
+        },
         "jobLocation": {
           "@type": "Place",
           "address": {

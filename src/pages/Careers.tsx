@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion'
+import { JsonLd } from '../components/JsonLd'
+import { breadcrumb, graph, webPage } from '../lib/schema'
 import { Reveal } from '../components/Reveal'
 import { Icon } from '../components/Icon'
 import { Faq } from '../components/sections/Faq'
@@ -45,6 +47,7 @@ export function Careers() {
 
   return (
     <main id="top" className="relative z-[1] pb-28 pt-32 sm:pb-32 sm:pt-40">
+      <JsonLd data={graph(webPage({ type: 'CollectionPage', path: '/careers', name: 'Careers at NestHub Solution — Jaipur Web & App Development Agency', description: 'Open roles at NestHub Solution: Lead Generation Executive (Jaipur, full-time). Apply today.' }), breadcrumb([{ name: 'Careers', path: '/careers' }]))} />
       {/* Hero */}
       <section className="relative mx-auto max-w-[1320px] px-6">
         <div aria-hidden className="pointer-events-none absolute -top-24 right-0 h-80 w-80 rounded-full bg-brand-100/60 blur-3xl" />

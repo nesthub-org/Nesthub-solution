@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { JsonLd } from '../components/JsonLd'
+import { breadcrumb, graph, webPage } from '../lib/schema'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
 import { Icon } from '../components/Icon'
@@ -153,6 +155,7 @@ export function CaseStudies() {
 
   return (
     <main id="top" className="relative z-[1] pb-8 pt-32 sm:pt-36">
+      <JsonLd data={graph(webPage({ type: 'CollectionPage', path: '/case-studies', name: 'Case Studies — NestHub Solution Client Work', description: 'A closer look at the products NestHub Solution has shipped — dashboards, e-commerce, health & wellness platforms and fintech, each broken down in detail.' }), breadcrumb([{ name: 'Case Studies', path: '/case-studies' }]))} />
       <section className="mx-auto max-w-[1320px] px-6">
         <Reveal className="max-w-[720px]">
           <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Case Studies</span>

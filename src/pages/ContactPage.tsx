@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion'
+import { JsonLd } from '../components/JsonLd'
+import { breadcrumb, graph, webPage, BUSINESS_ID } from '../lib/schema'
 import { Reveal } from '../components/Reveal'
 import { Icon } from '../components/Icon'
 import { Contact } from '../components/sections/Contact'
@@ -20,15 +22,29 @@ const next = [
   { n: '3', title: 'Written proposal', body: 'A clear scope, fixed quote and timeline you can share with your team.' },
 ]
 
+const schema = graph(
+  webPage({
+    type: 'ContactPage',
+    path: '/contact',
+    name: 'Contact NestHub Solution',
+    description: 'Contact NestHub Solution by email, WhatsApp or a free 30-minute discovery call. We reply within one business day.',
+    speakable: ['h1', '.page-summary'],
+    extra: { mainEntity: { '@id': BUSINESS_ID } },
+  }),
+  breadcrumb([{ name: 'Contact', path: '/contact' }]),
+)
+
 export function ContactPage() {
   useDocumentTitle(
     'Contact NestHub Solution — Start Your Project | Jaipur, India',
     'Contact NestHub Solution by email, WhatsApp or a free 30-minute discovery call. We reply within one business day.',
     '/contact',
+    'contact web development agency Jaipur, hire web developer Jaipur, website quote India, NestHub Solution contact',
   )
 
   return (
     <main id="top" className="relative z-[1] pt-32 sm:pt-40">
+      <JsonLd data={schema} />
       <PageHero
         crumb="Contact"
         eyebrow="We reply within one business day"

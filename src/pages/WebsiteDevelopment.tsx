@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion'
+import { JsonLd } from '../components/JsonLd'
+import { servicePageSchema } from '../lib/schema'
 import { Reveal } from '../components/Reveal'
 import { Icon } from '../components/Icon'
 import { Faq } from '../components/sections/Faq'
@@ -187,6 +189,7 @@ export function WebsiteDevelopment() {
 
   return (
     <main id="top" className="relative z-[1] pb-16 pt-32 sm:pt-36">
+      <JsonLd data={servicePageSchema('/services/website-development', 'Website Development Services — NestHub Solution', 'Explore NestHub Solution website development services, technologies used (React 19, Next.js 15, TypeScript, Node.js, Tailwind CSS), engineering pillars, and bespoke web solutions.')} />
       {/* Hero Section */}
       <section className="mx-auto max-w-[1320px] px-6">
         <Reveal className="max-w-[840px]">

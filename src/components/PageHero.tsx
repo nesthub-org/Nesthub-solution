@@ -45,7 +45,7 @@ export function PageHero({ eyebrow, title, description, crumb, children, aside }
             <h1 className="mt-6 text-balance text-[44px] font-bold leading-[.98] tracking-[-.05em] sm:text-[64px] lg:text-[78px]">
               {title}
             </h1>
-            <div className="mt-6 max-w-[620px] text-pretty text-[17px] leading-[1.65] text-muted sm:text-[18px]">{description}</div>
+            <div className="page-summary mt-6 max-w-[620px] text-pretty text-[17px] leading-[1.65] text-muted sm:text-[18px]">{description}</div>
             {children && <div className="mt-8 flex flex-wrap items-center gap-3">{children}</div>}
           </div>
           {aside && <div className="relative">{aside}</div>}

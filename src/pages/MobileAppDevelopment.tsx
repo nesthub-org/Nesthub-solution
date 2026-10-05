@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion'
+import { JsonLd } from '../components/JsonLd'
+import { servicePageSchema } from '../lib/schema'
 import { Reveal } from '../components/Reveal'
 import { Icon } from '../components/Icon'
 import { Faq } from '../components/sections/Faq'
@@ -81,6 +83,7 @@ export function MobileAppDevelopment() {
 
   return (
     <main id="top" className="relative z-[1] pb-16 pt-32 sm:pt-36">
+      <JsonLd data={servicePageSchema('/services/mobile-app-development', 'Mobile App Development (Android & iOS) — NestHub Solution', 'Build fast, native-feeling mobile applications for iOS and Android using React Native, TypeScript, and modern mobile architectures with NestHub Solution.')} />
       <section className="mx-auto max-w-[1320px] px-6">
         <Reveal className="max-w-[840px]">
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-[.08em] text-emerald-600">

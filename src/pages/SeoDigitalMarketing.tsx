@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion'
+import { JsonLd } from '../components/JsonLd'
+import { servicePageSchema } from '../lib/schema'
 import { Reveal } from '../components/Reveal'
 import { Icon } from '../components/Icon'
 import { Faq } from '../components/sections/Faq'
@@ -81,6 +83,7 @@ export function SeoDigitalMarketing() {
 
   return (
     <main id="top" className="relative z-[1] pb-16 pt-32 sm:pt-36">
+      <JsonLd data={servicePageSchema('/services/seo-digital-marketing', 'SEO & Digital Marketing Services — NestHub Solution', 'Drive organic Google rankings, technical SEO audits, high-ROI Google & Meta ads campaigns, and conversion optimization with NestHub Solution.')} />
       <section className="mx-auto max-w-[1320px] px-6">
         <Reveal className="max-w-[840px]">
           <div className="inline-flex items-center gap-2 rounded-full border border-teal-500/20 bg-teal-500/10 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-[.08em] text-teal-600">

@@ -1,4 +1,7 @@
 import { motion } from 'framer-motion'
+import { JsonLd } from '../components/JsonLd'
+import { breadcrumb, graph, webPage } from '../lib/schema'
+import { SITE_URL } from '../lib/blog'
 import { Reveal } from '../components/Reveal'
 import { Icon } from '../components/Icon'
 import { tones } from '../components/sections/Services/tones'
@@ -58,15 +61,40 @@ function Column({ title, items, color }: { title: string; items: string[]; color
   )
 }
 
+const schema = graph(
+  webPage({
+    path: '/process',
+    name: 'Our Process — How NestHub Builds Websites & Apps',
+    description: 'Discovery, design, development, testing, launch and support — the six-step process NestHub Solution uses on every project.',
+    speakable: ['h1', '.page-summary'],
+  }),
+  {
+    '@type': 'HowTo',
+    '@id': `${SITE_URL}/process#howto`,
+    name: 'How NestHub Solution builds a website or app',
+    description: 'The six-step process NestHub Solution follows on every website, app and AI project.',
+    step: steps.map((st, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: st.title,
+      text: `${st.body} Typical duration: ${st.duration}.`,
+      url: `${SITE_URL}/process#step-${st.n}`,
+    })),
+  },
+  breadcrumb([{ name: 'Process', path: '/process' }]),
+)
+
 export function ProcessPage() {
   useDocumentTitle(
     'Our Process — How NestHub Builds Websites & Apps | NestHub Solution',
     'Discovery, design, development, testing, launch and support — the six-step process NestHub Solution uses on every project.',
     '/process',
+    'website development process, web design process steps, how long does a website take, agency project process India',
   )
 
   return (
     <main id="top" className="relative z-[1] pb-4 pt-32 sm:pt-40">
+      <JsonLd data={schema} />
       <PageHero
         crumb="Process"
         eyebrow="How we work"

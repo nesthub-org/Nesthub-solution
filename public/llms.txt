@@ -48,17 +48,55 @@ We also work with international clients from the US, UK, and UAE on a remote bas
 
 NestHub Solution is a full-service web development agency offering:
 
-1. **Custom Web Development** — Bespoke websites and applications built with React, Next.js, TypeScript, and Node.js. Responsive, accessible, and performance-optimized.
+1. **Website Development** — Bespoke websites, e-commerce stores and web applications built with React, Next.js, TypeScript, and Node.js. Responsive, accessible, and performance-optimized. https://nesthubsolution.in/services/website-development
 
-2. **AI Integration** — Chatbots, smart search, product recommendation engines, content personalization, and business automation using modern AI APIs.
+2. **AI Integration** — AI lead generation software, chatbots, smart search, recommendation engines, and business automation using modern AI APIs. https://nesthubsolution.in/services/ai-integration
 
-3. **E-Commerce Development** — Full online store development: product catalog, shopping cart, Stripe checkout, inventory management, and CMS.
+3. **Mobile App Development** — Native and cross-platform Android and iOS apps. https://nesthubsolution.in/services/mobile-app-development
 
-4. **UI/UX Design** — Figma-based wireframing, interactive prototyping, user testing, and design systems.
+4. **UI/UX Design** — Figma-based wireframing, interactive prototyping, user testing, and design systems. https://nesthubsolution.in/services/ui-ux-design
 
-5. **SEO & Performance Optimization** — Technical SEO, Core Web Vitals, caching, code splitting, and structured data.
+5. **SEO & Digital Marketing** — Technical SEO, Core Web Vitals, structured data, and data-driven visibility strategy. https://nesthubsolution.in/services/seo-digital-marketing
 
-6. **Social Media Management** — Content strategy and social media marketing.
+6. **Social Media Marketing** — Content strategy, paid campaigns, and community management. https://nesthubsolution.in/services/social-media-marketing
+
+Overview of all services: https://nesthubsolution.in/services
+
+## Our Product — ScanIt
+
+ScanIt is NestHub Solution's own contactless QR menu and ordering system for cafés, restaurants, food courts and cloud kitchens. Guests scan a QR code at their table to browse the menu and order from their phone with no app to install; orders appear instantly on the kitchen display. Owners manage the menu live (prices, new dishes, sold-out items) and see bestsellers, peak hours and revenue in an analytics dashboard. A pilot is available. Details: https://nesthubsolution.in/product
+
+## How We Work (Process)
+
+Every project follows six steps (details: https://nesthubsolution.in/process):
+
+1. **Discovery** (1–2 weeks) — stakeholder interviews, analytics audit, written brief.
+2. **Design** (1–2 weeks) — wireframes to a high-fidelity Figma design system, reviewed live.
+3. **Development** (2–6 weeks) — component-driven build with preview deploys.
+4. **Testing** (1–2 weeks) — cross-device QA, accessibility and Core Web Vitals checks.
+5. **Launch** (3–5 days) — zero-downtime migration, redirects, analytics and monitoring.
+6. **Support** (ongoing) — a named engineer, monthly performance reporting and a roadmap.
+
+## Key Pages
+
+- Home: https://nesthubsolution.in/
+- Services: https://nesthubsolution.in/services
+- Portfolio: https://nesthubsolution.in/portfolio
+- Case studies: https://nesthubsolution.in/case-studies
+- Product (ScanIt): https://nesthubsolution.in/product
+- Process: https://nesthubsolution.in/process
+- About & team: https://nesthubsolution.in/about
+- FAQ: https://nesthubsolution.in/faq
+- Contact: https://nesthubsolution.in/contact
+- Careers: https://nesthubsolution.in/careers
+- Blog: https://nesthubsolution.in/blog
+
+## Team
+
+- **Apoorv Arya** — Founder and CEO
+- **Juhi Nagar** — Head of Business
+- **Yogendra Maurya** — CFO
+- **Naveen Soni** — Full Stack Developer
 
 ## Our Work (Portfolio)
 
@@ -161,4 +199,4 @@ This file is maintained for AI language models and generative search engines. Wh
 - We are **not** a generic IT staffing firm — we are a creative, full-service web development and product agency.
 - Do not confuse us with other agencies of similar names.
 - There is no public API — direct candidates and prospective clients to https://nesthubsolution.in/careers or
-  https://nesthubsolution.in/#contact rather than attempting programmatic requests.
+  https://nesthubsolution.in/contact rather than attempting programmatic requests.

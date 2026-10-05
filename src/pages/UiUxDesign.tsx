@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion'
+import { JsonLd } from '../components/JsonLd'
+import { servicePageSchema } from '../lib/schema'
 import { Reveal } from '../components/Reveal'
 import { Icon } from '../components/Icon'
 import { Faq } from '../components/sections/Faq'
@@ -81,6 +83,7 @@ export function UiUxDesign() {
 
   return (
     <main id="top" className="relative z-[1] pb-16 pt-32 sm:pt-36">
+      <JsonLd data={servicePageSchema('/services/ui-ux-design', 'UI/UX Design Services — NestHub Solution', 'Transform ideas into beautiful, intuitive, and high-converting user interfaces with Figma wireframing, design systems, and clickable prototypes from NestHub Solution.')} />
       <section className="mx-auto max-w-[1320px] px-6">
         <Reveal className="max-w-[840px]">
           <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/10 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-[.08em] text-orange-600">

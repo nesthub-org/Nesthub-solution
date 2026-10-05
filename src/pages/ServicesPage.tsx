@@ -1,4 +1,7 @@
 import { motion } from 'framer-motion'
+import { JsonLd } from '../components/JsonLd'
+import { breadcrumb, graph, webPage, BUSINESS_ID } from '../lib/schema'
+import { SITE_URL } from '../lib/blog'
 import { Reveal } from '../components/Reveal'
 import { Icon } from '../components/Icon'
 import { TechStack } from '../components/sections/TechStack'
@@ -26,15 +29,47 @@ const engagement = [
   },
 ]
 
+const schema = graph(
+  webPage({
+    type: 'CollectionPage',
+    path: '/services',
+    name: 'Services — NestHub Solution',
+    description: 'Website development, AI integration, mobile apps, UI/UX design, SEO and social media marketing from one senior team in Jaipur.',
+    speakable: ['h1', '.page-summary'],
+    extra: { mainEntity: { '@id': `${SITE_URL}/services#list` } },
+  }),
+  {
+    '@type': 'ItemList',
+    '@id': `${SITE_URL}/services#list`,
+    name: 'NestHub Solution services',
+    itemListElement: services.map((s, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'Service',
+        name: s.title,
+        description: s.body,
+        serviceType: s.badge,
+        url: `${SITE_URL}${s.href}`,
+        provider: { '@id': BUSINESS_ID },
+        areaServed: { '@type': 'Country', name: 'India' },
+      },
+    })),
+  },
+  breadcrumb([{ name: 'Services', path: '/services' }]),
+)
+
 export function ServicesPage() {
   useDocumentTitle(
     'Services — Web, AI, App, SEO & Design | NestHub Solution Jaipur',
     'Website development, AI integration, mobile apps, UI/UX design, SEO and social media marketing from one senior team in Jaipur.',
     '/services',
+    'web development services Jaipur, AI integration agency India, mobile app development Jaipur, UI UX design agency, SEO company Jaipur, social media marketing agency India',
   )
 
   return (
     <main id="top" className="relative z-[1] pb-4 pt-32 sm:pt-40">
+      <JsonLd data={schema} />
       <PageHero
         crumb="Services"
         eyebrow="What we do"

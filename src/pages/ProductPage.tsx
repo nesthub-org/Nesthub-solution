@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { JsonLd } from '../components/JsonLd'
+import { breadcrumb, graph, webPage, faqPage, BUSINESS_ID } from '../lib/schema'
+import { SITE_URL } from '../lib/blog'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
 import { Icon } from '../components/Icon'
@@ -46,11 +49,38 @@ const productFaqs = [
   { q: 'Is there a pilot?', a: 'Yes, a pilot is available now. Book a demo and we will set one up for your venue.' },
 ]
 
+const schema = graph(
+  webPage({
+    path: '/product',
+    name: 'ScanIt — QR Menu & Ordering System for Restaurants',
+    description: 'Contactless QR menu and ordering for cafés and restaurants. No app needed, live kitchen orders, menu management and analytics.',
+    speakable: ['h1', '.page-summary'],
+    extra: { mainEntity: { '@id': `${SITE_URL}/product#scanit` } },
+  }),
+  {
+    '@type': 'SoftwareApplication',
+    '@id': `${SITE_URL}/product#scanit`,
+    name: 'ScanIt',
+    applicationCategory: 'BusinessApplication',
+    applicationSubCategory: 'Restaurant QR menu and ordering system',
+    operatingSystem: 'Web browser (Android, iOS, desktop)',
+    description:
+      'ScanIt is a contactless QR menu and ordering system for cafés, restaurants and food courts. Guests scan a table QR code to browse and order without installing an app, and orders appear instantly on the kitchen display.',
+    featureList: qrFeatures.map((f) => `${f.title}: ${f.body}`),
+    audience: { '@type': 'BusinessAudience', audienceType: 'Restaurants, cafés, food courts, cloud kitchens' },
+    publisher: { '@id': BUSINESS_ID },
+    image: `${SITE_URL}/og-image.png`,
+  },
+  faqPage('/product', productFaqs),
+  breadcrumb([{ name: 'Product', path: '/product' }]),
+)
+
 export function ProductPage() {
   useDocumentTitle(
     'ScanIt — QR Menu & Ordering System for Restaurants | NestHub Solution',
     'ScanIt by NestHub: contactless QR menu and ordering for cafés and restaurants. No app needed, live kitchen orders, menu management and analytics.',
     '/product',
+    'QR code menu India, restaurant QR ordering system, contactless menu Jaipur, digital menu for cafe, ScanIt QR menu, restaurant ordering software India',
   )
   const [role, setRole] = useState(roles[0].id)
   const [open, setOpen] = useState<number | null>(0)
@@ -58,6 +88,7 @@ export function ProductPage() {
 
   return (
     <main id="top" className="relative z-[1] pb-4 pt-32 sm:pt-40">
+      <JsonLd data={schema} />
       <PageHero
         crumb="Product"
         eyebrow="ScanIt · built by NestHub"

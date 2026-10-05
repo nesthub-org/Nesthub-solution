@@ -36,6 +36,23 @@ function AssistantAvatar({ size = 40 }: { size?: number }) {
 
 // What the voice says. Kept separate from the on-screen GREETING so the
 // punctuation can shape a natural, conversational delivery.
+const BUBBLE_DISMISSED_KEY = 'nh-assistant-bubble-dismissed'
+const isSmallScreen = () => window.matchMedia('(max-width: 639px)').matches
+function bubbleDismissed(): boolean {
+  try {
+    return sessionStorage.getItem(BUBBLE_DISMISSED_KEY) === '1'
+  } catch {
+    return false
+  }
+}
+function rememberBubbleDismissed() {
+  try {
+    sessionStorage.setItem(BUBBLE_DISMISSED_KEY, '1')
+  } catch {
+    // Storage unavailable: the bubble just comes back on the next page.
+  }
+}
+
 const SPOKEN_GREETING = 'Welcome to NestHub Solution! How may I help you?'
 
 const NATURAL_VOICE = /natural|neural|online|premium|enhanced/i
@@ -282,6 +299,13 @@ export function AiAssistant() {
     })
   }, [attachLipSync])
 
+  // Phones: the greeting gets a few seconds, then tucks away so it never sits on top of the page.
+  useEffect(() => {
+    if (!bubble || !isSmallScreen()) return
+    const t = window.setTimeout(() => setBubble(false), 6000)
+    return () => window.clearTimeout(t)
+  }, [bubble])
+
   // Greeting: show the bubble, type the text out and say it — but only on the
   // first page of the visit, not on every in-site page change (see hasGreeted). Browsers refuse to play any sound before the
   // visitor has interacted with the page, so if the first attempt is blocked,
@@ -293,6 +317,9 @@ export function AiAssistant() {
     if ('speechSynthesis' in window) void loadVoices()
 
     if (hasGreeted()) {
+      // On phones the bubble covers real content, so after the first page (or
+      // once dismissed) only the avatar stays.
+      if (isSmallScreen() || bubbleDismissed()) return
       // Moving around the site: keep the greeting on screen, but silently.
       const t = window.setTimeout(() => {
         setTyped(GREETING)
@@ -414,13 +441,16 @@ export function AiAssistant() {
                   animate={{ opacity: 1, x: 0, scale: 1 }}
                   exit={{ opacity: 0, x: 16, scale: 0.9 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-                  className="relative mb-10 mr-1 flex origin-right items-center sm:mb-14"
+                  className="relative mb-6 mr-1 flex origin-right items-center sm:mb-14"
                   role="status"
                   aria-live="polite"
                 >
                   <button
                     type="button"
-                    onClick={() => setBubble(false)}
+                    onClick={() => {
+                      setBubble(false)
+                      rememberBubbleDismissed()
+                    }}
                     aria-label="Dismiss greeting"
                     className="mr-1.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white text-ink shadow-[0_4px_12px_rgba(17,17,17,.18)] transition hover:scale-110"
                   >
@@ -463,7 +493,7 @@ export function AiAssistant() {
               aria-label={`Chat with ${ASSISTANT_NAME}, our AI assistant`}
               whileHover={{ scale: 1.05, y: -4 }}
               whileTap={{ scale: 0.95 }}
-              className="relative block w-[120px] shrink-0 sm:w-[180px]"
+              className="relative block w-[92px] shrink-0 sm:w-[180px]"
             >
               <span
                 className={`absolute inset-[12%] rounded-full bg-brand-500/40 blur-2xl transition-opacity duration-500 ${speaking ? 'animate-pulse opacity-100' : 'opacity-0'}`}

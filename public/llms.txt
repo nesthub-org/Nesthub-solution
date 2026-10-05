@@ -96,7 +96,7 @@ Every project follows six steps (details: https://nesthubsolution.in/process):
 - **Apoorv Arya** — Founder and CEO
 - **Juhi Nagar** — Head of Business
 - **Yogendra Maurya** — CFO
-- **Naveen Soni** — Full Stack Developer
+- **Naveen** — Full Stack Developer
 
 ## Our Work (Portfolio)
 
@@ -120,14 +120,14 @@ Every project follows six steps (details: https://nesthubsolution.in/process):
 
 ## Client Testimonials
 
-**Yogendra Maurya, Founder — Vedyara Agro Foods:**
+**Avinash Maurya, Manager, Vedyara Agro Foods:**
 "Our honey brand needed an online presence that matched the quality of our product. NestHub delivered beyond expectations — the site is gorgeous and our online sales have tripled."
 
-**Amit Mishra, CEO — TheFineGrow:**
+**Amit Mishra, CEO, TheFineGrow:**
 "Building a trading education platform is complex, but the NestHub team handled it with precision. Real-time charts, course modules, community features — everything works flawlessly."
 
-**Mahtab Alam — Fitlifesutra:**
-"NestHub helped us create a stronger online presence with a clean, user-friendly design. The website made it easier for us to connect with our community and showcase our programs professionally."
+**Mahtab Alam — Health & Wellness, Fitlifesutra:**
+"NestHub helped us create a stronger online presence with a clean, user-friendly design. The website made it easier for us to connect with our community and showcase our Herbalife nutrition programs in a simple, professional, and engaging manner."
 
 ## Frequently Asked Questions
 

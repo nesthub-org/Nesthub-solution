@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { ScrollToTop } from './components/ScrollToTop'
+import { ScrollProgress } from './components/ScrollProgress'
 import { SmoothScroll } from './components/SmoothScroll'
 import { WhatsAppButton } from './components/WhatsAppButton'
 import { AiAssistant } from './components/AiAssistant'
@@ -53,6 +54,7 @@ function App() {
     <>
       <SmoothScroll />
       <ScrollToTop />
+      <ScrollProgress />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />

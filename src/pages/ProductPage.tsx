@@ -14,19 +14,19 @@ import scanitPhone from '../assets/scanit-phone.webp'
 const roles = [
   {
     id: 'guest',
-    label: 'For guests',
+    label: 'Guests',
     title: 'Scan, browse, order — in under a minute.',
     points: ['No app download or sign-up', 'Photos, prices and veg / non-veg tags', 'Live order status on their own phone', 'Call-waiter and bill-request buttons'],
   },
   {
     id: 'kitchen',
-    label: 'For the kitchen',
+    label: 'Kitchen',
     title: 'Every order lands on the screen instantly.',
     points: ['Orders grouped by table with timestamps', 'Accept, prepare, ready — one tap each', 'Sound alerts for new tickets', 'No more misheard or lost paper slips'],
   },
   {
     id: 'owner',
-    label: 'For owners',
+    label: 'Owners',
     title: 'Run the menu and see the numbers.',
     points: ['Edit dishes and prices in real time', 'Mark items sold-out in one click', 'Bestsellers, peak hours and revenue', 'Role-based access for managers and staff'],
   },

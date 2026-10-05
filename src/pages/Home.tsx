@@ -13,6 +13,8 @@ import { Team } from '../components/sections/Team'
 import { Faq } from '../components/sections/Faq'
 import { BookCall } from '../components/sections/BookCall'
 import { Contact } from '../components/sections/Contact'
+import { KineticRibbons } from '../components/sections/KineticRibbons'
+import { Statement } from '../components/sections/Statement'
 import { JsonLd } from '../components/JsonLd'
 import { breadcrumb, faqPage, graph, webPage } from '../lib/schema'
 import { faqs } from '../data/content'
@@ -42,7 +44,9 @@ export function Home() {
       <Hero />
       <TrustBar />
       <Partners />
+      <Statement />
       <Services />
+      <KineticRibbons />
       <Work />
       <Product />
       <Testimonials />

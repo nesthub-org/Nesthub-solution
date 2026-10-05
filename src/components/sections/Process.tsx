@@ -26,44 +26,65 @@ export function Process() {
         </p>
       </Reveal>
 
-      <ol className="mt-16 grid grid-cols-1 gap-x-5 gap-y-14 sm:grid-cols-2 sm:gap-y-16 lg:grid-cols-6">
+      <ol className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {steps.map((st, i) => {
           const c = tones[accentCycle[i % accentCycle.length]]
           return (
-            <Reveal key={st.n} delay={Math.min(i * 0.06, 0.3)} tilt={false} className="h-full">
-              <li className="relative flex h-full flex-col">
-                <motion.span
-                  whileHover={{ y: -2, scale: 1.06 }}
-                  transition={{ type: 'spring', stiffness: 320, damping: 16 }}
-                  className="absolute -top-6 left-1/2 z-10 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full border-2 bg-white font-mono text-[13px] font-bold shadow-[0_4px_14px_rgba(0,0,0,.06)]"
-                  style={{ borderColor: c[300], color: c[600] }}
+            <motion.li
+              key={st.n}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: (i % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="group relative flex flex-col overflow-hidden rounded-[24px] border border-line bg-white p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_50px_rgba(0,0,0,.08)]"
+            >
+              {/* accent glow on hover */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-60"
+                style={{ background: c[200] }}
+              />
+
+              {/* journey progress: how far along the six steps this one sits */}
+              <div className="relative flex gap-1.5">
+                {steps.map((_, j) => (
+                  <span
+                    key={j}
+                    className="h-1 flex-1 rounded-full"
+                    style={{ background: j <= i ? c[400] : '#ececec' }}
+                  />
+                ))}
+              </div>
+
+              <div className="relative mt-7 flex items-start justify-between">
+                <span
+                  className="flex h-14 w-14 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110"
+                  style={{ background: c[50], boxShadow: `inset 0 0 0 1px ${c[200]}` }}
                 >
+                  <Icon name={st.icon} color={c[600]} size={24} />
+                </span>
+                <span className="text-[44px] font-bold leading-none tracking-[-.05em] transition-colors duration-300" style={{ color: c[200] }}>
                   {st.n}
-                </motion.span>
+                </span>
+              </div>
 
-                <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white pt-10 pb-5 text-center shadow-[0_8px_30px_rgba(0,0,0,.04)]">
-                  <div className="flex flex-1 flex-col items-center px-5">
-                    <span className="flex h-16 w-16 items-center justify-center rounded-full" style={{ background: c[50] }}>
-                      <Icon name={st.icon} color={c[600]} size={26} />
-                    </span>
-                    <h3 className="mt-4 text-[18px] font-semibold tracking-[-.02em]">{st.title}</h3>
-                    <p className="mt-2 flex-1 text-[14px] leading-[1.6] text-muted">{st.body}</p>
-                  </div>
+              <h3 className="relative mt-6 text-[21px] font-semibold tracking-[-.025em]">{st.title}</h3>
+              <p className="relative mt-2 text-[15px] leading-[1.65] text-muted">{st.body}</p>
 
-                  {/* <div className="mt-4 flex justify-center px-5">
-                    <span
-                      className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[.06em]"
-                      style={{ background: c[50], color: c[700] }}
-                    >
-                      <Icon name="clock" color={c[600]} size={12} />
-                      {st.duration}
-                    </span>
-                  </div> */}
-
-                  <span className="mt-5 block h-[3px] w-full" style={{ background: c[400] }} />
-                </div>
-              </li>
-            </Reveal>
+              <div className="relative mt-auto flex items-center gap-2 pt-6 text-[12px] font-semibold uppercase tracking-[.12em]" style={{ color: c[600] }}>
+                {i < steps.length - 1 ? (
+                  <>
+                    Next · {steps[i + 1].title}
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  </>
+                ) : (
+                  <>
+                    And we keep going
+                    <span className="transition-transform duration-500 group-hover:rotate-180">↻</span>
+                  </>
+                )}
+              </div>
+            </motion.li>
           )
         })}
       </ol>

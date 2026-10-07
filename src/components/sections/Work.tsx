@@ -176,14 +176,14 @@ function BrowserFrame({ project: p }: { project: Project }) {
           <span className="truncate">{domain}</span>
         </span>
       </div>
-      <div className="relative aspect-[12/7] overflow-hidden rounded-[10px] bg-white">
+      <div className="relative aspect-[12/7] overflow-hidden rounded-[10px] bg-[#0e1014]">
         <img
           src={p.screen}
           alt={`${p.title} website`}
           loading="lazy"
           width={1200}
           height={700}
-          className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          className="h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.03]"
         />
         <div className="pointer-events-none absolute inset-0 flex items-end justify-center bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           <span className="mb-5 inline-flex translate-y-2 items-center gap-1.5 rounded-full bg-white px-4 py-2 text-[13px] font-semibold text-ink shadow-lg transition-transform duration-300 group-hover:translate-y-0">

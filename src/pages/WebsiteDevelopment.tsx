@@ -427,7 +427,7 @@ export function WebsiteDevelopment() {
                 Contact Engineers
               </motion.a>
               <a
-                href="/case-studies"
+                href="/portfolio"
                 className="inline-flex h-13 items-center justify-center rounded-2xl border border-line bg-white px-7 text-[15px] font-semibold text-ink hover:border-ink"
               >
                 Browse All Case Studies

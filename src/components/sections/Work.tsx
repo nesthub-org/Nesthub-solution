@@ -82,7 +82,7 @@ export function Work() {
       <Reveal>
         <div className="mt-10 flex justify-center">
           <a
-            href="/case-studies"
+            href="/portfolio"
             className="group inline-flex h-12 items-center gap-2 rounded-2xl border border-line bg-white px-6 text-[15px] font-semibold text-ink transition-colors hover:border-ink"
           >
             All case studies

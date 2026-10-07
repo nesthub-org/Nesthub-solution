@@ -13,6 +13,7 @@ import projectAgencyOS from '../assets/agencyos.png'
 import projectIllusionmed from '../assets/illusionmed-img.png'
 import projectDrSunil from '../assets/project-drsunil.png'
 import scanitMockup from '../assets/scanit-mockup.png'
+import projectVedyaraHome from '../assets/project-vedyara-home.webp'
 import screenVedyara from '../assets/screen-vedyara.webp'
 import screenFitlife from '../assets/screen-fitlife.webp'
 import screenDrSunil from '../assets/screen-drsunil.webp'
@@ -248,6 +249,7 @@ export const projects: Project[] = [
     ],
     href: 'https://vedyara.in',
     image: projectHoney,
+    gallery: [projectVedyaraHome],
     logo: logoVedyara,
     accent: 'amber',
     screen: screenVedyara,

@@ -69,7 +69,7 @@ const schema = graph(
     featureList: qrFeatures.map((f) => `${f.title}: ${f.body}`),
     audience: { '@type': 'BusinessAudience', audienceType: 'Restaurants, cafés, food courts, cloud kitchens' },
     publisher: { '@id': BUSINESS_ID },
-    image: `${SITE_URL}/og-image.png`,
+    image: `${SITE_URL}/og-image.jpg`,
   },
   faqPage('/product', productFaqs),
   breadcrumb([{ name: 'Product', path: '/product' }]),

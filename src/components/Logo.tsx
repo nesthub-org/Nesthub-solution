@@ -3,12 +3,12 @@ interface LogoProps {
   className?: string
 }
 
-// Points at public/logo.png so the real brand mark can be dropped in without
-// any code changes — falls back to the mark below if the file is missing.
+// public/logo-96.webp is public/logo.png resized for this slot — falls back to
+// the mark below if the file is missing.
 export function Logo({ size = 50, className }: LogoProps) {
   return (
     <img
-      src="/logo.png"
+      src="/logo-96.webp"
       alt="NestHub Solution"
       width={size}
       height={size}

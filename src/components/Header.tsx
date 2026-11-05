@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
 import { navLinks } from '../data/content'
 import { Logo, LogoFallback } from './Logo'
 
@@ -11,102 +10,77 @@ export function Header() {
 
   return (
     <header className="fixed top-2.5 left-0 right-0 z-[60] px-4 sm:top-[18px] sm:px-6">
-      <nav className="mx-auto max-w-[1320px] h-[68px] flex items-center justify-between pl-[22px] pr-3 bg-white/78 backdrop-blur-xl border border-line rounded-[20px] shadow-[0_8px_40px_rgba(0,0,0,.05)]">
-        <motion.a href="/#top" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="flex items-center gap-2.5 text-ink">
-          <motion.span whileHover={{ rotate: -8 }} transition={{ type: 'spring', stiffness: 300, damping: 12 }}>
-            <Logo size={40} />
-            <LogoFallback size={40} />
-          </motion.span>
+      <nav className="mx-auto max-w-[1320px] h-[60px] sm:h-[68px] flex items-center justify-between pl-4 sm:pl-[22px] pr-2 sm:pr-3 bg-white border border-line rounded-[18px] sm:rounded-[20px] shadow-[0_8px_30px_rgba(5,12,60,.14)]">
+        <a href="/#top" className="group flex items-center gap-2.5 text-ink transition-transform hover:scale-[1.03] active:scale-[.97]">
+          <span className="transition-transform duration-300 group-hover:-rotate-[8deg]">
+            <Logo size={36} />
+            <LogoFallback size={36} />
+          </span>
           <span className="text-[16.5px] font-bold tracking-[-.02em]">
             NestHub<span className="font-bold" style={{ color: '#2563eb' }}> Solution</span>
           </span>
-        </motion.a>
+        </a>
 
         <div className="hidden lg:flex items-center gap-[30px]">
           {navLinks.map((l) => (
-            <motion.a
+            <a
               key={l.href}
               href={l.href}
-              initial="rest"
-              whileHover="hover"
-              animate={isActive(l.href) ? 'hover' : 'rest'}
               aria-current={isActive(l.href) ? 'page' : undefined}
-              className={`relative text-[15px] font-medium transition-colors hover:text-ink ${isActive(l.href) ? 'text-ink' : 'text-muted'}`}
+              className={`group relative text-[15px] font-medium transition-colors hover:text-ink ${isActive(l.href) ? 'text-ink' : 'text-muted'}`}
             >
               {l.label}
-              <motion.span
-                variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
-                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                style={{ originX: 0 }}
-                className="absolute -bottom-1 left-0 h-[1.5px] w-full bg-brand-500"
-              />
-            </motion.a>
+              <span className={`absolute -bottom-1 left-0 h-[1.5px] w-full origin-left bg-brand-500 transition-transform duration-300 group-hover:scale-x-100 ${isActive(l.href) ? 'scale-x-100' : 'scale-x-0'}`} />
+            </a>
           ))}
         </div>
 
         <div className="hidden md:flex items-center gap-2">
-          <motion.a
+          <a
             href="/contact"
-            whileHover={{ y: -1, backgroundColor: '#1D4ED8' }}
-            className="h-11 px-5 flex items-center rounded-[14px] bg-brand-500 text-white text-[16px] font-semibold shadow-[0_6px_18px_rgba(37,99,235,.22)]"
+            className="h-11 px-5 flex items-center rounded-[14px] bg-brand-500 text-white text-[16px] font-semibold shadow-[0_6px_18px_rgba(37,99,235,.22)] transition-all hover:-translate-y-px hover:bg-brand-600"
           >
             Start a project
-          </motion.a>
+          </a>
         </div>
 
         <button
           aria-label="Toggle menu"
+          aria-expanded={open}
           onClick={() => setOpen((o) => !o)}
           className="lg:hidden flex h-11 w-11 items-center justify-center shrink-0"
         >
           <span className="relative block w-5 h-3">
-            <motion.span
-              animate={{ rotate: open ? 45 : 0, y: open ? 6 : 0 }}
-              className="absolute left-0 top-0 block h-[1.6px] w-5 bg-ink"
-            />
-            <motion.span
-              animate={{ opacity: open ? 0 : 1 }}
-              className="absolute left-0 top-1/2 -translate-y-1/2 block h-[1.6px] w-5 bg-ink"
-            />
-            <motion.span
-              animate={{ rotate: open ? -45 : 0, y: open ? -6 : 0 }}
-              className="absolute left-0 bottom-0 block h-[1.6px] w-5 bg-ink"
-            />
+            <span className={`absolute left-0 top-0 block h-[1.6px] w-5 bg-ink transition-transform duration-200 ${open ? 'translate-y-[5.2px] rotate-45' : ''}`} />
+            <span className={`absolute left-0 top-1/2 -translate-y-1/2 block h-[1.6px] w-5 bg-ink transition-opacity duration-200 ${open ? 'opacity-0' : ''}`} />
+            <span className={`absolute left-0 bottom-0 block h-[1.6px] w-5 bg-ink transition-transform duration-200 ${open ? '-translate-y-[5.2px] -rotate-45' : ''}`} />
           </span>
         </button>
       </nav>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -12, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -12, scale: 0.98 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:hidden mx-auto mt-2 max-w-[1320px] rounded-[20px] border border-line bg-white p-4 shadow-[0_8px_40px_rgba(0,0,0,.08)]"
-          >
-            <div className="flex flex-col gap-1">
-              {navLinks.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className={`rounded-xl px-3 py-3 text-[15px] font-medium hover:bg-surface ${isActive(l.href) ? 'bg-surface text-brand-500' : 'text-ink'}`}
-                >
-                  {l.label}
-                </a>
-              ))}
+      {open && (
+        <div className="note-in lg:hidden mx-auto mt-2 max-w-[1320px] rounded-[20px] border border-line bg-white p-4 shadow-[0_8px_40px_rgba(0,0,0,.08)]">
+          <div className="flex flex-col gap-1">
+            {navLinks.map((l) => (
               <a
-                href="/contact"
+                key={l.href}
+                href={l.href}
                 onClick={() => setOpen(false)}
-                className="mt-2 flex h-12 items-center justify-center rounded-[14px] bg-brand-500 text-[16px] font-semibold text-white"
+                className={`rounded-xl px-3 py-3 text-[15px] font-medium hover:bg-surface ${isActive(l.href) ? 'bg-surface text-brand-500' : 'text-ink'}`}
               >
-                Start a project
+                {l.label}
               </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            ))}
+            <a
+              href="/contact"
+              onClick={() => setOpen(false)}
+              className="mt-2 flex h-12 items-center justify-center rounded-[14px] bg-brand-500 text-[16px] font-semibold text-white"
+            >
+              Start a project
+            </a>
+          </div>
+        </div>
+      )}
     </header>
   )
 }

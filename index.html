@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload" href="/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
 
   <!-- ═══════════════════════════════════════════════════
        PRIMARY META
@@ -22,7 +23,7 @@
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="language" content="English" />
   <meta name="revisit-after" content="14 days" />
-  <meta name="theme-color" content="#2563eb" />
+  <meta name="theme-color" content="#1337cf" />
   <meta name="rating" content="general" />
   <meta name="category" content="Web Development, Freelancing Agency, Digital Agency, Technology" />
   <meta name="google-site-verification" content="NDMcVTSTLgBymB0V144JxWBWtHxmUCI8Zc15-vDxb90" />
@@ -53,8 +54,8 @@
     title="NestHub Solution oEmbed" />
 
   <!-- Favicon & Icons -->
-  <link rel="icon" type="image/png" href="/logo.png" />
-  <link rel="apple-touch-icon" href="/logo.png" />
+  <link rel="icon" type="image/png" href="/icon-48.png" />
+  <link rel="apple-touch-icon" href="/icon-180.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
   <!-- ═══════════════════════════════════════════════════
@@ -75,9 +76,9 @@
   <meta property="og:title" content="Top Web Development &amp; Freelancing Agency in Jaipur | NestHub Solution" />
   <meta property="og:description"
     content="Jaipur's top-rated web development &amp; freelancing agency. Websites, AI platforms &amp; e-commerce for businesses across India. 5★ rated · Free discovery call." />
-  <meta property="og:image" content="https://nesthubsolution.in/og-image.png" />
-  <meta property="og:image:width" content="1731" />
-  <meta property="og:image:height" content="909" />
+  <meta property="og:image" content="https://nesthubsolution.in/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="NestHub Solution — Top Web Development Agency in Jaipur, India" />
 
   <!-- ═══════════════════════════════════════════════════
@@ -88,7 +89,7 @@
   <meta name="twitter:title" content="Top Web Development &amp; Freelancing Agency in Jaipur | NestHub Solution" />
   <meta name="twitter:description"
     content="Jaipur's top-rated web development &amp; freelancing agency. Websites, AI apps &amp; e-commerce across India. 5★ rated." />
-  <meta name="twitter:image" content="https://nesthubsolution.in/og-image.png" />
+  <meta name="twitter:image" content="https://nesthubsolution.in/og-image.jpg" />
   <meta name="twitter:image:alt" content="NestHub Solution — Top Web Development Agency" />
 
   <!-- ═══════════════════════════════════════════════════
@@ -116,7 +117,7 @@
           "width": 200,
           "height": 200
         },
-        "image": "https://nesthubsolution.in/og-image.png",
+        "image": "https://nesthubsolution.in/og-image.jpg",
         "description": "NestHub Solution is Jaipur's top-rated web development and freelancing agency. We build AI-powered websites, custom React applications, e-commerce platforms, and digital tools for growing businesses across Jaipur, Delhi, Mumbai, Bangalore, and all of India.",
         "foundingDate": "2025",
         "numberOfEmployees": {
@@ -415,10 +416,17 @@
 
   <!-- Microsoft Clarity -->
   <script type="text/javascript">
+    // Starts after the page has loaded so it can't compete with the first screen,
+    // and never during the prerender capture, which would bake it into the HTML.
     (function (c, l, a, r, i, t, y) {
+      if (c.__PRERENDER__) return;
       c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+      c.addEventListener("load", function () {
+        setTimeout(function () {
+          t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+          y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        }, 800);
+      });
     })(window, document, "clarity", "script", "x82augbcxm");
   </script>
 </head>

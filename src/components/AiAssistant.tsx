@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { useMountAfterHydration } from '../hooks/usePrerendering'
 import assistantFull from '../assets/assistant-full.webp'
 import assistantFace from '../assets/assistant-face.webp'
 import { LiveAvatar } from './LiveAvatar'
@@ -117,27 +116,16 @@ function markGreeted() {
   }
 }
 
-// Say the greeting aloud once per visit (per browser tab): the first page the
-// visitor opens, never again as they move around the site. The header/footer
-// use plain <a> links, which reload the page, so this can't rely on the
-// assistant staying mounted — sessionStorage survives those reloads.
+// Say the greeting aloud once per visit (per browser tab), the first time the
+// visitor opens the chat. The header/footer use plain <a> links, which reload
+// the page, so this can't rely on the assistant staying mounted —
+// sessionStorage survives those reloads.
 function hasGreeted(): boolean {
   try {
     return sessionStorage.getItem(GREETED_KEY) === '1'
   } catch {
     return false
   }
-}
-
-// True when this click/tap is on a link that will unload the page. Starting
-// the greeting from that gesture would cut it off a moment later and leave it
-// "unheard", so it would restart on the next page — every page.
-function leavesPage(e: Event): boolean {
-  const link = (e.target as Element | null)?.closest?.('a[href]') as HTMLAnchorElement | null
-  if (!link || link.target === '_blank' || link.hasAttribute('download')) return false
-  const url = new URL(link.href, window.location.href)
-  if (url.origin !== window.location.origin) return true
-  return url.pathname !== window.location.pathname || url.search !== window.location.search
 }
 
 function ActionLink({ action }: { action: AssistantAction }) {
@@ -157,9 +145,8 @@ function ActionLink({ action }: { action: AssistantAction }) {
   )
 }
 
-export function AiAssistant() {
-  const mounted = useMountAfterHydration()
-  const [open, setOpen] = useState(false)
+export function AiAssistant({ startOpen = false }: { startOpen?: boolean }) {
+  const [open, setOpen] = useState(startOpen)
   const [bubble, setBubble] = useState(false)
   const [typed, setTyped] = useState('')
   const [speaking, setSpeaking] = useState(false)
@@ -299,87 +286,29 @@ export function AiAssistant() {
     })
   }, [attachLipSync])
 
-  // Phones: the greeting gets a few seconds, then tucks away so it never sits on top of the page.
+  // Greeting bubble, on larger screens only: on phones it would cover real content.
   useEffect(() => {
-    if (!bubble || !isSmallScreen()) return
-    const t = window.setTimeout(() => setBubble(false), 6000)
-    return () => window.clearTimeout(t)
-  }, [bubble])
-
-  // Greeting: show the bubble, type the text out and say it — but only on the
-  // first page of the visit, not on every in-site page change (see hasGreeted). Browsers refuse to play any sound before the
-  // visitor has interacted with the page, so if the first attempt is blocked,
-  // say it on their first click / tap / keypress anywhere on the page instead.
-  useEffect(() => {
-    if (!mounted) return
-    // Warm the voice list now so the best voice is ready by the first click
+    if (isSmallScreen() || bubbleDismissed()) return
+    // Warm the voice list now so the best voice is ready when the chat opens
     // (speak() reads it synchronously).
     if ('speechSynthesis' in window) void loadVoices()
 
-    if (hasGreeted()) {
-      // On phones the bubble covers real content, so after the first page (or
-      // once dismissed) only the avatar stays.
-      if (isSmallScreen() || bubbleDismissed()) return
-      // Moving around the site: keep the greeting on screen, but silently.
-      const t = window.setTimeout(() => {
-        setTyped(GREETING)
-        setBubble(true)
-      }, 1200)
-      return () => window.clearTimeout(t)
-    }
-
     let typeTimer = 0
-    let cancelled = false
-    const cleanups: (() => void)[] = []
-
     const startTimer = window.setTimeout(() => {
       setBubble(true)
       let i = 0
       typeTimer = window.setInterval(() => {
         i += 1
         setTyped(GREETING.slice(0, i))
-        if (i >= GREETING.length) {
-          window.clearInterval(typeTimer)
-        }
+        if (i >= GREETING.length) window.clearInterval(typeTimer)
       }, 38)
-
-      let done = false
-      let inFlight = false
-      const attempt = (e?: Event) => {
-        if (done || inFlight || cancelled) return
-        if (e && leavesPage(e)) return
-        inFlight = true
-        void speak(SPOKEN_GREETING).then((ok) => {
-          inFlight = false
-          if (!ok) return
-          done = true
-          disarm()
-          markGreeted()
-        })
-      }
-
-      // Listen for the visitor's first click / tap / keypress straight away
-      // (only these count as "user activation"; scrolling and hovering don't),
-      // and speak from inside that gesture. Chrome silently ignores speech that
-      // is blocked, so waiting to find out first would miss an early click.
-      const events = ['mousedown', 'pointerup', 'touchend', 'keydown', 'click'] as const
-      const disarm = () => events.forEach((e) => window.removeEventListener(e, attempt, true))
-      events.forEach((e) => window.addEventListener(e, attempt, { capture: true, passive: true }))
-      cleanups.push(disarm)
-
-      // If the page already has user activation (or the browser doesn't report
-      // it), try right away; otherwise the attempt would just be blocked.
-      const activation = (navigator as Navigator & { userActivation?: { hasBeenActive: boolean } }).userActivation
-      if (!activation || activation.hasBeenActive) attempt()
     }, 1200)
 
     return () => {
-      cancelled = true
       window.clearTimeout(startTimer)
       window.clearInterval(typeTimer)
-      cleanups.forEach((fn) => fn())
     }
-  }, [mounted, speak])
+  }, [])
 
   useEffect(() => {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: 'smooth' })
@@ -389,11 +318,15 @@ export function AiAssistant() {
     if (open) window.setTimeout(() => inputRef.current?.focus(), 250)
   }, [open])
 
-  // Opening the chat doesn't cut the greeting off: the click is often the
-  // visitor's first interaction, which is exactly what lets her speak.
+  // She only speaks once asked: this click is what lets the browser play it,
+  // and nobody gets a voice out of nowhere while filling in the page.
   const openChat = () => {
     setBubble(false)
     setOpen(true)
+    if (!hasGreeted()) {
+      markGreeted()
+      void speak(SPOKEN_GREETING)
+    }
   }
 
   const send = async (raw: string) => {
@@ -419,7 +352,7 @@ export function AiAssistant() {
     void send(input)
   }
 
-  if (!mounted) return null
+  const small = isSmallScreen()
 
   return (
     <>
@@ -431,7 +364,7 @@ export function AiAssistant() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.7, y: 30 }}
             transition={{ type: 'spring', stiffness: 240, damping: 22 }}
-            className="fixed bottom-3 right-3 z-[75] flex origin-bottom-right items-end sm:bottom-4 sm:right-4"
+            className="fixed bottom-[76px] right-3 z-[65] flex origin-bottom-right items-end sm:bottom-4 sm:right-4 sm:z-[75]"
           >
             <AnimatePresence>
               {bubble && (
@@ -493,15 +426,19 @@ export function AiAssistant() {
               aria-label={`Chat with ${ASSISTANT_NAME}, our AI assistant`}
               whileHover={{ scale: 1.05, y: -4 }}
               whileTap={{ scale: 0.95 }}
-              className="relative block w-[92px] shrink-0 sm:w-[180px]"
+              className="relative block shrink-0 rounded-full max-sm:shadow-[0_8px_24px_rgba(5,12,60,.3)] sm:w-[132px]"
             >
               <span
                 className={`absolute inset-[12%] rounded-full bg-brand-500/40 blur-2xl transition-opacity duration-500 ${speaking ? 'animate-pulse opacity-100' : 'opacity-0'}`}
                 aria-hidden
               />
-              <span className="relative block drop-shadow-[0_18px_30px_rgba(37,99,235,.28)]">
-                <LiveAvatar src={assistantFull} width={440} height={407} speaking={speaking} cue={cue} />
-              </span>
+              {small ? (
+                <AssistantAvatar size={52} />
+              ) : (
+                <span className="relative block drop-shadow-[0_18px_30px_rgba(37,99,235,.28)]">
+                  <LiveAvatar src={assistantFull} width={440} height={407} speaking={speaking} cue={cue} />
+                </span>
+              )}
             </motion.button>
           </motion.div>
         )}

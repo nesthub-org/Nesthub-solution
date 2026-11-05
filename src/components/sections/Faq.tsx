@@ -1,8 +1,5 @@
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Reveal } from '../Reveal'
 import { faqs } from '../../data/content'
-import { SplitText } from '../SplitText'
 
 const PER_PAGE = 3
 const totalPages = Math.ceil(faqs.length / PER_PAGE)
@@ -19,23 +16,23 @@ export function Faq() {
   const visible = faqs.slice(page * PER_PAGE, page * PER_PAGE + PER_PAGE)
 
   return (
-    <section id="faq" className="mx-auto max-w-[860px] px-6 pt-28 sm:pt-32">
-      <Reveal className="text-center">
+    <section id="faq" className="mx-auto max-w-[860px] px-6 pt-20 sm:pt-28">
+      <div className="rise text-center">
         <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">FAQ</span>
-        <SplitText className="mt-4 text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em]">
+        <h2 className="mt-4 text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em]">
           Questions, answered
-        </SplitText>
+        </h2>
         <p className="text-pretty mx-auto mt-4 max-w-[560px] text-[17px] leading-[1.6] text-muted">
           Everything you need to know before booking a call — don't see yours, just ask.
         </p>
-      </Reveal>
+      </div>
 
       <div className="mt-12 flex flex-col gap-3">
         {visible.map((item, i) => {
           const absoluteIndex = page * PER_PAGE + i
           const isOpen = openIndex === absoluteIndex
           return (
-            <Reveal key={item.q} delay={Math.min(i * 0.04, 0.2)} tilt={false}>
+            <div key={item.q} className="rise">
               <div className={`overflow-hidden rounded-2xl border bg-white transition-colors duration-300 ${isOpen ? 'border-brand-200' : 'border-line'}`}>
                 <button
                   type="button"
@@ -48,27 +45,16 @@ export function Faq() {
                     className={`relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${isOpen ? 'border-brand-500 bg-brand-50' : 'border-line'}`}
                   >
                     <span className={`absolute h-[1.6px] w-3 rounded-full transition-colors duration-300 ${isOpen ? 'bg-brand-500' : 'bg-ink'}`} />
-                    <motion.span
-                      animate={{ rotate: isOpen ? 0 : 90 }}
-                      transition={{ duration: 0.25, ease: 'easeOut' }}
-                      className={`absolute h-[1.6px] w-3 rounded-full transition-colors duration-300 ${isOpen ? 'bg-brand-500' : 'bg-ink'}`}
-                    />
+                    <span className={`absolute h-[1.6px] w-3 rounded-full transition-all duration-300 ${isOpen ? 'bg-brand-500' : 'rotate-90 bg-ink'}`} />
                   </span>
                 </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                      <p className="px-6 pb-5 text-[15px] leading-[1.65] text-muted">{item.a}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                <div className={`grid transition-[grid-template-rows] duration-300 ease-out ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+                  <div className="overflow-hidden">
+                    <p className="px-6 pb-5 text-[15px] leading-[1.65] text-muted">{item.a}</p>
+                  </div>
+                </div>
               </div>
-            </Reveal>
+            </div>
           )
         })}
       </div>

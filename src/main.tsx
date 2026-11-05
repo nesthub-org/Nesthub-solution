@@ -3,16 +3,9 @@ import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
+import { loadInitialPage } from './routes'
 
 const rootEl = document.getElementById('root')!
-
-const app = (
-  <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </StrictMode>
-)
 
 // Production builds are prerendered (see scripts/prerender.mjs), so `root`
 // already contains real markup — hydrate over it instead of wiping and
@@ -29,10 +22,20 @@ const currentRoute = window.location.pathname.replace(/\/+$/, '') || '/'
 const variesByQuery = currentRoute === '/blog' && /[?&](tag|page)=/.test(window.location.search)
 const snapshotMatches = !snapshotRoute || (snapshotRoute === currentRoute && !variesByQuery)
 
-if (rootEl.hasChildNodes() && snapshotMatches) {
-  hydrateRoot(rootEl, app)
-} else {
-  rootEl.replaceChildren()
-  delete rootEl.dataset.route
-  createRoot(rootEl).render(app)
-}
+void loadInitialPage(window.location.pathname).then((initialPage) => {
+  const app = (
+    <StrictMode>
+      <BrowserRouter>
+        <App initialPage={initialPage} />
+      </BrowserRouter>
+    </StrictMode>
+  )
+
+  if (rootEl.hasChildNodes() && snapshotMatches) {
+    hydrateRoot(rootEl, app)
+  } else {
+    rootEl.replaceChildren()
+    delete rootEl.dataset.route
+    createRoot(rootEl).render(app)
+  }
+})

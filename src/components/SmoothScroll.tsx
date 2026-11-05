@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import Lenis from 'lenis'
+import type Lenis from 'lenis'
 import 'lenis/dist/lenis.css'
 import { isPrerendering } from '../hooks/usePrerendering'
 
@@ -12,46 +12,60 @@ export function getLenis(): Lenis | null {
 }
 
 // Inertia-style smooth scrolling for the whole page. Skipped during the
-// prerender capture and for users who prefer reduced motion, in which case
-// the browser's native scroll is used untouched.
+// prerender capture, for users who prefer reduced motion and on touch devices
+// (where Lenis leaves swipes native anyway, so its frame loop would only cost
+// battery), in which case the browser's native scroll is used untouched and
+// Lenis isn't even downloaded.
 export function SmoothScroll() {
   useEffect(() => {
     if (isPrerendering()) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse)').matches) return
 
-    const instance = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      // Let scrollable children (chat panel, mobile menu) scroll on their own.
-      allowNestedScroll: true,
+    let cancelled = false
+    let cleanup: (() => void) | undefined
+
+    void import('lenis').then(({ default: LenisClass }) => {
+      if (cancelled) return
+
+      const instance = new LenisClass({
+        duration: 1.15,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        // Let scrollable children (chat panel, mobile menu) scroll on their own.
+        allowNestedScroll: true,
+      })
+      lenis = instance
+
+      let frame = requestAnimationFrame(function raf(time) {
+        instance.raf(time)
+        frame = requestAnimationFrame(raf)
+      })
+
+      // Same-page anchor links like "/#contact" glide instead of jumping.
+      const onClick = (e: MouseEvent) => {
+        if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+        const link = (e.target as Element | null)?.closest?.('a[href*="#"]') as HTMLAnchorElement | null
+        if (!link || link.target === '_blank') return
+        const url = new URL(link.href, window.location.href)
+        if (url.origin !== window.location.origin || url.pathname !== window.location.pathname || !url.hash) return
+        const target = url.hash === '#top' ? 0 : document.getElementById(decodeURIComponent(url.hash.slice(1)))
+        if (target === null) return
+        e.preventDefault()
+        history.pushState(null, '', url.hash)
+        instance.scrollTo(target, { offset: -90 })
+      }
+      document.addEventListener('click', onClick)
+
+      cleanup = () => {
+        document.removeEventListener('click', onClick)
+        cancelAnimationFrame(frame)
+        instance.destroy()
+        lenis = null
+      }
     })
-    lenis = instance
-
-    let frame = requestAnimationFrame(function raf(time) {
-      instance.raf(time)
-      frame = requestAnimationFrame(raf)
-    })
-
-    // Same-page anchor links like "/#contact" glide instead of jumping.
-    const onClick = (e: MouseEvent) => {
-      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
-      const link = (e.target as Element | null)?.closest?.('a[href*="#"]') as HTMLAnchorElement | null
-      if (!link || link.target === '_blank') return
-      const url = new URL(link.href, window.location.href)
-      if (url.origin !== window.location.origin || url.pathname !== window.location.pathname || !url.hash) return
-      const target = url.hash === '#top' ? 0 : document.getElementById(decodeURIComponent(url.hash.slice(1)))
-      if (target === null) return
-      e.preventDefault()
-      history.pushState(null, '', url.hash)
-      instance.scrollTo(target, { offset: -90 })
-    }
-    document.addEventListener('click', onClick)
 
     return () => {
-      document.removeEventListener('click', onClick)
-      cancelAnimationFrame(frame)
-      instance.destroy()
-      lenis = null
+      cancelled = true
+      cleanup?.()
     }
   }, [])
 

@@ -4,6 +4,7 @@ import { breadcrumb, graph, webPage } from '../lib/schema'
 import { Reveal } from '../components/Reveal'
 import { Icon } from '../components/Icon'
 import { Faq } from '../components/sections/Faq'
+import { HeroFacts, PageHero } from '../components/PageHero'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { brand, openJobs, values, type Job } from '../data/content'
 import { SplitText } from '../components/SplitText'
@@ -46,50 +47,29 @@ export function Careers() {
   ]
 
   return (
-    <main id="top" className="relative z-[1] pb-28 pt-32 sm:pb-32 sm:pt-40">
+    <main id="top" className="relative z-[1]">
       <JsonLd data={graph(webPage({ type: 'CollectionPage', path: '/careers', name: 'Careers at NestHub Solution — Jaipur Web & App Development Agency', description: 'Open roles at NestHub Solution: Lead Generation Executive (Jaipur, full-time). Apply today.' }), breadcrumb([{ name: 'Careers', path: '/careers' }]))} />
       {/* Hero */}
-      <section className="relative mx-auto max-w-[1320px] px-6">
-        <div aria-hidden className="pointer-events-none absolute -top-24 right-0 h-80 w-80 rounded-full bg-brand-100/60 blur-3xl" />
-        <Reveal>
-          <div className="relative grid grid-cols-1 items-end gap-12 border-b border-line pb-12 lg:grid-cols-[1.4fr_.6fr]">
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3.5 py-1.5 text-[13px] font-semibold text-ink shadow-[0_2px_10px_rgba(17,17,17,.05)]">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
-                </span>
-                We're hiring
-              </span>
-              <h1 className="mt-6 text-[48px] font-bold leading-[.98] tracking-[-.05em] sm:text-[68px] lg:text-[84px]">
-                Grow with
-                <br />
-                <span className="text-brand-500">NestHub.</span>
-              </h1>
-              <p className="mt-6 max-w-[580px] text-pretty text-[17px] leading-[1.65] text-muted sm:text-[18px]">
-                NestHub Solution is a small, senior-led team based in Jaipur, working with clients across India. We hire
-                for craft and ownership, not headcount — every open role below is a real seat on real client work.
-              </p>
-            </div>
-
-            <dl className="grid grid-cols-2 gap-x-6 gap-y-6 rounded-[20px] border border-line bg-white/80 p-6 shadow-[0_8px_40px_rgba(0,0,0,.04)] backdrop-blur">
-              {facts.map((f) => (
-                <div key={f.label}>
-                  <dt className="text-[12.5px] text-muted">{f.label}</dt>
-                  <dd className="mt-1 text-[19px] font-semibold leading-tight tracking-[-.02em] text-ink">{f.value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </Reveal>
-      </section>
+      <PageHero
+        crumb="Careers"
+        eyebrow="We're hiring"
+        title={
+          <>
+            Grow with
+            <br />
+            <span className="marker">NestHub.</span>
+          </>
+        }
+        description="NestHub Solution is a small, senior-led team based in Jaipur, working with clients across India. We hire for craft and ownership, not headcount — every open role below is a real seat on real client work."
+        aside={<HeroFacts facts={facts} />}
+      />
 
       {/* Open roles */}
       <section id="openings" className="mx-auto max-w-[1320px] px-6 pt-20 sm:pt-24">
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <span className="text-[13px] font-semibold text-brand-500">Open roles</span>
+              <span className="sheet-label text-blueprint">Open roles</span>
               <SplitText className="mt-2 text-[32px] font-bold leading-[1.05] tracking-[-.04em] sm:text-[44px]">Current openings</SplitText>
             </div>
             <span className="rounded-full border border-line bg-surface px-3.5 py-1.5 text-[13px] font-semibold text-muted">
@@ -110,7 +90,7 @@ export function Careers() {
       {/* Values */}
       <section className="mx-auto max-w-[1320px] px-6 pt-24 sm:pt-28">
         <Reveal>
-          <span className="text-[13px] font-semibold text-brand-500">Why NestHub</span>
+          <span className="sheet-label text-blueprint">Why NestHub</span>
           <SplitText className="mt-2 max-w-[640px] text-[32px] font-bold leading-[1.05] tracking-[-.04em] sm:text-[44px]">
             What we value, every day.
           </SplitText>
@@ -125,7 +105,7 @@ export function Careers() {
               >
                 <div className="flex items-start justify-between">
                   <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 transition-colors group-hover:bg-brand-100">
-                    <Icon name={v.icon} color="#2563EB" size={22} />
+                    <Icon name={v.icon} color="#1337CF" size={22} />
                   </span>
                   <span aria-hidden className="text-[40px] font-medium leading-none tracking-[-.05em]" style={outlined}>
                     {String(i + 1).padStart(2, '0')}
@@ -142,18 +122,14 @@ export function Careers() {
       {/* How to apply */}
       <section className="mx-auto max-w-[1320px] px-4 pt-24 sm:px-6 sm:pt-28">
         <Reveal tilt={false}>
-          <div className="relative overflow-hidden rounded-[28px] bg-[#07080b] px-6 py-12 sm:px-12 sm:py-16 lg:px-16">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -left-40 -top-40 h-[560px] w-[560px] rounded-full bg-[radial-gradient(circle,rgba(37,99,235,.34),rgba(37,99,235,0)_65%)]"
-            />
+          <div className="blueprint overflow-hidden rounded-[28px] px-6 py-12 text-white sm:px-12 sm:py-16 lg:px-16">
             <div className="relative grid grid-cols-1 items-center gap-12 lg:grid-cols-[.9fr_1.1fr]">
               <div>
-                <span className="text-[13px] font-semibold text-brand-500">How to apply</span>
+                <span className="sheet-label text-white/90">How to apply</span>
                 <SplitText className="mt-3 text-[38px] font-bold leading-[1] tracking-[-.045em] text-white sm:text-[52px]">
-                  Ready to <span className="text-brand-500">join us?</span>
+                  Ready to <span className="marker">join us?</span>
                 </SplitText>
-                <p className="mt-5 max-w-[440px] text-[16.5px] leading-[1.6] text-white/60">
+                <p className="mt-5 max-w-[440px] text-[16.5px] leading-[1.6] text-white/90">
                   No forms, no portals. Email your resume and a line about why the role fits you.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -161,12 +137,12 @@ export function Careers() {
                     href={mailtoFor(openJobs.length === 1 ? openJobs[0] : undefined)}
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.97 }}
-                    className="inline-flex h-12 items-center gap-2 rounded-xl bg-brand-500 px-6 text-[15px] font-semibold text-white shadow-[0_10px_30px_rgba(37,99,235,.35)] transition-colors hover:bg-brand-600"
+                    className="btn-primary"
                   >
-                    <Icon name="send" color="#ffffff" size={16} />
+                    <Icon name="send" color="#111111" size={16} />
                     Email your resume
                   </motion.a>
-                  <a href={`mailto:${brand.email}`} className="text-[14px] font-medium text-white/60 transition-colors hover:text-white">
+                  <a href={`mailto:${brand.email}`} className="text-[14px] font-medium text-white/85 transition-colors hover:text-white">
                     {brand.email}
                   </a>
                 </div>
@@ -174,13 +150,13 @@ export function Careers() {
 
               <ol className="grid gap-3">
                 {applySteps.map((s, i) => (
-                  <li key={s.title} className="flex items-start gap-4 rounded-xl border border-white/10 bg-white/[.03] px-5 py-4">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-500 text-[12px] font-bold text-white">
+                  <li key={s.title} className="flex items-start gap-4 rounded-xl border border-white/25 bg-white/10 px-5 py-4">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-marker text-[12px] font-bold text-ink">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <span>
                       <span className="block text-[16px] font-semibold text-white">{s.title}</span>
-                      <span className="mt-0.5 block text-[14px] leading-[1.5] text-white/55">{s.body}</span>
+                      <span className="mt-0.5 block text-[14px] leading-[1.5] text-white/85">{s.body}</span>
                     </span>
                   </li>
                 ))}
@@ -216,7 +192,7 @@ function JobRow({ job, index }: { job: Job; index: number }) {
               key={c.text}
               className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 text-[13px] font-medium text-ink"
             >
-              <Icon name={c.icon} size={13} color="#2563EB" />
+              <Icon name={c.icon} size={13} color="#1337CF" />
               {c.text}
             </span>
           ))}
@@ -229,7 +205,7 @@ function JobRow({ job, index }: { job: Job; index: number }) {
             href={mailtoFor(job)}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className="group inline-flex h-12 items-center gap-2 rounded-xl bg-brand-500 px-6 text-[15px] font-semibold text-white shadow-[0_10px_30px_rgba(37,99,235,.28)] transition-colors hover:bg-brand-600"
+            className="group inline-flex h-12 items-center gap-2 rounded-xl bg-brand-500 px-6 text-[15px] font-semibold text-white shadow-[0_10px_30px_rgba(19,55,207,.28)] transition-colors hover:bg-brand-600"
           >
             Apply for this role
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>
@@ -245,13 +221,13 @@ function JobRow({ job, index }: { job: Job; index: number }) {
         </div>
       </div>
 
-      <div className="relative overflow-hidden rounded-[24px] bg-[#07080b] p-7 shadow-[0_30px_70px_-30px_rgba(15,23,42,.6)] sm:p-9">
+      <div className="relative overflow-hidden rounded-[24px] bg-navy p-7 shadow-[0_30px_70px_-30px_rgba(15,23,42,.6)] sm:p-9">
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-32 -top-32 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(37,99,235,.32),rgba(37,99,235,0)_65%)]"
+          className="pointer-events-none absolute -right-32 -top-32 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(19,55,207,.32),rgba(19,55,207,0)_65%)]"
         />
         <div className="relative">
-          <h4 className="text-[13px] font-semibold text-brand-500">What you'll do</h4>
+          <h4 className="sheet-label text-marker">What you'll do</h4>
           <ol className="mt-4 grid gap-2.5">
             {job.responsibilities.map((r, i) => (
               <li key={r} className="flex items-start gap-3.5 rounded-xl border border-white/10 bg-white/[.03] px-4 py-3">
@@ -263,7 +239,7 @@ function JobRow({ job, index }: { job: Job; index: number }) {
             ))}
           </ol>
 
-          <h4 className="mt-8 text-[13px] font-semibold text-brand-500">What we're after</h4>
+          <h4 className="mt-8 sheet-label text-marker">What we're after</h4>
           <ul className="mt-4 grid gap-3">
             {job.requirements.map((r) => (
               <li key={r} className="flex items-start gap-3 text-[14.5px] leading-[1.55] text-white/70">

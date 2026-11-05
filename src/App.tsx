@@ -10,6 +10,7 @@ import { AssistantLoader } from './components/AssistantLoader'
 import { pageRoutes, type InitialPage } from './routes'
 import { captureSource } from './lib/lead'
 import { initMetaPixel } from './lib/track'
+import { initPointerFx } from './lib/pointerFx'
 
 const AdminApp = lazy(() => import('./pages/admin/AdminApp'))
 
@@ -31,6 +32,7 @@ function App({ initialPage }: { initialPage: InitialPage | null }) {
     if (isAdmin) return
     captureSource()
     initMetaPixel()
+    initPointerFx()
   }, [isAdmin])
 
   // The admin panel has its own chrome — no marketing header/footer/widgets

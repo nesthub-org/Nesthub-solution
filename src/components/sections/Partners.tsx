@@ -11,7 +11,7 @@ export function Partners() {
   return (
     <section className="mx-auto max-w-[1320px] px-6 pt-24 sm:pt-28">
       <Reveal className="text-center">
-        <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Our partners</span>
+        <span className="sheet-label text-blueprint">Our partners</span>
         <SplitText className="mt-4 text-[26px] sm:text-[32px] font-bold leading-[1.15] tracking-[-.03em]">
           Trusted by the brands we build for
         </SplitText>

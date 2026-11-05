@@ -7,6 +7,7 @@ import { Icon } from '../components/Icon'
 import { Faq } from '../components/sections/Faq'
 import { accentStyles, tones } from '../components/sections/Services/tones'
 import { getDomain } from '../utils/url'
+import { PageHero } from '../components/PageHero'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { projects, type Project } from '../data/content'
 import { SplitText } from '../components/SplitText'
@@ -154,34 +155,32 @@ export function CaseStudies() {
   )
 
   return (
-    <main id="top" className="relative z-[1] pb-8 pt-32 sm:pt-36">
+    <main id="top" className="relative z-[1]">
       <JsonLd data={graph(webPage({ type: 'CollectionPage', path: '/case-studies', name: 'Case Studies — NestHub Solution Client Work', description: 'A closer look at the products NestHub Solution has shipped — dashboards, e-commerce, health & wellness platforms and fintech, each broken down in detail.' }), breadcrumb([{ name: 'Case Studies', path: '/case-studies' }]))} />
-      <section className="mx-auto max-w-[1320px] px-6">
-        <Reveal className="max-w-[720px]">
-          <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Case Studies</span>
-          <h1 className="mt-4 text-[36px] sm:text-[44px] lg:text-[52px] font-bold leading-[1.08] tracking-[-.035em] text-balance">
-            Selected work, in detail.
-          </h1>
-          <p className="text-pretty mt-5 text-[17px] sm:text-[18px] leading-[1.65] text-muted">
-            Every project below shipped to production for a real client — the platform, the capabilities we built,
-            and a link to see it live.
-          </p>
-        </Reveal>
-
-        <Reveal delay={0.08}>
-          <nav aria-label="Jump to case study" className="mt-8 flex flex-wrap gap-2">
-            {projects.map((p) => (
-              <a
-                key={p.slug}
-                href={`#${p.slug}`}
-                className="rounded-full border border-line bg-white px-3.5 py-1.5 text-[13.5px] font-semibold text-muted transition-colors hover:border-ink hover:text-ink"
-              >
-                {p.title}
-              </a>
-            ))}
-          </nav>
-        </Reveal>
-      </section>
+      <PageHero
+        crumb="Case studies"
+        eyebrow="Case studies"
+        title={
+          <>
+            Selected work,
+            <br />
+            <span className="marker">in detail.</span>
+          </>
+        }
+        description="Every project below shipped to production for a real client — the platform, the capabilities we built, and a link to see it live."
+      >
+        <nav aria-label="Jump to case study" className="flex flex-wrap gap-2">
+          {projects.map((p) => (
+            <a
+              key={p.slug}
+              href={`#${p.slug}`}
+              className="flex h-10 items-center rounded-full border border-white/35 bg-white/10 px-3.5 text-[13.5px] font-semibold text-white transition-colors hover:border-marker hover:bg-marker hover:text-ink"
+            >
+              {p.title}
+            </a>
+          ))}
+        </nav>
+      </PageHero>
 
       <section className="mx-auto max-w-[1320px] px-6 pt-16 sm:pt-20">
         {projects.map((project, i) => (
@@ -193,7 +192,7 @@ export function CaseStudies() {
         <Reveal>
           <div className="rounded-[20px] border border-line bg-white p-8 text-center shadow-[0_8px_40px_rgba(0,0,0,.05)] sm:p-10">
             <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl border border-line bg-brand-50">
-              <Icon name="send" color="#2563EB" size={20} />
+              <Icon name="send" color="#1337CF" size={20} />
             </span>
             <SplitText className="mt-5 text-[24px] sm:text-[28px] font-bold leading-[1.15] tracking-[-.03em]">
               Have a project like this in mind?
@@ -203,9 +202,9 @@ export function CaseStudies() {
             </p>
             <motion.a
               href="/#contact"
-              whileHover={{ y: -2, backgroundColor: '#1D4ED8' }}
+              whileHover={{ y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className="mt-6 inline-flex h-13 items-center justify-center rounded-2xl bg-brand-500 px-8 text-[15.5px] font-semibold text-white shadow-[0_8px_28px_rgba(37,99,235,.24)]"
+              className="mt-6 inline-flex h-13 items-center justify-center rounded-2xl bg-brand-500 px-8 text-[15.5px] font-semibold text-white shadow-[0_8px_28px_rgba(19,55,207,.24)]"
             >
               Start a project
             </motion.a>

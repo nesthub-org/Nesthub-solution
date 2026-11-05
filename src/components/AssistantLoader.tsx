@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import assistantFace from '../assets/assistant-face.webp'
 import { isPrerendering } from '../hooks/usePrerendering'
 
@@ -8,30 +9,36 @@ const ARRIVE_DELAY_MS = 9000
 
 /**
  * Keeps the assistant, and the animation library it brings along, off the first
- * screen. Larger screens get her after a short delay. Phones get a small button
- * once they scroll past the hero, and only load her if they tap it.
+ * screen. On the homepage she waits below the hero, so nothing covers the
+ * preview; other pages get her after a short delay. Phones only ever get a small
+ * button once they scroll, and load her if they tap it.
  */
 export function AssistantLoader() {
+  const { pathname } = useLocation()
   const [phone, setPhone] = useState(false)
   const [arrived, setArrived] = useState(false)
   const [load, setLoad] = useState(false)
 
   useEffect(() => {
     if (isPrerendering()) return
-    if (!window.matchMedia('(max-width: 639px)').matches) {
+    const isPhone = window.matchMedia('(max-width: 639px)').matches
+    setPhone(isPhone)
+
+    if (!isPhone && pathname !== '/') {
       const t = window.setTimeout(() => setLoad(true), ARRIVE_DELAY_MS)
       return () => window.clearTimeout(t)
     }
-    setPhone(true)
+
     const onScroll = () => {
       if (window.scrollY < window.innerHeight * 0.8) return
-      setArrived(true)
+      if (isPhone) setArrived(true)
+      else setLoad(true)
       window.removeEventListener('scroll', onScroll)
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [pathname])
 
   if (load) {
     return (

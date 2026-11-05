@@ -11,7 +11,7 @@ export function Services() {
 
       <Reveal>
         <div className="max-w-[760px]">
-          <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Services</span>
+          <span className="sheet-label text-blueprint">Services</span>
           <SplitText className="mt-4 text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em]">
             Services That Deliver
           </SplitText>

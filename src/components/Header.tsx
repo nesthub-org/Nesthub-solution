@@ -11,13 +11,13 @@ export function Header() {
   return (
     <header className="fixed top-2.5 left-0 right-0 z-[60] px-4 sm:top-[18px] sm:px-6">
       <nav className="mx-auto max-w-[1320px] h-[60px] sm:h-[68px] flex items-center justify-between pl-4 sm:pl-[22px] pr-2 sm:pr-3 bg-white border border-line rounded-[18px] sm:rounded-[20px] shadow-[0_8px_30px_rgba(5,12,60,.14)]">
-        <a href="/#top" className="group flex items-center gap-2.5 text-ink transition-transform hover:scale-[1.03] active:scale-[.97]">
+        <a href="/#top" className="group flex h-11 items-center gap-2.5 text-ink transition-transform hover:scale-[1.03] active:scale-[.97]">
           <span className="transition-transform duration-300 group-hover:-rotate-[8deg]">
             <Logo size={36} />
             <LogoFallback size={36} />
           </span>
           <span className="text-[16.5px] font-bold tracking-[-.02em]">
-            NestHub<span className="font-bold" style={{ color: '#2563eb' }}> Solution</span>
+            NestHub<span className="font-bold" style={{ color: '#1337CF' }}> Solution</span>
           </span>
         </a>
 
@@ -38,7 +38,7 @@ export function Header() {
         <div className="hidden md:flex items-center gap-2">
           <a
             href="/contact"
-            className="h-11 px-5 flex items-center rounded-[14px] bg-brand-500 text-white text-[16px] font-semibold shadow-[0_6px_18px_rgba(37,99,235,.22)] transition-all hover:-translate-y-px hover:bg-brand-600"
+            className="h-11 px-5 flex items-center rounded-[14px] bg-brand-500 text-white text-[16px] font-semibold shadow-[0_6px_18px_rgba(19,55,207,.22)] transition-all hover:-translate-y-px hover:bg-brand-600"
           >
             Start a project
           </a>

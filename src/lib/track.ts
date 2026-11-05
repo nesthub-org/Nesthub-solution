@@ -14,6 +14,8 @@ export type TrackEvent =
   | 'preview_start'
   | 'preview_ready'
   | 'preview_share'
+  | 'preview_tap'
+  | 'checklist_share'
   | 'whatsapp_click'
   | 'call_click'
   | 'calendly_click'

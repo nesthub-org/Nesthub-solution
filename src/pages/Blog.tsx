@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { Reveal } from '../components/Reveal'
+import { PageHero } from '../components/PageHero'
 import { BlogCard } from '../components/blog/BlogCard'
 import { useSeo } from '../hooks/useSeo'
 import { blogApi, embedJson, readEmbeddedData, SITE_URL, type BlogSummary, type Paginated } from '../lib/blog'
@@ -82,45 +82,35 @@ export function Blog() {
     : null
 
   return (
-    <main id="top" className="relative z-[1] pb-28 pt-32 sm:pb-32 sm:pt-40">
-      <section className="relative mx-auto max-w-[1320px] px-6">
-        <div aria-hidden className="pointer-events-none absolute -top-24 right-0 h-80 w-80 rounded-full bg-brand-100/60 blur-3xl" />
-        <Reveal>
-          <div className="relative border-b border-line pb-12">
-            <nav aria-label="Breadcrumb" className="text-[13.5px] text-muted">
-              <a href="/" className="text-muted hover:text-ink">Home</a>
-              <span className="mx-2">/</span>
-              {tag ? (
-                <>
-                  <a href="/blog" className="text-muted hover:text-ink">Blog</a>
-                  <span className="mx-2">/</span>
-                  <span className="text-ink">{tag}</span>
-                </>
-              ) : (
-                <span className="text-ink">Blog</span>
-              )}
-            </nav>
-            <h1 className="mt-6 text-[48px] font-bold leading-[.98] tracking-[-.05em] sm:text-[68px] lg:text-[84px]">
-              {tag ? (
-                <>
-                  <span className="text-brand-500">#</span>
-                  {tag}
-                </>
-              ) : (
-                <>
-                  Insights from
-                  <br />
-                  <span className="text-brand-500">NestHub.</span>
-                </>
-              )}
-            </h1>
-            <p className="mt-6 max-w-[620px] text-pretty text-[17px] leading-[1.65] text-muted sm:text-[18px]">
-              Practical notes on building fast websites, shipping AI features, ranking on Google and growing a business
-              online, written by the team that does it every day.
-            </p>
-          </div>
-        </Reveal>
-      </section>
+    <main id="top" className="relative z-[1]">
+      <PageHero
+        crumb={
+          tag ? (
+            <>
+              <a href="/blog" className="-my-2 py-2 text-white/75 hover:text-white">Blog</a>
+              <span aria-hidden className="mx-2 text-white/75">/</span>
+              {tag}
+            </>
+          ) : (
+            'Blog'
+          )
+        }
+        eyebrow="The NestHub blog"
+        title={
+          tag ? (
+            <>
+              <span className="marker">#{tag}</span>
+            </>
+          ) : (
+            <>
+              Insights from
+              <br />
+              <span className="marker">NestHub.</span>
+            </>
+          )
+        }
+        description="Practical notes on building fast websites, shipping AI features, ranking on Google and growing a business online, written by the team that does it every day."
+      />
 
       <section className="mx-auto mt-14 max-w-[1320px] px-6">
         {error && (

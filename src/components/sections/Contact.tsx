@@ -8,7 +8,7 @@ import { WhatsAppGlyph, WhatsAppLink } from '../WhatsAppButton'
 // border, brand-blue focus ring) — reproduced in plain Tailwind so the form no
 // longer needs to pull in MUI + Emotion just for two field types.
 const fieldClasses =
-  'h-14 w-full rounded-[14px] border border-line bg-white px-4 text-[16px] text-ink placeholder:text-muted/70 transition-shadow outline-none hover:border-[#D8D8D8] focus:border-brand-500 focus:shadow-[0_0_0_4px_rgba(37,99,235,.10)]'
+  'h-14 w-full rounded-[14px] border border-line bg-white px-4 text-[16px] text-ink placeholder:text-muted transition-shadow outline-none hover:border-[#D8D8D8] focus:border-brand-500 focus:shadow-[0_0_0_4px_rgba(19,55,207,.10)]'
 
 function Field({ label, id, ...props }: { label: string; id: string } & InputHTMLAttributes<HTMLInputElement>) {
   return (
@@ -293,7 +293,7 @@ export function Contact() {
                       />
                     </div>
                   ) : (
-                    <button type="button" onClick={() => setShowMore(true)} className="mt-5 text-[14.5px] font-semibold text-brand-500 underline decoration-brand-200 underline-offset-4 hover:decoration-brand-500">
+                    <button type="button" onClick={() => setShowMore(true)} className="mt-2.5 py-2.5 text-[14.5px] font-semibold text-brand-500 underline decoration-brand-200 underline-offset-4 hover:decoration-brand-500">
                       Add more details (optional)
                     </button>
                   )}

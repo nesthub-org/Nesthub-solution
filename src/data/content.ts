@@ -15,12 +15,16 @@ import projectDrSunil from '../assets/project-drsunil.png'
 import scanitMockup from '../assets/scanit-mockup.png'
 import screenVedyara from '../assets/screen-vedyara.webp'
 import screenVedyaraSmall from '../assets/screen-vedyara-640.webp'
+import screenVedyaraPhone from '../assets/screen-vedyara-phone.webp'
 import screenFitlife from '../assets/screen-fitlife.webp'
 import screenFitlifeSmall from '../assets/screen-fitlife-640.webp'
+import screenFitlifePhone from '../assets/screen-fitlife-phone.webp'
 import screenDrSunil from '../assets/screen-drsunil.webp'
 import screenDrSunilSmall from '../assets/screen-drsunil-640.webp'
+import screenDrSunilPhone from '../assets/screen-drsunil-phone.webp'
 import screenTheFineGrow from '../assets/screen-thefinegrow.webp'
 import screenTheFineGrowSmall from '../assets/screen-thefinegrow-640.webp'
+import screenTheFineGrowPhone from '../assets/screen-thefinegrow-phone.webp'
 import screenIllusionmed from '../assets/screen-illusionmed.webp'
 import screenAgencyOS from '../assets/screen-agencyos.webp'
 
@@ -211,8 +215,10 @@ export interface Project {
   accent: ServiceAccent
   /** The bare website (no laptop frame), shown inside the homepage browser frame. */
   screen: string
-  /** A 640px-wide copy of `screen` for phones, where one exists. */
+  /** A 640px-wide copy of `screen` for smaller screens, where one exists. */
   screenSmall?: string
+  /** The site as it looks on a phone, for the homepage's grid on phones. */
+  screenPhone?: string
   /** Homepage filter groups this project appears under. */
   kinds: ProjectKind[]
   /** Homepage meta row. Each is optional and only shown when known. */
@@ -247,6 +253,7 @@ export const projects: Project[] = [
     accent: 'amber',
     screen: screenVedyara,
     screenSmall: screenVedyaraSmall,
+    screenPhone: screenVedyaraPhone,
     kinds: ['websites'],
     stack: 'React, Node.js, MongoDB, Razorpay',
     outcome: 'Online sales tripled',
@@ -269,6 +276,7 @@ export const projects: Project[] = [
     accent: 'emerald',
     screen: screenFitlife,
     screenSmall: screenFitlifeSmall,
+    screenPhone: screenFitlifePhone,
     kinds: ['websites'],
     stack: 'React, Node.js, MongoDB',
     outcome: 'Programs & community online',
@@ -290,6 +298,7 @@ export const projects: Project[] = [
     accent: 'sky',
     screen: screenDrSunil,
     screenSmall: screenDrSunilSmall,
+    screenPhone: screenDrSunilPhone,
     kinds: ['websites'],
     stack: 'React, Framer Motion',
     outcome: 'Online appointments',
@@ -312,6 +321,7 @@ export const projects: Project[] = [
     accent: 'violet',
     screen: screenTheFineGrow,
     screenSmall: screenTheFineGrowSmall,
+    screenPhone: screenTheFineGrowPhone,
     kinds: ['platforms'],
     stack: 'Real-time data, WebSockets',
     outcome: 'Live-market learning',
@@ -359,6 +369,10 @@ export const projects: Project[] = [
   },
 ]
 
+// The client sites the homepage links to, in the order it shows them.
+const homepageOrder = ['dr-sunil-chaudhary', 'vedyara-organic', 'thefinegrow', 'fitlife-sutra']
+export const homepageProjects = homepageOrder.flatMap((slug) => projects.filter((p) => p.slug === slug))
+
 export interface QrFeature {
   n: string
   icon: string
@@ -375,6 +389,8 @@ export const qrFeatures: QrFeature[] = [
 
 export interface Testimonial {
   quote: string
+  /** One sentence lifted word for word from `quote`, for where the full quote won't fit. */
+  highlight: string
   name: string
   initials: string
   role: string
@@ -386,6 +402,7 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     quote: 'Our honey brand needed an online presence that matched the quality of our product. NestHub delivered beyond expectations — the site is gorgeous and our online sales have tripled.',
+    highlight: 'NestHub delivered beyond expectations — the site is gorgeous and our online sales have tripled.',
     name: 'Mr. Avinash Maurya',
     initials: 'AM',
     role: 'Manager, Vedyara Agro Foods',
@@ -394,6 +411,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote: 'Building a trading education platform is complex, but the NestHub team handled it with precision. Real-time charts, course modules, community features — everything works flawlessly.',
+    highlight: 'Building a trading education platform is complex, but the NestHub team handled it with precision.',
     name: 'Mr. Amit Mishra',
     initials: 'AM',
     role: 'CEO, TheFineGrow',
@@ -402,6 +420,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote: 'NestHub helped us create a stronger online presence with a clean, user-friendly design. The website made it easier for us to connect with our community and showcase our Herbalife nutrition programs in a simple, professional, and engaging manner.',
+    highlight: 'NestHub helped us create a stronger online presence with a clean, user-friendly design.',
     name: 'Mr. Mahtab Alam',
     initials: 'MA',
     role: 'Health & Wellness',
@@ -440,10 +459,10 @@ export interface Step {
 }
 
 export const steps: Step[] = [
-  { n: '01', title: 'Discovery', body: 'Stakeholder interviews, analytics audit and a written brief we both sign off on.', duration: '1-2 Weeks', icon: 'search' },
-  { n: '02', title: 'Design', body: 'Wireframes to high-fidelity system in Figma, reviewed live rather than by email.', duration: '1-2 Weeks', icon: 'design' },
-  { n: '03', title: 'Development', body: 'Component-driven build with preview deploys on every pull request.', duration: '2-6 Weeks', icon: 'dev' },
-  { n: '04', title: 'Testing', body: 'Cross-device QA, accessibility audit and Core Web Vitals budgets enforced in CI.', duration: '1-2 Weeks', icon: 'clipboardCheck' },
+  { n: '01', title: 'Discovery', body: 'Stakeholder interviews, analytics audit and a written brief we both sign off on.', duration: '1-2 days', icon: 'search' },
+  { n: '02', title: 'Design', body: 'Wireframes to high-fidelity system in Figma, reviewed live rather than by email.', duration: '1-2 days', icon: 'design' },
+  { n: '03', title: 'Development', body: 'Component-driven build with preview deploys on every pull request.', duration: '2-6 days', icon: 'dev' },
+  { n: '04', title: 'Testing', body: 'Cross-device QA, accessibility audit and Core Web Vitals budgets enforced in CI.', duration: '1-2 days', icon: 'clipboardCheck' },
   { n: '05', title: 'Launch', body: 'Zero-downtime migration, redirects mapped, analytics and monitoring verified.', duration: '3-5 Days', icon: 'rocket' },
   { n: '06', title: 'Support', body: 'A named engineer, monthly performance reporting and a roadmap that keeps moving.', duration: 'Ongoing', icon: 'headset' },
 ]
@@ -461,13 +480,15 @@ export const processHighlights: ProcessHighlight[] = [
   { icon: 'team', title: 'Long-term partnership', body: 'We ship, support and keep improving.' },
 ]
 
-export const needs = ['New website', 'Redesign', 'AI integration', 'Ongoing partner']
+export const needs = ['New website', 'Redesign', 'Mobile app', 'AI integration', 'SEO or ads', 'Social media', 'Ongoing partner']
 
 export const budgets = ['Under ₹50k', '₹50k to ₹2L', '₹2L to ₹5L', '₹5L+', 'Not sure yet']
 
 export interface WebsitePackage {
   id: string
   title: string
+  /** What the visitor says they want, in the picker above the cards. */
+  goal: string
   forWhom: string
   timeline: string
   /** Starting price shown on the card, e.g. '₹25,000'. Left out, the card offers a quote instead. */
@@ -479,23 +500,72 @@ export const packages: WebsitePackage[] = [
   {
     id: 'landing',
     title: 'Landing page',
+    goal: 'More enquiries from my ads',
     forWhom: 'One page built to turn ad clicks into enquiries. Right for a single offer, launch or campaign.',
-    timeline: '1–2 weeks',
+    timeline: '1–2 days',
     includes: ['One focused, mobile-first page', 'WhatsApp and call buttons', 'Enquiry form to your inbox', 'Analytics set up', '30 days of support after launch'],
   },
   {
     id: 'business',
     title: 'Business website',
+    goal: 'A complete website for my business',
     forWhom: 'Your full home online: services, work, reviews and contact. Right for clinics, shops, firms and studios.',
-    timeline: '3–5 weeks',
+    timeline: '3–5 days',
     includes: ['Every page your business needs', 'WhatsApp, call and enquiry form', 'Built to open fast on phones', 'Technical SEO and analytics set up', '30 days of support after launch'],
   },
   {
     id: 'platform',
     title: 'Online store or platform',
+    goal: 'Sell or take bookings online',
     forWhom: 'Sell online, take bookings or run your operations from one place.',
-    timeline: '6–12 weeks',
-    includes: ['Catalogue, cart and online payments', 'Bookings, dashboards or AI features', 'Add and edit content yourself', 'Technical SEO and analytics set up', '30 days of support after launch'],
+    timeline: '6–12 days',
+    includes: ['Catalogue, cart and online payments', 'Bookings, dashboards, CRM or AI features', 'Add and edit content yourself', 'Technical SEO and analytics set up', '30 days of support after launch'],
+  },
+]
+
+export interface MoreService {
+  title: string
+  body: string
+  href: string
+  icon: string
+}
+
+export const moreServices: MoreService[] = [
+  {
+    title: 'AI Integration',
+    body: 'Chatbots that answer your customers, AI lead generation, smart search and automated workflows.',
+    href: '/services/ai-integration',
+    icon: 'ai',
+  },
+  {
+    title: 'Mobile App Development',
+    body: 'Android and iOS apps, primarily with React Native, from the same team as your website.',
+    href: '/services/mobile-app-development',
+    icon: 'mobile',
+  },
+  {
+    title: 'SEO & Digital Marketing',
+    body: 'Show up on Google, run Meta and Google Ads, and see what works with analytics set up properly.',
+    href: '/services/seo-digital-marketing',
+    icon: 'seo',
+  },
+  {
+    title: 'Social Media Marketing',
+    body: 'Content calendars, reels, paid campaigns and community management.',
+    href: '/services/social-media-marketing',
+    icon: 'social',
+  },
+  {
+    title: 'UI/UX Design',
+    body: 'Wireframes, clickable prototypes and user testing, for new products and redesigns.',
+    href: '/services/ui-ux-design',
+    icon: 'design',
+  },
+  {
+    title: 'ScanIt for restaurants',
+    body: 'Our own QR menu and ordering system. Guests order from their phone and the kitchen sees it instantly. Pilot available.',
+    href: '/product',
+    icon: 'qr',
   },
 ]
 
@@ -518,7 +588,7 @@ export const buyerQuestions: FaqItem[] = [
   },
   {
     q: 'When will it be live?',
-    a: 'Landing pages usually take 1–2 weeks, business websites 3–5, and online stores or platforms 6–12. You get a firm timeline after the first call.',
+    a: 'Landing pages usually take 1–2 days, business websites 3–5, and online stores or platforms 6–12. You get a firm timeline after the first call.',
   },
   {
     q: 'Who helps me after launch?',
@@ -537,7 +607,7 @@ export const nextSteps = [
   },
   {
     title: 'Written scope and fixed quote',
-    body: 'Price and timeline in writing before anything starts. Then we design, build and launch, with a progress demo every week.',
+    body: 'Price and timeline in writing before anything starts. Then we design, build and launch, showing you progress along the way.',
   },
 ]
 
@@ -553,7 +623,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: 'How long does a project take?',
-    a: 'Landing pages typically take 1–2 weeks, full business websites 3–5 weeks, and e-commerce or AI-integrated platforms 6–12 weeks. You get a firm timeline after the discovery call, not a guess.',
+    a: 'Landing pages typically take 1–2 days, full business websites 3–5 days, and e-commerce or AI-integrated platforms 6–12 days. You get a firm timeline after the discovery call, not a guess.',
   },
   {
     q: 'Do you work with clients outside Jaipur?',

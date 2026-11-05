@@ -39,7 +39,7 @@ export function KineticRibbons() {
 
   return (
     <section ref={ref} aria-label="What we do" className="relative overflow-hidden pb-4 pt-20 sm:pt-24">
-      <motion.div style={{ x: x1 }} className="relative z-10 -mx-[12%] -rotate-[3deg] bg-brand-500 py-4 shadow-[0_20px_50px_rgba(37,99,235,.3)] sm:py-5">
+      <motion.div style={{ x: x1 }} className="relative z-10 -mx-[12%] -rotate-[3deg] bg-brand-500 py-4 shadow-[0_20px_50px_rgba(19,55,207,.3)] sm:py-5">
         <Row />
       </motion.div>
       <motion.div style={{ x: x2 }} className="relative -mx-[12%] mt-3 rotate-[2.5deg] bg-ink py-4 sm:mt-4 sm:py-5">

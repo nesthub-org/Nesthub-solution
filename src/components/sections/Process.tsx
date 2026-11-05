@@ -15,7 +15,7 @@ export function Process() {
       <Reveal className="mx-auto max-w-[640px] text-center">
         <div className="flex items-center justify-center gap-4">
           <span className="h-px w-10 bg-line sm:w-14" />
-          <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Our Process</span>
+          <span className="sheet-label text-blueprint">Our Process</span>
           <span className="h-px w-10 bg-line sm:w-14" />
         </div>
         <SplitText className="mt-4 text-[32px] sm:text-[40px] lg:text-[48px] font-bold leading-[1.08] tracking-[-.035em]">
@@ -94,7 +94,7 @@ export function Process() {
           {processHighlights.map((h) => (
             <div key={h.title} className="flex items-start gap-3.5">
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-line bg-white">
-                <Icon name={h.icon} color="#2563EB" size={20} />
+                <Icon name={h.icon} color="#1337CF" size={20} />
               </span>
               <div>
                 <div className="text-[15px] font-semibold tracking-[-.01em]">{h.title}</div>

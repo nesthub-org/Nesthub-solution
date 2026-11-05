@@ -1,6 +1,9 @@
+import { useEffect, useRef, useState, type MouseEvent } from 'react'
 import { WhatsAppGlyph } from '../WhatsAppButton'
 import { businessTypes, previewDomain, type BusinessTypeId } from './businessTypes'
 import { MiniSite } from './MiniSite'
+
+const ENQUIRY_DELAY_MS = 1900
 
 /** What shows under the sample site while it's being "drawn": the page as a blueprint. */
 function Wireframe() {
@@ -29,10 +32,30 @@ interface PhonePreviewProps {
   buildKey: number
   /** Let the sample site glide through its sections. Off while the visitor types, so their name stays in view. */
   drift: boolean
+  /** The visitor tapped the sample site. */
+  onTap: () => void
 }
 
-export function PhonePreview({ typeId, name, buildKey, drift }: PhonePreviewProps) {
+export function PhonePreview({ typeId, name, buildKey, drift, onTap }: PhonePreviewProps) {
   const built = buildKey > 0
+  const enquiryText = businessTypes[typeId].enquiry
+  const [enquiry, setEnquiry] = useState<{ id: number; text: string } | null>(null)
+  const [ripple, setRipple] = useState<{ id: number; x: number; y: number } | null>(null)
+  const nextId = useRef(1)
+
+  // Every finished build ends with what a website is actually for: a customer getting in touch.
+  useEffect(() => {
+    if (!buildKey) return
+    const t = window.setTimeout(() => setEnquiry({ id: nextId.current++, text: enquiryText }), ENQUIRY_DELAY_MS)
+    return () => window.clearTimeout(t)
+  }, [buildKey, enquiryText])
+
+  const onScreenTap = (e: MouseEvent<HTMLDivElement>) => {
+    const box = e.currentTarget.getBoundingClientRect()
+    setRipple({ id: nextId.current++, x: e.clientX - box.left, y: e.clientY - box.top })
+    setEnquiry({ id: nextId.current++, text: enquiryText })
+    onTap()
+  }
 
   return (
     <div className="studio-phone relative mx-auto w-fit" role="img" aria-label={`Sample website preview for ${name}`}>
@@ -53,7 +76,7 @@ export function PhonePreview({ typeId, name, buildKey, drift }: PhonePreviewProp
             </span>
           </div>
 
-          <div className="relative min-h-0 flex-1 overflow-hidden bg-blueprint" aria-hidden>
+          <div className="relative min-h-0 flex-1 cursor-pointer overflow-hidden bg-blueprint" aria-hidden onClick={onScreenTap}>
             <Wireframe />
             <div key={buildKey} className={`absolute inset-0 overflow-hidden ${built ? 'ms-wipe' : ''}`}>
               <div className={drift ? 'ms-drift' : undefined}>
@@ -63,7 +86,27 @@ export function PhonePreview({ typeId, name, buildKey, drift }: PhonePreviewProp
               </div>
             </div>
             {built && <div key={`scan-${buildKey}`} className="ms-scan" />}
+
+            {ripple && <span key={ripple.id} className="ms-ripple" style={{ left: ripple.x, top: ripple.y }} />}
+
+            {enquiry && (
+              <div key={enquiry.id} className="ms-toast">
+                <span className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[10px] bg-[#25D366]">
+                  <WhatsAppGlyph size={18} />
+                </span>
+                <span className="min-w-0">
+                  <span className="flex items-center justify-between text-[10.5px] font-semibold text-[#0B1026]/55">
+                    WhatsApp
+                    <span>example</span>
+                  </span>
+                  <span className="mt-px block text-[12.5px] font-bold leading-[1.2] text-[#0B1026]">New enquiry from your website</span>
+                  <span className="mt-px block text-[12px] leading-[1.25] text-[#0B1026]/80">“{enquiry.text}”</span>
+                </span>
+              </div>
+            )}
+
             <span className="ms-fab absolute bottom-6 right-2.5 z-[1] flex h-[44px] w-[44px] items-center justify-center rounded-full bg-[#25D366] shadow-[0_6px_16px_rgba(0,0,0,.28)] sm:bottom-3">
+              <span className="ms-fab-ring" />
               <WhatsAppGlyph size={22} />
             </span>
           </div>

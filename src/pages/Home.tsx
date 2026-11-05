@@ -40,7 +40,6 @@ export function Home() {
       <NextSteps />
       <Team />
       <Faq />
-      <div className="h-16 sm:h-24" />
       <Contact />
     </main>
   )

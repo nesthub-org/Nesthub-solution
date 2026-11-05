@@ -5,12 +5,12 @@ import { businessTypeList, businessTypes, detectBusinessType, isBusinessType, ty
 import { isPrerendering } from '../../hooks/usePrerendering'
 import { getLead, leadMessage, setLead, shareHref, whatsappHref } from '../../lib/lead'
 import { track } from '../../lib/track'
-import { projects } from '../../data/content'
+import { homepageProjects } from '../../data/content'
 import { getDomain } from '../../utils/url'
 
 const MAX_NAME = 40
 const TYPE_SPEED_MS = 55
-const HOLD_MS = 2900
+const HOLD_MS = 3500
 const DEMO_START_MS = 1300
 const demoOrder: BusinessTypeId[] = ['restaurant', 'gym', 'salon', 'shop', 'realty', 'coaching', 'clinic']
 
@@ -144,6 +144,11 @@ export function StudioHero() {
     track('preview_ready', { content_category: typeId })
   }
 
+  const onPhoneTap = () => {
+    start()
+    track('preview_tap')
+  }
+
   const onNameChange = (value: string) => {
     setTyped(value)
     setFinished(false)
@@ -172,13 +177,13 @@ export function StudioHero() {
 
   return (
     <section ref={sectionRef} id="studio" className="blueprint relative overflow-hidden text-white">
-      <div className="mx-auto grid max-w-[1320px] grid-cols-1 px-4 pb-8 pt-[86px] sm:px-6 sm:pt-[112px] lg:min-h-[calc(100svh-52px)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,.95fr)] lg:grid-rows-[1fr_auto_1fr] lg:gap-x-14 lg:pb-10 lg:pt-[116px]">
+      <div className="studio-layout mx-auto grid max-w-[1320px] grid-cols-1 px-4 pb-8 pt-[86px] sm:px-6 sm:pt-[112px] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,.95fr)] lg:grid-rows-[1fr_auto_auto_1fr] lg:gap-x-14 lg:pb-6 lg:pt-[104px]">
         {/* headline */}
-        <div className="lg:col-start-1 lg:row-start-2">
+        <div className="studio-copy lg:col-start-1 lg:row-start-2">
           <p className="text-[13px] font-semibold text-white/85 sm:text-[15px]">Website design and development, from Jaipur</p>
           <h1
             aria-label={`What's your ${noun} called?`}
-            className="mt-2 text-[clamp(28px,9.2vw,40px)] font-bold leading-[1.04] tracking-[-.035em] sm:mt-3 sm:text-[56px] lg:text-[clamp(44px,4.6vw,70px)] lg:leading-[1.02]"
+            className="mt-2 text-[clamp(28px,9.2vw,40px)] font-bold leading-[1.04] tracking-[-.035em] sm:mt-3 sm:text-[56px] lg:text-[clamp(44px,4.9vw,72px)] lg:leading-[1.02]"
           >
             <span aria-hidden>
               What&apos;s your
@@ -204,17 +209,17 @@ export function StudioHero() {
         </div>
 
         {/* phone */}
-        <div className="mt-3 sm:mt-8 lg:col-start-2 lg:row-span-3 lg:row-start-1 lg:mt-0 lg:self-center">
-          <p className="sheet-label mb-2 flex items-center justify-center gap-2 !text-[10.5px] text-white/90 lg:mb-4 lg:!text-[11.5px]">
+        <div className="studio-stage mt-3 sm:mt-8 lg:col-start-2 lg:row-span-4 lg:row-start-1 lg:mt-0 lg:self-center">
+          <p className="sheet-label mb-2 flex items-center justify-center gap-2 !text-[11px] text-white/90 lg:mb-4 lg:!text-[11.5px]">
             <span className="h-1.5 w-1.5 rounded-full bg-[#7CFFCB]" />
             Live preview, not a video
           </p>
-          <PhonePreview typeId={typeId} name={siteName} buildKey={buildKey} drift={!focused} />
+          <PhonePreview typeId={typeId} name={siteName} buildKey={buildKey} drift={!focused} onTap={onPhoneTap} />
         </div>
 
         {/* controls: docked over the phone's lower edge on small screens, so the
             phone stays right above the field when the keyboard is up */}
-        <div className="relative z-[4] -mt-[26px] sm:mt-6 lg:col-start-1 lg:row-start-3 lg:mt-7 lg:self-start">
+        <div className="studio-controls relative z-[4] -mt-[26px] sm:mt-6 lg:col-start-1 lg:row-start-3 lg:mt-7 lg:self-start">
           <form onSubmit={onSubmit} className={`relative rounded-[18px] ${demoOn ? 'field-glow' : 'shadow-[0_0_0_3px_rgba(255,225,77,.95),0_14px_34px_rgba(5,12,60,.3)]'}`}>
             <label htmlFor="studio-name" className="sr-only">
               Your business name
@@ -269,7 +274,7 @@ export function StudioHero() {
                   type="button"
                   aria-pressed={on}
                   onClick={() => onPickType(t.id)}
-                  className={`h-[34px] shrink-0 rounded-full border px-3.5 text-[13.5px] font-semibold transition-colors sm:h-[38px] sm:text-[14.5px] lg:px-[11px] xl:px-3 ${
+                  className={`h-10 shrink-0 rounded-full border px-3.5 text-[13.5px] font-semibold transition-colors sm:h-[38px] sm:text-[14.5px] lg:px-[11px] xl:px-3 ${
                     on ? 'border-marker bg-marker text-ink' : 'border-white/35 bg-white/10 text-white hover:border-white/70'
                   }`}
                 >
@@ -319,16 +324,16 @@ export function StudioHero() {
 
       {/* Verifiable proof, on the first screen of a laptop */}
       <div className="relative border-t border-white/20 bg-blueprint-deep/70">
-        <div className="mx-auto flex max-w-[1320px] items-center gap-x-6 gap-y-1.5 overflow-x-auto px-4 py-3.5 sm:px-6 chip-scroller">
-          <span className="sheet-label shrink-0 !text-[11px] text-white/80">Built by us, live now</span>
-          {projects.slice(0, 4).map((p) => (
+        <div className="mx-auto flex max-w-[1320px] flex-wrap items-center gap-x-4 px-4 py-2 sm:gap-x-6 sm:px-6">
+          <span className="sheet-label w-full pt-1.5 !text-[11px] text-white/80 sm:w-auto sm:pt-0">Built by us, live now</span>
+          {homepageProjects.map((p) => (
             <a
               key={p.slug}
               href={p.href}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => track('client_site_open', { content_name: p.slug })}
-              className="shrink-0 text-[14px] font-semibold text-white underline decoration-white/40 underline-offset-4 transition-colors hover:decoration-marker"
+              className="py-2 text-[14px] font-semibold text-white underline decoration-white/40 underline-offset-4 transition-colors hover:decoration-marker"
             >
               {getDomain(p.href)}
             </a>

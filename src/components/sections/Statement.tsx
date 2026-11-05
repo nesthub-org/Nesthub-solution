@@ -25,7 +25,7 @@ export function Statement() {
 
   return (
     <section className="mx-auto max-w-[1320px] px-6 pt-28 sm:pt-36">
-      <div className="flex items-center gap-3 text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">
+      <div className="flex items-center gap-3 sheet-label text-blueprint">
         <span className="h-px w-10 bg-brand-500" />
         Who we are
       </div>

@@ -11,7 +11,7 @@ export function NextSteps() {
 
         <ol className="mt-9 grid list-none grid-cols-1 gap-7 p-0 sm:mt-12 md:grid-cols-3 md:gap-6">
           {nextSteps.map((step, i) => (
-            <li key={step.title} className="rise border-t-[3px] border-ink pt-4">
+            <li key={step.title} className="rise draw-line">
               <span className="font-display text-[46px] font-bold leading-none tracking-[-.04em] text-blueprint sm:text-[60px]">{i + 1}</span>
               <h3 className="mt-2 text-[22px] font-bold leading-[1.15] tracking-[-.02em] sm:text-[25px]">{step.title}</h3>
               <p className="mt-2 text-[16px] leading-[1.5] text-ink/75">{step.body}</p>

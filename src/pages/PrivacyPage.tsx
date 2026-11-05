@@ -56,7 +56,7 @@ export function PrivacyPage() {
   )
 
   return (
-    <main id="top" className="relative z-[1] pt-32 sm:pt-40">
+    <main id="top" className="relative z-[1]">
       <JsonLd data={schema} />
       <PageHero
         crumb="Privacy"

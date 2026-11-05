@@ -394,7 +394,7 @@ export function AiAssistant({ startOpen = false }: { startOpen?: boolean }) {
                   <button
                     type="button"
                     onClick={openChat}
-                    className="relative w-[190px] rounded-2xl bg-[#14161c] px-4 py-3 text-left text-white shadow-[0_14px_40px_rgba(17,17,17,.35)] ring-1 ring-white/15 transition hover:bg-[#1c1f27] sm:w-[230px]"
+                    className="relative w-[190px] rounded-2xl bg-navy px-4 py-3 text-left text-white shadow-[0_14px_40px_rgba(17,17,17,.35)] ring-1 ring-white/15 transition hover:bg-blueprint-deep sm:w-[230px]"
                   >
                     <span className="flex items-start gap-2">
                       <span className="min-h-[2.5rem] flex-1 text-[13px] font-semibold leading-snug">
@@ -435,7 +435,7 @@ export function AiAssistant({ startOpen = false }: { startOpen?: boolean }) {
               {small ? (
                 <AssistantAvatar size={52} />
               ) : (
-                <span className="relative block drop-shadow-[0_18px_30px_rgba(37,99,235,.28)]">
+                <span className="relative block drop-shadow-[0_18px_30px_rgba(19,55,207,.28)]">
                   <LiveAvatar src={assistantFull} width={440} height={407} speaking={speaking} cue={cue} />
                 </span>
               )}
@@ -544,7 +544,7 @@ export function AiAssistant({ startOpen = false }: { startOpen?: boolean }) {
                 placeholder="Type your message…"
                 aria-label="Message"
                 maxLength={500}
-                className="min-w-0 flex-1 rounded-full border border-line bg-surface px-4 py-2.5 text-sm text-ink outline-none transition placeholder:text-muted focus:border-brand-500 focus:bg-white"
+                className="min-w-0 flex-1 rounded-full border border-line bg-surface px-4 py-2.5 text-[16px] text-ink outline-none sm:text-sm transition placeholder:text-muted focus:border-brand-500 focus:bg-white"
               />
               <button
                 type="submit"

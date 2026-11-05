@@ -152,28 +152,30 @@ export function BlogPost() {
   ]
 
   return (
-    <main id="top" className="relative z-[1] pb-28 pt-32 sm:pb-32 sm:pt-40">
-      <article className="mx-auto max-w-[760px] px-6">
-        <nav aria-label="Breadcrumb" className="text-[13.5px] text-muted">
-          <a href="/" className="text-muted hover:text-ink">Home</a>
+    <main id="top" className="relative z-[1] pb-20 sm:pb-24">
+      <article>
+        <div className="blueprint text-white">
+          <div className="mx-auto max-w-[760px] px-6 pb-10 pt-[100px] sm:pb-14 sm:pt-[132px]">
+        <nav aria-label="Breadcrumb" className="text-[13.5px] text-white/75">
+          <a href="/" className="text-white/75 hover:text-white">Home</a>
           <span className="mx-2">/</span>
-          <a href="/blog" className="text-muted hover:text-ink">Blog</a>
+          <a href="/blog" className="text-white/75 hover:text-white">Blog</a>
           {post.category && (
             <>
               <span className="mx-2">/</span>
-              <span className="text-ink">{post.category}</span>
+              <span className="text-white">{post.category}</span>
             </>
           )}
         </nav>
 
         <header className="mt-6">
-          <h1 className="text-balance text-[36px] font-bold leading-[1.08] tracking-[-.04em] text-ink sm:text-[50px]">
+          <h1 className="text-balance text-[36px] font-bold leading-[1.06] tracking-[-.035em] text-white sm:text-[52px]">
             {post.title}
           </h1>
-          {post.excerpt && <p className="mt-5 text-pretty text-[19px] leading-[1.6] text-muted sm:text-[21px]">{post.excerpt}</p>}
+          {post.excerpt && <p className="mt-5 text-pretty text-[19px] leading-[1.6] text-white/85 sm:text-[21px]">{post.excerpt}</p>}
 
-          <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 border-y border-line py-4 text-[14.5px] text-muted">
-            <span className="font-semibold text-ink">{post.created_by || brand.name}</span>
+          <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 border-y border-white/25 py-4 text-[14.5px] text-white/85">
+            <span className="font-semibold text-white">{post.created_by || brand.name}</span>
             <span aria-hidden>·</span>
             <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
             <span aria-hidden>·</span>
@@ -188,6 +190,9 @@ export function BlogPost() {
             )}
           </div>
         </header>
+          </div>
+        </div>
+        <div className="mx-auto max-w-[760px] px-6 pt-10 sm:pt-12">
 
         {cover && (
           <figure className="mt-9 -mx-6 sm:mx-0">
@@ -245,20 +250,21 @@ export function BlogPost() {
           </button>
         </div>
 
-        <aside className="mt-14 rounded-[22px] bg-ink p-8 text-white sm:p-10">
-          <p className="text-[24px] font-bold leading-tight tracking-[-.03em] sm:text-[28px]">Want this built for your business?</p>
-          <p className="mt-3 max-w-[520px] text-[16px] leading-relaxed text-white/70">
+        <aside className="blueprint mt-14 overflow-hidden rounded-[22px] p-8 text-white sm:p-10">
+          <p className="font-display text-[26px] font-bold leading-tight tracking-[-.03em] sm:text-[32px]">Want this built for your business?</p>
+          <p className="mt-3 max-w-[520px] text-[16px] leading-relaxed text-white/90">
             NestHub Solution designs and develops fast, SEO-ready websites, apps and AI features for businesses across India.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href={brand.calendly} target="_blank" rel="noopener noreferrer" className="rounded-xl bg-brand-500 px-5 py-3 font-semibold text-white hover:bg-brand-600">
+            <a href={brand.calendly} target="_blank" rel="noopener noreferrer" className="btn-primary">
               Book a free call
             </a>
-            <a href="/#contact" className="rounded-xl border border-white/25 px-5 py-3 font-semibold text-white hover:border-white">
+            <a href="/#contact" className="btn-ghost">
               Contact us
             </a>
           </div>
         </aside>
+      </div>
       </article>
 
       {related.length > 0 && (

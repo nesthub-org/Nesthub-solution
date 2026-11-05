@@ -10,6 +10,8 @@ export interface BusinessType {
   sample: string
   /** Callouts around the phone: what this kind of business would get. */
   notes: [string, string, string]
+  /** What a customer might send from this kind of site. Shown as a clearly marked example. */
+  enquiry: string
   /** Words in a business name that give its type away. */
   keywords: string[]
 }
@@ -21,6 +23,7 @@ export const businessTypes: Record<BusinessTypeId, BusinessType> = {
     noun: 'clinic',
     sample: 'Sharma Dental Clinic',
     notes: ['Online booking', 'WhatsApp button', 'Fast on any network'],
+    enquiry: 'Can I book a check-up for tomorrow?',
     keywords: ['clinic', 'dental', 'dentist', 'hospital', 'doctor', 'dr', 'physio', 'physiotherapy', 'diagnostic', 'diagnostics', 'pharmacy', 'medical', 'ayurveda', 'ayurvedic', 'nursing', 'healthcare'],
   },
   restaurant: {
@@ -29,6 +32,7 @@ export const businessTypes: Record<BusinessTypeId, BusinessType> = {
     noun: 'restaurant',
     sample: 'Café Aroma',
     notes: ['Phone-friendly menu', 'WhatsApp orders', 'On Google Maps'],
+    enquiry: 'Do you have a table for 4 at 8 pm?',
     keywords: ['restaurant', 'cafe', 'café', 'dhaba', 'kitchen', 'bakery', 'sweets', 'mithai', 'food', 'foods', 'biryani', 'pizza', 'tiffin', 'catering', 'caterers', 'bistro', 'lounge'],
   },
   salon: {
@@ -37,6 +41,7 @@ export const businessTypes: Record<BusinessTypeId, BusinessType> = {
     noun: 'salon',
     sample: 'Glow Studio',
     notes: ['Online slot booking', 'Show off your looks', 'WhatsApp button'],
+    enquiry: 'Any slot for a haircut this Sunday?',
     keywords: ['salon', 'parlour', 'parlor', 'beauty', 'spa', 'makeup', 'barber', 'unisex', 'nails', 'mehendi', 'mehndi', 'glow'],
   },
   gym: {
@@ -45,6 +50,7 @@ export const businessTypes: Record<BusinessTypeId, BusinessType> = {
     noun: 'gym',
     sample: 'Iron Temple Fitness',
     notes: ['Trial sign-ups', 'Class timings', 'Fast on any network'],
+    enquiry: 'How do I start the free trial?',
     keywords: ['gym', 'gymnasium', 'fitness', 'crossfit', 'yoga', 'zumba', 'muscle'],
   },
   realty: {
@@ -53,6 +59,7 @@ export const businessTypes: Record<BusinessTypeId, BusinessType> = {
     noun: 'realty firm',
     sample: 'Skyline Homes',
     notes: ['Site visit booking', 'A page per project', 'WhatsApp enquiries'],
+    enquiry: 'Can I visit the 3 BHK this weekend?',
     keywords: ['realty', 'realtors', 'estate', 'estates', 'homes', 'properties', 'property', 'builders', 'developers', 'infra', 'infratech', 'construction', 'constructions', 'interiors'],
   },
   coaching: {
@@ -61,6 +68,7 @@ export const businessTypes: Record<BusinessTypeId, BusinessType> = {
     noun: 'institute',
     sample: 'Bright Minds Academy',
     notes: ['Demo class booking', 'Courses and batches', 'WhatsApp enquiries'],
+    enquiry: 'When is the next demo class?',
     keywords: ['academy', 'classes', 'coaching', 'institute', 'tutorial', 'tutorials', 'school', 'college', 'education', 'learning', 'tuition'],
   },
   shop: {
@@ -69,6 +77,7 @@ export const businessTypes: Record<BusinessTypeId, BusinessType> = {
     noun: 'shop',
     sample: 'Aanya Handicrafts',
     notes: ['Secure checkout', 'Add your products', 'Orders on your phone'],
+    enquiry: 'Do you deliver to Jaipur?',
     keywords: ['shop', 'store', 'stores', 'mart', 'boutique', 'jeweller', 'jewellers', 'jewelers', 'jewellery', 'handicraft', 'handicrafts', 'fashion', 'garments', 'textiles', 'kirana', 'traders', 'collection', 'collections', 'saree', 'sarees', 'emporium'],
   },
   other: {
@@ -77,6 +86,7 @@ export const businessTypes: Record<BusinessTypeId, BusinessType> = {
     noun: 'business',
     sample: 'Mehta & Sons',
     notes: ['Your services, explained', 'WhatsApp enquiries', 'Easy to find on Google'],
+    enquiry: 'Can I get a quote for this?',
     keywords: [],
   },
 }

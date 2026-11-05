@@ -34,7 +34,7 @@ function useJaipurTime() {
 
 function FooterLink({ href, label }: { href: string; label: string }) {
   return (
-    <a href={href} className="group relative inline-flex w-fit items-center gap-1.5 text-[15.5px] text-white/60 transition-colors hover:text-white">
+    <a href={href} className="group relative inline-flex min-h-10 w-fit items-center gap-1.5 text-[15.5px] text-white/80 transition-colors hover:text-white sm:min-h-0">
       <span className="h-px w-0 bg-brand-500 transition-all duration-300 group-hover:w-3" />
       {label}
     </a>
@@ -43,7 +43,7 @@ function FooterLink({ href, label }: { href: string; label: string }) {
 
 function ColumnTitle({ children }: { children: string }) {
   return (
-    <div className="flex items-center gap-2 font-mono text-[12px] uppercase tracking-[.18em] text-white/40">
+    <div className="flex items-center gap-2 font-mono text-[12px] uppercase tracking-[.18em] text-white/70">
       <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
       {children}
     </div>
@@ -123,7 +123,7 @@ export function Footer() {
               <LogoFallback size={46} />
               <span className="text-[17px] font-bold tracking-[-.02em]">{brand.name}</span>
             </div>
-            <p className="mt-5 max-w-[320px] text-[15.5px] leading-relaxed text-white/55">
+            <p className="mt-5 max-w-[320px] text-[15.5px] leading-relaxed text-white/80">
               We craft digital experiences that drive growth. From concept to launch, we build websites that make an
               impact.
             </p>
@@ -145,7 +145,7 @@ export function Footer() {
 
           <div>
             <ColumnTitle>Explore</ColumnTitle>
-            <div className="mt-5 grid gap-3">
+            <div className="mt-3.5 grid sm:mt-5 sm:gap-3">
               {footerLinks.quick.map((l) => (
                 <FooterLink key={l.label} {...l} />
               ))}
@@ -154,7 +154,7 @@ export function Footer() {
 
           <div>
             <ColumnTitle>Services</ColumnTitle>
-            <div className="mt-5 grid gap-3">
+            <div className="mt-3.5 grid sm:mt-5 sm:gap-3">
               {footerLinks.services.map((l, i) => (
                 <FooterLink key={i} {...l} />
               ))}
@@ -163,20 +163,20 @@ export function Footer() {
 
           <div className="col-span-2 md:col-span-1">
             <ColumnTitle>Say hello</ColumnTitle>
-            <div className="mt-5 grid gap-3">
+            <div className="mt-3.5 grid sm:mt-5 sm:gap-3">
               <a
                 href={`mailto:${brand.email}`}
-                className="group w-fit text-[17px] font-medium text-white transition-colors hover:text-brand-200"
+                className="group w-fit py-2 text-[17px] font-medium text-white transition-colors hover:text-brand-200 sm:py-0"
               >
                 {brand.email}
                 <span className="block h-px w-0 bg-brand-200 transition-all duration-300 group-hover:w-full" />
               </a>
-              <a href={`tel:${brand.phone.replace(/\s+/g, '')}`} className="w-fit text-[15.5px] text-white/60 transition-colors hover:text-white">
+              <a href={`tel:${brand.phone.replace(/\s+/g, '')}`} className="w-fit py-2 text-[15.5px] text-white/80 transition-colors hover:text-white sm:py-0">
                 {brand.phone}
               </a>
               <div className="mt-2 rounded-2xl border border-white/10 bg-white/[.03] p-4">
                 <div className="text-[14.5px] text-white/80">{brand.location}</div>
-                <div className="mt-1 flex items-center gap-2 font-mono text-[12.5px] text-white/45">
+                <div className="mt-1 flex items-center gap-2 font-mono text-[12.5px] text-white/75">
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-success" />
                   {time ? `Local time · ${time} IST` : 'India Standard Time'}
                 </div>
@@ -187,15 +187,15 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col-reverse items-start justify-between gap-4 border-t border-white/10 py-6 sm:flex-row sm:items-center">
-          <span className="text-[13.5px] text-white/40">{`© ${new Date().getFullYear()} ${brand.name}. Crafted with care in Jaipur.`}</span>
+          <span className="text-[13.5px] text-white/70">{`© ${new Date().getFullYear()} ${brand.name}. Crafted with care in Jaipur.`}</span>
           <span className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[13.5px]">
-            <a href="/privacy" className="text-white/60 transition-colors hover:text-white">
+            <a href="/privacy" className="py-2.5 text-white/80 transition-colors hover:text-white">
               Privacy
             </a>
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="group inline-flex items-center gap-1.5 rounded-full border border-white/12 px-3 py-1 text-white/60 transition-colors hover:border-white/40 hover:text-white"
+              className="group inline-flex items-center gap-1.5 rounded-full border border-white/12 px-3.5 py-2 text-white/80 transition-colors hover:border-white/40 hover:text-white"
             >
               Back to top
               <span className="transition-transform duration-300 group-hover:-translate-y-0.5">↑</span>
@@ -207,7 +207,7 @@ export function Footer() {
       {/* Giant wordmark — decorative; also gives the floating WhatsApp / assistant buttons empty space to sit over */}
       <div ref={wordRef} onPointerMove={onMove} aria-hidden className="relative select-none overflow-hidden pt-2">
         <div
-          style={{ backgroundImage: 'radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(96,165,250,.9), rgba(37,99,235,.35) 40%, rgba(255,255,255,.06) 70%)' }}
+          style={{ backgroundImage: 'radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(96,165,250,.9), rgba(19,55,207,.35) 40%, rgba(255,255,255,.06) 70%)' }}
           className="translate-y-[18%] bg-clip-text text-center font-display text-[clamp(72px,19vw,300px)] font-extrabold leading-[.85] tracking-[-.06em] text-transparent [-webkit-background-clip:text]"
         >
           NestHub

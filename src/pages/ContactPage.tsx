@@ -43,7 +43,7 @@ export function ContactPage() {
   )
 
   return (
-    <main id="top" className="relative z-[1] pt-32 sm:pt-40">
+    <main id="top" className="relative z-[1]">
       <JsonLd data={schema} />
       <PageHero
         crumb="Contact"
@@ -52,7 +52,7 @@ export function ContactPage() {
           <>
             Let&apos;s talk about
             <br />
-            <span className="text-brand-500">your next big thing.</span>
+            <span className="marker">your next big thing.</span>
           </>
         }
         description="Tell us about the project — a new website, a redesign, an AI feature or ongoing support. No pitch decks needed, just a few lines is plenty."
@@ -72,7 +72,7 @@ export function ContactPage() {
                 <div className="flex items-center justify-between">
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 transition-colors group-hover:bg-brand-500">
                     <span className="group-hover:hidden">
-                      <Icon name={c.icon} color="#2563EB" size={20} />
+                      <Icon name={c.icon} color="#1337CF" size={20} />
                     </span>
                     <span className="hidden group-hover:block">
                       <Icon name={c.icon} color="#ffffff" size={20} />
@@ -97,7 +97,7 @@ export function ContactPage() {
           {next.map((s, i) => (
             <Reveal key={s.n} delay={i * 0.08} tilt={false}>
               <div className="relative h-full rounded-[22px] border border-line bg-white p-8">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ink text-[15px] font-bold text-white">{s.n}</span>
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-blueprint text-[15px] font-bold text-white">{s.n}</span>
                 <h3 className="mt-5 text-[19px] font-semibold tracking-[-.02em]">{s.title}</h3>
                 <p className="mt-2 text-[15px] leading-[1.6] text-muted">{s.body}</p>
               </div>

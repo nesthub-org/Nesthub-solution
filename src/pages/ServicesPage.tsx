@@ -68,7 +68,7 @@ export function ServicesPage() {
   )
 
   return (
-    <main id="top" className="relative z-[1] pb-4 pt-32 sm:pt-40">
+    <main id="top" className="relative z-[1]">
       <JsonLd data={schema} />
       <PageHero
         crumb="Services"
@@ -77,7 +77,7 @@ export function ServicesPage() {
           <>
             Six services.
             <br />
-            <span className="text-brand-500">One senior team.</span>
+            <span className="marker">One senior team.</span>
           </>
         }
         description="Strategy, design, engineering and growth under one roof — so nothing gets lost in a hand-off between agencies. Pick one service or combine them into a full launch."
@@ -119,7 +119,7 @@ export function ServicesPage() {
                     <span className="flex h-14 w-14 items-center justify-center rounded-2xl" style={{ background: c[50], boxShadow: `inset 0 0 0 1px ${c[200]}` }}>
                       <Icon name={s.icon} color={c[600]} size={26} />
                     </span>
-                    <span className="font-mono text-[13px] font-bold" style={{ color: c[400] }}>
+                    <span className="font-mono text-[13px] font-bold" style={{ color: c[600] }}>
                       {String(i + 1).padStart(2, '0')} / {String(services.length).padStart(2, '0')}
                     </span>
                   </div>
@@ -159,20 +159,20 @@ export function ServicesPage() {
             <Reveal key={e.title} delay={i * 0.08} tilt={false}>
               <div
                 className={`relative flex h-full flex-col rounded-[24px] border p-8 ${
-                  e.featured ? 'border-ink bg-ink text-white shadow-[0_24px_60px_rgba(17,17,17,.2)]' : 'border-line bg-white'
+                  e.featured ? 'blueprint border-blueprint text-white shadow-[0_24px_60px_rgba(19,55,207,.3)]' : 'border-line bg-white'
                 }`}
               >
                 {e.featured && (
-                  <span className="absolute right-6 top-6 rounded-full bg-brand-500 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[.08em] text-white">
+                  <span className="absolute right-6 top-6 rounded-full bg-marker px-2.5 py-1 text-[11px] font-bold uppercase tracking-[.08em] text-ink">
                     Most popular
                   </span>
                 )}
                 <h3 className="text-[21px] font-semibold tracking-[-.02em]">{e.title}</h3>
-                <p className={`mt-3 text-[15px] leading-[1.6] ${e.featured ? 'text-white/65' : 'text-muted'}`}>{e.body}</p>
+                <p className={`mt-3 text-[15px] leading-[1.6] ${e.featured ? 'text-white/90' : 'text-muted'}`}>{e.body}</p>
                 <ul className="mt-6 grid gap-3">
                   {e.points.map((p) => (
                     <li key={p} className="flex items-center gap-3 text-[14.5px]">
-                      <span className={`flex h-5 w-5 items-center justify-center rounded-full text-[11px] ${e.featured ? 'bg-brand-500 text-white' : 'bg-brand-50 text-brand-500'}`}>
+                      <span className={`flex h-5 w-5 items-center justify-center rounded-full text-[11px] ${e.featured ? 'bg-marker text-ink' : 'bg-brand-50 text-brand-500'}`}>
                         ✓
                       </span>
                       {p}

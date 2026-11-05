@@ -53,7 +53,7 @@ export function AboutPage() {
   )
 
   return (
-    <main id="top" className="relative z-[1] pb-4 pt-32 sm:pt-40">
+    <main id="top" className="relative z-[1]">
       <JsonLd data={schema} />
       <PageHero
         crumb="About"
@@ -62,7 +62,7 @@ export function AboutPage() {
           <>
             Building the web,
             <br />
-            <span className="text-brand-500">one pixel at a time.</span>
+            <span className="marker">one pixel at a time.</span>
           </>
         }
         description={aboutIntro}
@@ -113,7 +113,7 @@ export function AboutPage() {
             <Reveal key={v.title} delay={i * 0.06} tilt={false}>
               <div className="h-full rounded-[22px] border border-line bg-white p-8">
                 <span className="flex h-13 w-13 items-center justify-center rounded-2xl bg-brand-50">
-                  <Icon name={v.icon} color="#2563EB" />
+                  <Icon name={v.icon} color="#1337CF" />
                 </span>
                 <div className="mt-5 text-[20px] font-semibold tracking-[-.02em]">{v.title}</div>
                 <p className="mt-2 text-[15.5px] leading-[1.6] text-muted">{v.body}</p>
@@ -125,15 +125,15 @@ export function AboutPage() {
 
       {/* Principles — dark band */}
       <section className="mx-auto max-w-[1320px] px-6 pt-28 sm:pt-32">
-        <div className="overflow-hidden rounded-[28px] bg-[#07080b] p-8 sm:p-14">
-          <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">How we work</span>
+        <div className="blueprint overflow-hidden rounded-[28px] p-8 sm:p-14">
+          <span className="sheet-label text-white/90">How we work</span>
           <h2 className="mt-3 max-w-[620px] text-[30px] font-bold leading-[1.1] tracking-[-.035em] text-white sm:text-[42px]">Four principles behind every project.</h2>
           <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-[20px] bg-white/10 sm:grid-cols-2">
             {principles.map((p) => (
-              <div key={p.n} className="group bg-[#07080b] p-7 transition-colors hover:bg-white/[.03] sm:p-9">
-                <span className="font-mono text-[13px] font-bold text-brand-500">{p.n}</span>
+              <div key={p.n} className="group bg-blueprint p-7 transition-colors hover:bg-blueprint-deep sm:p-9">
+                <span className="font-mono text-[13px] font-bold text-marker">{p.n}</span>
                 <h3 className="mt-3 text-[20px] font-semibold tracking-[-.02em] text-white">{p.title}</h3>
-                <p className="mt-2 text-[15px] leading-[1.6] text-white/55">{p.body}</p>
+                <p className="mt-2 text-[15px] leading-[1.6] text-white/85">{p.body}</p>
               </div>
             ))}
           </div>

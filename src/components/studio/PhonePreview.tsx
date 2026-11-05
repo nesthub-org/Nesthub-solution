@@ -64,16 +64,36 @@ export function PhonePreview({ typeId, name, buildKey, drift, onTap }: PhonePrev
         <span className="absolute inset-3 rounded-[34px] border border-dashed border-white/25" />
       </div>
 
-      <div className="relative rounded-[30px] bg-[#0B1026] p-[6px] shadow-[0_26px_60px_rgba(4,10,52,.5)] sm:rounded-[36px] lg:rounded-[44px] lg:p-2">
-        <div className="relative flex flex-col overflow-hidden rounded-[24px] bg-white sm:rounded-[30px] lg:rounded-[36px]" style={{ width: 'var(--screen-w)', height: 'var(--screen-h)' }}>
-          <div className="relative z-[3] flex h-[32px] shrink-0 items-center justify-center bg-[#EEF0F5] px-3 lg:h-[40px]" aria-hidden>
-            <span className="flex min-w-0 items-center gap-1.5 text-[10.5px] font-medium text-[#0B1026]/70 lg:text-[12px]">
-              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="shrink-0">
-                <rect x="5" y="11" width="14" height="10" rx="2" />
-                <path d="M8 11V7a4 4 0 0 1 8 0v4" />
-              </svg>
-              <span className="truncate">{previewDomain(name)}</span>
-            </span>
+      <div className="relative rounded-[30px] bg-[#0B1026] p-[6px] shadow-[0_26px_60px_rgba(4,10,52,.5),inset_0_0_0_1px_rgba(255,255,255,.14)] sm:rounded-[36px] lg:rounded-[44px] lg:p-2">
+        <span aria-hidden className="absolute -left-[2px] top-[18%] hidden h-[8%] w-[3px] rounded-l-sm bg-[#0B1026] lg:block" />
+        <span aria-hidden className="absolute -left-[2px] top-[29%] hidden h-[11%] w-[3px] rounded-l-sm bg-[#0B1026] lg:block" />
+        <span aria-hidden className="absolute -right-[2px] top-[24%] hidden h-[15%] w-[3px] rounded-r-sm bg-[#0B1026] lg:block" />
+        <div className="relative flex flex-col overflow-hidden rounded-[24px] bg-white [contain:strict] sm:rounded-[30px] lg:rounded-[36px]" style={{ width: 'var(--screen-w)', height: 'var(--screen-h)' }}>
+          <div className="relative z-[3] shrink-0 bg-white" aria-hidden>
+            <div className="relative flex h-[17px] items-center justify-between px-4 text-[9px] font-semibold text-[#0B1026] lg:h-[28px] lg:px-6 lg:text-[11.5px]">
+              <span>9:41</span>
+              <span className="absolute left-1/2 top-[3px] h-[11px] w-[40px] -translate-x-1/2 rounded-full bg-[#0B1026] lg:top-[6px] lg:h-[18px] lg:w-[68px]" />
+              <span className="flex items-center gap-1">
+                <svg width="13" height="9" viewBox="0 0 18 12" fill="currentColor">
+                  <rect y="8" width="3" height="4" rx="1" />
+                  <rect x="5" y="5" width="3" height="7" rx="1" />
+                  <rect x="10" y="2.5" width="3" height="9.5" rx="1" />
+                  <rect x="15" width="3" height="12" rx="1" />
+                </svg>
+                <span className="relative block h-[8px] w-[15px] rounded-[2.5px] border border-current p-[1px] lg:h-[9px] lg:w-[18px]">
+                  <span className="block h-full w-3/4 rounded-[1px] bg-current" />
+                </span>
+              </span>
+            </div>
+            <div className="px-2.5 pb-1 lg:px-3 lg:pb-2">
+              <span className="flex h-[20px] min-w-0 items-center justify-center gap-1.5 rounded-full bg-[#EEF0F5] px-3 text-[10px] font-medium text-[#0B1026]/75 lg:h-[28px] lg:text-[12px]">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="shrink-0">
+                  <rect x="5" y="11" width="14" height="10" rx="2" />
+                  <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                </svg>
+                <span className="truncate">{previewDomain(name)}</span>
+              </span>
+            </div>
           </div>
 
           <div className="relative min-h-0 flex-1 cursor-pointer overflow-hidden bg-blueprint" aria-hidden onClick={onScreenTap}>
@@ -109,6 +129,7 @@ export function PhonePreview({ typeId, name, buildKey, drift, onTap }: PhonePrev
               <span className="ms-fab-ring" />
               <WhatsAppGlyph size={22} />
             </span>
+            <span aria-hidden className="pointer-events-none absolute bottom-1.5 left-1/2 z-[3] hidden h-[4px] w-[34%] -translate-x-1/2 rounded-full bg-black/60 shadow-[0_0_0_1px_rgba(255,255,255,.35)] sm:block" />
           </div>
         </div>
       </div>

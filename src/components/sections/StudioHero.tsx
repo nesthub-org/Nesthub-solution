@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { PhonePreview } from '../studio/PhonePreview'
+import { heroPhotos } from '../studio/photos'
 import { WhatsAppGlyph } from '../WhatsAppButton'
 import { businessTypeList, businessTypes, detectBusinessType, isBusinessType, type BusinessTypeId } from '../studio/businessTypes'
 import { isPrerendering } from '../../hooks/usePrerendering'
@@ -9,9 +10,9 @@ import { homepageProjects } from '../../data/content'
 import { getDomain } from '../../utils/url'
 
 const MAX_NAME = 40
-const TYPE_SPEED_MS = 55
+const TYPE_SPEED_MS = 90
 const HOLD_MS = 3500
-const DEMO_START_MS = 1300
+const DEMO_START_MS = 2600
 const demoOrder: BusinessTypeId[] = ['restaurant', 'gym', 'salon', 'shop', 'realty', 'coaching', 'clinic']
 
 export function StudioHero() {
@@ -81,8 +82,9 @@ export function StudioHero() {
     const wait = (ms: number) => new Promise<void>((resolve) => timers.push(window.setTimeout(resolve, ms)))
 
     const run = async () => {
-      await wait(DEMO_START_MS)
       const order = demoOnly ? [demoOnly] : demoOrder
+      new Image().src = heroPhotos[order[0]]
+      await wait(DEMO_START_MS)
       for (let i = 0; !cancelled; i += 1) {
         if (offScreenRef.current || document.hidden) {
           await wait(500)
@@ -91,9 +93,11 @@ export function StudioHero() {
         const next = businessTypes[order[i % order.length]]
         setDemoName('')
         applyType(next.id)
-        for (let c = 1; c <= next.sample.length && !cancelled; c += 1) {
+        new Image().src = heroPhotos[order[(i + 1) % order.length]]
+        for (let c = 2; !cancelled; c += 2) {
           setDemoName(next.sample.slice(0, c))
           await wait(TYPE_SPEED_MS)
+          if (c >= next.sample.length) break
         }
         if (demoOnly) return
         await wait(HOLD_MS)

@@ -1,5 +1,6 @@
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { StudioHero } from '../components/sections/StudioHero'
+import { Partners } from '../components/sections/Partners'
 import { LiveProof } from '../components/sections/LiveProof'
 import { Packages } from '../components/sections/Packages'
 import { AskThem } from '../components/sections/AskThem'
@@ -34,6 +35,7 @@ export function Home() {
     <main id="top" className="relative z-[1]">
       <JsonLd data={schema} />
       <StudioHero />
+      <Partners />
       <LiveProof />
       <Packages />
       <AskThem />

@@ -1,18 +1,18 @@
-import logoVedyara from '../assets/logo-vedyara.png'
-import logoFitlifeSutra from '../assets/logo-fitlifesutra.png'
-import logoTheFineGrow from '../assets/logo-thefinegrow.png'
-import logoIllusionmed from '../assets/illusionmed-logo.png'
-import logoSKC from '../assets/logo-skc.png'
-import logoGSS from '../assets/logo-gss.jpg'
-import logoScanIt from '../assets/logo-scanit.png'
-import projectHoney from '../assets/project-honey.png'
-import projectHealth from '../assets/project-health.png'
-import projectHealth1 from '../assets/project-health1.png'
-import projectTrading from '../assets/project-trading.png'
-import projectAgencyOS from '../assets/agencyos.png'
-import projectIllusionmed from '../assets/illusionmed-img.png'
-import projectDrSunil from '../assets/project-drsunil.png'
-import scanitMockup from '../assets/scanit-mockup.png'
+import logoVedyara from '../assets/logo-vedyara.webp'
+import logoFitlifeSutra from '../assets/logo-fitlifesutra.webp'
+import logoTheFineGrow from '../assets/logo-thefinegrow.webp'
+import markTheFineGrow from '../assets/mark-thefinegrow.webp'
+import logoIllusionmed from '../assets/illusionmed-logo.webp'
+import logoSKC from '../assets/logo-skc.webp'
+import logoGSS from '../assets/logo-gss.webp'
+import projectHoney from '../assets/project-honey.webp'
+import projectHealth from '../assets/project-health.webp'
+import projectHealth1 from '../assets/project-health1.webp'
+import projectTrading from '../assets/project-trading.webp'
+import projectAgencyOS from '../assets/agencyos.webp'
+import projectIllusionmed from '../assets/illusionmed-img.webp'
+import projectDrSunil from '../assets/project-drsunil.webp'
+import scanitMockup from '../assets/scanit-mockup.webp'
 import screenVedyara from '../assets/screen-vedyara.webp'
 import screenVedyaraSmall from '../assets/screen-vedyara-640.webp'
 import screenVedyaraPhone from '../assets/screen-vedyara-phone.webp'
@@ -40,6 +40,7 @@ export const brand = {
 }
 
 export const navLinks = [
+  { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/process', label: 'Process' },
@@ -56,7 +57,7 @@ export const trustedBy = [
   { name: 'SKC', logo: logoSKC },
   { name: 'G.S.S. Welfare Association', logo: logoGSS },
   { name: 'IllusionMed', logo: logoIllusionmed },
-  { name: 'ScanIt', logo: logoScanIt },
+  { name: 'The Fine Grow', logo: logoTheFineGrow },
 ]
 
 export const trustStats = [
@@ -317,7 +318,7 @@ export const projects: Project[] = [
     ],
     href: 'https://thefinegrow.com',
     image: projectTrading,
-    logo: logoTheFineGrow,
+    logo: markTheFineGrow,
     accent: 'violet',
     screen: screenTheFineGrow,
     screenSmall: screenTheFineGrowSmall,

@@ -93,7 +93,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Anchor jumps on touch devices, where Lenis (and its offset) is off, clear the fixed header. */
+    /* Anchor jumps clear the fixed header. */
     scroll-padding-top: 90px;
   }
 
@@ -202,16 +202,11 @@ header { view-transition-name: site-header; }
 @media (prefers-reduced-motion: no-preference) {
   .blueprint:not(#studio) h1 .marker { animation: markerIn .7s cubic-bezier(.65, 0, .35, 1) .25s both; }
 }
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    main h2 .marker {
-      animation: markerSweep linear both;
-      animation-timeline: view();
-      animation-range: entry 30% entry 85%;
-    }
-    main .blueprint h2 .marker { animation-name: markerIn; }
-  }
-}
+/* Headings get their highlight once, on arrival. See lib/revealFx.ts. */
+main h2 .marker.is-waiting { background-size: 0% 100%; }
+main .blueprint h2 .marker.is-waiting { color: #fff; }
+main h2 .marker.is-in { animation: markerSweep .7s cubic-bezier(.65, 0, .35, 1) var(--reveal-delay, 0ms) backwards; }
+main .blueprint h2 .marker.is-in { animation-name: markerIn; }
 
 /* The grid lights up around the cursor, with a drafting crosshair. See lib/pointerFx.ts. */
 .blueprint { position: relative; }
@@ -315,15 +310,8 @@ header { view-transition-name: site-header; }
   background: var(--color-ink);
   transform-origin: left;
 }
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .draw-line::before {
-      animation: scrollGrow linear both;
-      animation-timeline: view();
-      animation-range: entry 20% cover 42%;
-    }
-  }
-}
+.draw-line.is-waiting::before { transform: scaleX(0); }
+.draw-line.is-in::before { animation: scrollGrow .9s cubic-bezier(.65, 0, .35, 1) var(--reveal-delay, 0ms) backwards; }
 
 .sheet-label {
   font-family: var(--font-mono);
@@ -333,21 +321,17 @@ header { view-transition-name: site-header; }
   text-transform: uppercase;
 }
 
-/* Sections rise in as they scroll into view, in browsers that can do it with
-   no JavaScript at all. Everywhere else they are simply already there. */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .rise {
-      animation: rise linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 42%;
-    }
-  }
-}
+/* Sections rise in once as they scroll into view, then are left alone so scrolling
+   has no animations to keep up to date. See lib/revealFx.ts. */
+.rise.is-waiting { opacity: 0; transform: translateY(26px); }
+.rise.is-in { animation: rise .7s cubic-bezier(.16, 1, .3, 1) var(--reveal-delay, 0ms) backwards; }
 /* No end state on purpose: each element settles to its own opacity and transform. */
 @keyframes rise {
   from { opacity: 0; transform: translateY(26px); }
 }
+
+/* Looping animations rest while their section is off-screen. */
+.is-offscreen, .is-offscreen *, .is-offscreen *::before, .is-offscreen *::after { animation-play-state: paused !important; }
 
 /* Top-edge reading progress, driven by the scroll position alone. */
 .scroll-progress { display: none; }

@@ -4,13 +4,13 @@ import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { ScrollToTop } from './components/ScrollToTop'
 import { ScrollProgress } from './components/ScrollProgress'
-import { SmoothScroll } from './components/SmoothScroll'
 import { MobileActionBar, WhatsAppButton } from './components/WhatsAppButton'
 import { AssistantLoader } from './components/AssistantLoader'
 import { pageRoutes, type InitialPage } from './routes'
 import { captureSource } from './lib/lead'
 import { initMetaPixel } from './lib/track'
 import { initPointerFx } from './lib/pointerFx'
+import { initRevealFx } from './lib/revealFx'
 
 const AdminApp = lazy(() => import('./pages/admin/AdminApp'))
 
@@ -33,6 +33,7 @@ function App({ initialPage }: { initialPage: InitialPage | null }) {
     captureSource()
     initMetaPixel()
     initPointerFx()
+    initRevealFx()
   }, [isAdmin])
 
   // The admin panel has its own chrome — no marketing header/footer/widgets
@@ -48,7 +49,6 @@ function App({ initialPage }: { initialPage: InitialPage | null }) {
 
   return (
     <>
-      <SmoothScroll />
       <ScrollToTop />
       <ScrollProgress />
       <Header />

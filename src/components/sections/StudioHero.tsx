@@ -180,7 +180,7 @@ export function StudioHero() {
   }
 
   return (
-    <section ref={sectionRef} id="studio" className="blueprint relative overflow-hidden text-white">
+    <section ref={sectionRef} id="studio" data-pausable className="blueprint relative overflow-hidden text-white">
       <div className="studio-layout mx-auto grid max-w-[1320px] grid-cols-1 px-4 pb-8 pt-[86px] sm:px-6 sm:pt-[112px] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,.95fr)] lg:grid-rows-[1fr_auto_auto_1fr] lg:gap-x-14 lg:pb-6 lg:pt-[104px]">
         {/* headline */}
         <div className="studio-copy lg:col-start-1 lg:row-start-2">

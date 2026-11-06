@@ -6,6 +6,7 @@ import logoIllusionmed from '../assets/illusionmed-logo.webp'
 import logoSKC from '../assets/logo-skc.webp'
 import logoGSS from '../assets/logo-gss.webp'
 import projectHoney from '../assets/project-honey.webp'
+import projectVedyaraHome from '../assets/project-vedyara-home.webp'
 import projectHealth from '../assets/project-health.webp'
 import projectHealth1 from '../assets/project-health1.webp'
 import projectTrading from '../assets/project-trading.webp'
@@ -250,6 +251,7 @@ export const projects: Project[] = [
     ],
     href: 'https://vedyara.in',
     image: projectHoney,
+    gallery: [projectVedyaraHome],
     logo: logoVedyara,
     accent: 'amber',
     screen: screenVedyara,

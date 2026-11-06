@@ -90,7 +90,7 @@ export function FaqPage() {
   }, [cat, query])
 
   return (
-    <main id="top" className="relative z-[1] pb-4 pt-32 sm:pt-40">
+    <main id="top" className="relative z-[1]">
       <JsonLd data={schema} />
       <PageHero
         crumb="FAQ"
@@ -99,7 +99,7 @@ export function FaqPage() {
           <>
             Questions,
             <br />
-            <span className="text-brand-500">answered.</span>
+            <span className="marker">answered.</span>
           </>
         }
         description="Everything you need to know before booking a call. Search below or browse by topic — and if yours isn't here, just ask."
@@ -120,7 +120,7 @@ export function FaqPage() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search questions…"
-                className="h-12 w-full rounded-xl border border-line bg-white pl-11 pr-4 text-[15px] outline-none transition-shadow focus:border-brand-500 focus:shadow-[0_0_0_4px_rgba(37,99,235,.1)]"
+                className="h-12 w-full rounded-xl border border-line bg-white pl-11 pr-4 text-[16px] outline-none transition-shadow focus:border-brand-500 focus:shadow-[0_0_0_4px_rgba(19,55,207,.1)]"
               />
               <svg className="absolute left-4 top-1/2 -translate-y-1/2" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2" strokeLinecap="round">
                 <circle cx="11" cy="11" r="7" />
@@ -137,11 +137,11 @@ export function FaqPage() {
                     type="button"
                     onClick={() => setCat(c)}
                     className={`flex items-center justify-between gap-3 rounded-xl px-4 py-2.5 text-left text-[14.5px] font-medium transition-colors ${
-                      active ? 'bg-ink text-white' : 'border border-line bg-white text-muted hover:text-ink lg:border-transparent lg:bg-transparent lg:hover:bg-surface'
+                      active ? 'bg-blueprint text-white' : 'border border-line bg-white text-muted hover:text-ink lg:border-transparent lg:bg-transparent lg:hover:bg-surface'
                     }`}
                   >
                     {c}
-                    <span className={`text-[12px] ${active ? 'text-white/60' : 'text-muted/70'}`}>{count}</span>
+                    <span className={`text-[12px] ${active ? 'text-white/85' : 'text-muted'}`}>{count}</span>
                   </button>
                 )
               })}
@@ -162,7 +162,7 @@ export function FaqPage() {
             const isOpen = open === item.q || (query.trim() !== '' && shown.length <= 3)
             return (
               <Reveal key={item.q} delay={Math.min(i * 0.03, 0.15)} tilt={false}>
-                <div className={`overflow-hidden rounded-2xl border bg-white transition-colors duration-300 ${isOpen ? 'border-brand-200 shadow-[0_10px_30px_rgba(37,99,235,.06)]' : 'border-line'}`}>
+                <div className={`overflow-hidden rounded-2xl border bg-white transition-colors duration-300 ${isOpen ? 'border-brand-200 shadow-[0_10px_30px_rgba(19,55,207,.06)]' : 'border-line'}`}>
                   <button
                     type="button"
                     onClick={() => setOpen(open === item.q ? null : item.q)}

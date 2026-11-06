@@ -56,7 +56,7 @@ export function PortfolioPage() {
   const shown = filter === 'all' ? projects : projects.filter((p) => p.kinds.includes(filter))
 
   return (
-    <main id="top" className="relative z-[1] pb-4 pt-32 sm:pt-40">
+    <main id="top" className="relative z-[1]">
       <JsonLd data={schema} />
       <PageHero
         crumb="Portfolio"
@@ -65,7 +65,7 @@ export function PortfolioPage() {
           <>
             Work that ships
             <br />
-            <span className="text-brand-500">and performs.</span>
+            <span className="marker">and performs.</span>
           </>
         }
         description="Every project here is live and in use — from artisanal e-commerce to trading education platforms and pharma brand systems. Open any one to see the full case study."
@@ -99,7 +99,7 @@ export function PortfolioPage() {
                   active ? 'border-ink text-white' : 'border-line bg-white text-muted hover:text-ink'
                 }`}
               >
-                {active && <motion.span layoutId="portfolio-filter" className="absolute inset-0 rounded-full bg-ink" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
+                {active && <motion.span layoutId="portfolio-filter" className="absolute inset-0 rounded-full bg-blueprint" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
                 <span className="relative">{f.label}</span>
               </button>
             )

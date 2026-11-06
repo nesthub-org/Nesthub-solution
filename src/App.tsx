@@ -1,32 +1,20 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { ScrollToTop } from './components/ScrollToTop'
 import { ScrollProgress } from './components/ScrollProgress'
-import { SmoothScroll } from './components/SmoothScroll'
-import { WhatsAppButton } from './components/WhatsAppButton'
-import { AiAssistant } from './components/AiAssistant'
-import { Home } from './pages/Home'
-import { Careers } from './pages/Careers'
-import { CaseStudies } from './pages/CaseStudies'
-import { WebsiteDevelopment } from './pages/WebsiteDevelopment'
-import { AiIntegration } from './pages/AiIntegration'
-import { MobileAppDevelopment } from './pages/MobileAppDevelopment'
-import { SeoDigitalMarketing } from './pages/SeoDigitalMarketing'
-import { SocialMediaMarketing } from './pages/SocialMediaMarketing'
-import { UiUxDesign } from './pages/UiUxDesign'
-import { Blog } from './pages/Blog'
-import { BlogPost } from './pages/BlogPost'
-import { ServicesPage } from './pages/ServicesPage'
-import { PortfolioPage } from './pages/PortfolioPage'
-import { ProductPage } from './pages/ProductPage'
-import { ProcessPage } from './pages/ProcessPage'
-import { AboutPage } from './pages/AboutPage'
-import { FaqPage } from './pages/FaqPage'
-import { ContactPage } from './pages/ContactPage'
+import { MobileActionBar, WhatsAppButton } from './components/WhatsAppButton'
+import { AssistantLoader } from './components/AssistantLoader'
+import { pageRoutes, type InitialPage } from './routes'
+import { captureSource } from './lib/lead'
+import { initMetaPixel } from './lib/track'
+import { initPointerFx } from './lib/pointerFx'
+import { initRevealFx } from './lib/revealFx'
 
 const AdminApp = lazy(() => import('./pages/admin/AdminApp'))
+
+const lazyPages = new Map(pageRoutes.map((route) => [route.path, lazy(route.load)]))
 
 function AdminFallback() {
   return (
@@ -36,11 +24,20 @@ function AdminFallback() {
   )
 }
 
-function App() {
+function App({ initialPage }: { initialPage: InitialPage | null }) {
   const { pathname } = useLocation()
+  const isAdmin = pathname === '/admin' || pathname.startsWith('/admin/')
+
+  useEffect(() => {
+    if (isAdmin) return
+    captureSource()
+    initMetaPixel()
+    initPointerFx()
+    initRevealFx()
+  }, [isAdmin])
 
   // The admin panel has its own chrome — no marketing header/footer/widgets
-  if (pathname === '/admin' || pathname.startsWith('/admin/')) {
+  if (isAdmin) {
     return (
       <Suspense fallback={<AdminFallback />}>
         <Routes>
@@ -52,34 +49,27 @@ function App() {
 
   return (
     <>
-      <SmoothScroll />
       <ScrollToTop />
       <ScrollProgress />
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/portfolio" element={<PortfolioPage />} />
-        <Route path="/product" element={<ProductPage />} />
-        <Route path="/process" element={<ProcessPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/faq" element={<FaqPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/careers" element={<Careers />} />
-        <Route path="/case-studies" element={<CaseStudies />} />
-        <Route path="/services/website-development" element={<WebsiteDevelopment />} />
-        <Route path="/website-development" element={<WebsiteDevelopment />} />
-        <Route path="/services/ai-integration" element={<AiIntegration />} />
-        <Route path="/services/mobile-app-development" element={<MobileAppDevelopment />} />
-        <Route path="/services/seo-digital-marketing" element={<SeoDigitalMarketing />} />
-        <Route path="/services/social-media-marketing" element={<SocialMediaMarketing />} />
-        <Route path="/services/ui-ux-design" element={<UiUxDesign />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
+        {pageRoutes.map(({ path }) => {
+          const Page = lazyPages.get(path)!
+          const element =
+            initialPage?.path === path ? (
+              <initialPage.Component />
+            ) : (
+              <Suspense fallback={<AdminFallback />}>
+                <Page />
+              </Suspense>
+            )
+          return <Route key={path} path={path} element={element} />
+        })}
       </Routes>
       <Footer />
+      <MobileActionBar />
       <WhatsAppButton />
-      <AiAssistant />
+      <AssistantLoader />
     </>
   )
 }

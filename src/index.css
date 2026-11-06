@@ -1,20 +1,48 @@
 @import "tailwindcss";
 
+/* Self-hosted so the first screen never waits on a third-party font host. */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/fonts/bricolage-grotesque-latin-wght-normal.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Carries the rupee sign, among others. */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/fonts/bricolage-grotesque-latin-ext-wght-normal.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
 @theme {
-  --font-sans: "Inter", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
-  --font-mono: ui-monospace, Menlo, monospace;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-display: "Bricolage Grotesque", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, Menlo, Consolas, monospace;
 
   --color-ink: #111111;
-  --color-muted: #6b7280;
+  --color-muted: #5b6270;
   --color-line: #ececec;
-  --color-surface: #fafafa;
+  --color-surface: #f7f5ef;
   --color-success: #16a34a;
 
-  --color-brand-50: #eef2fb;
-  --color-brand-100: #dce6fa;
-  --color-brand-200: #b9cff6;
-  --color-brand-500: #2563eb;
-  --color-brand-600: #1d4ed8;
+  --color-brand-50: #eef1fd;
+  --color-brand-100: #dde4fb;
+  --color-brand-200: #b5c3f5;
+  --color-brand-300: #8ba0ee;
+  --color-brand-400: #5a75e3;
+  --color-brand-500: #1337cf;
+  --color-brand-600: #0c2596;
+  --color-brand-700: #0a1f80;
+
+  /* Homepage drafting-table palette */
+  --color-blueprint: #1337cf;
+  --color-blueprint-deep: #0c2596;
+  --color-marker: #ffe14d;
+  --color-paper: #f7f5ef;
+  --color-navy: #080e2c;
 }
 
 @keyframes floaty {
@@ -65,6 +93,17 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Anchor jumps clear the fixed header. */
+    scroll-padding-top: 90px;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+  }
+
+  /* Entrance tilts can push a full-width block a few pixels past the screen edge. */
+  main {
+    overflow-x: clip;
   }
 
   body {
@@ -82,7 +121,7 @@
   }
 
   ::selection {
-    background: var(--color-brand-100);
+    background: var(--color-marker);
     color: var(--color-ink);
   }
 }
@@ -99,6 +138,490 @@
 }
 .preserve-3d {
   transform-style: preserve-3d;
+}
+
+@view-transition { navigation: auto; }
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
+header { view-transition-name: site-header; }
+
+/* ─── Homepage: drafting-table look ───────────────────────────────── */
+.blueprint {
+  background-color: var(--color-blueprint);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .13) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .13) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, .055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .055) 1px, transparent 1px);
+  background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+}
+
+.blueprint > :not(.absolute) { position: relative; }
+
+.btn-primary, .btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-height: 52px;
+  padding: 0 1.5rem;
+  border-radius: 15px;
+  font-size: 15.5px;
+  font-weight: 700;
+  transition: transform .2s ease, background-color .2s ease, border-color .2s ease;
+}
+.btn-primary:hover, .btn-ghost:hover { transform: translateY(-2px); }
+.btn-primary:active, .btn-ghost:active { transform: scale(.97); }
+.btn-primary { background: var(--color-blueprint); color: #fff; }
+.btn-primary:hover { background: var(--color-blueprint-deep); }
+.btn-ghost { border: 1px solid rgba(17, 17, 17, .18); background: #fff; color: var(--color-ink); }
+.btn-ghost:hover { border-color: var(--color-ink); }
+.blueprint .btn-primary { background: var(--color-marker); color: var(--color-ink); }
+.blueprint .btn-primary:hover { background: #ffd60a; }
+.blueprint .btn-ghost { border-color: rgba(255, 255, 255, .45); background: transparent; color: #fff; }
+.blueprint .btn-ghost:hover { border-color: #fff; }
+
+.marker {
+  display: inline-block;
+  padding: 0 .16em;
+  border-radius: .12em;
+  background: linear-gradient(var(--color-marker), var(--color-marker)) no-repeat 0 0 / 100% 100%;
+  color: var(--color-ink);
+}
+
+/* Highlights get drawn on: on arrival in a page's header, and as you scroll to the rest. */
+@keyframes markerIn {
+  from { background-size: 0% 100%; color: #fff; }
+  to { background-size: 100% 100%; color: var(--color-ink); }
+}
+@keyframes markerSweep {
+  from { background-size: 0% 100%; }
+  to { background-size: 100% 100%; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .blueprint:not(#studio) h1 .marker { animation: markerIn .7s cubic-bezier(.65, 0, .35, 1) .25s both; }
+}
+/* Headings get their highlight once, on arrival. See lib/revealFx.ts. */
+main h2 .marker.is-waiting { background-size: 0% 100%; }
+main .blueprint h2 .marker.is-waiting { color: #fff; }
+main h2 .marker.is-in { animation: markerSweep .7s cubic-bezier(.65, 0, .35, 1) var(--reveal-delay, 0ms) backwards; }
+main .blueprint h2 .marker.is-in { animation-name: markerIn; }
+
+/* The grid lights up around the cursor, with a drafting crosshair. See lib/pointerFx.ts. */
+.blueprint { position: relative; }
+.blueprint::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .3s ease;
+  background:
+    linear-gradient(rgba(255, 225, 77, .7), rgba(255, 225, 77, .7)) var(--px, 0) 0 / 1px 100% no-repeat,
+    linear-gradient(rgba(255, 225, 77, .7), rgba(255, 225, 77, .7)) 0 var(--py, 0) / 100% 1px no-repeat,
+    linear-gradient(rgba(255, 255, 255, .34) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, rgba(255, 255, 255, .34) 1px, transparent 1px) 0 0 / 24px 24px;
+  -webkit-mask-image: radial-gradient(260px circle at var(--px, 50%) var(--py, 50%), #000, transparent);
+  mask-image: radial-gradient(260px circle at var(--px, 50%) var(--py, 50%), #000, transparent);
+}
+.blueprint.is-hot::before { opacity: 1; }
+
+/* A tap on the grid, on touch screens */
+.blueprint-ping {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border: 2px solid var(--color-marker);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: bluePing .7s ease-out forwards;
+}
+@keyframes bluePing {
+  to { transform: scale(9); opacity: 0; }
+}
+
+/* Cards glow under the cursor. See lib/pointerFx.ts. */
+[data-glow] { position: relative; }
+[data-glow]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .25s ease;
+  background: radial-gradient(240px circle at var(--gx, 50%) var(--gy, 50%), rgba(19, 55, 207, .12), transparent 72%);
+}
+[data-glow]:hover::before { opacity: 1; }
+
+/* Package picker: the matching card steps forward, the others step back */
+.package-card { transition: opacity .3s ease, transform .3s ease, box-shadow .3s ease, border-color .3s ease, background-color .3s ease; }
+.package-card[data-picked="false"] { opacity: .55; }
+.package-card[data-picked="true"] {
+  border-color: var(--color-blueprint);
+  background: #fff;
+  box-shadow: 0 0 0 2px var(--color-blueprint), 0 22px 44px -22px rgba(19, 55, 207, .55);
+  transform: translateY(-4px);
+}
+.package-flag {
+  position: absolute;
+  top: -13px;
+  left: 22px;
+  padding: 3px 10px;
+  border-radius: 7px;
+  background: var(--color-marker);
+  color: var(--color-ink);
+  font-size: 12.5px;
+  font-weight: 800;
+  opacity: 0;
+  transform: translateY(6px) rotate(-2deg);
+  transition: opacity .25s ease, transform .3s cubic-bezier(.16, 1, .3, 1);
+}
+.package-card[data-picked="true"] .package-flag { opacity: 1; transform: rotate(-2deg); }
+
+/* Interactive checklist: the tick draws itself */
+.tick {
+  display: flex;
+  width: 26px;
+  height: 26px;
+  margin-top: 2px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(255, 255, 255, .6);
+  border-radius: 8px;
+  color: var(--color-ink);
+  transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+.group:hover .tick { border-color: var(--color-marker); }
+.tick-on { border-color: var(--color-marker); background: var(--color-marker); transform: rotate(-3deg); }
+.tick svg { width: 17px; height: 17px; stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset .25s ease .05s; }
+.tick-on svg { stroke-dashoffset: 0; }
+
+/* A rule that draws itself across as you reach it */
+.draw-line { position: relative; padding-top: 1rem; }
+.draw-line::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--color-ink);
+  transform-origin: left;
+}
+.draw-line.is-waiting::before { transform: scaleX(0); }
+.draw-line.is-in::before { animation: scrollGrow .9s cubic-bezier(.65, 0, .35, 1) var(--reveal-delay, 0ms) backwards; }
+
+.sheet-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+/* Sections rise in once as they scroll into view, then are left alone so scrolling
+   has no animations to keep up to date. See lib/revealFx.ts. */
+.rise.is-waiting { opacity: 0; transform: translateY(26px); }
+.rise.is-in { animation: rise .7s cubic-bezier(.16, 1, .3, 1) var(--reveal-delay, 0ms) backwards; }
+/* No end state on purpose: each element settles to its own opacity and transform. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(26px); }
+}
+
+/* Looping animations rest while their section is off-screen. */
+.is-offscreen, .is-offscreen *, .is-offscreen *::before, .is-offscreen *::after { animation-play-state: paused !important; }
+
+/* Top-edge reading progress, driven by the scroll position alone. */
+.scroll-progress { display: none; }
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    display: block;
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 90;
+    height: 3px;
+    transform-origin: left;
+    background: var(--color-marker);
+    pointer-events: none;
+    animation: scrollGrow linear both;
+    animation-timeline: scroll(root);
+  }
+}
+@keyframes scrollGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* The sample site is authored at a fixed 320px wide and scaled to the phone.
+   --drift is how far it glides, as a share of its 800px layout height, so the
+   lower sections come into view without ever running off the end. */
+.studio-phone { --screen-w: 224px; --screen-h: 318px; --s: .7; --drift: 30%; }
+/* A short phone shows less of the sample site, so its photo shrinks to keep the name in view. */
+@media (max-width: 639px) and (max-height: 700px) {
+  .studio-phone { --hero-k: .72; }
+}
+/* On short phones the phone gives way, so the name field stays above the fold. */
+@supports (height: 100svh) {
+  .studio-phone { --screen-h: clamp(190px, calc(100svh - 442px), 318px); }
+}
+/* 360px-wide phones are everywhere in India: a smaller phone keeps the callouts clear of it. */
+@media (max-width: 379px) {
+  .studio-phone { --screen-w: 200px; --s: .625; --drift: 28%; }
+}
+.ms-scale { width: 320px; transform: scale(var(--s)); transform-origin: 0 0; }
+.ms-fab { transform: scale(var(--s)); transform-origin: 100% 100%; }
+@media (min-width: 640px) {
+  .studio-phone { --screen-w: 240px; --screen-h: 470px; --s: .75; --drift: 20%; }
+}
+@media (min-width: 640px) and (max-height: 720px) {
+  .studio-phone { --screen-w: 204px; --screen-h: 400px; --s: .6375; --drift: 17%; }
+}
+@media (min-width: 1024px) {
+  .studio-phone { --screen-w: 304px; --screen-h: 600px; --s: .95; --drift: 23%; }
+}
+/* Shorter laptop windows get a smaller phone, never a squashed one: width and
+   height step down together, so it stays about twice as tall as it is wide. */
+@media (min-width: 1024px) and (max-height: 769px) {
+  .studio-phone { --screen-w: 280px; --screen-h: 552px; --s: .875; }
+}
+@media (min-width: 1024px) and (max-height: 699px) {
+  .studio-phone { --screen-w: 256px; --screen-h: 505px; --s: .8; --drift: 21%; }
+}
+@media (min-width: 1024px) and (max-height: 639px) {
+  .studio-phone { --screen-w: 232px; --screen-h: 457px; --s: .725; --drift: 20%; }
+}
+@media (min-width: 1024px) and (max-height: 589px) {
+  .studio-phone { --screen-w: 208px; --screen-h: 410px; --s: .65; --drift: 18%; }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .studio-phone {
+    transform: perspective(1400px) rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg));
+    transition: transform .25s ease-out;
+  }
+}
+
+/* A customer gets in touch: slides down, stays long enough to read, leaves. */
+.ms-toast {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  display: flex;
+  width: calc((var(--screen-w) - 16px) / var(--s));
+  gap: 9px;
+  padding: 9px 10px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(5, 12, 60, .35);
+  transform-origin: 0 0;
+  pointer-events: none;
+  animation: msToast 3s cubic-bezier(.16, 1, .3, 1) both;
+}
+@keyframes msToast {
+  0% { opacity: 0; transform: translateY(-110%) scale(var(--s)); }
+  12% { opacity: 1; transform: translateY(0) scale(var(--s)); }
+  88% { opacity: 1; transform: translateY(0) scale(var(--s)); }
+  100% { opacity: 0; transform: translateY(-110%) scale(var(--s)); }
+}
+.ms-ripple {
+  position: absolute;
+  z-index: 2;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border-radius: 50%;
+  background: rgba(255, 225, 77, .75);
+  pointer-events: none;
+  animation: msRipple .55s ease-out forwards;
+}
+@keyframes msRipple {
+  to { transform: scale(5); opacity: 0; }
+}
+.ms-fab-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #25d366;
+  animation: msFabRing 2.2s ease-out infinite;
+}
+.ms-fab > svg { position: relative; }
+@keyframes msFabRing {
+  0% { transform: scale(1); opacity: .6; }
+  70%, 100% { transform: scale(1.75); opacity: 0; }
+}
+
+/* The main photo drifts slowly, and each piece settles in once the wipe has passed it. */
+.ms-kb { animation: msKb 16s ease-in-out infinite alternate; }
+@keyframes msKb {
+  from { transform: scale(1.01); }
+  to { transform: scale(1.12) translateY(-2%); }
+}
+.ms-wipe .ms-in { animation: msIn .55s cubic-bezier(.16, 1, .3, 1) both; animation-delay: calc(.42s + var(--i, 0) * 90ms); }
+@keyframes msIn {
+  from { opacity: 0; translate: 0 12px; }
+  to { opacity: 1; translate: 0 0; }
+}
+/* A glint across the main button, every few seconds */
+.ms-cta { position: relative; overflow: hidden; }
+.ms-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 45%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .55), transparent);
+  transform: translateX(-130%) skewX(-18deg);
+  animation: msGlint 4.5s ease-in-out 1.6s infinite;
+}
+@keyframes msGlint {
+  0% { transform: translateX(-130%) skewX(-18deg); }
+  28%, 100% { transform: translateX(300%) skewX(-18deg); }
+}
+
+.ms-wipe { animation: msWipe .95s cubic-bezier(.65, 0, .35, 1) both; }
+.ms-scan {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 2;
+  height: 3px;
+  background: var(--color-marker);
+  box-shadow: 0 0 18px 4px rgba(255, 225, 77, .75);
+  pointer-events: none;
+  animation: msScan .95s cubic-bezier(.65, 0, .35, 1) both;
+}
+.ms-drift { animation: msDrift 15s ease-in-out 1.4s infinite alternate; }
+@keyframes msWipe {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes msScan {
+  from { top: 0; opacity: 1; }
+  92% { opacity: 1; }
+  to { top: 100%; opacity: 0; }
+}
+@keyframes msDrift {
+  0%, 18% { transform: translateY(0); }
+  82%, 100% { transform: translateY(calc(var(--drift) * -1)); }
+}
+
+/* Marked-up callouts around the phone */
+.studio-note {
+  --edge: calc((100vw - 236px) / -2 + 8px); /* 8px in from the screen edge, whatever the phone's width */
+  position: absolute;
+  z-index: 3;
+  max-width: 84px;
+  padding: 5px 7px;
+  border-radius: 6px;
+  background: var(--color-marker);
+  color: var(--color-ink);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.18;
+  box-shadow: 0 6px 16px rgba(5, 12, 60, .28);
+  rotate: var(--tilt);
+}
+.studio-note-0 { --tilt: -3deg; left: var(--edge); top: 40px; }
+.studio-note-1 { --tilt: 2.5deg; right: var(--edge); top: 118px; }
+.studio-note-2 { --tilt: 2deg; left: var(--edge); top: 212px; }
+.note-in { animation: noteIn .5s cubic-bezier(.16, 1, .3, 1) var(--d, 0s) both; }
+@keyframes noteIn {
+  from { opacity: 0; transform: translateY(10px) scale(.92); }
+  to { opacity: 1; transform: none; }
+}
+@media (max-width: 379px) {
+  .studio-note { --edge: calc((100vw - 212px) / -2 + 6px); }
+}
+@media (max-width: 349px) {
+  .studio-note { display: none; }
+}
+@media (max-width: 639px) and (max-height: 690px) {
+  .studio-note-2 { display: none; }
+}
+@media (min-width: 640px) {
+  .studio-note { max-width: 130px; padding: 8px 11px; font-size: 13.5px; }
+  .studio-note-0 { left: -118px; top: 64px; }
+  .studio-note-1 { right: -118px; top: 196px; }
+  .studio-note-2 { left: -118px; top: 340px; }
+}
+@media (min-width: 1024px) {
+  .studio-note { max-width: 108px; font-size: 12.5px; }
+  .studio-note-0 { left: -92px; top: 14%; }
+  .studio-note-1 { right: -92px; top: 43%; }
+  .studio-note-2 { left: -92px; top: 72%; }
+}
+@media (min-width: 1280px) {
+  .studio-note { max-width: 130px; font-size: 14px; }
+  .studio-note-0 { left: -112px; }
+  .studio-note-1 { right: -112px; }
+  .studio-note-2 { left: -112px; }
+}
+
+/* Phones on their side: headline and field on the left, phone on the right, all on one screen. */
+@media (min-width: 560px) and (max-width: 1023px) and (max-height: 520px) {
+  .studio-layout {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    column-gap: 16px;
+    align-items: start;
+    padding-top: 92px;
+    padding-bottom: 12px;
+  }
+  .studio-copy { grid-column: 1; grid-row: 1; }
+  .studio-stage { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; }
+  .studio-controls { grid-column: 1; grid-row: 2; margin-top: 10px; }
+  .studio-layout h1 { margin-top: 2px; font-size: 32px; }
+  .studio-layout p[aria-live] { display: none; }
+  .studio-controls [role="group"] {
+    flex-wrap: nowrap;
+    margin-inline: -16px;
+    padding-inline: 16px;
+    overflow-x: auto;
+  }
+  .studio-phone { --screen-w: 168px; --screen-h: 331px; --s: .525; --drift: 15%; }
+  .studio-note { display: none; }
+}
+
+/* The word that changes in the headline */
+.noun-in { animation: nounIn .45s cubic-bezier(.16, 1, .3, 1) both; }
+@keyframes nounIn {
+  from { opacity: 0; transform: translateY(.45em) rotate(-2deg); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes msToastStill {
+  0%, 100% { opacity: 0; transform: scale(var(--s)); }
+  10%, 90% { opacity: 1; transform: scale(var(--s)); }
+}
+
+.field-glow { box-shadow: 0 0 0 3px #ffe14d, 0 14px 34px rgba(5, 12, 60, .3); }
+.field-glow::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 21px;
+  border: 2px solid rgba(255, 255, 255, .7);
+  pointer-events: none;
+  animation: fieldGlow 1.8s ease-in-out infinite;
+}
+@keyframes fieldGlow {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  20% { opacity: 1; transform: scale(1); }
+  70% { opacity: 0; transform: scale(1.03, 1.18); }
+}
+.type-caret { animation: typeCaret 1s step-end infinite; }
+@keyframes typeCaret {
+  50% { opacity: 0; }
+}
+
+.chip-scroller { scrollbar-width: none; }
+.chip-scroller::-webkit-scrollbar { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ms-wipe, .ms-scan, .ms-drift, .note-in, .noun-in, .field-glow::after, .type-caret, .ms-fab-ring, .ms-ripple, .ms-kb, .ms-cta::after, .ms-wipe .ms-in { animation: none; }
+  .ms-scan, .ms-ripple, .ms-fab-ring, .field-glow::after { display: none; }
+  .ms-toast { animation-name: msToastStill; }
+  .tick svg, .package-card, .package-flag { transition: none; }
 }
 
 /* AI assistant: "speaking" sound-wave bars in the greeting pill */

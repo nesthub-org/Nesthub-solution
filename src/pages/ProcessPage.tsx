@@ -93,7 +93,7 @@ export function ProcessPage() {
   )
 
   return (
-    <main id="top" className="relative z-[1] pb-4 pt-32 sm:pt-40">
+    <main id="top" className="relative z-[1]">
       <JsonLd data={schema} />
       <PageHero
         crumb="Process"
@@ -102,7 +102,7 @@ export function ProcessPage() {
           <>
             Six steps.
             <br />
-            <span className="text-brand-500">No surprises.</span>
+            <span className="marker">No surprises.</span>
           </>
         }
         description="You'll always know what is happening this week, what you'll get at the end of it, and what we need from you. Here is exactly how a NestHub project runs."
@@ -135,7 +135,7 @@ export function ProcessPage() {
                   {st.n}
                 </span>
                 {st.title}
-                <span className="ml-auto text-[12px] text-muted/70">{st.duration}</span>
+                <span className="ml-auto text-[12px] text-muted">{st.duration}</span>
               </a>
             ))}
           </nav>
@@ -161,7 +161,7 @@ export function ProcessPage() {
                     <span className="flex h-16 w-16 items-center justify-center rounded-2xl" style={{ background: c[50], boxShadow: `inset 0 0 0 1px ${c[200]}` }}>
                       <Icon name={st.icon} color={c[600]} size={28} />
                     </span>
-                    <span className="text-[56px] font-bold leading-none tracking-[-.06em]" style={{ color: c[200] }}>
+                    <span className="text-[56px] font-bold leading-none tracking-[-.06em]" style={{ color: c[500] }}>
                       {st.n}
                     </span>
                   </div>
@@ -197,7 +197,7 @@ export function ProcessPage() {
             <Reveal key={h.title} delay={i * 0.06} tilt={false}>
               <div className="h-full rounded-[22px] border border-line bg-white p-7">
                 <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50">
-                  <Icon name={h.icon} color="#2563EB" size={22} />
+                  <Icon name={h.icon} color="#1337CF" size={22} />
                 </span>
                 <div className="mt-5 text-[17px] font-semibold tracking-[-.01em]">{h.title}</div>
                 <p className="mt-1.5 text-[14.5px] leading-[1.55] text-muted">{h.body}</p>

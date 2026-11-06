@@ -24,7 +24,7 @@ export function BookCall() {
         <div className="grid grid-cols-1 overflow-hidden rounded-[28px] border border-line bg-surface lg:grid-cols-[.85fr_1.15fr]">
           <div className="relative p-8 sm:p-12 lg:px-10 lg:py-9 xl:px-12">
             <div aria-hidden className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-brand-100/70 blur-3xl" />
-            <span className="relative text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Schedule a call</span>
+            <span className="relative sheet-label text-blueprint">Schedule a call</span>
             <SplitText className="relative mt-4 text-[28px] sm:text-[34px] font-bold leading-[1.15] tracking-[-.03em]">
               Book a Free 1-on-1 Discovery Call
             </SplitText>
@@ -68,7 +68,7 @@ export function BookCall() {
             ) : (
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-8 text-center">
                 <span className="flex h-14 w-14 animate-pulse items-center justify-center rounded-2xl bg-brand-50">
-                  <Icon name="clock" size={26} color="#2563EB" />
+                  <Icon name="clock" size={26} color="#1337CF" />
                 </span>
                 <p className="text-[15px] text-muted">Loading available time slots…</p>
                 <a href={brand.calendly} target="_blank" rel="noreferrer" className="text-[14px] font-semibold">

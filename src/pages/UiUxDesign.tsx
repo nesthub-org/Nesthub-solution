@@ -82,48 +82,49 @@ export function UiUxDesign() {
   )
 
   return (
-    <main id="top" className="relative z-[1] pb-16 pt-32 sm:pt-36">
+    <main id="top" className="relative z-[1]">
       <JsonLd data={servicePageSchema('/services/ui-ux-design', 'UI/UX Design Services — NestHub Solution', 'Transform ideas into beautiful, intuitive, and high-converting user interfaces with Figma wireframing, design systems, and clickable prototypes from NestHub Solution.')} />
-      <section className="mx-auto max-w-[1320px] px-6">
-        <Reveal className="max-w-[840px]">
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/10 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-[.08em] text-orange-600">
-            <span className="h-2 w-2 rounded-full bg-orange-500 animate-pulse" />
+      <section className="blueprint text-white">
+        <div className="mx-auto max-w-[1320px] px-4 pb-14 pt-[100px] sm:px-6 sm:pb-20 sm:pt-[132px]">
+        <div className="max-w-[880px]">
+          <div className="sheet-label flex items-center gap-2 text-white/90">
+            <span className="h-2 w-2 rounded-full bg-marker animate-pulse" />
             Product Design & UI/UX
           </div>
 
-          <h1 className="mt-5 text-[36px] font-bold leading-[1.08] tracking-[-.035em] text-ink sm:text-[48px] lg:text-[56px] text-balance">
-            User-Centered UI/UX Product Design Services
+          <h1 className="mt-5 text-[36px] font-bold leading-[1.06] tracking-[-.035em] text-white sm:text-[52px] lg:text-[64px] text-balance">
+            User-Centered <span className="marker">UI/UX</span> Product Design Services
           </h1>
 
-          <p className="mt-5 text-[17.5px] leading-[1.65] text-muted sm:text-[19px] text-pretty">
+          <p className="mt-5 text-[17.5px] leading-[1.65] text-white/85 sm:text-[19px] text-pretty">
             Design is not just how it looks — it's how it works. At NestHub Solution, we design intuitive, elegant, and high-converting digital products. From wireframing and user research to full design systems and interactive Figma prototypes, we bring your vision to life.
           </p>
 
           <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            <div className="rounded-2xl border border-line bg-white/80 p-4 text-center shadow-sm backdrop-blur-sm">
-              <span className="block text-[24px] font-extrabold text-orange-600 sm:text-[28px]">100%</span>
-              <span className="mt-0.5 block text-[12.5px] font-semibold text-muted">Figma Prototypes</span>
+            <div className="rounded-2xl border border-white/25 bg-white/10 p-4 text-center">
+              <span className="block text-[24px] font-extrabold text-marker sm:text-[28px]">100%</span>
+              <span className="mt-0.5 block text-[12.5px] font-semibold text-white/85">Figma Prototypes</span>
             </div>
-            <div className="rounded-2xl border border-line bg-white/80 p-4 text-center shadow-sm backdrop-blur-sm">
-              <span className="block text-[24px] font-extrabold text-orange-600 sm:text-[28px]">Design</span>
-              <span className="mt-0.5 block text-[12.5px] font-semibold text-muted">System Ready</span>
+            <div className="rounded-2xl border border-white/25 bg-white/10 p-4 text-center">
+              <span className="block text-[24px] font-extrabold text-marker sm:text-[28px]">Design</span>
+              <span className="mt-0.5 block text-[12.5px] font-semibold text-white/85">System Ready</span>
             </div>
-            <div className="rounded-2xl border border-line bg-white/80 p-4 text-center shadow-sm backdrop-blur-sm">
-              <span className="block text-[24px] font-extrabold text-orange-600 sm:text-[28px]">Mobile & Desktop</span>
-              <span className="mt-0.5 block text-[12.5px] font-semibold text-muted">Responsive Views</span>
+            <div className="rounded-2xl border border-white/25 bg-white/10 p-4 text-center">
+              <span className="block text-[24px] font-extrabold text-marker sm:text-[28px]">Mobile & Desktop</span>
+              <span className="mt-0.5 block text-[12.5px] font-semibold text-white/85">Responsive Views</span>
             </div>
-            <div className="rounded-2xl border border-line bg-white/80 p-4 text-center shadow-sm backdrop-blur-sm">
-              <span className="block text-[24px] font-extrabold text-orange-600 sm:text-[28px]">Dev</span>
-              <span className="mt-0.5 block text-[12.5px] font-semibold text-muted">Seamless Handoff</span>
+            <div className="rounded-2xl border border-white/25 bg-white/10 p-4 text-center">
+              <span className="block text-[24px] font-extrabold text-marker sm:text-[28px]">Dev</span>
+              <span className="mt-0.5 block text-[12.5px] font-semibold text-white/85">Seamless Handoff</span>
             </div>
           </div>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
             <motion.a
               href="/#contact"
-              whileHover={{ y: -2, backgroundColor: '#EA580C' }}
+              whileHover={{ y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex h-13 items-center justify-center rounded-2xl bg-orange-600 px-7 text-[15.5px] font-semibold text-white shadow-[0_10px_30px_rgba(234,88,12,.28)] transition-all"
+              className="btn-primary"
             >
               Start Product Design
             </motion.a>
@@ -131,19 +132,20 @@ export function UiUxDesign() {
               href={brand.calendly}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-13 items-center justify-center gap-2 rounded-2xl border border-line bg-white px-6 text-[15px] font-semibold text-ink transition-all hover:border-ink"
+              className="btn-ghost"
             >
-              <Icon name="clock" color="#475569" size={17} />
+              <Icon name="clock" color="currentColor" size={17} />
               Book UI/UX Consultation
             </a>
           </div>
-        </Reveal>
+        </div>
+        </div>
       </section>
 
       {/* Pillars */}
       <section className="mx-auto max-w-[1320px] px-6 pt-20 sm:pt-28">
         <Reveal className="max-w-[720px]">
-          <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-orange-600">Design Pillars</span>
+          <span className="sheet-label text-blueprint">Design Pillars</span>
           <SplitText className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[38px]">
             Our End-to-End Product Design Process
           </SplitText>
@@ -152,10 +154,10 @@ export function UiUxDesign() {
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
           {designPillars.map((pillar, index) => (
             <Reveal key={pillar.title} delay={index * 0.05}>
-              <div className="group flex h-full flex-col rounded-[28px] border border-line bg-white p-7 shadow-[0_4px_20px_rgba(0,0,0,.03)] transition-all duration-300 hover:-translate-y-1 hover:border-orange-500/40 hover:shadow-[0_16px_40px_rgba(234,88,12,.12)]">
+              <div data-glow className="group flex h-full flex-col rounded-[28px] border border-line bg-white p-7 shadow-[0_4px_20px_rgba(0,0,0,.03)] transition-all duration-300 hover:-translate-y-1 hover:border-blueprint hover:shadow-[0_16px_40px_rgba(19,55,207,.12)]">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-orange-100 bg-orange-50 text-orange-600">
-                    <Icon name={pillar.icon} color="#EA580C" size={22} />
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-brand-100 bg-brand-50 text-blueprint">
+                    <Icon name={pillar.icon} color="#1337CF" size={22} />
                   </span>
                   <h3 className="text-[20px] font-bold tracking-[-.02em] text-ink">{pillar.title}</h3>
                 </div>
@@ -165,7 +167,7 @@ export function UiUxDesign() {
                 <ul className="mt-5 grid gap-2 pt-4 border-t border-line/60">
                   {pillar.points.map((pt) => (
                     <li key={pt} className="flex items-start gap-2 text-[13.5px] font-medium text-ink">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-orange-600" />
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blueprint" />
                       <span>{pt}</span>
                     </li>
                   ))}
@@ -180,7 +182,7 @@ export function UiUxDesign() {
       <section className="mx-auto max-w-[1320px] px-6 pt-24 sm:pt-32">
         <div className="rounded-[36px] border border-line bg-gradient-to-b from-white to-surface p-8 shadow-[0_10px_50px_rgba(0,0,0,.04)] sm:p-12">
           <Reveal className="max-w-[760px]">
-            <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-orange-600">Design System</span>
+            <span className="sheet-label text-blueprint">Design System</span>
             <SplitText className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[40px]">
               Design Deliverables & Methodology
             </SplitText>
@@ -189,10 +191,10 @@ export function UiUxDesign() {
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {designTools.map((tech, i) => (
               <Reveal key={tech.name} delay={i * 0.04}>
-                <div className="flex h-full flex-col rounded-2xl border border-line/80 bg-white p-6 transition-all duration-300 hover:border-orange-400 hover:shadow-md">
+                <div className="flex h-full flex-col rounded-2xl border border-line/80 bg-white p-6 transition-all duration-300 hover:border-blueprint hover:shadow-md">
                   <div className="flex items-center justify-between">
-                    <span className="text-[12px] font-bold uppercase tracking-[.08em] text-orange-600">{tech.category}</span>
-                    <span className="rounded-full border border-orange-200 bg-orange-50 px-2.5 py-0.5 text-[11px] font-bold text-orange-700">
+                    <span className="text-[12px] font-bold uppercase tracking-[.08em] text-blueprint">{tech.category}</span>
+                    <span className="rounded-full border border-brand-200 bg-brand-50 px-2.5 py-0.5 text-[11px] font-bold text-blueprint">
                       {tech.badge}
                     </span>
                   </div>
@@ -209,22 +211,22 @@ export function UiUxDesign() {
       {/* CTA Box */}
       <section className="mx-auto max-w-[840px] px-6 pt-20 sm:pt-28">
         <Reveal>
-          <div className="rounded-[32px] border border-orange-500/20 bg-gradient-to-b from-orange-50/70 to-white p-8 text-center shadow-[0_12px_45px_rgba(234,88,12,.1)] sm:p-12">
-            <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-600 text-white shadow-md">
-              <Icon name="design" color="#ffffff" size={24} />
+          <div className="blueprint overflow-hidden rounded-[28px] px-6 py-12 text-center text-white sm:p-12">
+            <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-marker text-ink">
+              <Icon name="design" color="#111111" size={24} />
             </span>
-            <SplitText className="mt-6 text-[26px] font-bold leading-[1.15] tracking-[-.03em] text-ink sm:text-[34px]">
+            <SplitText className="mt-6 text-[26px] font-bold leading-[1.15] tracking-[-.03em] text-white sm:text-[38px]">
               Ready to Design Your Next Digital Product?
             </SplitText>
-            <p className="mt-3 text-[16px] leading-[1.65] text-muted">
+            <p className="mt-3 text-[16px] leading-[1.65] text-white/90">
               Get in touch with our UI/UX design team to review your wireframes, product specs, or redesign brief.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <motion.a
                 href="/#contact"
-                whileHover={{ y: -2, backgroundColor: '#EA580C' }}
+                whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex h-13 items-center justify-center rounded-2xl bg-orange-600 px-8 text-[15.5px] font-semibold text-white shadow-[0_10px_30px_rgba(234,88,12,.28)]"
+                className="btn-primary"
               >
                 Contact UI/UX Designers
               </motion.a>

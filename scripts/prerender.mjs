@@ -28,6 +28,7 @@ const routes = [
     'about',
     'faq',
     'contact',
+    'privacy',
     'services/website-development',
     'services/ai-integration',
     'services/mobile-app-development',
@@ -105,10 +106,24 @@ try {
 
     // Lets src/main.tsx tell whether this snapshot belongs to the URL being opened
     await page.evaluate((p) => {
-      document.getElementById('root').dataset.route = p
+      const root = document.getElementById('root')
+      root.dataset.route = p
+
+      // JSX like `Open {domain}` makes two adjacent text nodes, which serialize
+      // into one. Hydration then finds the text doesn't match and throws away
+      // the whole snapshot to rebuild the page. Separating them with an empty
+      // comment, as React's own server renderer does, keeps the two in step.
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT)
+      const textNodes = []
+      while (walker.nextNode()) textNodes.push(walker.currentNode)
+      for (const node of textNodes) {
+        if (node.previousSibling?.nodeType === Node.TEXT_NODE) node.parentNode.insertBefore(document.createComment(''), node)
+      }
     }, route.path)
 
-    const html = await page.content()
+    // Tags added at runtime (the page chunk's modulepreloads) were resolved against
+    // this local server, so make them relative again for the live site.
+    const html = (await page.content()).replaceAll(new URL(base).origin, '')
     const outPath = path.join('dist', route.out)
     await mkdir(path.dirname(outPath), { recursive: true })
     await writeFile(outPath, html)

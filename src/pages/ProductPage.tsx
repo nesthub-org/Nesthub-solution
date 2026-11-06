@@ -69,7 +69,7 @@ const schema = graph(
     featureList: qrFeatures.map((f) => `${f.title}: ${f.body}`),
     audience: { '@type': 'BusinessAudience', audienceType: 'Restaurants, cafés, food courts, cloud kitchens' },
     publisher: { '@id': BUSINESS_ID },
-    image: `${SITE_URL}/og-image.png`,
+    image: `${SITE_URL}/og-image.jpg`,
   },
   faqPage('/product', productFaqs),
   breadcrumb([{ name: 'Product', path: '/product' }]),
@@ -87,7 +87,7 @@ export function ProductPage() {
   const active = roles.find((r) => r.id === role) ?? roles[0]
 
   return (
-    <main id="top" className="relative z-[1] pb-4 pt-32 sm:pt-40">
+    <main id="top" className="relative z-[1]">
       <JsonLd data={schema} />
       <PageHero
         crumb="Product"
@@ -96,7 +96,7 @@ export function ProductPage() {
           <>
             The QR menu your
             <br />
-            <span className="text-brand-500">kitchen will love.</span>
+            <span className="marker">kitchen will love.</span>
           </>
         }
         description="ScanIt is a contactless menu and ordering system for cafés, restaurants and food courts. Guests scan the QR at their table, order from their phone, and the kitchen sees it instantly."
@@ -131,7 +131,7 @@ export function ProductPage() {
                 onClick={() => setRole(r.id)}
                 className={`relative rounded-xl px-4 py-2 text-[14px] font-semibold transition-colors sm:px-6 ${role === r.id ? 'text-white' : 'text-muted hover:text-ink'}`}
               >
-                {role === r.id && <motion.span layoutId="product-role" className="absolute inset-0 rounded-xl bg-ink" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
+                {role === r.id && <motion.span layoutId="product-role" className="absolute inset-0 rounded-xl bg-blueprint" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
                 <span className="relative">{r.label}</span>
               </button>
             ))}
@@ -168,9 +168,9 @@ export function ProductPage() {
               <div className="group h-full rounded-[22px] border border-line bg-white p-7 transition-shadow hover:shadow-[0_20px_50px_rgba(0,0,0,.07)]">
                 <div className="flex items-center justify-between">
                   <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 transition-transform group-hover:-rotate-6">
-                    <Icon name={f.icon} color="#2563EB" size={22} />
+                    <Icon name={f.icon} color="#1337CF" size={22} />
                   </span>
-                  <span className="font-mono text-[12px] font-bold text-brand-200">{f.n}</span>
+                  <span className="font-mono text-[12px] font-bold text-blueprint">{f.n}</span>
                 </div>
                 <h3 className="mt-5 text-[18px] font-semibold tracking-[-.02em]">{f.title}</h3>
                 <p className="mt-2 text-[14.5px] leading-[1.6] text-muted">{f.body}</p>
@@ -186,7 +186,7 @@ export function ProductPage() {
           {benefits.map((b, i) => (
             <Reveal key={b.stat + i} delay={i * 0.05} tilt={false}>
               <div className={`h-full border-line p-7 sm:p-9 ${i % 2 === 0 ? 'border-r' : ''} ${i < 2 ? 'border-b lg:border-b-0' : ''} ${i < 3 ? 'lg:border-r' : ''}`}>
-                <Icon name={b.icon} color="#2563EB" size={22} />
+                <Icon name={b.icon} color="#1337CF" size={22} />
                 <div className="mt-4 text-[30px] font-bold tracking-[-.04em]">{b.stat}</div>
                 <p className="mt-1 text-[14.5px] leading-[1.5] text-muted">{b.label}</p>
               </div>

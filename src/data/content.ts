@@ -1,23 +1,31 @@
-import logoVedyara from '../assets/logo-vedyara.png'
-import logoFitlifeSutra from '../assets/logo-fitlifesutra.png'
-import logoTheFineGrow from '../assets/logo-thefinegrow.png'
-import logoIllusionmed from '../assets/illusionmed-logo.png'
-import logoSKC from '../assets/logo-skc.png'
-import logoGSS from '../assets/logo-gss.jpg'
-import logoScanIt from '../assets/logo-scanit.png'
-import projectHoney from '../assets/project-honey.png'
-import projectHealth from '../assets/project-health.png'
-import projectHealth1 from '../assets/project-health1.png'
-import projectTrading from '../assets/project-trading.png'
-import projectAgencyOS from '../assets/agencyos.png'
-import projectIllusionmed from '../assets/illusionmed-img.png'
-import projectDrSunil from '../assets/project-drsunil.png'
-import scanitMockup from '../assets/scanit-mockup.png'
+import logoVedyara from '../assets/logo-vedyara.webp'
+import logoFitlifeSutra from '../assets/logo-fitlifesutra.webp'
+import logoTheFineGrow from '../assets/logo-thefinegrow.webp'
+import markTheFineGrow from '../assets/mark-thefinegrow.webp'
+import logoIllusionmed from '../assets/illusionmed-logo.webp'
+import logoSKC from '../assets/logo-skc.webp'
+import logoGSS from '../assets/logo-gss.webp'
+import projectHoney from '../assets/project-honey.webp'
 import projectVedyaraHome from '../assets/project-vedyara-home.webp'
+import projectHealth from '../assets/project-health.webp'
+import projectHealth1 from '../assets/project-health1.webp'
+import projectTrading from '../assets/project-trading.webp'
+import projectAgencyOS from '../assets/agencyos.webp'
+import projectIllusionmed from '../assets/illusionmed-img.webp'
+import projectDrSunil from '../assets/project-drsunil.webp'
+import scanitMockup from '../assets/scanit-mockup.webp'
 import screenVedyara from '../assets/screen-vedyara.webp'
+import screenVedyaraSmall from '../assets/screen-vedyara-640.webp'
+import screenVedyaraPhone from '../assets/screen-vedyara-phone.webp'
 import screenFitlife from '../assets/screen-fitlife.webp'
+import screenFitlifeSmall from '../assets/screen-fitlife-640.webp'
+import screenFitlifePhone from '../assets/screen-fitlife-phone.webp'
 import screenDrSunil from '../assets/screen-drsunil.webp'
+import screenDrSunilSmall from '../assets/screen-drsunil-640.webp'
+import screenDrSunilPhone from '../assets/screen-drsunil-phone.webp'
 import screenTheFineGrow from '../assets/screen-thefinegrow.webp'
+import screenTheFineGrowSmall from '../assets/screen-thefinegrow-640.webp'
+import screenTheFineGrowPhone from '../assets/screen-thefinegrow-phone.webp'
 import screenIllusionmed from '../assets/screen-illusionmed.webp'
 import screenAgencyOS from '../assets/screen-agencyos.webp'
 
@@ -33,14 +41,12 @@ export const brand = {
 }
 
 export const navLinks = [
+  { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
   { href: '/portfolio', label: 'Portfolio' },
-  { href: '/product', label: 'Product' },
   { href: '/process', label: 'Process' },
   { href: '/about', label: 'About' },
   { href: '/faq', label: 'FAQ' },
-  { href: '/contact', label: 'Contact' },
-  { href: '/careers', label: 'Careers' },
   { href: '/blog', label: 'Blog' },
 ]
 
@@ -52,23 +58,15 @@ export const trustedBy = [
   { name: 'SKC', logo: logoSKC },
   { name: 'G.S.S. Welfare Association', logo: logoGSS },
   { name: 'IllusionMed', logo: logoIllusionmed },
-  { name: 'ScanIt', logo: logoScanIt },
+  { name: 'The Fine Grow', logo: logoTheFineGrow },
 ]
 
 export const trustStats = [
   { number: 10, suffix: '+', label: 'Projects delivered' },
-  { number: 100, suffix: '%', label: 'Client satisfaction' },
-  { number: 2, suffix: '+', label: 'Years experience' },
-  { number: 98, suffix: '/100', label: 'Lighthouse score' },
+  { number: 4, suffix: '', label: 'Client sites you can open today' },
+  { number: 30, suffix: ' days', label: 'Support after every launch' },
+  { number: 2025, suffix: '', label: 'Founded in Jaipur' },
 ]
-
-export const heroBadge = 'AI-POWERED DEVELOPMENT'
-
-export const heroPanel = {
-  aiEnabled: 'AI ENABLED',
-  lighthouse: { label: 'LIGHTHOUSE SCORE', value: 98, max: 100 },
-  techStack: ['React', 'Node.js', 'AI', 'TypeScript'],
-}
 
 export const icons: Record<string, IconDef> = {
   design: [
@@ -219,6 +217,10 @@ export interface Project {
   accent: ServiceAccent
   /** The bare website (no laptop frame), shown inside the homepage browser frame. */
   screen: string
+  /** A 640px-wide copy of `screen` for smaller screens, where one exists. */
+  screenSmall?: string
+  /** The site as it looks on a phone, for the homepage's grid on phones. */
+  screenPhone?: string
   /** Homepage filter groups this project appears under. */
   kinds: ProjectKind[]
   /** Homepage meta row. Each is optional and only shown when known. */
@@ -253,6 +255,8 @@ export const projects: Project[] = [
     logo: logoVedyara,
     accent: 'amber',
     screen: screenVedyara,
+    screenSmall: screenVedyaraSmall,
+    screenPhone: screenVedyaraPhone,
     kinds: ['websites'],
     stack: 'React, Node.js, MongoDB, Razorpay',
     outcome: 'Online sales tripled',
@@ -274,6 +278,8 @@ export const projects: Project[] = [
     logo: logoFitlifeSutra,
     accent: 'emerald',
     screen: screenFitlife,
+    screenSmall: screenFitlifeSmall,
+    screenPhone: screenFitlifePhone,
     kinds: ['websites'],
     stack: 'React, Node.js, MongoDB',
     outcome: 'Programs & community online',
@@ -294,6 +300,8 @@ export const projects: Project[] = [
     logo: logoSKC,
     accent: 'sky',
     screen: screenDrSunil,
+    screenSmall: screenDrSunilSmall,
+    screenPhone: screenDrSunilPhone,
     kinds: ['websites'],
     stack: 'React, Framer Motion',
     outcome: 'Online appointments',
@@ -312,9 +320,11 @@ export const projects: Project[] = [
     ],
     href: 'https://thefinegrow.com',
     image: projectTrading,
-    logo: logoTheFineGrow,
+    logo: markTheFineGrow,
     accent: 'violet',
     screen: screenTheFineGrow,
+    screenSmall: screenTheFineGrowSmall,
+    screenPhone: screenTheFineGrowPhone,
     kinds: ['platforms'],
     stack: 'Real-time data, WebSockets',
     outcome: 'Live-market learning',
@@ -362,6 +372,10 @@ export const projects: Project[] = [
   },
 ]
 
+// The client sites the homepage links to, in the order it shows them.
+const homepageOrder = ['dr-sunil-chaudhary', 'vedyara-organic', 'thefinegrow', 'fitlife-sutra']
+export const homepageProjects = homepageOrder.flatMap((slug) => projects.filter((p) => p.slug === slug))
+
 export interface QrFeature {
   n: string
   icon: string
@@ -378,33 +392,43 @@ export const qrFeatures: QrFeature[] = [
 
 export interface Testimonial {
   quote: string
+  /** One sentence lifted word for word from `quote`, for where the full quote won't fit. */
+  highlight: string
   name: string
   initials: string
   role: string
   company: string
+  /** The project this quote is about, so the homepage can show them together. */
+  projectSlug: string
 }
 
 export const testimonials: Testimonial[] = [
   {
     quote: 'Our honey brand needed an online presence that matched the quality of our product. NestHub delivered beyond expectations — the site is gorgeous and our online sales have tripled.',
+    highlight: 'NestHub delivered beyond expectations — the site is gorgeous and our online sales have tripled.',
     name: 'Mr. Avinash Maurya',
     initials: 'AM',
     role: 'Manager, Vedyara Agro Foods',
     company: 'E-Commerce Platform',
+    projectSlug: 'vedyara-organic',
   },
   {
     quote: 'Building a trading education platform is complex, but the NestHub team handled it with precision. Real-time charts, course modules, community features — everything works flawlessly.',
+    highlight: 'Building a trading education platform is complex, but the NestHub team handled it with precision.',
     name: 'Mr. Amit Mishra',
     initials: 'AM',
     role: 'CEO, TheFineGrow',
     company: 'Trading Platform',
+    projectSlug: 'thefinegrow',
   },
   {
     quote: 'NestHub helped us create a stronger online presence with a clean, user-friendly design. The website made it easier for us to connect with our community and showcase our Herbalife nutrition programs in a simple, professional, and engaging manner.',
+    highlight: 'NestHub helped us create a stronger online presence with a clean, user-friendly design.',
     name: 'Mr. Mahtab Alam',
     initials: 'MA',
     role: 'Health & Wellness',
     company: 'Fitlifesutra',
+    projectSlug: 'fitlife-sutra',
   },
 ]
 
@@ -438,10 +462,10 @@ export interface Step {
 }
 
 export const steps: Step[] = [
-  { n: '01', title: 'Discovery', body: 'Stakeholder interviews, analytics audit and a written brief we both sign off on.', duration: '1-2 Weeks', icon: 'search' },
-  { n: '02', title: 'Design', body: 'Wireframes to high-fidelity system in Figma, reviewed live rather than by email.', duration: '1-2 Weeks', icon: 'design' },
-  { n: '03', title: 'Development', body: 'Component-driven build with preview deploys on every pull request.', duration: '2-6 Weeks', icon: 'dev' },
-  { n: '04', title: 'Testing', body: 'Cross-device QA, accessibility audit and Core Web Vitals budgets enforced in CI.', duration: '1-2 Weeks', icon: 'clipboardCheck' },
+  { n: '01', title: 'Discovery', body: 'Stakeholder interviews, analytics audit and a written brief we both sign off on.', duration: '1-2 days', icon: 'search' },
+  { n: '02', title: 'Design', body: 'Wireframes to high-fidelity system in Figma, reviewed live rather than by email.', duration: '1-2 days', icon: 'design' },
+  { n: '03', title: 'Development', body: 'Component-driven build with preview deploys on every pull request.', duration: '2-6 days', icon: 'dev' },
+  { n: '04', title: 'Testing', body: 'Cross-device QA, accessibility audit and Core Web Vitals budgets enforced in CI.', duration: '1-2 days', icon: 'clipboardCheck' },
   { n: '05', title: 'Launch', body: 'Zero-downtime migration, redirects mapped, analytics and monitoring verified.', duration: '3-5 Days', icon: 'rocket' },
   { n: '06', title: 'Support', body: 'A named engineer, monthly performance reporting and a roadmap that keeps moving.', duration: 'Ongoing', icon: 'headset' },
 ]
@@ -459,7 +483,136 @@ export const processHighlights: ProcessHighlight[] = [
   { icon: 'team', title: 'Long-term partnership', body: 'We ship, support and keep improving.' },
 ]
 
-export const needs = ['New website', 'Redesign', 'AI integration', 'Ongoing partner']
+export const needs = ['New website', 'Redesign', 'Mobile app', 'AI integration', 'SEO or ads', 'Social media', 'Ongoing partner']
+
+export const budgets = ['Under ₹50k', '₹50k to ₹2L', '₹2L to ₹5L', '₹5L+', 'Not sure yet']
+
+export interface WebsitePackage {
+  id: string
+  title: string
+  /** What the visitor says they want, in the picker above the cards. */
+  goal: string
+  forWhom: string
+  timeline: string
+  /** Starting price shown on the card, e.g. '₹25,000'. Left out, the card offers a quote instead. */
+  priceFrom?: string
+  includes: string[]
+}
+
+export const packages: WebsitePackage[] = [
+  {
+    id: 'landing',
+    title: 'Landing page',
+    goal: 'More enquiries from my ads',
+    forWhom: 'One page built to turn ad clicks into enquiries. Right for a single offer, launch or campaign.',
+    timeline: '1–2 days',
+    includes: ['One focused, mobile-first page', 'WhatsApp and call buttons', 'Enquiry form to your inbox', 'Analytics set up', '30 days of support after launch'],
+  },
+  {
+    id: 'business',
+    title: 'Business website',
+    goal: 'A complete website for my business',
+    forWhom: 'Your full home online: services, work, reviews and contact. Right for clinics, shops, firms and studios.',
+    timeline: '3–5 days',
+    includes: ['Every page your business needs', 'WhatsApp, call and enquiry form', 'Built to open fast on phones', 'Technical SEO and analytics set up', '30 days of support after launch'],
+  },
+  {
+    id: 'platform',
+    title: 'Online store or platform',
+    goal: 'Sell or take bookings online',
+    forWhom: 'Sell online, take bookings or run your operations from one place.',
+    timeline: '6–12 days',
+    includes: ['Catalogue, cart and online payments', 'Bookings, dashboards, CRM or AI features', 'Add and edit content yourself', 'Technical SEO and analytics set up', '30 days of support after launch'],
+  },
+]
+
+export interface MoreService {
+  title: string
+  body: string
+  href: string
+  icon: string
+}
+
+export const moreServices: MoreService[] = [
+  {
+    title: 'AI Integration',
+    body: 'Chatbots that answer your customers, AI lead generation, smart search and automated workflows.',
+    href: '/services/ai-integration',
+    icon: 'ai',
+  },
+  {
+    title: 'Mobile App Development',
+    body: 'Android and iOS apps, primarily with React Native, from the same team as your website.',
+    href: '/services/mobile-app-development',
+    icon: 'mobile',
+  },
+  {
+    title: 'SEO & Digital Marketing',
+    body: 'Show up on Google, run Meta and Google Ads, and see what works with analytics set up properly.',
+    href: '/services/seo-digital-marketing',
+    icon: 'seo',
+  },
+  {
+    title: 'Social Media Marketing',
+    body: 'Content calendars, reels, paid campaigns and community management.',
+    href: '/services/social-media-marketing',
+    icon: 'social',
+  },
+  {
+    title: 'UI/UX Design',
+    body: 'Wireframes, clickable prototypes and user testing, for new products and redesigns.',
+    href: '/services/ui-ux-design',
+    icon: 'design',
+  },
+  {
+    title: 'ScanIt for restaurants',
+    body: 'Our own QR menu and ordering system. Guests order from their phone and the kitchen sees it instantly. Pilot available.',
+    href: '/product',
+    icon: 'qr',
+  },
+]
+
+export const buyerQuestions: FaqItem[] = [
+  {
+    q: 'Can I open websites you have actually built?',
+    a: 'Yes. Four of them are linked on this page. Try them on your phone before you decide.',
+  },
+  {
+    q: 'Who will actually build mine?',
+    a: 'The same small team in Jaipur that scopes it. No handoffs, no agencies inside agencies.',
+  },
+  {
+    q: 'Will I own the website and the code?',
+    a: 'Yes. Once the final invoice is paid, the code, design files, domain and content are fully yours.',
+  },
+  {
+    q: 'What is the price, and what is extra?',
+    a: 'You get a written scope and a fixed quote before work starts, paid in milestones at kick-off, design sign-off and launch.',
+  },
+  {
+    q: 'When will it be live?',
+    a: 'Landing pages usually take 1–2 days, business websites 3–5, and online stores or platforms 6–12. You get a firm timeline after the first call.',
+  },
+  {
+    q: 'Who helps me after launch?',
+    a: 'Every project includes 30 days of support. After that, most clients move to a monthly plan with a named engineer.',
+  },
+]
+
+export const nextSteps = [
+  {
+    title: 'You send a message',
+    body: 'WhatsApp, a call or the form below. Your preview comes along, so we can see what you have in mind.',
+  },
+  {
+    title: 'Free 30-minute call',
+    body: "Your goals, what to build first and what to skip, and a ballpark budget. You'll leave with a clear plan, whether or not we work together.",
+  },
+  {
+    title: 'Written scope and fixed quote',
+    body: 'Price and timeline in writing before anything starts. Then we design, build and launch, showing you progress along the way.',
+  },
+]
 
 export interface FaqItem {
   q: string
@@ -468,24 +621,24 @@ export interface FaqItem {
 
 export const faqs: FaqItem[] = [
   {
-    q: 'Who is NestHub Solution?',
-    a: "We're a web development studio based in Jaipur, Rajasthan, founded in 2025. Our team of designers, developers and strategists has shipped projects like Vedyara Agro Foods, Fitlife Sutra and TheFineGrow for clients across India.",
+    q: 'How much does a website cost?',
+    a: "Pricing is scoped to each project rather than a flat rate, with competitive mid-range pricing built for Indian SMEs and startups. Book a free 30-minute discovery call and we'll give you a clear quote.",
+  },
+  {
+    q: 'How long does a project take?',
+    a: 'Landing pages typically take 1–2 days, full business websites 3–5 days, and e-commerce or AI-integrated platforms 6–12 days. You get a firm timeline after the discovery call, not a guess.',
   },
   {
     q: 'Do you work with clients outside Jaipur?',
     a: 'Yes. While we\'re based in Jaipur, we work fully remotely with clients across Delhi, Mumbai, Bangalore, Hyderabad, Pune, Chennai, Kolkata and Ahmedabad. Distance has never been a blocker on a project.',
   },
   {
+    q: 'Who is NestHub Solution?',
+    a: "We're a web development studio based in Jaipur, Rajasthan, founded in 2025. Our team of designers, developers and strategists has shipped projects like Vedyara Agro Foods, Fitlife Sutra and TheFineGrow for clients across India.",
+  },
+  {
     q: 'What services does NestHub Solution offer?',
     a: 'AI integration, website development, mobile app development (Android & iOS), UI/UX design, SEO & digital marketing, and social media marketing — one senior team handling strategy through to launch, no handoffs.',
-  },
-  {
-    q: 'How much does a website cost?',
-    a: "Pricing is scoped to each project rather than a flat rate, with competitive mid-range pricing built for Indian SMEs and startups. Book a free 30-minute discovery call and we'll give you a clear quote.",
-  },
-  {
-    q: 'How long does a project take?',
-    a: 'Landing pages typically take 1–2 weeks, full business websites 3–5 weeks, and e-commerce or AI-integrated platforms 6–12 weeks. You get a firm timeline after the discovery call, not a guess.',
   },
   {
     q: 'Can you integrate AI into my website or app?',

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion, useMotionTemplate, useMotionValue } from 'framer-motion'
+import { useLocation } from 'react-router-dom'
+import { isPrerendering } from '../hooks/usePrerendering'
 import { brand, footerLinks } from '../data/content'
 import { Logo, LogoFallback } from './Logo'
 import { FacebookIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from './SocialIcons'
@@ -19,8 +20,12 @@ function useJaipurTime() {
       hour12: true,
       timeZone: 'Asia/Kolkata',
     }).format(new Date())
-  const [time, setTime] = useState(fmt)
+  // Empty on the first render: the prerendered HTML can't know the visitor's
+  // time, and any mismatch makes React discard that HTML and rebuild the page.
+  const [time, setTime] = useState('')
   useEffect(() => {
+    if (isPrerendering()) return
+    setTime(fmt())
     const id = setInterval(() => setTime(fmt()), 30_000)
     return () => clearInterval(id)
   }, [])
@@ -29,7 +34,7 @@ function useJaipurTime() {
 
 function FooterLink({ href, label }: { href: string; label: string }) {
   return (
-    <a href={href} className="group relative inline-flex w-fit items-center gap-1.5 text-[15.5px] text-white/60 transition-colors hover:text-white">
+    <a href={href} className="group relative inline-flex min-h-10 w-fit items-center gap-1.5 text-[15.5px] text-white/80 transition-colors hover:text-white sm:min-h-0">
       <span className="h-px w-0 bg-brand-500 transition-all duration-300 group-hover:w-3" />
       {label}
     </a>
@@ -38,7 +43,7 @@ function FooterLink({ href, label }: { href: string; label: string }) {
 
 function ColumnTitle({ children }: { children: string }) {
   return (
-    <div className="flex items-center gap-2 font-mono text-[12px] uppercase tracking-[.18em] text-white/40">
+    <div className="flex items-center gap-2 font-mono text-[12px] uppercase tracking-[.18em] text-white/70">
       <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
       {children}
     </div>
@@ -46,21 +51,20 @@ function ColumnTitle({ children }: { children: string }) {
 }
 
 export function Footer() {
+  const { pathname } = useLocation()
   const time = useJaipurTime()
   const wordRef = useRef<HTMLDivElement>(null)
-  const mx = useMotionValue(50)
-  const my = useMotionValue(50)
-  const spotlight = useMotionTemplate`radial-gradient(420px circle at ${mx}% ${my}%, rgba(96,165,250,.9), rgba(37,99,235,.35) 40%, rgba(255,255,255,.06) 70%)`
 
   const onMove = (e: React.PointerEvent) => {
-    const r = wordRef.current?.getBoundingClientRect()
-    if (!r) return
-    mx.set(((e.clientX - r.left) / r.width) * 100)
-    my.set(((e.clientY - r.top) / r.height) * 100)
+    const el = wordRef.current
+    const r = el?.getBoundingClientRect()
+    if (!el || !r) return
+    el.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`)
+    el.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`)
   }
 
   return (
-    <footer className="relative overflow-hidden bg-[#0a0a0b] text-white">
+    <footer className="relative overflow-hidden bg-navy text-white">
       {/* ambient glow + grid */}
       <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 h-[480px] w-[900px] -translate-x-1/2 rounded-full bg-brand-500/20 blur-[120px]" />
       <div
@@ -76,8 +80,8 @@ export function Footer() {
       />
 
       <div className="relative mx-auto max-w-[1320px] px-6">
-        {/* CTA band */}
-        <div className="flex flex-col items-start justify-between gap-8 border-b border-white/10 py-16 md:flex-row md:items-end md:py-20">
+        {/* CTA band, on pages that don't already end with the contact section */}
+        {pathname !== '/' && <div className="flex flex-col items-start justify-between gap-8 border-b border-white/10 py-16 md:flex-row md:items-end md:py-20">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[12.5px] text-white/70">
               <span className="relative flex h-2 w-2">
@@ -87,21 +91,19 @@ export function Footer() {
               Taking on new projects
             </div>
             <h2 className="mt-5 max-w-[640px] text-[clamp(34px,5vw,60px)] font-semibold leading-[1.02] tracking-[-.04em]">
-              Got an idea? <span className="text-shimmer">Let&apos;s build it</span> together.
+              Got an idea? <span className="text-marker">Let&apos;s build it</span> together.
             </h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <motion.a
+            <a
               href="/contact"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
-              className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-[15px] font-semibold text-ink"
+              className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-[15px] font-semibold text-ink transition-transform hover:scale-[1.04] active:scale-[.96]"
             >
               Start a project
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-ink text-white transition-transform duration-300 group-hover:rotate-45">
                 ↗
               </span>
-            </motion.a>
+            </a>
             <a
               href={brand.calendly}
               target="_blank"
@@ -111,7 +113,7 @@ export function Footer() {
               Book a call
             </a>
           </div>
-        </div>
+        </div>}
 
         {/* Columns */}
         <div className="grid grid-cols-2 gap-x-8 gap-y-12 py-16 md:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
@@ -121,31 +123,29 @@ export function Footer() {
               <LogoFallback size={46} />
               <span className="text-[17px] font-bold tracking-[-.02em]">{brand.name}</span>
             </div>
-            <p className="mt-5 max-w-[320px] text-[15.5px] leading-relaxed text-white/55">
+            <p className="mt-5 max-w-[320px] text-[15.5px] leading-relaxed text-white/80">
               We craft digital experiences that drive growth. From concept to launch, we build websites that make an
               impact.
             </p>
             <div className="mt-6 flex gap-2.5">
               {socials.map(({ label, Icon, href }) => (
-                <motion.a
+                <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label}
-                  whileHover={{ y: -4, backgroundColor: '#2563EB', borderColor: '#2563EB' }}
-                  whileTap={{ scale: 0.92 }}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/12 bg-white/5 text-white"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/12 bg-white/5 text-white transition-all hover:-translate-y-1 hover:border-brand-500 hover:bg-brand-500"
                 >
                   <Icon size={17} />
-                </motion.a>
+                </a>
               ))}
             </div>
           </div>
 
           <div>
             <ColumnTitle>Explore</ColumnTitle>
-            <div className="mt-5 grid gap-3">
+            <div className="mt-3.5 grid sm:mt-5 sm:gap-3">
               {footerLinks.quick.map((l) => (
                 <FooterLink key={l.label} {...l} />
               ))}
@@ -154,7 +154,7 @@ export function Footer() {
 
           <div>
             <ColumnTitle>Services</ColumnTitle>
-            <div className="mt-5 grid gap-3">
+            <div className="mt-3.5 grid sm:mt-5 sm:gap-3">
               {footerLinks.services.map((l, i) => (
                 <FooterLink key={i} {...l} />
               ))}
@@ -163,22 +163,22 @@ export function Footer() {
 
           <div className="col-span-2 md:col-span-1">
             <ColumnTitle>Say hello</ColumnTitle>
-            <div className="mt-5 grid gap-3">
+            <div className="mt-3.5 grid sm:mt-5 sm:gap-3">
               <a
                 href={`mailto:${brand.email}`}
-                className="group w-fit text-[17px] font-medium text-white transition-colors hover:text-brand-200"
+                className="group w-fit py-2 text-[17px] font-medium text-white transition-colors hover:text-brand-200 sm:py-0"
               >
                 {brand.email}
                 <span className="block h-px w-0 bg-brand-200 transition-all duration-300 group-hover:w-full" />
               </a>
-              <a href={`tel:${brand.phone.replace(/\s+/g, '')}`} className="w-fit text-[15.5px] text-white/60 transition-colors hover:text-white">
+              <a href={`tel:${brand.phone.replace(/\s+/g, '')}`} className="w-fit py-2 text-[15.5px] text-white/80 transition-colors hover:text-white sm:py-0">
                 {brand.phone}
               </a>
               <div className="mt-2 rounded-2xl border border-white/10 bg-white/[.03] p-4">
                 <div className="text-[14.5px] text-white/80">{brand.location}</div>
-                <div className="mt-1 flex items-center gap-2 font-mono text-[12.5px] text-white/45">
+                <div className="mt-1 flex items-center gap-2 font-mono text-[12.5px] text-white/75">
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-success" />
-                  Local time · {time} IST
+                  {time ? `Local time · ${time} IST` : 'India Standard Time'}
                 </div>
               </div>
             </div>
@@ -187,21 +187,15 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col-reverse items-start justify-between gap-4 border-t border-white/10 py-6 sm:flex-row sm:items-center">
-          <span className="text-[13.5px] text-white/40">{`© ${new Date().getFullYear()} ${brand.name}. Crafted with care in Jaipur.`}</span>
+          <span className="text-[13.5px] text-white/70">{`© ${new Date().getFullYear()} ${brand.name}. Crafted with care in Jaipur.`}</span>
           <span className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[13.5px]">
-            <a href="/#top" className="text-white/40 transition-colors hover:text-white">
+            <a href="/privacy" className="py-2.5 text-white/80 transition-colors hover:text-white">
               Privacy
-            </a>
-            <a href="/#top" className="text-white/40 transition-colors hover:text-white">
-              Terms
-            </a>
-            <a href="/admin/login" rel="nofollow" className="text-white/40 transition-colors hover:text-white">
-              Admin login
             </a>
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="group inline-flex items-center gap-1.5 rounded-full border border-white/12 px-3 py-1 text-white/60 transition-colors hover:border-white/40 hover:text-white"
+              className="group inline-flex items-center gap-1.5 rounded-full border border-white/12 px-3.5 py-2 text-white/80 transition-colors hover:border-white/40 hover:text-white"
             >
               Back to top
               <span className="transition-transform duration-300 group-hover:-translate-y-0.5">↑</span>
@@ -212,16 +206,12 @@ export function Footer() {
 
       {/* Giant wordmark — decorative; also gives the floating WhatsApp / assistant buttons empty space to sit over */}
       <div ref={wordRef} onPointerMove={onMove} aria-hidden className="relative select-none overflow-hidden pt-2">
-        <motion.div
-          initial={{ y: '40%', opacity: 0 }}
-          whileInView={{ y: '18%', opacity: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-          style={{ backgroundImage: spotlight }}
-          className="bg-clip-text text-center text-[clamp(72px,19vw,300px)] font-black leading-[.85] tracking-[-.06em] text-transparent [-webkit-background-clip:text]"
+        <div
+          style={{ backgroundImage: 'radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(96,165,250,.9), rgba(19,55,207,.35) 40%, rgba(255,255,255,.06) 70%)' }}
+          className="translate-y-[18%] bg-clip-text text-center font-display text-[clamp(72px,19vw,300px)] font-extrabold leading-[.85] tracking-[-.06em] text-transparent [-webkit-background-clip:text]"
         >
           NestHub
-        </motion.div>
+        </div>
       </div>
     </footer>
   )

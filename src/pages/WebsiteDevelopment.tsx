@@ -188,50 +188,51 @@ export function WebsiteDevelopment() {
   )
 
   return (
-    <main id="top" className="relative z-[1] pb-16 pt-32 sm:pt-36">
+    <main id="top" className="relative z-[1]">
       <JsonLd data={servicePageSchema('/services/website-development', 'Website Development Services — NestHub Solution', 'Explore NestHub Solution website development services, technologies used (React 19, Next.js 15, TypeScript, Node.js, Tailwind CSS), engineering pillars, and bespoke web solutions.')} />
       {/* Hero Section */}
-      <section className="mx-auto max-w-[1320px] px-6">
-        <Reveal className="max-w-[840px]">
-          <div className="inline-flex items-center gap-2 rounded-full border border-brand-500/20 bg-brand-500/10 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-[.08em] text-brand-600">
-            <span className="h-2 w-2 rounded-full bg-brand-500 animate-pulse" />
+      <section className="blueprint text-white">
+        <div className="mx-auto max-w-[1320px] px-4 pb-14 pt-[100px] sm:px-6 sm:pb-20 sm:pt-[132px]">
+        <div className="max-w-[880px]">
+          <div className="sheet-label flex items-center gap-2 text-white/90">
+            <span className="h-2 w-2 rounded-full bg-marker animate-pulse" />
             Web Engineering & Development
           </div>
 
-          <h1 className="mt-5 text-[36px] font-bold leading-[1.08] tracking-[-.035em] text-ink sm:text-[48px] lg:text-[56px] text-balance">
-            Crafting High-Performance Websites & Next-Gen Web Applications
+          <h1 className="mt-5 text-[36px] font-bold leading-[1.06] tracking-[-.035em] text-white sm:text-[52px] lg:text-[64px] text-balance">
+            Crafting High-Performance <span className="marker">Websites</span> & Next-Gen Web Applications
           </h1>
 
-          <p className="mt-5 text-[17.5px] leading-[1.65] text-muted sm:text-[19px] text-pretty">
+          <p className="mt-5 text-[17.5px] leading-[1.65] text-white/85 sm:text-[19px] text-pretty">
             Website development is the complete lifecycle process of designing, coding, architecting, and optimizing digital experiences on the web. At NestHub Solution, we combine modern visual aesthetics with enterprise-grade web technologies to build fast, secure, and conversion-focused websites.
           </p>
 
           {/* Key Metrics / Highlights */}
           <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            <div className="rounded-2xl border border-line bg-white/80 p-4 text-center shadow-sm backdrop-blur-sm">
-              <span className="block text-[24px] font-extrabold text-brand-600 sm:text-[28px]">98/100</span>
-              <span className="mt-0.5 block text-[12.5px] font-semibold text-muted">Lighthouse Speed</span>
+            <div className="rounded-2xl border border-white/25 bg-white/10 p-4 text-center">
+              <span className="block text-[24px] font-extrabold text-marker sm:text-[28px]">98/100</span>
+              <span className="mt-0.5 block text-[12.5px] font-semibold text-white/85">Lighthouse Speed</span>
             </div>
-            <div className="rounded-2xl border border-line bg-white/80 p-4 text-center shadow-sm backdrop-blur-sm">
-              <span className="block text-[24px] font-extrabold text-brand-600 sm:text-[28px]">100%</span>
-              <span className="mt-0.5 block text-[12.5px] font-semibold text-muted">Mobile Responsive</span>
+            <div className="rounded-2xl border border-white/25 bg-white/10 p-4 text-center">
+              <span className="block text-[24px] font-extrabold text-marker sm:text-[28px]">100%</span>
+              <span className="mt-0.5 block text-[12.5px] font-semibold text-white/85">Mobile Responsive</span>
             </div>
-            <div className="rounded-2xl border border-line bg-white/80 p-4 text-center shadow-sm backdrop-blur-sm">
-              <span className="block text-[24px] font-extrabold text-brand-600 sm:text-[28px]">60 FPS</span>
-              <span className="mt-0.5 block text-[12.5px] font-semibold text-muted">Micro-Animations</span>
+            <div className="rounded-2xl border border-white/25 bg-white/10 p-4 text-center">
+              <span className="block text-[24px] font-extrabold text-marker sm:text-[28px]">60 FPS</span>
+              <span className="mt-0.5 block text-[12.5px] font-semibold text-white/85">Micro-Animations</span>
             </div>
-            <div className="rounded-2xl border border-line bg-white/80 p-4 text-center shadow-sm backdrop-blur-sm">
-              <span className="block text-[24px] font-extrabold text-brand-600 sm:text-[28px]">SEO</span>
-              <span className="mt-0.5 block text-[12.5px] font-semibold text-muted">Ready Architecture</span>
+            <div className="rounded-2xl border border-white/25 bg-white/10 p-4 text-center">
+              <span className="block text-[24px] font-extrabold text-marker sm:text-[28px]">SEO</span>
+              <span className="mt-0.5 block text-[12.5px] font-semibold text-white/85">Ready Architecture</span>
             </div>
           </div>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
             <motion.a
               href="/#contact"
-              whileHover={{ y: -2, backgroundColor: '#1D4ED8' }}
+              whileHover={{ y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex h-13 items-center justify-center rounded-2xl bg-brand-500 px-7 text-[15.5px] font-semibold text-white shadow-[0_10px_30px_rgba(37,99,235,.28)] transition-all"
+              className="btn-primary"
             >
               Start Your Web Project
             </motion.a>
@@ -239,19 +240,20 @@ export function WebsiteDevelopment() {
               href={brand.calendly}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-13 items-center justify-center gap-2 rounded-2xl border border-line bg-white px-6 text-[15px] font-semibold text-ink transition-all hover:border-ink"
+              className="btn-ghost"
             >
-              <Icon name="clock" color="#475569" size={17} />
+              <Icon name="clock" color="currentColor" size={17} />
               Book 30-Min Discovery Call
             </a>
           </div>
-        </Reveal>
+        </div>
+        </div>
       </section>
 
       {/* Section 1: What is Website Development? */}
       <section className="mx-auto max-w-[1320px] px-6 pt-20 sm:pt-28">
         <Reveal className="max-w-[720px]">
-          <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Overview</span>
+          <span className="sheet-label text-blueprint">Overview</span>
           <SplitText className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[38px]">
             What is Website Development?
           </SplitText>
@@ -263,10 +265,10 @@ export function WebsiteDevelopment() {
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {webDevelopmentPillars.map((pillar, index) => (
             <Reveal key={pillar.title} delay={index * 0.05}>
-              <div className="group relative flex h-full flex-col rounded-[28px] border border-line bg-white p-7 shadow-[0_4px_20px_rgba(0,0,0,.03)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-500/40 hover:shadow-[0_16px_40px_rgba(37,99,235,.12)]">
+              <div className="group relative flex h-full flex-col rounded-[28px] border border-line bg-white p-7 shadow-[0_4px_20px_rgba(0,0,0,.03)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-500/40 hover:shadow-[0_16px_40px_rgba(19,55,207,.12)]">
                 <div className="flex items-center gap-3">
                   <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-brand-100 bg-brand-50 text-brand-600 transition-transform group-hover:scale-110">
-                    <Icon name={pillar.icon} color="#2563EB" size={22} />
+                    <Icon name={pillar.icon} color="#1337CF" size={22} />
                   </span>
                   <h3 className="text-[20px] font-bold tracking-[-.02em] text-ink">{pillar.title}</h3>
                 </div>
@@ -291,7 +293,7 @@ export function WebsiteDevelopment() {
       <section className="mx-auto max-w-[1320px] px-6 pt-24 sm:pt-32">
         <div className="rounded-[36px] border border-line bg-gradient-to-b from-white to-surface p-8 shadow-[0_10px_50px_rgba(0,0,0,.04)] sm:p-12">
           <Reveal className="max-w-[760px]">
-            <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Tech Stack</span>
+            <span className="sheet-label text-blueprint">Tech Stack</span>
             <SplitText className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[40px]">
               Technologies Used in Our Web Projects
             </SplitText>
@@ -323,7 +325,7 @@ export function WebsiteDevelopment() {
       {/* Section 3: All Types of Website Development We Offer */}
       <section className="mx-auto max-w-[1320px] px-6 pt-24 sm:pt-32">
         <Reveal className="max-w-[720px]">
-          <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Solutions</span>
+          <span className="sheet-label text-blueprint">Solutions</span>
           <SplitText className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[38px]">
             Comprehensive Website Development Solutions
           </SplitText>
@@ -338,7 +340,7 @@ export function WebsiteDevelopment() {
               <div className="flex h-full flex-col rounded-[28px] border border-line bg-white p-7 shadow-sm transition-all duration-300 hover:border-brand-400 hover:shadow-lg">
                 <div className="flex items-center justify-between">
                   <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-100 bg-brand-50 text-brand-600">
-                    <Icon name={sol.icon} color="#2563EB" size={20} />
+                    <Icon name={sol.icon} color="#1337CF" size={20} />
                   </span>
                   <span className="rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-[11px] font-bold text-brand-700">
                     {sol.badge}
@@ -364,7 +366,7 @@ export function WebsiteDevelopment() {
       {/* Section 4: Web Projects Featured */}
       <section className="mx-auto max-w-[1320px] px-6 pt-24 sm:pt-32">
         <Reveal className="max-w-[720px]">
-          <span className="text-[13px] font-semibold uppercase tracking-[.09em] text-brand-500">Portfolio</span>
+          <span className="sheet-label text-blueprint">Portfolio</span>
           <SplitText className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[38px]">
             Websites Built by NestHub Solution
           </SplitText>
@@ -407,28 +409,28 @@ export function WebsiteDevelopment() {
       {/* CTA Box */}
       <section className="mx-auto max-w-[840px] px-6 pt-20 sm:pt-28">
         <Reveal>
-          <div className="rounded-[32px] border border-brand-500/20 bg-gradient-to-b from-brand-50/70 to-white p-8 text-center shadow-[0_12px_45px_rgba(37,99,235,.1)] sm:p-12">
-            <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-500 text-white shadow-md">
-              <Icon name="rocket" color="#ffffff" size={24} />
+          <div className="blueprint overflow-hidden rounded-[28px] px-6 py-12 text-center text-white sm:p-12">
+            <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-marker text-ink">
+              <Icon name="rocket" color="#111111" size={24} />
             </span>
-            <SplitText className="mt-6 text-[26px] font-bold leading-[1.15] tracking-[-.03em] text-ink sm:text-[34px]">
+            <SplitText className="mt-6 text-[26px] font-bold leading-[1.15] tracking-[-.03em] text-white sm:text-[38px]">
               Ready to Build Your Website with NestHub?
             </SplitText>
-            <p className="mt-3 text-[16px] leading-[1.65] text-muted">
+            <p className="mt-3 text-[16px] leading-[1.65] text-white/90">
               Get in touch with our engineering team for a free quote, scope review, and technical proposal.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <motion.a
                 href="/#contact"
-                whileHover={{ y: -2, backgroundColor: '#1D4ED8' }}
+                whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex h-13 items-center justify-center rounded-2xl bg-brand-500 px-8 text-[15.5px] font-semibold text-white shadow-[0_10px_30px_rgba(37,99,235,.28)]"
+                className="btn-primary"
               >
                 Contact Engineers
               </motion.a>
               <a
-                href="/portfolio"
-                className="inline-flex h-13 items-center justify-center rounded-2xl border border-line bg-white px-7 text-[15px] font-semibold text-ink hover:border-ink"
+                href="/case-studies"
+                className="btn-ghost"
               >
                 Browse All Case Studies
               </a>

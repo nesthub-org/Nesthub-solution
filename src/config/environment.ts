@@ -28,4 +28,6 @@ export const isProduction = !isLocalHost(hostname)
 export const environment = {
   isProduction,
   apiUrl: (typeof window !== 'undefined' && window.__API_URL__) || (isProduction ? PROD_API_URL : LOCAL_API_URL),
+  /** Meta Pixel ID from Events Manager. Nothing loads while this is empty. */
+  metaPixelId: '',
 }
